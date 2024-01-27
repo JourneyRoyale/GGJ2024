@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://ckcijwy1aysav"]
+[gd_scene load_steps=4 format=3 uid="uid://c0k7v81sf0jv5"]
 
 [ext_resource type="Script" path="res://scenes/Projectile.gd" id="1_saq74"]
 
@@ -16,4 +16,5 @@ script = ExtResource("1_saq74")
 shape = SubResource("SphereShape3D_20eg4")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
 mesh = SubResource("CapsuleMesh_ha14e")

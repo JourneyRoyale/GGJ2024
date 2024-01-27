@@ -1,12 +1,14 @@
-[gd_scene load_steps=16 format=3 uid="uid://b0hyqaqjfjjkf"]
+[gd_scene load_steps=26 format=3 uid="uid://o3l3wwshraia"]
 
-[ext_resource type="PackedScene" uid="uid://dfddod52n51d5" path="res://scenes/AudienceMember.tscn" id="1_wtwtw"]
+[ext_resource type="PackedScene" path="res://scenes/AudienceMember.tscn" id="1_wtwtw"]
 [ext_resource type="Script" path="res://scripts/Game/Comedian.gd" id="2_4yu3q"]
 [ext_resource type="SpriteFrames" uid="uid://cr383cnklcbny" path="res://sprites/spriteframes.tres" id="3_ie6en"]
 [ext_resource type="Script" path="res://scripts/JokeBar/JokeBar.gd" id="4_52nw3"]
 [ext_resource type="PackedScene" path="res://scenes/ui_screen.tscn" id="5_7lsjr"]
 [ext_resource type="Script" path="res://scripts/Game/SpotLight.gd" id="6_73ogf"]
 [ext_resource type="Script" path="res://scripts/ProjectileEmitter.gd" id="7_0jqkp"]
+[ext_resource type="Texture2D" uid="uid://b65jxkkklfumw" path="res://sprites/DF-Bases (1).png" id="8_f1xvl"]
+[ext_resource type="Script" path="res://scripts/Heckler/HecklerAI.gd" id="9_hwrwj"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_8w5cq"]
 radius = 0.25
@@ -29,6 +31,63 @@ points = PackedVector3Array(-0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_j3y3t"]
 albedo_color = Color(0.929412, 0.0941176, 0, 1)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_2c3vt"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7sejg"]
+atlas = ExtResource("8_f1xvl")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2iaew"]
+atlas = ExtResource("8_f1xvl")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f3uor"]
+atlas = ExtResource("8_f1xvl")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yo082"]
+atlas = ExtResource("8_f1xvl")
+region = Rect2(0, 448, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qrde3"]
+atlas = ExtResource("8_f1xvl")
+region = Rect2(64, 448, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0vxdg"]
+atlas = ExtResource("8_f1xvl")
+region = Rect2(128, 448, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_yd2pu"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7sejg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2iaew")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f3uor")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yo082")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qrde3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0vxdg")
+}],
+"loop": true,
+"name": &"new_animation",
+"speed": 5.0
+}]
 
 [node name="DemoScene" type="Node3D"]
 
@@ -66,6 +125,7 @@ surface_material_override/0 = SubResource("StandardMaterial3D_0hve7")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.10567e-05, -0.439361, -0.414402)
+visible = false
 shape = SubResource("ConvexPolygonShape3D_p54l4")
 
 [node name="MeshInstance3D3" type="MeshInstance3D" parent="StaticBody3D"]
@@ -110,4 +170,18 @@ transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0.0473775, 0.149725, 0.
 
 [node name="ProjectileEmitter" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0936981, 0.272931)
+visible = false
 script = ExtResource("7_0jqkp")
+
+[node name="HecklerObject" type="Area3D" parent="."]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0.5, 0.152, 0.263)
+script = ExtResource("9_hwrwj")
+
+[node name="HecklerCollider" type="CollisionShape3D" parent="HecklerObject"]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0)
+shape = SubResource("CapsuleShape3D_2c3vt")
+
+[node name="HecklerScript" type="AnimatedSprite3D" parent="HecklerObject"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+sprite_frames = SubResource("SpriteFrames_yd2pu")
+autoplay = "default"

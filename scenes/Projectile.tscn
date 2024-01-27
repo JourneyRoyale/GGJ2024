@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://ckcijwy1aysav"]
 
-[ext_resource type="Script" path="res://scenes/Projectile.gd" id="1_saq74"]
+[ext_resource type="Script" path="res://scripts/Game/Projectile.gd" id="1_saq74"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_20eg4"]
 radius = 0.01
@@ -17,3 +17,5 @@ shape = SubResource("SphereShape3D_20eg4")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("CapsuleMesh_ha14e")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

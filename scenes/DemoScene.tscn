@@ -1,18 +1,15 @@
-[gd_scene load_steps=26 format=3 uid="uid://o3l3wwshraia"]
+[gd_scene load_steps=21 format=3 uid="uid://b0hyqaqjfjjkf"]
 
-[ext_resource type="PackedScene" path="res://scenes/AudienceMember.tscn" id="1_wtwtw"]
-[ext_resource type="Script" path="res://scripts/Game/Comedian.gd" id="2_4yu3q"]
-[ext_resource type="SpriteFrames" uid="uid://cr383cnklcbny" path="res://sprites/spriteframes.tres" id="3_ie6en"]
-[ext_resource type="Script" path="res://scripts/JokeBar/JokeBar.gd" id="4_52nw3"]
-[ext_resource type="PackedScene" path="res://scenes/ui_screen.tscn" id="5_7lsjr"]
-[ext_resource type="Script" path="res://scripts/Game/SpotLight.gd" id="6_73ogf"]
+[ext_resource type="PackedScene" path="res://scenes/comedian.tscn" id="1_74wpv"]
+[ext_resource type="PackedScene" uid="uid://dfddod52n51d5" path="res://scenes/AudienceMember.tscn" id="1_wtwtw"]
+[ext_resource type="Script" path="res://scripts/UI/ui_screen.gd" id="4_amrrn"]
+[ext_resource type="Texture2D" uid="uid://nsxwa07hhb12" path="res://sprites/placeholder/Gear-icon-transparent-background.png" id="5_mhmrp"]
+[ext_resource type="Texture2D" uid="uid://284ju54ci7o1" path="res://sprites/curtain-placeholder.png" id="5_noomy"]
 [ext_resource type="Script" path="res://scripts/ProjectileEmitter.gd" id="7_0jqkp"]
-[ext_resource type="Texture2D" uid="uid://b65jxkkklfumw" path="res://sprites/DF-Bases (1).png" id="8_f1xvl"]
-[ext_resource type="Script" path="res://scripts/Heckler/HecklerAI.gd" id="9_hwrwj"]
-
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_8w5cq"]
-radius = 0.25
-height = 0.75
+[ext_resource type="Script" path="res://scripts/AudioManager.gd" id="8_7ik8w"]
+[ext_resource type="AudioStream" uid="uid://inflyfrfxqu7" path="res://music/refract.mp3" id="9_go7je"]
+[ext_resource type="AudioStream" uid="uid://b77xbhcraw287" path="res://music/mixkit-arcade-game-complete-or-approved-mission-205.wav" id="10_mp5ov"]
+[ext_resource type="PackedScene" path="res://scenes/spot_lights.tscn" id="10_n2jgg"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_2nep6"]
 
@@ -24,7 +21,7 @@ albedo_color = Color(0, 0.223529, 0.223529, 1)
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0hve7"]
 albedo_color = Color(0.270588, 0.141176, 0, 1)
 
-[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_p54l4"]
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_v7e3w"]
 points = PackedVector3Array(-0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5)
 
 [sub_resource type="BoxMesh" id="BoxMesh_ecs3e"]
@@ -32,85 +29,54 @@ points = PackedVector3Array(-0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_j3y3t"]
 albedo_color = Color(0.929412, 0.0941176, 0, 1)
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_2c3vt"]
+[sub_resource type="LabelSettings" id="LabelSettings_jkbkj"]
+font_size = 46
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_7sejg"]
-atlas = ExtResource("8_f1xvl")
-region = Rect2(0, 0, 64, 64)
+[sub_resource type="Animation" id="Animation_cx5om"]
+resource_name = "curtains_open"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Curtain Container/Left Curtain:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-20, 0), Vector2(-600, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Curtain Container/Right Curtain:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(25, 0), Vector2(625, 0)]
+}
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_2iaew"]
-atlas = ExtResource("8_f1xvl")
-region = Rect2(64, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_f3uor"]
-atlas = ExtResource("8_f1xvl")
-region = Rect2(128, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_yo082"]
-atlas = ExtResource("8_f1xvl")
-region = Rect2(0, 448, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_qrde3"]
-atlas = ExtResource("8_f1xvl")
-region = Rect2(64, 448, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_0vxdg"]
-atlas = ExtResource("8_f1xvl")
-region = Rect2(128, 448, 64, 64)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_yd2pu"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_7sejg")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_2iaew")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_f3uor")
-}],
-"loop": true,
-"name": &"default",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_yo082")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_qrde3")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_0vxdg")
-}],
-"loop": true,
-"name": &"new_animation",
-"speed": 5.0
-}]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0rtmh"]
+_data = {
+"curtains_open": SubResource("Animation_cx5om")
+}
 
 [node name="DemoScene" type="Node3D"]
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(-1, 3.69465e-08, -7.92319e-08, 0, 0.906308, 0.422618, 8.74228e-08, 0.422618, -0.906308, 0, 0.373225, -0.658381)
+transform = Transform3D(-1, 3.69464e-08, -7.9232e-08, 0, 0.906308, 0.422618, 8.74228e-08, 0.422618, -0.906308, 0, 7.06303, -9.96952)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.00396917, 0.929172, -0.369628, 0.96977, 0.0866099, 0.228134, 0.243989, -0.359359, -0.900739, -0.278868, 0.456484, -0.769173)
 
-[node name="Comedian" type="CharacterBody3D" parent="."]
-transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0.336477, -0.185228)
-script = ExtResource("2_4yu3q")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Comedian"]
-shape = SubResource("CapsuleShape3D_8w5cq")
-
-[node name="Sprite" type="AnimatedSprite3D" parent="Comedian"]
-sprite_frames = ExtResource("3_ie6en")
-animation = &"new_animation"
-autoplay = "new_animation"
-frame_progress = 0.776392
+[node name="Comedian" parent="." instance=ExtResource("1_74wpv")]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 5.14236, -0.185228)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
+transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 0, 0, 0)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
 mesh = SubResource("PlaneMesh_2nep6")
@@ -125,8 +91,7 @@ surface_material_override/0 = SubResource("StandardMaterial3D_0hve7")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.10567e-05, -0.439361, -0.414402)
-visible = false
-shape = SubResource("ConvexPolygonShape3D_p54l4")
+shape = SubResource("ConvexPolygonShape3D_v7e3w")
 
 [node name="MeshInstance3D3" type="MeshInstance3D" parent="StaticBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.1, -0.900706, 0.00265056, -0.000804007)
@@ -140,48 +105,384 @@ mesh = SubResource("BoxMesh_ecs3e")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_j3y3t")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
-layout_direction = 3
-offset_left = 8.0
-offset_top = 541.0
-offset_right = 1147.0
-offset_bottom = 633.0
+[node name="Ui Screen" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("4_amrrn")
+
+[node name="GameUI" type="Control" parent="Ui Screen"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Ui Screen/GameUI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 50
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Ui Screen/GameUI/MarginContainer"]
+layout_mode = 2
+
+[node name="Top UI Bar" type="HBoxContainer" parent="Ui Screen/GameUI/MarginContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="TextureButton" type="TextureButton" parent="Ui Screen/GameUI/MarginContainer/VBoxContainer/Top UI Bar"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 0
+texture_normal = ExtResource("5_mhmrp")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="Seperator" type="Control" parent="Ui Screen/GameUI/MarginContainer/VBoxContainer/Top UI Bar"]
+layout_mode = 2
 size_flags_horizontal = 3
+
+[node name="Laughter Meter" type="ProgressBar" parent="Ui Screen/GameUI/MarginContainer/VBoxContainer/Top UI Bar"]
+custom_minimum_size = Vector2(500, 11)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 1
+max_value = 2.0
+value = 1.0
+show_percentage = false
+
+[node name="Seperator2" type="Control" parent="Ui Screen/GameUI/MarginContainer/VBoxContainer/Top UI Bar"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Timer" type="Label" parent="Ui Screen/GameUI/MarginContainer/VBoxContainer/Top UI Bar"]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "10:00"
+horizontal_alignment = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Ui Screen/GameUI/MarginContainer/VBoxContainer"]
+layout_mode = 2
 size_flags_vertical = 3
-script = ExtResource("4_52nw3")
 
-[node name="Ui Screen" parent="." instance=ExtResource("5_7lsjr")]
+[node name="Joke Bar" type="HBoxContainer" parent="Ui Screen/GameUI/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 150)
+layout_direction = 3
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 8
+
+[node name="Pause Screen" type="Control" parent="Ui Screen"]
 visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="SpotLight" type="SpotLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -0.366629, 0.515142, -0.776176)
-light_energy = 2.559
-spot_angle = 9.18
-script = ExtResource("6_73ogf")
+[node name="MarginContainer" type="MarginContainer" parent="Ui Screen/Pause Screen"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="Ui Screen/Pause Screen/MarginContainer"]
+layout_mode = 2
+color = Color(0.0980392, 0.0980392, 0.0980392, 0.615686)
+
+[node name="MarginContainer" type="MarginContainer" parent="Ui Screen/Pause Screen/MarginContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 100
+theme_override_constants/margin_top = 100
+theme_override_constants/margin_right = 100
+theme_override_constants/margin_bottom = 50
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Ui Screen/Pause Screen/MarginContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Ui Screen/Pause Screen/MarginContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 75
+text = "Pause"
+horizontal_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="Ui Screen/Pause Screen/MarginContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Pause Menu" type="GridContainer" parent="Ui Screen/Pause Screen/MarginContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/h_separation = 50
+columns = 4
+
+[node name="Resume" type="Button" parent="Ui Screen/Pause Screen/MarginContainer/MarginContainer/VBoxContainer/Pause Menu"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Resume"
+
+[node name="Restart" type="Button" parent="Ui Screen/Pause Screen/MarginContainer/MarginContainer/VBoxContainer/Pause Menu"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Restart"
+
+[node name="Setting" type="Button" parent="Ui Screen/Pause Screen/MarginContainer/MarginContainer/VBoxContainer/Pause Menu"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Setting
+"
+
+[node name="Exit" type="Button" parent="Ui Screen/Pause Screen/MarginContainer/MarginContainer/VBoxContainer/Pause Menu"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Exit
+"
+
+[node name="Pause Setting" type="VBoxContainer" parent="Ui Screen/Pause Screen/MarginContainer/MarginContainer/VBoxContainer"]
+visible = false
+layout_mode = 2
+alignment = 1
+
+[node name="GridContainer" type="GridContainer" parent="Ui Screen/Pause Screen/MarginContainer/MarginContainer/VBoxContainer/Pause Setting"]
+layout_mode = 2
+theme_override_constants/h_separation = 16
+
+[node name="Master Label" type="Label" parent="Ui Screen/Pause Screen/MarginContainer/MarginContainer/VBoxContainer/Pause Setting/GridContainer"]
+layout_mode = 2
+text = "Master"
+horizontal_alignment = 1
+
+[node name="Master Slider" type="HSlider" parent="Ui Screen/Pause Screen/MarginContainer/MarginContainer/VBoxContainer/Pause Setting/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+max_value = 1.0
+step = 0.05
+value = 1.0
+
+[node name="Background Label" type="Label" parent="Ui Screen/Pause Screen/MarginContainer/MarginContainer/VBoxContainer/Pause Setting/GridContainer"]
+layout_mode = 2
+text = "Background"
+horizontal_alignment = 1
+
+[node name="Background Slider" type="HSlider" parent="Ui Screen/Pause Screen/MarginContainer/MarginContainer/VBoxContainer/Pause Setting/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+max_value = 1.0
+step = 0.05
+value = 1.0
+
+[node name="Sound Effect Label" type="Label" parent="Ui Screen/Pause Screen/MarginContainer/MarginContainer/VBoxContainer/Pause Setting/GridContainer"]
+layout_mode = 2
+text = "Sound Effect"
+horizontal_alignment = 1
+
+[node name="Sound Effect Slider" type="HSlider" parent="Ui Screen/Pause Screen/MarginContainer/MarginContainer/VBoxContainer/Pause Setting/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+max_value = 1.0
+step = 0.05
+value = 1.0
+
+[node name="Back" type="Button" parent="Ui Screen/Pause Screen/MarginContainer/MarginContainer/VBoxContainer/Pause Setting/GridContainer"]
+layout_mode = 2
+text = "Back"
+
+[node name="TitleScreen" type="Control" parent="Ui Screen"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Curtain Container" type="Node2D" parent="Ui Screen/TitleScreen"]
+position = Vector2(577, -2)
+
+[node name="Left Curtain" type="Node2D" parent="Ui Screen/TitleScreen/Curtain Container"]
+position = Vector2(-20, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="Ui Screen/TitleScreen/Curtain Container/Left Curtain"]
+position = Vector2(-253, 332)
+scale = Vector2(0.856429, 0.780989)
+texture = ExtResource("5_noomy")
+
+[node name="Right Curtain" type="Node2D" parent="Ui Screen/TitleScreen/Curtain Container"]
+position = Vector2(25, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="Ui Screen/TitleScreen/Curtain Container/Right Curtain"]
+position = Vector2(276, 331)
+scale = Vector2(0.856735, 0.780538)
+texture = ExtResource("5_noomy")
+
+[node name="MarginContainer" type="MarginContainer" parent="Ui Screen/TitleScreen"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 100
+theme_override_constants/margin_top = 100
+theme_override_constants/margin_right = 100
+theme_override_constants/margin_bottom = 50
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Ui Screen/TitleScreen/MarginContainer"]
+layout_mode = 2
+
+[node name="Title Label" type="Label" parent="Ui Screen/TitleScreen/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Giggle Gauntlet 😂😂😂"
+label_settings = SubResource("LabelSettings_jkbkj")
+horizontal_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="Ui Screen/TitleScreen/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Main Menu" type="GridContainer" parent="Ui Screen/TitleScreen/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/h_separation = 50
+columns = 4
+
+[node name="Start Game" type="Button" parent="Ui Screen/TitleScreen/MarginContainer/VBoxContainer/Main Menu"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+text = "Start Game"
+
+[node name="Settings" type="Button" parent="Ui Screen/TitleScreen/MarginContainer/VBoxContainer/Main Menu"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+text = "Settings"
+
+[node name="How To Play" type="Button" parent="Ui Screen/TitleScreen/MarginContainer/VBoxContainer/Main Menu"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+text = "How To Play"
+
+[node name="Exit" type="Button" parent="Ui Screen/TitleScreen/MarginContainer/VBoxContainer/Main Menu"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+text = "Exit"
+
+[node name="Setting" type="VBoxContainer" parent="Ui Screen/TitleScreen/MarginContainer/VBoxContainer"]
+visible = false
+layout_mode = 2
+alignment = 1
+
+[node name="GridContainer" type="GridContainer" parent="Ui Screen/TitleScreen/MarginContainer/VBoxContainer/Setting"]
+layout_mode = 2
+theme_override_constants/h_separation = 16
+
+[node name="Master Label" type="Label" parent="Ui Screen/TitleScreen/MarginContainer/VBoxContainer/Setting/GridContainer"]
+layout_mode = 2
+text = "Master"
+horizontal_alignment = 1
+
+[node name="Master Slider" type="HSlider" parent="Ui Screen/TitleScreen/MarginContainer/VBoxContainer/Setting/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+max_value = 1.0
+step = 0.05
+value = 1.0
+
+[node name="Background Label" type="Label" parent="Ui Screen/TitleScreen/MarginContainer/VBoxContainer/Setting/GridContainer"]
+layout_mode = 2
+text = "Background"
+horizontal_alignment = 1
+
+[node name="Background Slider" type="HSlider" parent="Ui Screen/TitleScreen/MarginContainer/VBoxContainer/Setting/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+max_value = 1.0
+step = 0.05
+value = 1.0
+
+[node name="Sound Effect Label" type="Label" parent="Ui Screen/TitleScreen/MarginContainer/VBoxContainer/Setting/GridContainer"]
+layout_mode = 2
+text = "Sound Effect"
+horizontal_alignment = 1
+
+[node name="Sound Effect Slider" type="HSlider" parent="Ui Screen/TitleScreen/MarginContainer/VBoxContainer/Setting/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+max_value = 1.0
+step = 0.05
+value = 1.0
+
+[node name="Back" type="Button" parent="Ui Screen/TitleScreen/MarginContainer/VBoxContainer/Setting/GridContainer"]
+layout_mode = 2
+text = "Back"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Ui Screen/TitleScreen"]
+libraries = {
+"": SubResource("AnimationLibrary_0rtmh")
+}
 
 [node name="AudienceMember" parent="." instance=ExtResource("1_wtwtw")]
-transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0.268132, 0.100738, 0.242063)
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 4.71457, 2.20556, 6.01891)
 
 [node name="AudienceMember2" parent="." instance=ExtResource("1_wtwtw")]
-transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -0.189306, 0.149725, 0.173102)
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -2.21678, 2.25455, 5.94995)
 
 [node name="AudienceMember3" parent="." instance=ExtResource("1_wtwtw")]
-transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0.0473775, 0.149725, 0.173102)
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 1.15043, 2.25455, 5.94995)
 
 [node name="ProjectileEmitter" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0936981, 0.272931)
-visible = false
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.95271, 5.40698)
 script = ExtResource("7_0jqkp")
 
-[node name="HecklerObject" type="Area3D" parent="."]
-transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0.5, 0.152, 0.263)
-script = ExtResource("9_hwrwj")
+[node name="AudioManager" type="Node3D" parent="."]
+script = ExtResource("8_7ik8w")
 
-[node name="HecklerCollider" type="CollisionShape3D" parent="HecklerObject"]
-transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0)
-shape = SubResource("CapsuleShape3D_2c3vt")
+[node name="Background" type="Node3D" parent="AudioManager"]
 
-[node name="HecklerScript" type="AnimatedSprite3D" parent="HecklerObject"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
-sprite_frames = SubResource("SpriteFrames_yd2pu")
-autoplay = "default"
+[node name="Refractor" type="AudioStreamPlayer" parent="AudioManager/Background"]
+stream = ExtResource("9_go7je")
+
+[node name="Sound Effect" type="Node3D" parent="AudioManager"]
+
+[node name="Arcade" type="AudioStreamPlayer" parent="AudioManager/Sound Effect"]
+stream = ExtResource("10_mp5ov")
+
+[node name="SpotLights" parent="." instance=ExtResource("10_n2jgg")]
+
+[connection signal="pressed" from="Ui Screen/GameUI/MarginContainer/VBoxContainer/Top UI Bar/TextureButton" to="Ui Screen" method="_on_ui_gear_button_pressed"]
+[connection signal="pressed" from="Ui Screen/Pause Screen/MarginContainer/MarginContainer/VBoxContainer/Pause Menu/Resume" to="Ui Screen" method="_on_pause_resume_pressed"]
+[connection signal="pressed" from="Ui Screen/Pause Screen/MarginContainer/MarginContainer/VBoxContainer/Pause Menu/Restart" to="Ui Screen" method="_on_pause_restart_pressed"]
+[connection signal="pressed" from="Ui Screen/Pause Screen/MarginContainer/MarginContainer/VBoxContainer/Pause Menu/Setting" to="Ui Screen" method="_on_pause_setting_pressed"]
+[connection signal="pressed" from="Ui Screen/Pause Screen/MarginContainer/MarginContainer/VBoxContainer/Pause Menu/Exit" to="Ui Screen" method="_on_pause_exit_pressed"]
+[connection signal="value_changed" from="Ui Screen/Pause Screen/MarginContainer/MarginContainer/VBoxContainer/Pause Setting/GridContainer/Master Slider" to="Ui Screen" method="_on_master_slider_value_changed"]
+[connection signal="value_changed" from="Ui Screen/Pause Screen/MarginContainer/MarginContainer/VBoxContainer/Pause Setting/GridContainer/Background Slider" to="Ui Screen" method="_on_background_slider_value_changed"]
+[connection signal="value_changed" from="Ui Screen/Pause Screen/MarginContainer/MarginContainer/VBoxContainer/Pause Setting/GridContainer/Sound Effect Slider" to="Ui Screen" method="_on_sound_effect_slider_value_changed"]
+[connection signal="pressed" from="Ui Screen/Pause Screen/MarginContainer/MarginContainer/VBoxContainer/Pause Setting/GridContainer/Back" to="Ui Screen" method="_on_pause_setting_back_pressed"]
+[connection signal="pressed" from="Ui Screen/TitleScreen/MarginContainer/VBoxContainer/Main Menu/Start Game" to="Ui Screen" method="_on_start_game_pressed"]
+[connection signal="pressed" from="Ui Screen/TitleScreen/MarginContainer/VBoxContainer/Main Menu/Settings" to="Ui Screen" method="_on_settings_pressed"]
+[connection signal="pressed" from="Ui Screen/TitleScreen/MarginContainer/VBoxContainer/Main Menu/How To Play" to="Ui Screen" method="_on_how_to_play_pressed"]
+[connection signal="pressed" from="Ui Screen/TitleScreen/MarginContainer/VBoxContainer/Main Menu/Exit" to="Ui Screen" method="_on_exit_pressed"]
+[connection signal="value_changed" from="Ui Screen/TitleScreen/MarginContainer/VBoxContainer/Setting/GridContainer/Master Slider" to="Ui Screen" method="_on_master_slider_value_changed"]
+[connection signal="pressed" from="Ui Screen/TitleScreen/MarginContainer/VBoxContainer/Setting/GridContainer/Back" to="Ui Screen" method="_on_back_pressed"]
+[connection signal="animation_finished" from="Ui Screen/TitleScreen/AnimationPlayer" to="Ui Screen" method="_on_animation_player_animation_finished"]

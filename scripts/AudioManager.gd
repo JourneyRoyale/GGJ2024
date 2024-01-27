@@ -14,25 +14,17 @@ var sound_effect_volume = .5
 func _ready():
 	pass # Replace with function body.
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	#print(master_volume)
-	pass
-	
 func _input(event):
 	if event is InputEventKey and event.pressed:
 		if event.keycode == KEY_Z:
-			_play_music('Refractor','Background')
+			play_music('Refractor','Background')
 		elif event.keycode == KEY_X:
-			_play_music('Arcade','Sound Effect')
+			play_music('Arcade','Sound Effect')
 
 
-func _play_music(music_name, audio_type):
+func play_music(music_name, audio_type):
 	var found_music = false;
 	var new_music = _find_music(music_name, audio_type)
-	print(new_music)
-
 	
 	if new_music != null:
 		match audio_type:

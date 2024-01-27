@@ -90,6 +90,7 @@ size_flags_vertical = 3
 script = ExtResource("4_52nw3")
 
 [node name="Ui Screen" parent="." instance=ExtResource("5_7lsjr")]
+visible = false
 
 [node name="SpotLight" type="SpotLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -0.366629, 0.515142, -0.776176)

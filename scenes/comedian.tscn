@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://dp6j4bqf2uuos"]
+
+[ext_resource type="Script" path="res://scripts/Game/Comedian.gd" id="1_joff3"]
+[ext_resource type="SpriteFrames" uid="uid://cr383cnklcbny" path="res://sprites/spriteframes.tres" id="2_u6svr"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_8w5cq"]
+radius = 0.25
+height = 0.75
+
+[node name="Comedian" type="CharacterBody3D" groups=["Player"]]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0.336477, -0.185228)
+script = ExtResource("1_joff3")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_8w5cq")
+
+[node name="Sprite" type="AnimatedSprite3D" parent="."]
+sprite_frames = ExtResource("2_u6svr")
+animation = &"new_animation"
+autoplay = "new_animation"
+frame_progress = 0.776392

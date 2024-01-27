@@ -10,3 +10,9 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	position.z -= SPEED
+
+
+func _on_body_entered(body):
+	if body.is_in_group("Player"):
+		body.projectile_collided()
+		#TODO: Let gamemanager know

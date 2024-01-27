@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://284ju54ci7o1"
-path.s3tc="res://.godot/imported/curtain-placeholder.png-39855e310da7b947b7bd3178e8c70a5f.s3tc.ctex"
+uid="uid://d0ryqaas3hduy"
+path.s3tc="res://.godot/imported/kisspng-cvs-pharmacy-child-infant-mouth-disease-thought-bubble-5a746a3ec14798.4822727115175788147917.png-499b79129283c85e3ac8619346de19b0.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://sprites/curtain-placeholder.png"
-dest_files=["res://.godot/imported/curtain-placeholder.png-39855e310da7b947b7bd3178e8c70a5f.s3tc.ctex"]
+source_file="res://sprites/kisspng-cvs-pharmacy-child-infant-mouth-disease-thought-bubble-5a746a3ec14798.4822727115175788147917.png"
+dest_files=["res://.godot/imported/kisspng-cvs-pharmacy-child-infant-mouth-disease-thought-bubble-5a746a3ec14798.4822727115175788147917.png-499b79129283c85e3ac8619346de19b0.s3tc.ctex"]
 
 [params]
 

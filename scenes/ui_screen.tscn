@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://d0hb5x170modd"]
+[gd_scene load_steps=6 format=3 uid="uid://3lalflhe2iba"]
 
 [ext_resource type="Script" path="res://scripts/UI/ui_screen.gd" id="1_o5slu"]
 [ext_resource type="Texture2D" uid="uid://284ju54ci7o1" path="res://sprites/curtain-placeholder.png" id="5_yahb5"]

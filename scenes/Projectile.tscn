@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://ckcijwy1aysav"]
+
+[ext_resource type="Script" path="res://scripts/Game/Projectile.gd" id="1_saq74"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_20eg4"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_ha14e"]
+height = 1.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wawp0"]
+albedo_color = Color(1, 0, 0, 1)
+
+[node name="Projectile" type="Area3D" groups=["projectiles"]]
+script = ExtResource("1_saq74")
+SPEED = 0.5
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_20eg4")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CapsuleMesh_ha14e")
+surface_material_override/0 = SubResource("StandardMaterial3D_wawp0")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

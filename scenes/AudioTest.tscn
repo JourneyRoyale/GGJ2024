@@ -89,13 +89,11 @@ script = ExtResource("1_vwgwk")
 
 [node name="Refractor" type="AudioStreamPlayer" parent="AudioManager/Background"]
 stream = ExtResource("2_1shli")
-bus = &"Background"
 
 [node name="Sound Effect" type="Node3D" parent="AudioManager"]
 
 [node name="Arcade" type="AudioStreamPlayer" parent="AudioManager/Sound Effect"]
 stream = ExtResource("3_j8h73")
-bus = &"Sound Effect"
 
 [connection signal="value_changed" from="Control/MarginContainer/VBoxContainer/GridContainer/Master Slider" to="AudioManager" method="_on_master_slider_value_changed"]
 [connection signal="value_changed" from="Control/MarginContainer/VBoxContainer/GridContainer/Background Slider" to="AudioManager" method="_on_background_slider_value_changed"]

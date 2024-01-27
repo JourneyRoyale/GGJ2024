@@ -58,7 +58,7 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="AudienceMember" type="AnimatedSprite3D"]
+[node name="AudienceMember" type="AnimatedSprite3D" groups=["audience"]]
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0.0423704, 0.161299, 0.228875)
 sprite_frames = SubResource("SpriteFrames_00nde")
 autoplay = "default"

@@ -17,6 +17,14 @@ func rotate_emoji():
 	label.text = "..."
 	await get_tree().create_timer(thinking_time).timeout
 	rotate_emoji()
+	
+func check_for_match(emoji):
+	if (emoji == label.text):
+		#TODO: tell GameManager we have a match
+		label.text = "🤩"
+	else:
+		label.text = "😡"
+		#TODO: tell GameManager we messed up
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):

@@ -9,6 +9,9 @@ func _ready():
 	text = emojis[0]; 
 	pass # Replace with function body.
 
+func _pressed():
+	get_tree().call_group("audience", "check_for_match", text)
+	queue_free()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):

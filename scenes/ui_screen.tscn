@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://ctkhok1wbfyra"]
+[gd_scene load_steps=6 format=3 uid="uid://ct2742i07udyi"]
 
 [ext_resource type="Script" path="res://scripts/UI/ui_screen.gd" id="1_o5slu"]
 [ext_resource type="Texture2D" uid="uid://284ju54ci7o1" path="res://sprites/curtain-placeholder.png" id="5_yahb5"]
@@ -46,7 +46,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_o5slu")
-animation = NodePath("TitleScreen/AnimationPlayer")
 
 [node name="TitleScreen" type="Control" parent="."]
 layout_mode = 1

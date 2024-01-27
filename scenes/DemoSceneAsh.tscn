@@ -1,14 +1,13 @@
-[gd_scene load_steps=17 format=3 uid="uid://cnbtu0la4py3d"]
+[gd_scene load_steps=16 format=3 uid="uid://mpg704y53gq0"]
 
-[ext_resource type="PackedScene" uid="uid://dp6j4bqf2uuos" path="res://scenes/comedian.tscn" id="1_41dwo"]
-[ext_resource type="Script" path="res://scripts/JokeBar/JokeBar.gd" id="3_fyko6"]
-[ext_resource type="PackedScene" uid="uid://3lalflhe2iba" path="res://scenes/ui_screen.tscn" id="4_4vnns"]
+[ext_resource type="PackedScene" path="res://scenes/comedian.tscn" id="1_41dwo"]
+[ext_resource type="PackedScene" uid="uid://bskgpd4m757s" path="res://scenes/ui_screen2.tscn" id="3_c1404"]
 [ext_resource type="PackedScene" uid="uid://dfddod52n51d5" path="res://scenes/AudienceMember.tscn" id="5_408j2"]
 [ext_resource type="Script" path="res://scripts/ProjectileEmitter.gd" id="6_1w8oq"]
 [ext_resource type="Script" path="res://scripts/AudioManager.gd" id="7_511vy"]
 [ext_resource type="AudioStream" uid="uid://inflyfrfxqu7" path="res://music/refract.mp3" id="8_ph3rs"]
 [ext_resource type="AudioStream" uid="uid://b77xbhcraw287" path="res://music/mixkit-arcade-game-complete-or-approved-mission-205.wav" id="9_rlvma"]
-[ext_resource type="PackedScene" uid="uid://j3q2c8ojgweb" path="res://scenes/spot_lights.tscn" id="10_i6wtp"]
+[ext_resource type="PackedScene" path="res://scenes/spot_lights.tscn" id="10_i6wtp"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_2nep6"]
 
@@ -69,19 +68,6 @@ mesh = SubResource("BoxMesh_ecs3e")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_j3y3t")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
-layout_direction = 3
-offset_left = 8.0
-offset_top = 541.0
-offset_right = 1147.0
-offset_bottom = 633.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-script = ExtResource("3_fyko6")
-
-[node name="Ui Screen" parent="." instance=ExtResource("4_4vnns")]
-visible = false
-
 [node name="AudienceMember" parent="." instance=ExtResource("5_408j2")]
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 4.71457, 2.20556, 6.01891)
 
@@ -90,6 +76,8 @@ transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -2.21678, 2.25455, 5.94
 
 [node name="AudienceMember3" parent="." instance=ExtResource("5_408j2")]
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 1.15043, 2.25455, 5.94995)
+
+[node name="Ui Screen" parent="." instance=ExtResource("3_c1404")]
 
 [node name="ProjectileEmitter" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.95271, 5.40698)

@@ -105,7 +105,7 @@ mesh = SubResource("BoxMesh_ecs3e")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_j3y3t")
 
-[node name="Ui Screen" type="Control" parent="." node_paths=PackedStringArray("title_screen", "main_menu", "setting", "pause_screen", "pause_menu", "pause_setting", "timer", "laughter_meter", "joke_bar")]
+[node name="Ui Screen" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -113,16 +113,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("4_amrrn")
-animation = NodePath("TitleScreen/AnimationPlayer")
-title_screen = NodePath("TitleScreen")
-main_menu = NodePath("TitleScreen/MarginContainer/VBoxContainer/Main Menu")
-setting = NodePath("TitleScreen/MarginContainer/VBoxContainer/Setting")
-pause_screen = NodePath("Pause Screen")
-pause_menu = NodePath("Pause Screen/MarginContainer/MarginContainer/VBoxContainer/Pause Menu")
-pause_setting = NodePath("Pause Screen/MarginContainer/MarginContainer/VBoxContainer/Pause Setting")
-timer = NodePath("GameUI/MarginContainer/VBoxContainer/Top UI Bar/Timer")
-laughter_meter = NodePath("GameUI/MarginContainer/VBoxContainer/Top UI Bar/Laughter Meter")
-joke_bar = NodePath("GameUI/MarginContainer/VBoxContainer/Joke Bar")
 
 [node name="GameUI" type="Control" parent="Ui Screen"]
 layout_mode = 1

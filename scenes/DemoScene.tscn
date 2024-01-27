@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://b0hyqaqjfjjkf"]
+[gd_scene load_steps=16 format=3 uid="uid://b0hyqaqjfjjkf"]
 
 [ext_resource type="PackedScene" uid="uid://dfddod52n51d5" path="res://scenes/AudienceMember.tscn" id="1_wtwtw"]
 [ext_resource type="Script" path="res://scripts/Game/Comedian.gd" id="2_4yu3q"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://scripts/JokeBar/JokeBar.gd" id="4_52nw3"]
 [ext_resource type="PackedScene" path="res://scenes/ui_screen.tscn" id="5_7lsjr"]
 [ext_resource type="Script" path="res://scripts/Game/SpotLight.gd" id="6_73ogf"]
+[ext_resource type="Script" path="res://scripts/ProjectileEmitter.gd" id="7_0jqkp"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_8w5cq"]
 radius = 0.25
@@ -106,3 +107,7 @@ transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -0.189306, 0.149725, 0.
 
 [node name="AudienceMember3" parent="." instance=ExtResource("1_wtwtw")]
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0.0473775, 0.149725, 0.173102)
+
+[node name="ProjectileEmitter" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0936981, 0.272931)
+script = ExtResource("7_0jqkp")

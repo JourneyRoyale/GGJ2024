@@ -2,27 +2,26 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://284ju54ci7o1"
-path.s3tc="res://.godot/imported/curtain-placeholder.png-39855e310da7b947b7bd3178e8c70a5f.s3tc.ctex"
+uid="uid://dqlp4k0yku7x6"
+path="res://.godot/imported/heckler-placeholder.png-24b658c5246a241ee21fd6ad0f246f76.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/curtain-placeholder.png"
-dest_files=["res://.godot/imported/curtain-placeholder.png-39855e310da7b947b7bd3178e8c70a5f.s3tc.ctex"]
+source_file="res://sprites/heckler-placeholder.png"
+dest_files=["res://.godot/imported/heckler-placeholder.png-24b658c5246a241ee21fd6ad0f246f76.ctex"]
 
 [params]
 
-compress/mode=2
+compress/mode=0
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=0
 compress/channel_pack=0
-mipmaps/generate=true
+mipmaps/generate=false
 mipmaps/limit=-1
 roughness/mode=0
 roughness/src_normal=""
@@ -32,4 +31,4 @@ process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
-detect_3d/compress_to=0
+detect_3d/compress_to=1

@@ -1,6 +1,7 @@
-[gd_resource type="SpriteFrames" load_steps=8 format=3 uid="uid://cr383cnklcbny"]
+[gd_resource type="SpriteFrames" load_steps=6 format=3 uid="uid://cr383cnklcbny"]
 
 [ext_resource type="Texture2D" uid="uid://b65jxkkklfumw" path="res://sprites/DF-Bases (1).png" id="1_nqvad"]
+[ext_resource type="Texture2D" uid="uid://b543u18ylg826" path="res://sprites/player-placeholder.png" id="2_3mlo8"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7sejg"]
 atlas = ExtResource("1_nqvad")
@@ -13,18 +14,6 @@ region = Rect2(64, 0, 64, 64)
 [sub_resource type="AtlasTexture" id="AtlasTexture_f3uor"]
 atlas = ExtResource("1_nqvad")
 region = Rect2(128, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_yo082"]
-atlas = ExtResource("1_nqvad")
-region = Rect2(0, 448, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_qrde3"]
-atlas = ExtResource("1_nqvad")
-region = Rect2(64, 448, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_0vxdg"]
-atlas = ExtResource("1_nqvad")
-region = Rect2(128, 448, 64, 64)
 
 [resource]
 animations = [{
@@ -44,13 +33,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_yo082")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_qrde3")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_0vxdg")
+"texture": ExtResource("2_3mlo8")
 }],
 "loop": true,
 "name": &"new_animation",

@@ -1,8 +1,7 @@
-[gd_scene load_steps=16 format=3 uid="uid://cjdeehnsaxqwk"]
+[gd_scene load_steps=15 format=3 uid="uid://cjdeehnsaxqwk"]
 
 [ext_resource type="PackedScene" uid="uid://dp6j4bqf2uuos" path="res://scenes/comedian.tscn" id="1_41dwo"]
 [ext_resource type="PackedScene" uid="uid://bskgpd4m757s" path="res://prefab/ui_screen.tscn" id="3_op1ac"]
-[ext_resource type="Script" path="res://scripts/ProjectileEmitter.gd" id="4_cyr5p"]
 [ext_resource type="PackedScene" uid="uid://dfddod52n51d5" path="res://scenes/AudienceMember.tscn" id="5_408j2"]
 [ext_resource type="Script" path="res://scripts/Singleton/AudioManager.gd" id="5_icdxn"]
 [ext_resource type="AudioStream" uid="uid://inflyfrfxqu7" path="res://music/refract.mp3" id="6_1aeq3"]
@@ -78,10 +77,6 @@ transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -2.21678, 2.25455, -4.6
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 1.15043, 2.25455, -4.67496)
 
 [node name="Ui Screen" parent="." instance=ExtResource("3_op1ac")]
-
-[node name="ProjectileEmitter" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.95271, 5.40698)
-script = ExtResource("4_cyr5p")
 
 [node name="AudioManager" type="Node3D" parent="."]
 script = ExtResource("5_icdxn")

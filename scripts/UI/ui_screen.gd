@@ -39,16 +39,17 @@ func _process(delta):
 func _add_joke():
 	await get_tree().create_timer(1).timeout
 	var instance = packed_joke_button.instantiate()
-	if (joke_bar.get_child_count() == game_manager.max_emoji):
-		print(joke_bar.get_child_count())
-		game_manager.delete_emoji(game_manager.emoji_list[0])
-	
-	joke_bar.add_child(instance)
-	var child_ref = joke_bar.get_child(joke_bar.get_child_count() - 1)
-	print('test')
+	if(joke_bar):
+		if (joke_bar.get_child_count() == game_manager.max_emoji):
+			print(joke_bar.get_child_count())
+			game_manager.delete_emoji(game_manager.emoji_list[0])
+		
+		joke_bar.add_child(instance)
+		var child_ref = joke_bar.get_child(joke_bar.get_child_count() - 1)
+		print('test')
 
-	game_manager.create_emoji(child_ref)
-	_add_joke()
+		game_manager.create_emoji(child_ref)
+		_add_joke()
 
 func _input(event):
 	if event is InputEventKey and event.pressed:

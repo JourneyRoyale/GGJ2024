@@ -1,0 +1,33 @@
+[gd_scene load_steps=2 format=3 uid="uid://bwvgps57riedg"]
+
+[sub_resource type="GDScript" id="GDScript_ln7jy"]
+script/source = "const pre_audience_factory = preload(\"res://scenes/AudienceMember.tscn\")
+var audience_factory
+
+var audience_rows = 2
+var audience_columns = 4
+var audience_horizontal_spacing = 2
+var audience_forward_spacing = 1
+
+var audience_members = []
+
+func _ready():
+	audience_factory = audience_factory.instance()
+	audience_members.append(audience_factory)
+	for row_index in audience_rows:
+		for column_index in audience_columns:
+			var spawn_position = self.position
+			spawn_position.x = audience_horizontal_spacing * column_index
+			spawn_position.y = audience_forward_spacing * row_index 
+			_spawn(spawn_position)
+
+func _spawn(relative_position):
+	var new_audience = audience_factory.duplicate()
+	new_audience.position = relative_position
+	audience_members.append(new_audience)
+	
+"
+
+[node name="Audience" type="Node3D"]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 1.15, 2.255, -4.675)
+script = SubResource("GDScript_ln7jy")

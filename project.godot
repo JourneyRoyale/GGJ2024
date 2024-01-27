@@ -15,6 +15,10 @@ run/main_scene="res://demo_scene.tscn"
 config/features=PackedStringArray("4.2", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[audio]
+
+buses/default_bus_layout="res://music/audio_bus_layout.tres"
+
 [dotnet]
 
 project/assembly_name="GGJ2024"

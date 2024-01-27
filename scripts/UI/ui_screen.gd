@@ -16,6 +16,8 @@ extends Control
 #Game UI
 @export var timer : Node
 @export var laughter_meter : Node
+@export var joke_bar: Node
+var packed_joke_button = load("res://scenes/JokeButton.tscn")
 
 @onready var audio_manager = get_node("/root/AudioManager")
 @onready var game_manager = get_node("/root/GameManager")
@@ -25,10 +27,28 @@ func _on_animation_player_animation_finished(anim_name):
 	if anim_name == "curtains_open":
 		game_manager.playing = true
 		
+
+func _ready():
+	_add_joke()
+
 func _process(delta):
-	#if(game_manager.playing):
-		#_sync_time()
-		pass
+	if(game_manager.playing):
+		_sync_laughter()
+		_sync_time()
+		
+func _add_joke():
+	await get_tree().create_timer(1).timeout
+	var instance = packed_joke_button.instantiate()
+	if (joke_bar.get_child_count() == game_manager.max_emoji):
+		print(joke_bar.get_child_count())
+		game_manager.delete_emoji(game_manager.emoji_list[0])
+	
+	joke_bar.add_child(instance)
+	var child_ref = joke_bar.get_child(joke_bar.get_child_count() - 1)
+	print('test')
+
+	game_manager.create_emoji(child_ref)
+	_add_joke()
 
 func _input(event):
 	if event is InputEventKey and event.pressed:
@@ -41,15 +61,19 @@ func _sync_volume(node):
 	node.get_node("GridContainer/Background Slider").value = audio_manager.background_volume
 	node.get_node("GridContainer/Sound Effect Slider").value = audio_manager.sound_effect_volume 
 
+func _sync_laughter():
+	laughter_meter.value = round_to_dec(game_manager.laughter, 2)
+
 func _sync_time():
 	timer.text = time_convert(game_manager.set_time - game_manager.timer)
+	
+func round_to_dec(num, digit):
+	return round(num * pow(10.0, digit)) / pow(10.0, digit)
 
 func time_convert(time_in_sec):
 	time_in_sec = int(time_in_sec)
 	var seconds = time_in_sec%60
 	var minutes = (time_in_sec/60)%60
-	
-	#returns a string with the format "HH:MM:SS"
 	return "%02d:%02d" % [minutes, seconds]
 
 #Main Menu
@@ -57,7 +81,7 @@ func _on_start_game_pressed():
 	var animation_player = get_node(animation)
 	if animation_player != null:
 		animation_player.play("curtains_open")
-	main_menu.visible = false
+	title_screen.visible = false
 
 func _on_how_to_play_pressed():
 	pass # Replace with function body.

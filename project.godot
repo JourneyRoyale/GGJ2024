@@ -21,6 +21,7 @@ buses/default_bus_layout="res://music/audio_bus_layout.tres"
 
 [autoload]
 
+GameManager="*res://scenes/game_manager.tscn"
 AudioManager="*res://scenes/audio_manager.tscn"
 
 [dotnet]

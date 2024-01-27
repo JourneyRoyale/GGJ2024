@@ -7,7 +7,7 @@ var score = 0;
 var playing;
 
 # Measure of audience satisfaction. Proportionally affects score rate.
-var laughter = 0.5;
+var laughter = 1;
 
 # Global game manager timer.
 var timer = 0;
@@ -26,23 +26,22 @@ var heckler_list;
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	create_audience();
-	playing = true;
-
+	create_audience()
+	playing = false
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if(laughter <= 0):
-		playing = false;
-		print("GAME OVER");
+		playing = false
+		print("GAME OVER")
 	
 	if(timer >= set_time):
-		print("GAME COMPLETE");
+		print("GAME COMPLETE")
 	
-	poll_audience();
+	poll_audience()
 	
 	# Score is improved proportionally to audience satisfaction and decreased inversely to how much time is left in set.
-	score = score + (base_score_rate * laughter) - (base_deplete_rate * timer / set_time);
+	score = score + (base_score_rate * laughter) - (base_deplete_rate * timer / set_time)
 	
 	if(playing):
 		timer += delta;
@@ -54,6 +53,7 @@ func create_audience():
 
 # Polls all audience members in order to determine current laughter score;
 func poll_audience():
+	var rng = RandomNumberGenerator.new()
 	pass
 
 #Create a heckler.

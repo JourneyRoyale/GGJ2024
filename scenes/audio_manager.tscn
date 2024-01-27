@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://rpkksxr1xx3r"]
+
+[ext_resource type="Script" path="res://scripts/AudioManager.gd" id="1_iiesv"]
+[ext_resource type="AudioStream" uid="uid://inflyfrfxqu7" path="res://music/refract.mp3" id="2_opr78"]
+[ext_resource type="AudioStream" uid="uid://b77xbhcraw287" path="res://music/mixkit-arcade-game-complete-or-approved-mission-205.wav" id="3_s30sk"]
+
+[node name="AudioManager" type="Node3D"]
+script = ExtResource("1_iiesv")
+
+[node name="Background" type="Node3D" parent="."]
+
+[node name="Refractor" type="AudioStreamPlayer" parent="Background"]
+stream = ExtResource("2_opr78")
+bus = &"Background"
+
+[node name="Sound Effect" type="Node3D" parent="."]
+
+[node name="Arcade" type="AudioStreamPlayer" parent="Sound Effect"]
+stream = ExtResource("3_s30sk")
+bus = &"Sound Effect"

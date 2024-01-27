@@ -5,8 +5,8 @@ var MOVE_SPEED = 1.0
 var MOVE_TIME_MIN = 2.0
 var MOVE_TIME_MAX = 5.0
 var AGGRESSIVENESS = 0.5 # TO-DO - implement aggressiveness variable that causes heckler to stop early in front of player
-var LEFT_BOUNDARY = -0.7
-var RIGHT_BOUNDARY = 0.7
+var LEFT_BOUNDARY = -7
+var RIGHT_BOUNDARY = 7
 var THROW_DELAY = 0.6 #how long the heckler pauses to throw a tomato in seconds
 
 # Variables
@@ -25,7 +25,7 @@ func _ready():
 func _process(delta):
 	#print("X position: ", position.x)
 	if is_moving:
-		position += current_direction * MOVE_SPEED * delta * 0.2
+		position += current_direction * MOVE_SPEED * delta * 5
 		move_timer += delta
 		if move_timer > move_time:
 			stop_moving()

@@ -1,64 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://bk2hnitd6h4eh"]
+[gd_scene load_steps=4 format=3 uid="uid://bk2hnitd6h4eh"]
 
 [ext_resource type="Script" path="res://scripts/Heckler/HecklerAI.gd" id="1_qatk1"]
-[ext_resource type="Texture2D" uid="uid://b65jxkkklfumw" path="res://sprites/DF-Bases (1).png" id="2_nknfb"]
+[ext_resource type="Texture2D" uid="uid://dqlp4k0yku7x6" path="res://sprites/heckler-placeholder.png" id="2_f6gg0"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_grwyp"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_7sejg"]
-atlas = ExtResource("2_nknfb")
-region = Rect2(0, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_2iaew"]
-atlas = ExtResource("2_nknfb")
-region = Rect2(64, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_f3uor"]
-atlas = ExtResource("2_nknfb")
-region = Rect2(128, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_yo082"]
-atlas = ExtResource("2_nknfb")
-region = Rect2(0, 448, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_qrde3"]
-atlas = ExtResource("2_nknfb")
-region = Rect2(64, 448, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_0vxdg"]
-atlas = ExtResource("2_nknfb")
-region = Rect2(128, 448, 64, 64)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_qvqgy"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_7sejg")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_2iaew")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_f3uor")
-}],
-"loop": true,
-"name": &"default",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_yo082")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_qrde3")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_0vxdg")
-}],
-"loop": true,
-"name": &"new_animation",
-"speed": 5.0
-}]
 
 [node name="Heckler" type="Area3D"]
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0.5, 0.152, 0.263)
@@ -68,7 +13,5 @@ script = ExtResource("1_qatk1")
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0)
 shape = SubResource("CapsuleShape3D_grwyp")
 
-[node name="HecklerSprite" type="AnimatedSprite3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
-sprite_frames = SubResource("SpriteFrames_qvqgy")
-autoplay = "default"
+[node name="Sprite3D" type="Sprite3D" parent="."]
+texture = ExtResource("2_f6gg0")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://mpg704y53gq0"]
+[gd_scene load_steps=17 format=3 uid="uid://mpg704y53gq0"]
 
 [ext_resource type="PackedScene" uid="uid://dp6j4bqf2uuos" path="res://scenes/comedian.tscn" id="1_41dwo"]
 [ext_resource type="PackedScene" uid="uid://bskgpd4m757s" path="res://scenes/ui_screen2.tscn" id="3_c1404"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://scripts/ProjectileEmitter.gd" id="6_1w8oq"]
 [ext_resource type="Script" path="res://scripts/AudioManager.gd" id="7_511vy"]
 [ext_resource type="AudioStream" uid="uid://inflyfrfxqu7" path="res://music/refract.mp3" id="8_ph3rs"]
+[ext_resource type="PackedScene" uid="uid://bk2hnitd6h4eh" path="res://scenes/Heckler.tscn" id="9_o0x78"]
 [ext_resource type="AudioStream" uid="uid://b77xbhcraw287" path="res://music/mixkit-arcade-game-complete-or-approved-mission-205.wav" id="9_rlvma"]
 [ext_resource type="PackedScene" uid="uid://j3q2c8ojgweb" path="res://scenes/spot_lights.tscn" id="10_i6wtp"]
 
@@ -97,3 +98,6 @@ stream = ExtResource("8_ph3rs")
 stream = ExtResource("9_rlvma")
 
 [node name="SpotLights" parent="." instance=ExtResource("10_i6wtp")]
+
+[node name="Heckler" parent="." instance=ExtResource("9_o0x78")]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0.476324, 2.2972, -9.09774)

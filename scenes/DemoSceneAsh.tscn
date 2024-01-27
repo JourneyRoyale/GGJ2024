@@ -1,0 +1,125 @@
+[gd_scene load_steps=19 format=3 uid="uid://bvntb8vxi6sw1"]
+
+[ext_resource type="Script" path="res://scripts/Game/Comedian.gd" id="1_5xjr6"]
+[ext_resource type="SpriteFrames" uid="uid://cr383cnklcbny" path="res://sprites/spriteframes.tres" id="2_rk8ih"]
+[ext_resource type="Script" path="res://scripts/JokeBar/JokeBar.gd" id="3_fyko6"]
+[ext_resource type="PackedScene" uid="uid://3lalflhe2iba" path="res://scenes/ui_screen.tscn" id="4_4vnns"]
+[ext_resource type="PackedScene" uid="uid://dfddod52n51d5" path="res://scenes/AudienceMember.tscn" id="5_408j2"]
+[ext_resource type="Script" path="res://scripts/ProjectileEmitter.gd" id="6_1w8oq"]
+[ext_resource type="Script" path="res://scripts/AudioManager.gd" id="7_511vy"]
+[ext_resource type="AudioStream" uid="uid://inflyfrfxqu7" path="res://music/refract.mp3" id="8_ph3rs"]
+[ext_resource type="AudioStream" uid="uid://b77xbhcraw287" path="res://music/mixkit-arcade-game-complete-or-approved-mission-205.wav" id="9_rlvma"]
+[ext_resource type="PackedScene" uid="uid://j3q2c8ojgweb" path="res://scenes/spot_lights.tscn" id="10_i6wtp"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_8w5cq"]
+radius = 0.25
+height = 0.75
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_2nep6"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_344r5"]
+albedo_color = Color(0, 0.223529, 0.223529, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_bhyeo"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0hve7"]
+albedo_color = Color(0.270588, 0.141176, 0, 1)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_p54l4"]
+points = PackedVector3Array(-0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5)
+
+[sub_resource type="BoxMesh" id="BoxMesh_ecs3e"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_j3y3t"]
+albedo_color = Color(0.929412, 0.0941176, 0, 1)
+
+[node name="DemoScene" type="Node3D"]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(-1, 3.69465e-08, -7.92319e-08, 0, 0.906308, 0.422618, 8.74228e-08, 0.422618, -0.906308, 0, 0.373225, -0.658381)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.00396917, 0.929172, -0.369628, 0.96977, 0.0866099, 0.228134, 0.243989, -0.359359, -0.900739, -0.278868, 0.456484, -0.769173)
+
+[node name="Comedian" type="CharacterBody3D" parent="." groups=["Player"]]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0.336477, -0.185228)
+script = ExtResource("1_5xjr6")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Comedian"]
+shape = SubResource("CapsuleShape3D_8w5cq")
+
+[node name="Sprite" type="AnimatedSprite3D" parent="Comedian"]
+sprite_frames = ExtResource("2_rk8ih")
+animation = &"new_animation"
+autoplay = "new_animation"
+frame_progress = 0.776392
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+mesh = SubResource("PlaneMesh_2nep6")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_344r5")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.10567e-05, -0.439361, -0.414402)
+mesh = SubResource("BoxMesh_bhyeo")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_0hve7")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.10567e-05, -0.439361, -0.414402)
+shape = SubResource("ConvexPolygonShape3D_p54l4")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.1, -0.900706, 0.00265056, -0.000804007)
+mesh = SubResource("BoxMesh_ecs3e")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_j3y3t")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.1, 0.912698, 0.00410165, -0.00203091)
+mesh = SubResource("BoxMesh_ecs3e")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_j3y3t")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_direction = 3
+offset_left = 8.0
+offset_top = 541.0
+offset_right = 1147.0
+offset_bottom = 633.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("3_fyko6")
+
+[node name="Ui Screen" parent="." instance=ExtResource("4_4vnns")]
+visible = false
+
+[node name="AudienceMember" parent="." instance=ExtResource("5_408j2")]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0.268132, 0.100738, 0.242063)
+
+[node name="AudienceMember2" parent="." instance=ExtResource("5_408j2")]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -0.189306, 0.149725, 0.173102)
+
+[node name="AudienceMember3" parent="." instance=ExtResource("5_408j2")]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0.0473775, 0.149725, 0.173102)
+
+[node name="ProjectileEmitter" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0936981, 0.272931)
+script = ExtResource("6_1w8oq")
+
+[node name="AudioManager" type="Node3D" parent="."]
+script = ExtResource("7_511vy")
+
+[node name="Background" type="Node3D" parent="AudioManager"]
+
+[node name="Refractor" type="AudioStreamPlayer" parent="AudioManager/Background"]
+stream = ExtResource("8_ph3rs")
+
+[node name="Sound Effect" type="Node3D" parent="AudioManager"]
+
+[node name="Arcade" type="AudioStreamPlayer" parent="AudioManager/Sound Effect"]
+stream = ExtResource("9_rlvma")
+
+[node name="SpotLights" parent="." instance=ExtResource("10_i6wtp")]

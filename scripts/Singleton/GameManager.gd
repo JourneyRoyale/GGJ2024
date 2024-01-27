@@ -73,7 +73,8 @@ func create_emoji(nodeReference):
 		emoji_list.append(nodeReference)
 	
 func delete_emoji(nodeReference):
-	if(playing):
-		if(nodeReference):
-			nodeReference.queue_free()
-			emoji_list.pop_front()
+	#if(playing):
+		#if(nodeReference):
+			#nodeReference.queue_free()
+			#emoji_list.pop_front()
+	pass

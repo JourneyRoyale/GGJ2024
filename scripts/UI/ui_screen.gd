@@ -17,7 +17,7 @@ extends Control
 @onready var timer = get_node("GameUI/MarginContainer/VBoxContainer/Top UI Bar/Timer")
 @onready var laughter_meter = get_node("GameUI/MarginContainer/VBoxContainer/Top UI Bar/Laughter Meter")
 @onready var joke_bar = get_node("GameUI/MarginContainer/VBoxContainer/Joke Bar")
-var packed_joke_button = load("res://scenes/JokeButton.tscn")
+var packed_joke_button = load("res://prefab/JokeButton.tscn")
 
 @onready var audio_manager = get_node("/root/AudioManager")
 @onready var game_manager = get_node("/root/GameManager")

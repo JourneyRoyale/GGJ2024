@@ -1,19 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://dfddod52n51d5"]
+[gd_scene load_steps=8 format=3 uid="uid://dfddod52n51d5"]
 
 [ext_resource type="Texture2D" uid="uid://b65jxkkklfumw" path="res://sprites/DF-Bases (1).png" id="1_8axol"]
+[ext_resource type="Texture2D" uid="uid://de2unrta476vq" path="res://sprites/audience-placeholder.png" id="1_a6k8n"]
 [ext_resource type="Script" path="res://scripts/Game/AudienceMember.gd" id="2_h3nul"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_7sejg"]
-atlas = ExtResource("1_8axol")
-region = Rect2(0, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_2iaew"]
-atlas = ExtResource("1_8axol")
-region = Rect2(64, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_f3uor"]
-atlas = ExtResource("1_8axol")
-region = Rect2(128, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_yo082"]
 atlas = ExtResource("1_8axol")
@@ -31,13 +20,7 @@ region = Rect2(128, 448, 64, 64)
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_7sejg")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_2iaew")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_f3uor")
+"texture": ExtResource("1_a6k8n")
 }],
 "loop": true,
 "name": &"default",
@@ -65,5 +48,6 @@ autoplay = "default"
 script = ExtResource("2_h3nul")
 
 [node name="Label3D" type="Label3D" parent="."]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0.321888, 0)
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 7.56557, 0)
 text = "😀"
+font_size = 600

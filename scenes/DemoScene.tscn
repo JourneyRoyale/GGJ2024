@@ -1,66 +1,11 @@
-[gd_scene load_steps=22 format=3 uid="uid://c2385tsp67n36"]
+[gd_scene load_steps=15 format=3 uid="uid://b0hyqaqjfjjkf"]
 
-[ext_resource type="Texture2D" uid="uid://b65jxkkklfumw" path="res://sprites/DF-Bases (1).png" id="1_g0whl"]
+[ext_resource type="PackedScene" uid="uid://dfddod52n51d5" path="res://scenes/AudienceMember.tscn" id="1_wtwtw"]
 [ext_resource type="Script" path="res://scripts/Game/Comedian.gd" id="2_4yu3q"]
 [ext_resource type="SpriteFrames" uid="uid://cr383cnklcbny" path="res://sprites/spriteframes.tres" id="3_ie6en"]
 [ext_resource type="Script" path="res://scripts/JokeBar/JokeBar.gd" id="4_52nw3"]
-[ext_resource type="PackedScene" uid="uid://d0hb5x170modd" path="res://scenes/ui_screen.tscn" id="5_7lsjr"]
+[ext_resource type="PackedScene" path="res://scenes/ui_screen.tscn" id="5_7lsjr"]
 [ext_resource type="Script" path="res://scripts/Game/SpotLight.gd" id="6_73ogf"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_7sejg"]
-atlas = ExtResource("1_g0whl")
-region = Rect2(0, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_2iaew"]
-atlas = ExtResource("1_g0whl")
-region = Rect2(64, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_f3uor"]
-atlas = ExtResource("1_g0whl")
-region = Rect2(128, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_yo082"]
-atlas = ExtResource("1_g0whl")
-region = Rect2(0, 448, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_qrde3"]
-atlas = ExtResource("1_g0whl")
-region = Rect2(64, 448, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_0vxdg"]
-atlas = ExtResource("1_g0whl")
-region = Rect2(128, 448, 64, 64)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_00nde"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_7sejg")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_2iaew")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_f3uor")
-}],
-"loop": true,
-"name": &"default",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_yo082")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_qrde3")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_0vxdg")
-}],
-"loop": true,
-"name": &"new_animation",
-"speed": 5.0
-}]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_8w5cq"]
 radius = 0.25
@@ -85,21 +30,6 @@ points = PackedVector3Array(-0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5
 albedo_color = Color(0.929412, 0.0941176, 0, 1)
 
 [node name="DemoScene" type="Node3D"]
-
-[node name="AnimatedSprite3D2" type="AnimatedSprite3D" parent="."]
-transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0.0423704, 0.161299, 0.228875)
-sprite_frames = SubResource("SpriteFrames_00nde")
-autoplay = "default"
-
-[node name="AnimatedSprite3D3" type="AnimatedSprite3D" parent="."]
-transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -0.100117, 0.161299, 0.228875)
-sprite_frames = SubResource("SpriteFrames_00nde")
-autoplay = "default"
-
-[node name="AnimatedSprite3D4" type="AnimatedSprite3D" parent="."]
-transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -0.286052, 0.161299, 0.228875)
-sprite_frames = SubResource("SpriteFrames_00nde")
-autoplay = "default"
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(-1, 3.69465e-08, -7.92319e-08, 0, 0.906308, 0.422618, 8.74228e-08, 0.422618, -0.906308, 0, 0.373225, -0.658381)
@@ -166,3 +96,12 @@ transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -0.366
 light_energy = 2.559
 spot_angle = 9.18
 script = ExtResource("6_73ogf")
+
+[node name="AudienceMember" parent="." instance=ExtResource("1_wtwtw")]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0.268132, 0.100738, 0.242063)
+
+[node name="AudienceMember2" parent="." instance=ExtResource("1_wtwtw")]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -0.189306, 0.149725, 0.173102)
+
+[node name="AudienceMember3" parent="." instance=ExtResource("1_wtwtw")]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0.0473775, 0.149725, 0.173102)

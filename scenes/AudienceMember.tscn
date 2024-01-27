@@ -1,0 +1,69 @@
+[gd_scene load_steps=10 format=3 uid="uid://dfddod52n51d5"]
+
+[ext_resource type="Texture2D" uid="uid://b65jxkkklfumw" path="res://sprites/DF-Bases (1).png" id="1_8axol"]
+[ext_resource type="Script" path="res://scripts/Game/AudienceMember.gd" id="2_h3nul"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7sejg"]
+atlas = ExtResource("1_8axol")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2iaew"]
+atlas = ExtResource("1_8axol")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f3uor"]
+atlas = ExtResource("1_8axol")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yo082"]
+atlas = ExtResource("1_8axol")
+region = Rect2(0, 448, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qrde3"]
+atlas = ExtResource("1_8axol")
+region = Rect2(64, 448, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0vxdg"]
+atlas = ExtResource("1_8axol")
+region = Rect2(128, 448, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_00nde"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7sejg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2iaew")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f3uor")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yo082")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qrde3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0vxdg")
+}],
+"loop": true,
+"name": &"new_animation",
+"speed": 5.0
+}]
+
+[node name="AudienceMember" type="AnimatedSprite3D"]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0.0423704, 0.161299, 0.228875)
+sprite_frames = SubResource("SpriteFrames_00nde")
+autoplay = "default"
+script = ExtResource("2_h3nul")
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0.321888, 0)
+text = "😀"

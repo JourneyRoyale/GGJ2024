@@ -1,33 +1,33 @@
 [gd_scene load_steps=21 format=3 uid="uid://b0hyqaqjfjjkf"]
 
-[ext_resource type="Texture2D" uid="uid://b65jxkkklfumw" path="res://sprites/DF-Bases (1).png" id="1_0hmno"]
-[ext_resource type="SpriteFrames" uid="uid://cr383cnklcbny" path="res://sprites/spriteframes.tres" id="1_dsue8"]
-[ext_resource type="Script" path="res://scripts/Comedian.gd" id="2_w3cef"]
-[ext_resource type="Script" path="res://JokeBar.gd" id="4_o0u63"]
-[ext_resource type="PackedScene" uid="uid://d05hpsvh1jg5g" path="res://title_screen.tscn" id="5_44mbm"]
+[ext_resource type="Texture2D" uid="uid://b65jxkkklfumw" path="res://sprites/DF-Bases (1).png" id="1_g0whl"]
+[ext_resource type="Script" path="res://scripts/Game/Comedian.gd" id="2_4yu3q"]
+[ext_resource type="SpriteFrames" uid="uid://cr383cnklcbny" path="res://sprites/spriteframes.tres" id="3_ie6en"]
+[ext_resource type="Script" path="res://scripts/JokeBar/JokeBar.gd" id="4_52nw3"]
+[ext_resource type="PackedScene" uid="uid://d05hpsvh1jg5g" path="res://scenes/TitleScreen.tscn" id="5_30451"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7sejg"]
-atlas = ExtResource("1_0hmno")
+atlas = ExtResource("1_g0whl")
 region = Rect2(0, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2iaew"]
-atlas = ExtResource("1_0hmno")
+atlas = ExtResource("1_g0whl")
 region = Rect2(64, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_f3uor"]
-atlas = ExtResource("1_0hmno")
+atlas = ExtResource("1_g0whl")
 region = Rect2(128, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_yo082"]
-atlas = ExtResource("1_0hmno")
+atlas = ExtResource("1_g0whl")
 region = Rect2(0, 448, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qrde3"]
-atlas = ExtResource("1_0hmno")
+atlas = ExtResource("1_g0whl")
 region = Rect2(64, 448, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0vxdg"]
-atlas = ExtResource("1_0hmno")
+atlas = ExtResource("1_g0whl")
 region = Rect2(128, 448, 64, 64)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_00nde"]
@@ -108,13 +108,13 @@ transform = Transform3D(0.00396917, 0.929172, -0.369628, 0.96977, 0.0866099, 0.2
 
 [node name="Comedian" type="CharacterBody3D" parent="."]
 transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0.336477, -0.185228)
-script = ExtResource("2_w3cef")
+script = ExtResource("2_4yu3q")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Comedian"]
 shape = SubResource("CapsuleShape3D_8w5cq")
 
 [node name="Sprite" type="AnimatedSprite3D" parent="Comedian"]
-sprite_frames = ExtResource("1_dsue8")
+sprite_frames = ExtResource("3_ie6en")
 animation = &"new_animation"
 autoplay = "new_animation"
 frame_progress = 0.776392
@@ -156,6 +156,6 @@ offset_right = 1147.0
 offset_bottom = 633.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-script = ExtResource("4_o0u63")
+script = ExtResource("4_52nw3")
 
-[node name="TitleScreen" parent="." instance=ExtResource("5_44mbm")]
+[node name="TitleScreen" parent="." instance=ExtResource("5_30451")]

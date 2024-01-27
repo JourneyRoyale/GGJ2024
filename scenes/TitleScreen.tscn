@@ -1,8 +1,8 @@
 [gd_scene load_steps=7 format=3 uid="uid://d05hpsvh1jg5g"]
 
 [ext_resource type="Texture2D" uid="uid://284ju54ci7o1" path="res://sprites/curtain-placeholder.png" id="1_bv0tl"]
-[ext_resource type="Script" path="res://scripts/Hide Title Screen.gd" id="1_u7u2r"]
-[ext_resource type="Script" path="res://scripts/Start Game.gd" id="3_vq3r0"]
+[ext_resource type="Script" path="res://scripts/TitleScreen/HideTitleScreenButton.gd" id="1_u7u2r"]
+[ext_resource type="Script" path="res://scripts/TitleScreen/StartGameButton.gd" id="3_vq3r0"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_jkbkj"]
 font_size = 46

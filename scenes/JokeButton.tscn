@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://c1wv0nrjgmhqh"]
 
-[ext_resource type="Script" path="res://scenes/JokeButton.gd" id="1_121v7"]
+[ext_resource type="Script" path="res://scripts/JokeBar/JokeButton.gd" id="1_121v7"]
 
 [sub_resource type="FontFile" id="FontFile_esay5"]
 subpixel_positioning = 0

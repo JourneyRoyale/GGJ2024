@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://bmgyt6b5j1y5r"]
+[gd_scene load_steps=7 format=3 uid="uid://bskgpd4m757s"]
 
 [ext_resource type="Script" path="res://scripts/UI/ui_screen.gd" id="1_w5wnv"]
 [ext_resource type="Texture2D" uid="uid://nsxwa07hhb12" path="res://sprites/placeholder/Gear-icon-transparent-background.png" id="2_vtl00"]
@@ -39,7 +39,7 @@ _data = {
 "curtains_open": SubResource("Animation_cx5om")
 }
 
-[node name="Ui Screen" type="Control" node_paths=PackedStringArray("title_screen", "main_menu", "setting", "pause_screen", "pause_menu", "pause_setting", "timer", "laughter_meter", "joke_bar")]
+[node name="Ui Screen" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -47,16 +47,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_w5wnv")
-animation = NodePath("TitleScreen/AnimationPlayer")
-title_screen = NodePath("")
-main_menu = NodePath("")
-setting = NodePath("")
-pause_screen = NodePath("")
-pause_menu = NodePath("")
-pause_setting = NodePath("")
-timer = NodePath("")
-laughter_meter = NodePath("")
-joke_bar = NodePath("")
 
 [node name="GameUI" type="Control" parent="."]
 layout_mode = 1

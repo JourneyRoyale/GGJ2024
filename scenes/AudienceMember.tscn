@@ -1,7 +1,7 @@
-[gd_scene load_steps=12 format=3 uid="uid://wsjsm7b6eic2"]
+[gd_scene load_steps=12 format=3 uid="uid://dfddod52n51d5"]
 
 [ext_resource type="Texture2D" uid="uid://b65jxkkklfumw" path="res://sprites/DF-Bases (1).png" id="1_8axol"]
-[ext_resource type="Texture2D" path="res://sprites/audience-placeholder.png" id="1_a6k8n"]
+[ext_resource type="Texture2D" uid="uid://de2unrta476vq" path="res://sprites/audience-placeholder.png" id="1_a6k8n"]
 [ext_resource type="Script" path="res://scripts/Game/AudienceMember.gd" id="2_h3nul"]
 [ext_resource type="Texture2D" uid="uid://cqotupq7p6lxa" path="res://sprites/q4soglmekmhdh1lrgisaiipi6t.png" id="3_gomj7"]
 [ext_resource type="Texture2D" uid="uid://d0ryqaas3hduy" path="res://sprites/kisspng-cvs-pharmacy-child-infant-mouth-disease-thought-bubble-5a746a3ec14798.4822727115175788147917.png" id="4_5dafe"]

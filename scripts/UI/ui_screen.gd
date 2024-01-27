@@ -1,22 +1,22 @@
 extends Control
 
 #Other
-@export var animation : NodePath
+@onready var animation = get_node("TitleScreen/AnimationPlayer")
 
 #Title Screen
-@export var title_screen : Node
-@export var main_menu : Node
-@export var setting : Node
+@onready var title_screen = get_node("TitleScreen")
+@onready var main_menu = get_node("TitleScreen/MarginContainer/VBoxContainer/Main Menu")
+@onready var setting = get_node("TitleScreen/MarginContainer/VBoxContainer/Setting")
 
 #Pause Screen
-@export var pause_screen : Node
-@export var pause_menu : Node
-@export var pause_setting : Node
+@onready var pause_screen = get_node("Pause Screen")
+@onready var pause_menu = get_node("Pause Screen/MarginContainer/MarginContainer/VBoxContainer/Pause Menu")
+@onready var pause_setting = get_node("Pause Screen/MarginContainer/MarginContainer/VBoxContainer/Pause Setting")
 
 #Game UI
-@export var timer : Node
-@export var laughter_meter : Node
-@export var joke_bar: Node
+@onready var timer = get_node("GameUI/MarginContainer/VBoxContainer/Top UI Bar/Timer")
+@onready var laughter_meter = get_node("GameUI/MarginContainer/VBoxContainer/Top UI Bar/Laughter Meter")
+@onready var joke_bar = get_node("GameUI/MarginContainer/VBoxContainer/Joke Bar")
 var packed_joke_button = load("res://scenes/JokeButton.tscn")
 
 @onready var audio_manager = get_node("/root/AudioManager")
@@ -39,16 +39,17 @@ func _process(delta):
 func _add_joke():
 	await get_tree().create_timer(1).timeout
 	var instance = packed_joke_button.instantiate()
-	if (joke_bar.get_child_count() == game_manager.max_emoji):
-		print(joke_bar.get_child_count())
-		game_manager.delete_emoji(game_manager.emoji_list[0])
-	
-	joke_bar.add_child(instance)
-	var child_ref = joke_bar.get_child(joke_bar.get_child_count() - 1)
-	print('test')
+	if(joke_bar):
+		if (joke_bar.get_child_count() == game_manager.max_emoji):
+			print(joke_bar.get_child_count())
+			game_manager.delete_emoji(game_manager.emoji_list[0])
+		
+		joke_bar.add_child(instance)
+		var child_ref = joke_bar.get_child(joke_bar.get_child_count() - 1)
+		print('test')
 
-	game_manager.create_emoji(child_ref)
-	_add_joke()
+		game_manager.create_emoji(child_ref)
+		_add_joke()
 
 func _input(event):
 	if event is InputEventKey and event.pressed:
@@ -78,9 +79,8 @@ func time_convert(time_in_sec):
 
 #Main Menu
 func _on_start_game_pressed():
-	var animation_player = get_node(animation)
-	if animation_player != null:
-		animation_player.play("curtains_open")
+	if animation != null:
+		animation.play("curtains_open")
 	title_screen.visible = false
 
 func _on_how_to_play_pressed():

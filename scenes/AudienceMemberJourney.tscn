@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://f6f308iy7vrr"]
+[gd_scene load_steps=14 format=3 uid="uid://c8v3p3b27wpmk"]
 
 [ext_resource type="Texture2D" uid="uid://b65jxkkklfumw" path="res://sprites/DF-Bases (1).png" id="1_8axol"]
 [ext_resource type="Script" path="res://scripts/Game/AudienceMember.gd" id="2_h3nul"]
@@ -88,7 +88,7 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="AudienceMember" type="AnimatedSprite3D" groups=["audience"]]
+[node name="AudienceMember2" type="AnimatedSprite3D" groups=["audience"]]
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0.0423704, 0.161299, 0.228875)
 sprite_frames = SubResource("SpriteFrames_00nde")
 autoplay = "default"

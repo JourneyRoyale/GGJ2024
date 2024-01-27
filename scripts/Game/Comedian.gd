@@ -1,9 +1,9 @@
 extends CharacterBody3D
 
-@export var ACCEL = 0.3
-@export var SPEED = 0.7
-@export var JUMP_VELOCITY = 1.0
-@export var INERTIA = 0.05
+@export var ACCEL = 1
+@export var SPEED = 7
+@export var JUMP_VELOCITY = 5.0
+@export var INERTIA = 0.3
 
 @onready var sprite = get_node("Sprite")
 @onready var audio_manager = get_node("/root/AudioManager")

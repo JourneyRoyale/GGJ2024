@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://d05hpsvh1jg5g"]
+[gd_scene load_steps=9 format=3 uid="uid://ck85a0avx1e86"]
 
 [ext_resource type="Texture2D" uid="uid://284ju54ci7o1" path="res://sprites/curtain-placeholder.png" id="2_fen75"]
 [ext_resource type="Script" path="res://scripts/AudioManager.gd" id="2_sde6v"]
@@ -70,7 +70,6 @@ script = ExtResource("2_sde6v")
 
 [node name="Refractor" type="AudioStreamPlayer" parent="AudioManager/Background"]
 stream = ExtResource("3_337jl")
-bus = &"Background"
 
 [node name="Sound Effect" type="Node3D" parent="AudioManager"]
 

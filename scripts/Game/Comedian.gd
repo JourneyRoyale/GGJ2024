@@ -10,6 +10,14 @@ extends CharacterBody3D
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
+var in_spotlight = false
+
+func on_spotlight_entered():
+	in_spotlight = true
+	
+func on_spotlight_exited():
+	in_spotlight = false
+
 func _physics_process(delta):
 	# Add the gravity.
 	if not is_on_floor():

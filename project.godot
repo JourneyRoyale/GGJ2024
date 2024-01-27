@@ -19,6 +19,10 @@ config/icon="res://icon.svg"
 
 buses/default_bus_layout="res://music/audio_bus_layout.tres"
 
+[autoload]
+
+AudioManager="*res://scenes/audio_manager.tscn"
+
 [dotnet]
 
 project/assembly_name="GGJ2024"

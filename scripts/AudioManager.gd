@@ -6,6 +6,9 @@ extends Node3D
 @onready var SOUND_EFFECT_ID = AudioServer.get_bus_index("Sound Effect")
 
 var current_music : AudioStreamPlayer
+var master_volume = .5
+var background_volume = .5
+var sound_effect_volume = .5
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -14,6 +17,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	print(master_volume)
 	pass
 	
 func _input(event):
@@ -50,15 +54,3 @@ func _find_music(music_name, audio_type):
 		return child_node.get_node(music_name)
 	else:
 		return null
-
-func _on_master_slider_value_changed(value):
-	AudioServer.set_bus_volume_db(MASTER_BUS_ID, linear_to_db(value))
-	AudioServer.set_bus_mute(MASTER_BUS_ID, value < .05)
-
-func _on_sound_effect_slider_value_changed(value):
-	AudioServer.set_bus_volume_db(SOUND_EFFECT_ID, linear_to_db(value))
-	AudioServer.set_bus_mute(SOUND_EFFECT_ID, value < .05)
-
-func _on_background_slider_value_changed(value):
-	AudioServer.set_bus_volume_db(BACKGROUND_BUS_ID, linear_to_db(value))
-	AudioServer.set_bus_mute(BACKGROUND_BUS_ID, value < .05)

@@ -23,12 +23,12 @@ func _process(delta):
 func _input(event):
 	if event is InputEventKey and event.pressed:
 		if event.keycode == KEY_Z:
-			_play_music('Refractor','Background')
+			play_music('Refractor','Background')
 		elif event.keycode == KEY_X:
-			_play_music('Arcade','Sound Effect')
+			play_music('Arcade','Sound Effect')
 
 
-func _play_music(music_name, audio_type):
+func play_music(music_name, audio_type):
 	var found_music = false;
 	var new_music = _find_music(music_name, audio_type)
 	print(new_music)

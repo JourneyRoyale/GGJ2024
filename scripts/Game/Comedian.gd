@@ -6,6 +6,7 @@ extends CharacterBody3D
 @export var INERTIA = 0.05
 
 @onready var sprite = get_node("Sprite")
+@onready var audio_manager = get_node("/root/AudioManager")
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
@@ -14,9 +15,15 @@ var in_spotlight = false
 
 func on_spotlight_entered():
 	in_spotlight = true
+	audio_manager.play_music('Arcade', 'Sound Effect')
 	
 func on_spotlight_exited():
 	in_spotlight = false
+	audio_manager.play_music('Arcade', 'Sound Effect')
+
+func projectile_collided():
+	audio_manager.play_music('Arcade', 'Sound Effect')
+	#TODO: Notify gamemanager
 
 func _physics_process(delta):
 	# Add the gravity.

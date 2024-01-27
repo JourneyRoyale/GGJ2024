@@ -1,12 +1,15 @@
-[gd_scene load_steps=16 format=3 uid="uid://b0hyqaqjfjjkf"]
+[gd_scene load_steps=19 format=3 uid="uid://b0hyqaqjfjjkf"]
 
 [ext_resource type="PackedScene" uid="uid://dfddod52n51d5" path="res://scenes/AudienceMember.tscn" id="1_wtwtw"]
 [ext_resource type="Script" path="res://scripts/Game/Comedian.gd" id="2_4yu3q"]
 [ext_resource type="SpriteFrames" uid="uid://cr383cnklcbny" path="res://sprites/spriteframes.tres" id="3_ie6en"]
 [ext_resource type="Script" path="res://scripts/JokeBar/JokeBar.gd" id="4_52nw3"]
-[ext_resource type="PackedScene" path="res://scenes/ui_screen.tscn" id="5_7lsjr"]
+[ext_resource type="PackedScene" uid="uid://3lalflhe2iba" path="res://scenes/ui_screen.tscn" id="5_7lsjr"]
 [ext_resource type="Script" path="res://scripts/Game/SpotLight.gd" id="6_73ogf"]
 [ext_resource type="Script" path="res://scripts/ProjectileEmitter.gd" id="7_0jqkp"]
+[ext_resource type="Script" path="res://scripts/AudioManager.gd" id="8_7ik8w"]
+[ext_resource type="AudioStream" uid="uid://inflyfrfxqu7" path="res://music/refract.mp3" id="9_go7je"]
+[ext_resource type="AudioStream" uid="uid://b77xbhcraw287" path="res://music/mixkit-arcade-game-complete-or-approved-mission-205.wav" id="10_mp5ov"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_8w5cq"]
 radius = 0.25
@@ -38,7 +41,7 @@ transform = Transform3D(-1, 3.69465e-08, -7.92319e-08, 0, 0.906308, 0.422618, 8.
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.00396917, 0.929172, -0.369628, 0.96977, 0.0866099, 0.228134, 0.243989, -0.359359, -0.900739, -0.278868, 0.456484, -0.769173)
 
-[node name="Comedian" type="CharacterBody3D" parent="."]
+[node name="Comedian" type="CharacterBody3D" parent="." groups=["Player"]]
 transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0.336477, -0.185228)
 script = ExtResource("2_4yu3q")
 
@@ -111,3 +114,16 @@ transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0.0473775, 0.149725, 0.
 [node name="ProjectileEmitter" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0936981, 0.272931)
 script = ExtResource("7_0jqkp")
+
+[node name="AudioManager" type="Node3D" parent="."]
+script = ExtResource("8_7ik8w")
+
+[node name="Background" type="Node3D" parent="AudioManager"]
+
+[node name="Refractor" type="AudioStreamPlayer" parent="AudioManager/Background"]
+stream = ExtResource("9_go7je")
+
+[node name="Sound Effect" type="Node3D" parent="AudioManager"]
+
+[node name="Arcade" type="AudioStreamPlayer" parent="AudioManager/Sound Effect"]
+stream = ExtResource("10_mp5ov")

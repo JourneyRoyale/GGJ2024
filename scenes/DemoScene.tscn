@@ -1,10 +1,11 @@
-[gd_scene load_steps=21 format=3 uid="uid://b0hyqaqjfjjkf"]
+[gd_scene load_steps=22 format=3 uid="uid://b0hyqaqjfjjkf"]
 
 [ext_resource type="Texture2D" uid="uid://b65jxkkklfumw" path="res://sprites/DF-Bases (1).png" id="1_g0whl"]
 [ext_resource type="Script" path="res://scripts/Game/Comedian.gd" id="2_4yu3q"]
 [ext_resource type="SpriteFrames" uid="uid://cr383cnklcbny" path="res://sprites/spriteframes.tres" id="3_ie6en"]
 [ext_resource type="Script" path="res://scripts/JokeBar/JokeBar.gd" id="4_52nw3"]
 [ext_resource type="PackedScene" uid="uid://d05hpsvh1jg5g" path="res://scenes/TitleScreen.tscn" id="5_30451"]
+[ext_resource type="Script" path="res://scripts/Game/SpotLight.gd" id="6_73ogf"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7sejg"]
 atlas = ExtResource("1_g0whl")
@@ -159,3 +160,10 @@ size_flags_vertical = 3
 script = ExtResource("4_52nw3")
 
 [node name="TitleScreen" parent="." instance=ExtResource("5_30451")]
+visible = false
+
+[node name="SpotLight" type="SpotLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -0.366629, 0.515142, -0.776176)
+light_energy = 2.559
+spot_angle = 9.18
+script = ExtResource("6_73ogf")

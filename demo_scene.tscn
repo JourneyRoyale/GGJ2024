@@ -1,9 +1,10 @@
-[gd_scene load_steps=20 format=3 uid="uid://b0hyqaqjfjjkf"]
+[gd_scene load_steps=21 format=3 uid="uid://b0hyqaqjfjjkf"]
 
 [ext_resource type="Texture2D" uid="uid://b65jxkkklfumw" path="res://sprites/DF-Bases (1).png" id="1_0hmno"]
 [ext_resource type="SpriteFrames" uid="uid://cr383cnklcbny" path="res://sprites/spriteframes.tres" id="1_dsue8"]
 [ext_resource type="Script" path="res://scripts/Comedian.gd" id="2_w3cef"]
 [ext_resource type="Script" path="res://JokeBar.gd" id="4_o0u63"]
+[ext_resource type="PackedScene" uid="uid://d05hpsvh1jg5g" path="res://title_screen.tscn" id="5_44mbm"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7sejg"]
 atlas = ExtResource("1_0hmno")
@@ -156,3 +157,5 @@ offset_bottom = 633.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource("4_o0u63")
+
+[node name="TitleScreen" parent="." instance=ExtResource("5_44mbm")]

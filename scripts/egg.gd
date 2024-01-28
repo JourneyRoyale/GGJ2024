@@ -18,5 +18,5 @@ func _process(delta):
 
 func _on_area_2d_input_event(viewport, event, shape_idx):
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
-		get_tree().call_group("Audience", "check_for_match", emoji_num)
+		get_tree().call_group("AudienceManager", "check_for_match", emoji_num)
 		queue_free()

@@ -22,6 +22,7 @@ var rng : RandomNumberGenerator = RandomNumberGenerator.new()
 @export var question_popup_rate_deviance_max = 5
 @export var question_popup_lifespan = 2
 @onready var audio_manager = get_node("/root/AudioManager")
+@onready var game_manager = get_node("/root/GameManager")
 @onready var timer = get_node("Timer")
 
 func _ready():
@@ -108,10 +109,26 @@ func _update():
 
 func _on_timer_timeout():
 	var children = members.get_children()
+	var num_children = children.size()
+	var force = randi_range(0, num_children-1)
 	for i in children:
 		i.clear_emoji()
-	children.shuffle()
-	children[0].show_emoji()
+		if (randi_range(0, 2) == 1 or force == children.find(i)):
+			i.show_emoji()
+	#children.shuffle()
+	#children[0].show_emoji()
 	if (randi_range(0, 1)):
 		_spawn_heckler()
 	timer.wait_time = randi_range(0, 5)
+
+func check_for_match(emoji):
+	var matched = false
+	for i in members.get_children():
+		if i.check_for_match(emoji):
+			matched = true;
+	if (matched):
+		audio_manager.play_music('PickupCoin', 'Sound Effect')
+		game_manager.register_match()
+	else:
+		audio_manager.play_music('HitHurt', 'Sound Effect')		
+		game_manager.register_error()

@@ -31,9 +31,5 @@ func check_for_match(emoji):
 		var match = emoji == current_emoji
 		var success = match
 		if success:
-			audio_manager.play_music('PickupCoin', 'Sound Effect')
-			game_manager.register_match()
-		else:
-			audio_manager.play_music('HitHurt', 'Sound Effect')		
-			game_manager.register_error()
-		clear_emoji()
+			clear_emoji()
+		return success

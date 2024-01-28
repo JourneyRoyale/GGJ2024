@@ -59,7 +59,7 @@ var inv_alt = 0
 func _process(delta):
 	if invulnerable:
 		inv_alt += delta
-		if inv_alt >= 1:
+		if inv_alt >= .15:
 			if visible:
 				hide()
 			else:

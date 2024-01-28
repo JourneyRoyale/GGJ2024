@@ -56,7 +56,7 @@ func _add_joke():
 func _input(event):
 	if event is InputEventKey and event.pressed:
 		if event.keycode == KEY_ESCAPE:
-			if(current_scene_name == "DemoScene"):
+			if(current_scene_name == "DemoScene2"):
 				pause_screen.visible = !pause_screen.visible
 
 func _sync_volume(node):

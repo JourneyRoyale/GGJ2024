@@ -1,13 +1,44 @@
-[gd_scene load_steps=11 format=3 uid="uid://cprmj3f5eei56"]
+[gd_scene load_steps=20 format=3 uid="uid://cprmj3f5eei56"]
 
 [ext_resource type="Script" path="res://hieu change/ui_screen_hieu_change.gd" id="1_abmho"]
 [ext_resource type="Theme" uid="uid://4c5xn5lj157e" path="res://theme/default.tres" id="2_s5wlq"]
-[ext_resource type="Texture2D" uid="uid://nsxwa07hhb12" path="res://sprites/placeholder/Gear-icon-transparent-background.png" id="3_16bi4"]
-[ext_resource type="Texture2D" uid="uid://c7hm8j8x8h8nn" path="res://sprites/White Rectangle.png" id="4_1amc0"]
+[ext_resource type="Texture2D" uid="uid://ct1bgt227dwru" path="res://sprites/ui/GearIcon.png" id="3_h61py"]
+[ext_resource type="Texture2D" uid="uid://c1j3mfi0kk3t4" path="res://sprites/ui/tile0.png" id="4_i78d3"]
+[ext_resource type="Texture2D" uid="uid://rma688d35ap1" path="res://sprites/ui/White Rectangle With Gray.png" id="4_u3sl2"]
+[ext_resource type="Texture2D" uid="uid://dhwa6xxmib58x" path="res://sprites/ui/tile1.png" id="5_dh3wa"]
 [ext_resource type="Texture2D" uid="uid://284ju54ci7o1" path="res://sprites/curtain-placeholder.png" id="5_t571l"]
+[ext_resource type="Texture2D" uid="uid://jb6gm7433n5o" path="res://sprites/ui/titleLogo.png" id="6_mwifm"]
+[ext_resource type="Texture2D" uid="uid://chxjv6mmrfukl" path="res://sprites/ui/tile2.png" id="6_n0th8"]
+[ext_resource type="Texture2D" uid="uid://k8i6dpa2btug" path="res://sprites/ui/tile5.png" id="7_66fwq"]
+[ext_resource type="Texture2D" uid="uid://wgrnk5h1tpll" path="res://sprites/ui/tile7.png" id="8_xcf41"]
+[ext_resource type="Texture2D" uid="uid://c5u4ifx3tu71a" path="res://sprites/ui/tile3.png" id="9_lr5ao"]
+[ext_resource type="Texture2D" uid="uid://dholw4bog4au" path="res://sprites/ui/tile6.png" id="10_x7xtt"]
+
+[sub_resource type="Animation" id="Animation_ef8g4"]
+resource_name = "Egg Convery"
+length = 1.05
+loop_mode = 1
+step = 0.125
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextureRect:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.125, 0.25, 0.375, 0.5, 0.625, 0.75, 0.875, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("4_i78d3"), ExtResource("5_dh3wa"), ExtResource("6_n0th8"), ExtResource("7_66fwq"), ExtResource("8_xcf41"), ExtResource("5_dh3wa"), ExtResource("9_lr5ao"), ExtResource("10_x7xtt"), ExtResource("4_i78d3")]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_11b3v"]
+_data = {
+"Egg Convery": SubResource("Animation_ef8g4")
+}
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_vuhmk"]
-texture = ExtResource("4_1amc0")
+texture = ExtResource("4_u3sl2")
 texture_margin_left = 40.0
 texture_margin_top = 30.0
 texture_margin_right = 38.0
@@ -20,9 +51,6 @@ border_width_top = 2
 border_width_right = 2
 border_width_bottom = 2
 border_color = Color(1, 1, 1, 1)
-
-[sub_resource type="LabelSettings" id="LabelSettings_jkbkj"]
-font_size = 46
 
 [sub_resource type="Animation" id="Animation_cx5om"]
 resource_name = "curtains_open"
@@ -101,7 +129,7 @@ custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 size_flags_horizontal = 0
 theme = ExtResource("2_s5wlq")
-texture_normal = ExtResource("3_16bi4")
+texture_normal = ExtResource("3_h61py")
 ignore_texture_size = true
 stretch_mode = 0
 
@@ -145,6 +173,19 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 8
 theme = ExtResource("2_s5wlq")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="GameUI"]
+libraries = {
+"": SubResource("AnimationLibrary_11b3v")
+}
+
+[node name="TextureRect" type="TextureRect" parent="GameUI"]
+layout_mode = 0
+offset_left = 204.0
+offset_top = 676.0
+offset_right = 1592.0
+offset_bottom = 1046.0
+texture = ExtResource("6_n0th8")
 
 [node name="Pause Screen" type="Control" parent="."]
 visible = false
@@ -332,6 +373,7 @@ theme = ExtResource("2_s5wlq")
 text = "Back"
 
 [node name="TitleScreen" type="Control" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -340,6 +382,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Curtain Container" type="Node2D" parent="TitleScreen"]
+visible = false
 position = Vector2(577, -2)
 
 [node name="Left Curtain" type="Node2D" parent="TitleScreen/Curtain Container"]
@@ -367,20 +410,21 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("2_s5wlq")
 theme_override_constants/margin_left = 100
-theme_override_constants/margin_top = 100
+theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 100
 theme_override_constants/margin_bottom = 50
+
+[node name="TextureRect" type="TextureRect" parent="TitleScreen/MarginContainer"]
+custom_minimum_size = Vector2(500, 800)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("6_mwifm")
+expand_mode = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="TitleScreen/MarginContainer"]
 layout_mode = 2
 theme = ExtResource("2_s5wlq")
-
-[node name="Title Label" type="Label" parent="TitleScreen/MarginContainer/VBoxContainer"]
-layout_mode = 2
-theme = ExtResource("2_s5wlq")
-text = "Giggle Gauntlet 😂😂😂"
-label_settings = SubResource("LabelSettings_jkbkj")
-horizontal_alignment = 1
 
 [node name="Main Menu" type="VBoxContainer" parent="TitleScreen/MarginContainer/VBoxContainer"]
 layout_mode = 2

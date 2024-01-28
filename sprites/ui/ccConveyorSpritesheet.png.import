@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c7hm8j8x8h8nn"
-path="res://.godot/imported/White Rectangle.png-43ce5677ee41f943633df7df2e7c9178.ctex"
+uid="uid://dhcfx7qetuqou"
+path="res://.godot/imported/ccConveyorSpritesheet.png-5ba970b090f12035a1bd8653d704d31d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/White Rectangle.png"
-dest_files=["res://.godot/imported/White Rectangle.png-43ce5677ee41f943633df7df2e7c9178.ctex"]
+source_file="res://sprites/ui/ccConveyorSpritesheet.png"
+dest_files=["res://.godot/imported/ccConveyorSpritesheet.png-5ba970b090f12035a1bd8653d704d31d.ctex"]
 
 [params]
 

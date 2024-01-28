@@ -1,0 +1,104 @@
+[gd_scene load_steps=14 format=3 uid="uid://c7mh4s0ur0tn1"]
+
+[ext_resource type="Texture2D" uid="uid://cmua1lqkbawoa" path="res://sprites/jokes/EggAsset-01.png" id="1_sm8h5"]
+[ext_resource type="Script" path="res://scripts/egg.gd" id="2_2nuck"]
+[ext_resource type="Script" path="res://scripts/Emoji.gd" id="3_gyjd7"]
+[ext_resource type="Texture2D" uid="uid://ce583o7s2tbuj" path="res://sprites/jokes/ChickenDrumStickAsset-01.png" id="4_ei7qw"]
+[ext_resource type="Texture2D" uid="uid://dw2m80rhg0f7d" path="res://sprites/jokes/ChickenLogoAsset-01.png" id="5_xn88e"]
+[ext_resource type="Texture2D" uid="uid://cmtnh448v0n0w" path="res://sprites/jokes/KnifeAsset-01.png" id="6_pr3du"]
+[ext_resource type="Texture2D" uid="uid://dwugcfv3jrt3f" path="res://sprites/jokes/HeartAsset-01.png" id="7_klg8b"]
+[ext_resource type="Texture2D" uid="uid://wqqosgek8bjo" path="res://sprites/jokes/CigarAsset-01.png" id="8_yhgdf"]
+[ext_resource type="Texture2D" uid="uid://bx4txy78e8ma3" path="res://sprites/jokes/MoneyBagAsset-01.png" id="9_5r685"]
+[ext_resource type="Texture2D" uid="uid://bmechf7hfuy7s" path="res://sprites/jokes/SkullAsset-01.png" id="10_k32j8"]
+
+[sub_resource type="Animation" id="Animation_uy0py"]
+resource_name = "Egg Animation"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(373, 763), Vector2(345, 812), Vector2(349, 876), Vector2(420, 916), Vector2(546, 919)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0.01, 0.01), Vector2(0.025, 0.025), Vector2(0.05, 0.05), Vector2(0.075, 0.075), Vector2(0.1, 0.1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_flvms"]
+_data = {
+"Egg Animation": SubResource("Animation_uy0py")
+}
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_w4ga1"]
+radius = 405.98
+height = 1207.9
+
+[node name="Egg" type="Sprite2D"]
+position = Vector2(345, 812)
+scale = Vector2(0.025, 0.025)
+texture = ExtResource("1_sm8h5")
+script = ExtResource("2_2nuck")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_flvms")
+}
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CapsuleShape2D_w4ga1")
+
+[node name="Emoji" type="Node2D" parent="."]
+scale = Vector2(0.7, 0.7)
+script = ExtResource("3_gyjd7")
+emojis = [NodePath("Sprite2D"), NodePath("Sprite2D2"), NodePath("Sprite2D3"), NodePath("Sprite2D4"), NodePath("Sprite2D5"), NodePath("Sprite2D6"), NodePath("Sprite2D7"), NodePath("Sprite2D8")]
+
+[node name="Sprite2D" type="Sprite2D" parent="Emoji"]
+visible = false
+texture = ExtResource("4_ei7qw")
+
+[node name="Sprite2D2" type="Sprite2D" parent="Emoji"]
+visible = false
+texture = ExtResource("5_xn88e")
+
+[node name="Sprite2D3" type="Sprite2D" parent="Emoji"]
+visible = false
+texture = ExtResource("4_ei7qw")
+
+[node name="Sprite2D4" type="Sprite2D" parent="Emoji"]
+visible = false
+texture = ExtResource("6_pr3du")
+
+[node name="Sprite2D5" type="Sprite2D" parent="Emoji"]
+visible = false
+texture = ExtResource("7_klg8b")
+
+[node name="Sprite2D6" type="Sprite2D" parent="Emoji"]
+visible = false
+texture = ExtResource("8_yhgdf")
+
+[node name="Sprite2D7" type="Sprite2D" parent="Emoji"]
+visible = false
+texture = ExtResource("9_5r685")
+
+[node name="Sprite2D8" type="Sprite2D" parent="Emoji"]
+visible = false
+texture = ExtResource("10_k32j8")
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
+[connection signal="input_event" from="Area2D" to="." method="_on_area_2d_input_event"]

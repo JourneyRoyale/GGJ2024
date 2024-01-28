@@ -32,6 +32,10 @@ window/size/initial_position_type=0
 
 project/assembly_name="GGJ2024"
 
+[filesystem]
+
+import/fbx/enabled=false
+
 [input]
 
 move_up={

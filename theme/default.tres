@@ -1,0 +1,28 @@
+[gd_resource type="Theme" load_steps=7 format=3 uid="uid://4c5xn5lj157e"]
+
+[ext_resource type="FontFile" uid="uid://bhiadmy4vtke4" path="res://font/Josefin_Sans/static/JosefinSans-Medium.ttf" id="1_3607l"]
+[ext_resource type="Texture2D" uid="uid://cyg7jp20r5pen" path="res://sprites/Button Selected.png" id="2_574tc"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wxlsv"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_1551h"]
+texture = ExtResource("2_574tc")
+texture_margin_left = 9.0
+texture_margin_top = 9.0
+texture_margin_right = 9.0
+texture_margin_bottom = 9.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ytewq"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ax2de"]
+
+[resource]
+Button/font_sizes/font_size = 40
+Button/fonts/font = ExtResource("1_3607l")
+Button/styles/focus = SubResource("StyleBoxEmpty_wxlsv")
+Button/styles/hover = SubResource("StyleBoxTexture_1551h")
+Button/styles/normal = SubResource("StyleBoxFlat_ytewq")
+Button/styles/pressed = SubResource("StyleBoxEmpty_ax2de")
+Label/font_sizes/font_size = 40
+Label/fonts/font = ExtResource("1_3607l")

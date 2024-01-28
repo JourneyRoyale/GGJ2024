@@ -13,13 +13,13 @@ var laughter = 1;
 var timer = 0;
 
 #List off all audience members
-var audience_list;
+var audience_list
 
 #List of all hecklers
-var heckler_list;
+var heckler_list
 
 #List of all available emoji
-var emoji_list = []
+var emoji_list = [];
 
 @export var set_time = 600;
 
@@ -27,7 +27,9 @@ var emoji_list = []
 
 @export var base_score_rate = 10;
 
-@export var max_emoji = 5 
+@export var max_emoji = 5;
+
+@export var laughter_factor = 0.25;
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -43,15 +45,13 @@ func _process(delta):
 	if(timer >= set_time):
 		print("GAME COMPLETE")
 	
-	poll_audience()
-	
 	# Score is improved proportionally to audience satisfaction and decreased inversely to how much time is left in set.
 	score = score + (base_score_rate * laughter) - (base_deplete_rate * timer / set_time)
 	
 	
 	
 	if(playing):
-		laughter -= .0001
+		laughter = min(laughter - .0001,0);
 		timer += delta;
 
 #Populate the audience.
@@ -59,9 +59,9 @@ func create_audience():
 	pass
 
 
-# Polls all audience members in order to determine current laughter score;
-func poll_audience():
-	pass
+# Polls all audience members in order to determine current laughter score. Called when joke is made.
+func poll_audience(audienceMembers_humored,audienceMembersCount):
+		laughter = max(laughter + audienceMembers_humored * laughter_factor / audienceMembersCount,2);
 
 #Create a heckler.
 func create_heckler():

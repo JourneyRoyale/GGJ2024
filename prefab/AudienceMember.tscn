@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://d2ubdlbhl5wd5"]
+[gd_scene load_steps=21 format=3 uid="uid://d2ubdlbhl5wd5"]
 
 [ext_resource type="Texture2D" uid="uid://nei63u2nrds8" path="res://sprites/audience/audience.png" id="1_ad5hx"]
 [ext_resource type="Texture2D" uid="uid://b65jxkkklfumw" path="res://sprites/DF-Bases (1).png" id="2_7lufv"]
@@ -15,7 +15,6 @@
 [ext_resource type="Texture2D" uid="uid://wqqosgek8bjo" path="res://sprites/jokes/CigarAsset-01.png" id="12_lscrp"]
 [ext_resource type="Texture2D" uid="uid://bx4txy78e8ma3" path="res://sprites/jokes/MoneyBagAsset-01.png" id="13_s8jem"]
 [ext_resource type="Texture2D" uid="uid://bmechf7hfuy7s" path="res://sprites/jokes/SkullAsset-01.png" id="14_qholi"]
-[ext_resource type="ArrayMesh" uid="uid://chre72e6kwwts" path="res://3D/SeatingAsset.obj" id="16_sogk5"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_yo082"]
 atlas = ExtResource("2_7lufv")
@@ -129,7 +128,3 @@ texture = ExtResource("13_s8jem")
 [node name="Sprite2D8" type="Sprite3D" parent="Emoji3D"]
 visible = false
 texture = ExtResource("14_qholi")
-
-[node name="Chair" type="MeshInstance3D" parent="."]
-transform = Transform3D(-1.31134e-07, -1.04636e-15, -3, 1.04636e-15, 3, -1.04636e-15, 3, -1.04636e-15, -1.31134e-07, 0.247781, -10.5337, -2.27177)
-mesh = ExtResource("16_sogk5")

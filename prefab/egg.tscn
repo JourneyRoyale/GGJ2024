@@ -1,10 +1,11 @@
-[gd_scene load_steps=14 format=3 uid="uid://dxs8g7wkq48v2"]
+[gd_scene load_steps=15 format=3 uid="uid://cxsv4epu1adg1"]
 
 [ext_resource type="Texture2D" uid="uid://cmua1lqkbawoa" path="res://sprites/jokes/EggAsset-01.png" id="1_fw7gv"]
 [ext_resource type="Script" path="res://scripts/egg.gd" id="2_vyl8j"]
 [ext_resource type="Script" path="res://scripts/Emoji.gd" id="3_a18lg"]
 [ext_resource type="Texture2D" uid="uid://ce583o7s2tbuj" path="res://sprites/jokes/ChickenDrumStickAsset-01.png" id="4_gy0yv"]
 [ext_resource type="Texture2D" uid="uid://dw2m80rhg0f7d" path="res://sprites/jokes/ChickenLogoAsset-01.png" id="5_1x2lv"]
+[ext_resource type="Texture2D" uid="uid://886it5vm2ecu" path="res://sprites/jokes/AlcoholAsset-01.png" id="6_1gqa6"]
 [ext_resource type="Texture2D" uid="uid://cmtnh448v0n0w" path="res://sprites/jokes/KnifeAsset-01.png" id="6_7g03r"]
 [ext_resource type="Texture2D" uid="uid://dwugcfv3jrt3f" path="res://sprites/jokes/HeartAsset-01.png" id="7_ib3wg"]
 [ext_resource type="Texture2D" uid="uid://wqqosgek8bjo" path="res://sprites/jokes/CigarAsset-01.png" id="8_y4vey"]
@@ -48,8 +49,7 @@ radius = 405.98
 height = 1207.9
 
 [node name="Egg" type="Sprite2D"]
-position = Vector2(-28, 84)
-scale = Vector2(0.025, 0.025)
+scale = Vector2(0.01, 0.01)
 texture = ExtResource("1_fw7gv")
 script = ExtResource("2_vyl8j")
 
@@ -78,7 +78,7 @@ texture = ExtResource("5_1x2lv")
 
 [node name="Sprite2D3" type="Sprite2D" parent="Emoji"]
 visible = false
-texture = ExtResource("4_gy0yv")
+texture = ExtResource("6_1gqa6")
 
 [node name="Sprite2D4" type="Sprite2D" parent="Emoji"]
 visible = false

@@ -1,0 +1,106 @@
+[gd_scene load_steps=15 format=3 uid="uid://c0ydy75urpdgf"]
+
+[ext_resource type="PackedScene" uid="uid://bal0jss3qcmho" path="res://prefab/comedian.tscn" id="1_41dwo"]
+[ext_resource type="Script" path="res://scripts/Singleton/AudioManager.gd" id="5_icdxn"]
+[ext_resource type="AudioStream" uid="uid://inflyfrfxqu7" path="res://music/refract.mp3" id="6_1aeq3"]
+[ext_resource type="AudioStream" uid="uid://b77xbhcraw287" path="res://music/mixkit-arcade-game-complete-or-approved-mission-205.wav" id="7_70iwb"]
+[ext_resource type="PackedScene" uid="uid://b7efb0ou050m6" path="res://audience.tscn" id="7_sgmdl"]
+[ext_resource type="PackedScene" uid="uid://bskgpd4m757s" path="res://prefab/ui_screen.tscn" id="8_g5q4x"]
+[ext_resource type="PackedScene" uid="uid://bun08wus37exn" path="res://prefab/spot_lights.tscn" id="8_l6oyf"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_2nep6"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_344r5"]
+albedo_color = Color(0.219608, 0.219608, 0.219608, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_bhyeo"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0hve7"]
+albedo_color = Color(0.270588, 0.270588, 0.270588, 1)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_v7e3w"]
+points = PackedVector3Array(-0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5)
+
+[sub_resource type="BoxMesh" id="BoxMesh_ecs3e"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_j3y3t"]
+albedo_color = Color(0.521569, 0.521569, 0.521569, 1)
+
+[node name="DemoScene" type="Node3D"]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.975985, 0.217836, 0, -0.217836, 0.975985, 0, 5.26582, 8.04614)
+current = true
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.00396917, 0.929172, -0.369628, 0.96977, 0.0866099, 0.228134, 0.243989, -0.359359, -0.900739, -0.278868, 0.456484, -0.769173)
+
+[node name="Comedian" parent="." instance=ExtResource("1_41dwo")]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 5.14236, 5.41365)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+transform = Transform3D(-20, 0, -1.74846e-06, 0, 20, 0, 1.74846e-06, 0, -20, 0, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+mesh = SubResource("PlaneMesh_2nep6")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_344r5")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.10567e-05, -0.439361, -0.414402)
+mesh = SubResource("BoxMesh_bhyeo")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_0hve7")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.10567e-05, -0.439361, -0.414402)
+shape = SubResource("ConvexPolygonShape3D_v7e3w")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.1, -0.900706, 0.00265056, -0.000804007)
+mesh = SubResource("BoxMesh_ecs3e")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_j3y3t")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.1, 0.912698, 0.00410165, -0.00203091)
+mesh = SubResource("BoxMesh_ecs3e")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_j3y3t")
+
+[node name="AudioManager" type="Node3D" parent="."]
+script = ExtResource("5_icdxn")
+
+[node name="Background" type="Node3D" parent="AudioManager"]
+
+[node name="Refractor" type="AudioStreamPlayer" parent="AudioManager/Background"]
+stream = ExtResource("6_1aeq3")
+
+[node name="Sound Effect" type="Node3D" parent="AudioManager"]
+
+[node name="Arcade" type="AudioStreamPlayer" parent="AudioManager/Sound Effect"]
+stream = ExtResource("7_70iwb")
+
+[node name="SpotLights" parent="." instance=ExtResource("8_l6oyf")]
+
+[node name="Audience" parent="." instance=ExtResource("7_sgmdl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.15, 2.255, -3.24723)
+audience_positions = [NodePath("spawn1"), NodePath("spawn2"), NodePath("spawn3")]
+
+[node name="spawn3" type="Node3D" parent="Audience"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.15, 2.255, -4.675)
+
+[node name="spawn2" type="Node3D" parent="Audience"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.217, 2.255, -4.675)
+
+[node name="spawn1" type="Node3D" parent="Audience"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.715, 2.206, -4.606)
+
+[node name="Members" type="Node" parent="Audience"]
+
+[node name="Timer" type="Timer" parent="Audience"]
+autostart = true
+
+[node name="Ui Screen" parent="." instance=ExtResource("8_g5q4x")]
+
+[connection signal="timeout" from="Audience/Timer" to="Audience" method="_on_timer_timeout"]

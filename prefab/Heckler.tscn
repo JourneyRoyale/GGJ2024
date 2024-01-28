@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://bqdtty1ekxhh"]
+[gd_scene load_steps=6 format=3 uid="uid://cikikj0y5ug6r"]
 
 [ext_resource type="Script" path="res://scripts/Heckler/HecklerAI.gd" id="1_qatk1"]
 [ext_resource type="Texture2D" uid="uid://uc21wyoxrxib" path="res://sprites/audience/heckler.png" id="2_2t0e4"]

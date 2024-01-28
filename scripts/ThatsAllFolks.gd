@@ -3,7 +3,7 @@ extends Node3D
 var in_time = 1
 var out_time = 1
 var current_time = 0
-
+@onready var game_manager = get_node("/root/GameManager")
 @export var player : Node3D
 
 @export var start_x : float = -20.0
@@ -27,28 +27,29 @@ func start():
 
 # Called every frame. 'delta' is the elapsed time since the previous framea
 func _process(delta):
-	if current_state == CANE_STATE.IN:
-		print("TIME " + str(current_time))
-		if current_time < in_time:
-			current_time += delta
-			position.x = lerp(start_x, target_x, current_time / in_time)
-		else:
-			current_time = 0
-			current_state = CANE_STATE.OUT
-			player.thats_all_folks()
-		position.y = player.position.y
-		position.z = player.position.z
-	elif current_state == CANE_STATE.OUT:
-		if current_time < out_time:
-			current_time += delta
-			position.x = lerp(target_x, start_x, current_time / out_time)
-		else:
-			current_time = 0
-			current_state = CANE_STATE.OFF
-			get_tree().call_group("Curtains", "end_game")
-		if player != null:
-			player.position.x = position.x
-		position.y = player.position.y
-		position.z = player.position.z
+	if game_manager.isPlaying == true:
+		if current_state == CANE_STATE.IN:
+			if current_time < in_time:
+				current_time += delta
+				position.x = lerp(start_x, target_x, current_time / in_time)
+			else:
+				current_time = 0
+				current_state = CANE_STATE.OUT
+				player.thats_all_folks()
+			position.y = player.position.y
+			position.z = player.position.z
+		elif current_state == CANE_STATE.OUT:
+			if current_time < out_time:
+				current_time += delta
+				position.x = lerp(target_x, start_x, current_time / out_time)
+			else:
+				current_time = 0
+				current_state = CANE_STATE.OFF
+				game_manager.isPlaying = false
+				get_tree().call_group("Curtains", "end_game")
+			if player != null:
+				player.position.x = position.x
+			position.y = player.position.y
+			position.z = player.position.z
 		
 		

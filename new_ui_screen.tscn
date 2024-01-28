@@ -1,7 +1,7 @@
 [gd_scene load_steps=13 format=3 uid="uid://vxc02h1qnjha"]
 
 [ext_resource type="Theme" uid="uid://4c5xn5lj157e" path="res://theme/default.tres" id="1_8kqac"]
-[ext_resource type="PackedScene" uid="uid://bhadpf1fsd2wq" path="res://prefab/curtain_container.tscn" id="1_33gma"]
+[ext_resource type="PackedScene" uid="uid://c2hstesjai7p1" path="res://prefab/curtain_container.tscn" id="1_33gma"]
 [ext_resource type="Texture2D" uid="uid://ct1bgt227dwru" path="res://sprites/ui/GearIcon.png" id="2_wab3x"]
 [ext_resource type="Texture2D" uid="uid://d1fh5xoe5jk74" path="res://sprites/ui/Tomato_Splat_sprite.png" id="3_a8h4s"]
 [ext_resource type="Texture2D" uid="uid://rma688d35ap1" path="res://sprites/ui/White Rectangle With Gray.png" id="3_mjecg"]

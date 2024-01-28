@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://bdm3g6dbxt003"]
+[gd_scene load_steps=3 format=3 uid="uid://dylmrkofcgcmw"]
 
 [ext_resource type="Script" path="res://scripts/ThatsAllFolks.gd" id="1_r5oal"]
 [ext_resource type="Texture2D" uid="uid://d4f3s4j0cf5rw" path="res://sprites/Cane_Sprite.png" id="2_7bqsd"]

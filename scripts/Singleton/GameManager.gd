@@ -17,11 +17,12 @@ var emoji_list = []
 
 @export var set_time = 600;
 
-@export var base_deplete_rate = 0.03;
+@export var base_deplete_rate = 2;
 @export var error_amount = 10
 @export var match_amount = 10
 @export var hit_amount = 20
 @onready var audio_manager = get_node("/root/AudioManager")
+@onready var ui_screen = get_node("/root/Game/Ui Screen")
 
 var spotlight = false
 var isPlaying = false
@@ -44,7 +45,13 @@ func exit_setting():
 	reset_stats()
 	isPlaying = false
 	audio_manager.stop_music();
-
+	
+func reset_game():
+	reset_stats()
+	audio_manager.stop_music();
+	get_tree().paused = false
+	get_tree().change_scene_to_file("res://scenes/Start.tscn")
+	ui_screen.game_ui.visible = false
 	
 func reset_setting():
 	reset_stats()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://u6fvtnry7dqy"]
+[gd_scene load_steps=11 format=3 uid="uid://vxc02h1qnjha"]
 
 [ext_resource type="Theme" uid="uid://4c5xn5lj157e" path="res://theme/default.tres" id="1_8kqac"]
 [ext_resource type="Texture2D" uid="uid://ct1bgt227dwru" path="res://sprites/ui/GearIcon.png" id="2_wab3x"]
@@ -10,7 +10,7 @@
 script/source = "extends Control
 
 #Scenc
-var game_scene = load(\"res://prefab/game.tscn\")
+var game_scene = load(\"res://scenes/Game.tscn\")
 
 #Other
 @onready var animation = get_node(\"TitleScreen/AnimationPlayer\")

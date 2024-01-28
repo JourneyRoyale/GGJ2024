@@ -1,13 +1,14 @@
-[gd_scene load_steps=16 format=3 uid="uid://ctjonbyxd08cp"]
+[gd_scene load_steps=17 format=3 uid="uid://uebvdm3hv1fi"]
 
 [ext_resource type="PackedScene" uid="uid://bal0jss3qcmho" path="res://prefab/comedian.tscn" id="1_vjq4e"]
 [ext_resource type="ArrayMesh" uid="uid://b7s1g8w1atyl6" path="res://3D/StageAsset.obj" id="2_eaubj"]
 [ext_resource type="Script" path="res://scripts/Singleton/AudioManager.gd" id="2_nf8ju"]
 [ext_resource type="AudioStream" uid="uid://inflyfrfxqu7" path="res://music/refract.mp3" id="3_6dedr"]
 [ext_resource type="AudioStream" uid="uid://b77xbhcraw287" path="res://music/mixkit-arcade-game-complete-or-approved-mission-205.wav" id="4_82kse"]
-[ext_resource type="PackedScene" uid="uid://j3q2c8ojgweb" path="res://prefab/spot_lights.tscn" id="5_ehl4j"]
+[ext_resource type="PackedScene" uid="uid://bun08wus37exn" path="res://prefab/spot_lights.tscn" id="5_ehl4j"]
 [ext_resource type="PackedScene" uid="uid://b7efb0ou050m6" path="res://audience.tscn" id="6_vhi3m"]
 [ext_resource type="PackedScene" uid="uid://bskgpd4m757s" path="res://prefab/ui_screen.tscn" id="7_3w6cu"]
+[ext_resource type="PackedScene" uid="uid://5joxwbolv6ji" path="res://conveyor.tscn" id="8_wkv8c"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_2nep6"]
 
@@ -101,25 +102,61 @@ stream = ExtResource("4_82kse")
 
 [node name="Audience" parent="." node_paths=PackedStringArray("heck") instance=ExtResource("6_vhi3m")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.15, 2.255, -4.675)
-audience_positions = [NodePath("spawn1"), NodePath("spawn2"), NodePath("spawn3")]
+audience_positions = [NodePath("spawn1"), NodePath("spawn2"), NodePath("spawn3"), NodePath("spawn4"), NodePath("spawn5"), NodePath("spawn6"), NodePath("spawn7"), NodePath("spawn8"), NodePath("spawn9"), NodePath("spawn10"), NodePath("spawn11"), NodePath("spawn12"), NodePath("spawn13"), NodePath("spawn14")]
 heck = NodePath("HECK")
 
+[node name="spawn1" type="Node3D" parent="Audience"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 1, -6.5)
+
+[node name="spawn2" type="Node3D" parent="Audience"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 1, -6.5)
+
 [node name="spawn3" type="Node3D" parent="Audience"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.15, 0.969536, -6.53477)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 1, -6.5)
+
+[node name="spawn4" type="Node3D" parent="Audience"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 1, -6.5)
+
+[node name="spawn5" type="Node3D" parent="Audience"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 1, -6.5)
+
+[node name="spawn6" type="Node3D" parent="Audience"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.5, 1, -6.5)
+
+[node name="spawn7" type="Node3D" parent="Audience"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 1, -6.5)
+
+[node name="spawn8" type="Node3D" parent="Audience"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 2, -13)
+
+[node name="spawn9" type="Node3D" parent="Audience"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 2, -13)
+
+[node name="spawn10" type="Node3D" parent="Audience"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -13)
+
+[node name="spawn11" type="Node3D" parent="Audience"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 2, -13)
+
+[node name="spawn12" type="Node3D" parent="Audience"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 2, -13)
+
+[node name="spawn13" type="Node3D" parent="Audience"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.5, 2, -13)
+
+[node name="spawn14" type="Node3D" parent="Audience"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 2, -13)
 
 [node name="HECK" type="Node3D" parent="Audience"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.15, 0.97, -6.535)
-
-[node name="spawn2" type="Node3D" parent="Audience"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.217, 0.969536, -6.53477)
-
-[node name="spawn1" type="Node3D" parent="Audience"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.715, 0.920536, -6.46577)
 
 [node name="Members" type="Node" parent="Audience"]
 
 [node name="Timer" type="Timer" parent="Audience"]
 autostart = true
+
+[node name="Conveyor" parent="Audience" instance=ExtResource("8_wkv8c")]
+position = Vector2(943, 1000)
 
 [node name="Ui Screen" parent="." instance=ExtResource("7_3w6cu")]
 

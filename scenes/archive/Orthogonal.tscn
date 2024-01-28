@@ -1,13 +1,13 @@
-[gd_scene load_steps=14 format=3 uid="uid://cc8i3qf66h2my"]
+[gd_scene load_steps=14 format=3 uid="uid://v3rfy1yn8wwy"]
 
-[ext_resource type="PackedScene" uid="uid://bal0jss3qcmho" path="res://prefab/comedian.tscn" id="1_pplf1"]
-[ext_resource type="Script" path="res://scripts/Singleton/AudioManager.gd" id="2_dtwfq"]
-[ext_resource type="ArrayMesh" uid="uid://b7s1g8w1atyl6" path="res://3D/StageAsset.obj" id="2_hf10p"]
-[ext_resource type="AudioStream" uid="uid://inflyfrfxqu7" path="res://music/refract.mp3" id="3_sdfj4"]
-[ext_resource type="AudioStream" uid="uid://b77xbhcraw287" path="res://music/mixkit-arcade-game-complete-or-approved-mission-205.wav" id="4_ll3pq"]
-[ext_resource type="PackedScene" uid="uid://j3q2c8ojgweb" path="res://prefab/spot_lights.tscn" id="5_iavp8"]
-[ext_resource type="PackedScene" uid="uid://b7efb0ou050m6" path="res://audience.tscn" id="6_qje8n"]
-[ext_resource type="PackedScene" uid="uid://bskgpd4m757s" path="res://prefab/ui_screen.tscn" id="7_jluwv"]
+[ext_resource type="PackedScene" uid="uid://bal0jss3qcmho" path="res://prefab/comedian.tscn" id="1_jv88y"]
+[ext_resource type="ArrayMesh" uid="uid://b7s1g8w1atyl6" path="res://3D/StageAsset.obj" id="2_nredr"]
+[ext_resource type="Script" path="res://scripts/Singleton/AudioManager.gd" id="3_h82ld"]
+[ext_resource type="AudioStream" uid="uid://inflyfrfxqu7" path="res://music/refract.mp3" id="4_6vw6p"]
+[ext_resource type="AudioStream" uid="uid://b77xbhcraw287" path="res://music/mixkit-arcade-game-complete-or-approved-mission-205.wav" id="5_q3j4c"]
+[ext_resource type="PackedScene" uid="uid://bun08wus37exn" path="res://prefab/spot_lights.tscn" id="6_48ex2"]
+[ext_resource type="PackedScene" uid="uid://b7efb0ou050m6" path="res://audience.tscn" id="7_f37b2"]
+[ext_resource type="PackedScene" uid="uid://bskgpd4m757s" path="res://prefab/ui_screen.tscn" id="8_b5mlq"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_j60il"]
 
@@ -32,7 +32,7 @@ size = 12.0
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.00396917, 0.929172, -0.369628, 0.96977, 0.0866099, 0.228134, 0.243989, -0.359359, -0.900739, -0.278868, 0.456484, -0.769173)
 
-[node name="Comedian" parent="." instance=ExtResource("1_pplf1")]
+[node name="Comedian" parent="." instance=ExtResource("1_jv88y")]
 transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 5.14236, 5.41365)
 
 [node name="Environment" type="StaticBody3D" parent="."]
@@ -60,7 +60,7 @@ transform = Transform3D(-0.5, 0, -7.54979e-08, 0, 0.5, 0, 7.54979e-08, 0, -0.5, 
 
 [node name="StageMesh" type="MeshInstance3D" parent="Stage"]
 transform = Transform3D(1.01545, 0, -1.71528e-14, 0, 1.01545, 0, 1.42109e-14, 0, 1.01545, 2.73313e-08, 0, -0.312633)
-mesh = ExtResource("2_hf10p")
+mesh = ExtResource("2_nredr")
 
 [node name="EastWall" type="CollisionShape3D" parent="Stage"]
 transform = Transform3D(22, 0, -5.59441e-06, 0, 22, 0, 5.59441e-06, 0, 22, -22, 2.08165e-12, -4.5)
@@ -83,21 +83,21 @@ transform = Transform3D(22, 0, -2.7972e-06, 0, 22, 0, 2.7972e-06, 0, 22, 2.08165
 shape = SubResource("ConvexPolygonShape3D_v7e3w")
 
 [node name="AudioManager" type="Node3D" parent="."]
-script = ExtResource("2_dtwfq")
+script = ExtResource("3_h82ld")
 
 [node name="Background" type="Node3D" parent="AudioManager"]
 
 [node name="Refractor" type="AudioStreamPlayer" parent="AudioManager/Background"]
-stream = ExtResource("3_sdfj4")
+stream = ExtResource("4_6vw6p")
 
 [node name="Sound Effect" type="Node3D" parent="AudioManager"]
 
 [node name="Arcade" type="AudioStreamPlayer" parent="AudioManager/Sound Effect"]
-stream = ExtResource("4_ll3pq")
+stream = ExtResource("5_q3j4c")
 
-[node name="SpotLights" parent="." instance=ExtResource("5_iavp8")]
+[node name="SpotLights" parent="." instance=ExtResource("6_48ex2")]
 
-[node name="Audience" parent="." instance=ExtResource("6_qje8n")]
+[node name="Audience" parent="." instance=ExtResource("7_f37b2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.15, 2.255, -4.675)
 audience_positions = [NodePath("spawn1"), NodePath("spawn2"), NodePath("spawn3")]
 
@@ -115,6 +115,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.715, 2.206, -4.606)
 [node name="Timer" type="Timer" parent="Audience"]
 autostart = true
 
-[node name="Ui Screen" parent="." instance=ExtResource("7_jluwv")]
+[node name="Ui Screen" parent="." instance=ExtResource("8_b5mlq")]
 
 [connection signal="timeout" from="Audience/Timer" to="Audience" method="_on_timer_timeout"]

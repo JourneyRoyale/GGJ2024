@@ -33,34 +33,42 @@ emojis = [NodePath("Sprite2D"), NodePath("Sprite2D2"), NodePath("Sprite2D3"), No
 
 [node name="Sprite2D" type="Sprite2D" parent="Emoji"]
 visible = false
+scale = Vector2(1, 1)
 texture = ExtResource("4_gy0yv")
 
 [node name="Sprite2D2" type="Sprite2D" parent="Emoji"]
 visible = false
+scale = Vector2(1, 1)
 texture = ExtResource("5_1x2lv")
 
 [node name="Sprite2D3" type="Sprite2D" parent="Emoji"]
 visible = false
+scale = Vector2(1, 1)
 texture = ExtResource("4_gy0yv")
 
 [node name="Sprite2D4" type="Sprite2D" parent="Emoji"]
 visible = false
+scale = Vector2(1, 1)
 texture = ExtResource("6_7g03r")
 
 [node name="Sprite2D5" type="Sprite2D" parent="Emoji"]
 visible = false
+scale = Vector2(1, 1)
 texture = ExtResource("7_ib3wg")
 
 [node name="Sprite2D6" type="Sprite2D" parent="Emoji"]
 visible = false
+scale = Vector2(1, 1)
 texture = ExtResource("8_y4vey")
 
 [node name="Sprite2D7" type="Sprite2D" parent="Emoji"]
 visible = false
+scale = Vector2(1, 1)
 texture = ExtResource("9_4tgkj")
 
 [node name="Sprite2D8" type="Sprite2D" parent="Emoji"]
 visible = false
+scale = Vector2(1, 1)
 texture = ExtResource("10_jdkhd")
 
 [connection signal="input_event" from="Area2D" to="." method="_on_area_2d_input_event"]

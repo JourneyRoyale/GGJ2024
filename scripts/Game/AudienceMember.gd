@@ -62,6 +62,7 @@ func specific_thought(thought, time):
 
 func show_specific_thought_helper(thought):
 	active = true
+	current_emoji = thought
 	emoji.set_emoji(thought)
 	bubble.show()
 	
@@ -106,9 +107,11 @@ func clear_thought():
 	
 func check_for_match(emoji):
 	var match = active && emoji == current_emoji
+	print("MATCH")
+	print(match)
 	var success = match && bubble_alignment == BubbleAlignment.GOOD
 	if success:
-		#TODO: show success emote for audience
+		#TODO: show
 		pass
 	return { 
 		"success" : success,

@@ -106,5 +106,6 @@ func _receive_joke(joke):
 	else:
 		print("cluck jones: 'yeesh, tough crowd...'")
 		#todo: take hit to meter
+	return successes
 				
 	

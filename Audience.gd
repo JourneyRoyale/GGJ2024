@@ -1,13 +1,20 @@
 extends Node3D
 
 @onready var pre_audience_factory = preload("res://prefab/AudienceMember.tscn")
+@onready var pre_heckler_factory = preload("res://prefab/Heckler.tscn")
+
 var audience_factory
+var heckler_factory
+
+var active_hecklers = []
 
 @export var audience_positions = []
 
 var audience_members = []
 
 var rng : RandomNumberGenerator = RandomNumberGenerator.new()
+
+@export var spotlight : Node3D
 
 @export var question_popup_rate = .5
 @export var question_popup_rate_deviance_min = -.5
@@ -32,8 +39,28 @@ func _spawn(node):
 	new_audience.position = node.position
 	audience_members.append(new_audience)
 
-func _spawn_heckler():
+func _despawn_hecklers():
+	print("heckler: 'okay maybe hes pretty good'")
+	for heckler in active_hecklers:
+		heckler.audience_reference.show()
+		heckler.queue_free()
+	active_hecklers = []
+
+func _spawn_heckler(audience_member):
 	print("heckler: 'YOU STINK!'")
+	audience_member.hide()
+	var new_heckler
+	if heckler_factory == null:
+		heckler_factory = pre_heckler_factory.instantiate()
+		new_heckler = heckler_factory
+		add_child(heckler_factory)
+	else:
+		new_heckler = heckler_factory.duplicate()
+		add_child(new_heckler)
+	new_heckler.audience_reference = audience_member
+	new_heckler.position = audience_member.position
+	active_hecklers.append(new_heckler)
+	
 	#todo: spawn heckler and manage heckler
 	
 func _update():
@@ -48,22 +75,31 @@ func _update():
 	
 func _receive_joke(joke):
 	var heckler = false
+	var heckler_base
 	var successes = 0
+	var spotlight_bonus = false
 	for member in audience_members:
 		var result = member.check_for_match(joke)
 		if result["heckler"]:
 			heckler = true
+			heckler_base = member
 			break
 		else:
 			if result["success"]:
 				successes += 1
+				if spotlight.active:
+					spotlight_bonus = true
 			else:
 				member.clear_thought()
-	if heckler:
+	if spotlight_bonus:
+		print("cluck jones: 'BA DUM TISHHHHHHHHHH'")
+		_despawn_hecklers()
+		#todo: maxout laugh meter
+	elif heckler:
 		for member in audience_members:
 			member.clear_thought()
 		successes = 0
-		_spawn_heckler()
+		_spawn_heckler(heckler_base)
 	elif successes > 0:
 		print("cluck jones: 'waka waka!'")
 		#todo: increase meter scaled by successes up to maximum amount

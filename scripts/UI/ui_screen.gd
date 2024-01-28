@@ -7,6 +7,7 @@ extends Control
 @onready var title_screen = get_node("TitleScreen")
 @onready var main_menu = get_node("TitleScreen/MarginContainer/VBoxContainer/Main Menu")
 @onready var setting = get_node("TitleScreen/MarginContainer/VBoxContainer/Setting")
+@onready var credits = get_node("TitleScreen/MarginContainer/VBoxContainer/Credits")
 
 #Pause Screen
 @onready var pause_screen = get_node("Pause Screen")
@@ -28,22 +29,21 @@ func _on_animation_player_animation_finished(anim_name):
 		game_manager.playing = true
 		
 func _process(delta):
-	_sync_laughter()
-	_sync_time()
+	pass
 
 func _input(event):
 	if event is InputEventKey and event.pressed:
 		if event.keycode == KEY_ESCAPE:
-			if(current_scene_name == "DemoScene"):
+			if(current_scene_name == "DemoScene2"):
 				pause_screen.visible = !pause_screen.visible
 
 func _sync_volume(node):
-	node.get_node("GridContainer/Master Slider").value = audio_manager.master_volume
-	node.get_node("GridContainer/Background Slider").value = audio_manager.background_volume
-	node.get_node("GridContainer/Sound Effect Slider").value = audio_manager.sound_effect_volume 
+	node.get_node("PanelContainer/GridContainer/Master Slider").value = audio_manager.master_volume
+	node.get_node("PanelContainer/GridContainer/Background Slider").value = audio_manager.background_volume
+	node.get_node("PanelContainer/GridContainer/Sound Effect Slider").value = audio_manager.sound_effect_volume 
 
 func _sync_laughter():
-	laughter_meter.value = round_to_dec(game_manager.score, 2)
+	laughter_meter.value = round_to_dec(game_manager.laughter, 2)
 
 func _sync_time():
 	timer.text = time_convert(game_manager.set_time - game_manager.timer)
@@ -65,6 +65,10 @@ func _on_start_game_pressed():
 
 func _on_how_to_play_pressed():
 	pass # Replace with function body.
+	
+func _on_credits_pressed():
+	credits.visible = true
+	main_menu.visible = false
 
 func _on_settings_pressed():
 	main_menu.visible = false
@@ -73,6 +77,7 @@ func _on_settings_pressed():
 
 func _on_back_pressed():
 	main_menu.visible = true
+	credits.visible = false
 	setting.visible = false
 
 func _on_exit_pressed():

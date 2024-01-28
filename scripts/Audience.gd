@@ -16,7 +16,7 @@ var audience_members = []
 var rng : RandomNumberGenerator = RandomNumberGenerator.new()
 
 @export var spotlight : Node3D
-
+@export var heck : Node3D
 @export var question_popup_rate = .5
 @export var question_popup_rate_deviance_min = -.5
 @export var question_popup_rate_deviance_max = 5
@@ -54,6 +54,7 @@ func destroy_all_hecklers():
 	active_hecklers = []
 
 func _spawn_heckler():
+	print("SPAWING HECKLER")
 	var new_heckler
 	if heckler_factory == null:
 		heckler_factory = pre_heckler_factory.instantiate()
@@ -63,6 +64,8 @@ func _spawn_heckler():
 		new_heckler = heckler_factory.duplicate()
 		add_child(new_heckler)
 	active_hecklers.append(new_heckler)
+	if heck != null:
+		new_heckler.position = heck.position
 	
 	#todo: spawn heckler and manage heckler
 	

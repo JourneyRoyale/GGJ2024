@@ -1,9 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://bskgpd4m757s"]
+[gd_scene load_steps=7 format=3 uid="uid://bskgpd4m757s"]
 
 [ext_resource type="Script" path="res://scripts/UI/ui_screen.gd" id="1_w5wnv"]
 [ext_resource type="Texture2D" uid="uid://nsxwa07hhb12" path="res://sprites/placeholder/Gear-icon-transparent-background.png" id="2_vtl00"]
 [ext_resource type="Texture2D" uid="uid://284ju54ci7o1" path="res://sprites/curtain-placeholder.png" id="3_upk2n"]
-[ext_resource type="Script" path="res://scripts/Conveyor.gd" id="4_hjwm8"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_jkbkj"]
 font_size = 46
@@ -49,17 +48,6 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
 script = ExtResource("1_w5wnv")
-
-[node name="Conveyor" type="Control" parent="."]
-layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-grow_vertical = 0
-script = ExtResource("4_hjwm8")
-
-[node name="Timer" type="Timer" parent="Conveyor"]
-autostart = true
 
 [node name="GameUI" type="Control" parent="."]
 layout_mode = 1
@@ -384,7 +372,6 @@ libraries = {
 "": SubResource("AnimationLibrary_0rtmh")
 }
 
-[connection signal="timeout" from="Conveyor/Timer" to="Conveyor" method="_on_timer_timeout"]
 [connection signal="pressed" from="GameUI/MarginContainer/VBoxContainer/Top UI Bar/TextureButton" to="." method="_on_ui_gear_button_pressed"]
 [connection signal="pressed" from="Pause Screen/MarginContainer/MarginContainer/VBoxContainer/Pause Menu/Resume" to="." method="_on_pause_resume_pressed"]
 [connection signal="pressed" from="Pause Screen/MarginContainer/MarginContainer/VBoxContainer/Pause Menu/Restart" to="." method="_on_pause_restart_pressed"]

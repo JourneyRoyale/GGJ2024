@@ -27,6 +27,8 @@ var stunned = false
 var invulnerable_time = 1
 var stun_time = .25
 
+func _ready():
+	audio_manager.play_music('Ragtime', 'Background')
 
 func on_spotlight_entered():
 	in_spotlight = true

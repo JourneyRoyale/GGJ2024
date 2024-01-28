@@ -39,6 +39,10 @@ func play_music(music_name, audio_type):
 	else:
 		print(audio_type, ', ', music_name, ' not found')
 
+func stop_music():
+	if current_music != null:
+		current_music._set_playing(false)
+
 func _find_music(music_name, audio_type):
 	var child_node = get_node(audio_type)
 

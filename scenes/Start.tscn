@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://cgmuc4qfrxoua"]
+[gd_scene load_steps=3 format=3 uid="uid://cwhsqyo035ghh"]
 
 [ext_resource type="PackedScene" uid="uid://vxc02h1qnjha" path="res://new_ui_screen.tscn" id="1_eorej"]
 
@@ -12,6 +12,7 @@ fog_enabled = true
 [node name="Game" type="Node3D"]
 
 [node name="Game Holder" type="Node3D" parent="."]
+process_mode = 1
 
 [node name="Ui Screen" parent="." instance=ExtResource("1_eorej")]
 

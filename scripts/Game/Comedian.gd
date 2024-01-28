@@ -57,12 +57,12 @@ func projectile_collided():
 	if !dead:
 		if invulnerable:
 			return
-      
+	  
 	if ui_screen:
 		ui_screen.createSplat()
 	else:
 		print("No UI Screen Node Found")
-    
+	
 	game_manager.register_hit()
 	audio_manager.play_music('HitHurt', 'Sound Effect')
 	sprite.play("hit")

@@ -8,7 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://bun08wus37exn" path="res://prefab/spot_lights.tscn" id="6_dyasr"]
 [ext_resource type="PackedScene" uid="uid://b7efb0ou050m6" path="res://audience.tscn" id="7_woc5g"]
 [ext_resource type="PackedScene" uid="uid://5joxwbolv6ji" path="res://conveyor.tscn" id="8_mgmwt"]
-[ext_resource type="PackedScene" uid="uid://bdm3g6dbxt003" path="res://prefab/thats_all_folks.tscn" id="9_vj2xq"]
+[ext_resource type="PackedScene" path="res://prefab/thats_all_folks.tscn" id="9_vj2xq"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_2nep6"]
 

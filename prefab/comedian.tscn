@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://bal0jss3qcmho"]
+[gd_scene load_steps=8 format=3 uid="uid://bal0jss3qcmho"]
 
 [ext_resource type="Script" path="res://scripts/Game/Comedian.gd" id="1_joff3"]
 [ext_resource type="SpriteFrames" uid="uid://cr383cnklcbny" path="res://sprites/spriteframes.tres" id="2_u6svr"]
@@ -22,9 +22,41 @@ tracks/0/keys = {
 "values": [true, false, true]
 }
 
+[sub_resource type="Animation" id="Animation_6mx4m"]
+resource_name = "yoink"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 12.7),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(2, 2, 2), Vector3(2, 2, 2)]
+}
+
+[sub_resource type="Animation" id="Animation_5khhi"]
+resource_name = "default"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1, 1, 1)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_crh5k"]
 _data = {
-"Invuln": SubResource("Animation_tedor")
+"Invuln": SubResource("Animation_tedor"),
+"default": SubResource("Animation_5khhi"),
+"yoink": SubResource("Animation_6mx4m")
 }
 
 [node name="Comedian" type="CharacterBody3D" groups=["Player"]]
@@ -36,6 +68,7 @@ transform = Transform3D(6, 0, 0, 0, 6, 0, 0, 0, 6, 0, 0, 0)
 shape = SubResource("CapsuleShape3D_qdsn5")
 
 [node name="Sprite" type="AnimatedSprite3D" parent="."]
+transform = Transform3D(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
 sprite_frames = ExtResource("2_u6svr")
 animation = &"yoink"
 autoplay = "new_animation"

@@ -2,7 +2,7 @@ extends Node3D
 
 var target_position = Vector3(1, 2.322, 1);
 var target_x_range = [-7.0, 7.0]
-var target_z_range = [0.0, 7.0]
+var target_z_range = [-3.5, 0.47]
 # TODO: replace with singleton RNG
 var rng = RandomNumberGenerator.new()
 @onready var particles : CPUParticles3D = get_node("Ground/CPUParticles3D")

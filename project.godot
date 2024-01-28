@@ -28,6 +28,7 @@ AudioManager="*res://prefab/audio_manager.tscn"
 
 window/size/viewport_width=1920
 window/size/viewport_height=1200
+window/size/initial_position_type=0
 
 [dotnet]
 

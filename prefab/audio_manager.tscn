@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://b0c1svfnwvga0"]
+[gd_scene load_steps=8 format=3 uid="uid://b0c1svfnwvga0"]
 
 [ext_resource type="Script" path="res://scripts/Singleton/AudioManager.gd" id="1_iiesv"]
+[ext_resource type="AudioStream" uid="uid://d4i4ojt2hlhdx" path="res://music/MapleLeafRag_64kb.mp3" id="2_jo7hm"]
 [ext_resource type="AudioStream" uid="uid://inflyfrfxqu7" path="res://music/refract.mp3" id="2_opr78"]
 [ext_resource type="AudioStream" uid="uid://b77xbhcraw287" path="res://music/mixkit-arcade-game-complete-or-approved-mission-205.wav" id="3_s30sk"]
 [ext_resource type="AudioStream" uid="uid://b76e5nc2kfdqv" path="res://music/pickupCoin.wav" id="4_273d0"]
@@ -11,6 +12,9 @@
 script = ExtResource("1_iiesv")
 
 [node name="Background" type="Node3D" parent="."]
+
+[node name="Ragtime" type="AudioStreamPlayer" parent="Background"]
+stream = ExtResource("2_jo7hm")
 
 [node name="Refractor" type="AudioStreamPlayer" parent="Background"]
 stream = ExtResource("2_opr78")

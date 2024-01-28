@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://j3q2c8ojgweb"]
+[gd_scene load_steps=6 format=3 uid="uid://bun08wus37exn"]
 
 [ext_resource type="Script" path="res://scripts/Game/SpotLight.gd" id="1_calee"]
 

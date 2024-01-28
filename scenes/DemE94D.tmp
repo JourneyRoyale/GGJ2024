@@ -1,12 +1,15 @@
-[gd_scene load_steps=15 format=3 uid="uid://cjdeehnsaxqwk"]
+[gd_scene load_steps=18 format=3 uid="uid://cjdeehnsaxqwk"]
 
-[ext_resource type="PackedScene" uid="uid://bal0jss3qcmho" path="res://prefab/comedian.tscn" id="1_41dwo"]
+[ext_resource type="PackedScene" path="res://prefab/comedian.tscn" id="1_41dwo"]
+[ext_resource type="PackedScene" uid="uid://bskgpd4m757s" path="res://prefab/ui_screen.tscn" id="3_op1ac"]
 [ext_resource type="Script" path="res://scripts/Singleton/AudioManager.gd" id="5_icdxn"]
 [ext_resource type="AudioStream" uid="uid://inflyfrfxqu7" path="res://music/refract.mp3" id="6_1aeq3"]
 [ext_resource type="AudioStream" uid="uid://b77xbhcraw287" path="res://music/mixkit-arcade-game-complete-or-approved-mission-205.wav" id="7_70iwb"]
 [ext_resource type="PackedScene" uid="uid://b7efb0ou050m6" path="res://audience.tscn" id="7_sgmdl"]
-[ext_resource type="PackedScene" uid="uid://bskgpd4m757s" path="res://prefab/ui_screen.tscn" id="8_g5q4x"]
-[ext_resource type="PackedScene" uid="uid://bun08wus37exn" path="res://prefab/spot_lights.tscn" id="8_l6oyf"]
+[ext_resource type="PackedScene" path="res://prefab/spot_lights.tscn" id="8_l6oyf"]
+[ext_resource type="Script" path="res://scripts/Conveyor.gd" id="8_sc8yn"]
+[ext_resource type="PackedScene" uid="uid://cxsv4epu1adg1" path="res://prefab/egg.tscn" id="9_vdqjx"]
+[ext_resource type="Script" path="res://scripts/egg.gd" id="10_mx0s4"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_2nep6"]
 
@@ -67,6 +70,8 @@ mesh = SubResource("BoxMesh_ecs3e")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_j3y3t")
 
+[node name="Ui Screen" parent="." instance=ExtResource("3_op1ac")]
+
 [node name="AudioManager" type="Node3D" parent="."]
 script = ExtResource("5_icdxn")
 
@@ -95,4 +100,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.217, 2.255, -4.675)
 [node name="spawn1" type="Node3D" parent="Audience"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.715, 2.206, -4.606)
 
-[node name="Ui Screen" parent="." instance=ExtResource("8_g5q4x")]
+[node name="Conveyor" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("8_sc8yn")
+
+[node name="Egg" parent="Conveyor" instance=ExtResource("9_vdqjx")]
+script = ExtResource("10_mx0s4")

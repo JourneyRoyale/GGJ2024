@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://dp6j4bqf2uuos"]
+[gd_scene load_steps=4 format=3 uid="uid://bal0jss3qcmho"]
 
 [ext_resource type="Script" path="res://scripts/Game/Comedian.gd" id="1_joff3"]
 [ext_resource type="SpriteFrames" uid="uid://cr383cnklcbny" path="res://sprites/spriteframes.tres" id="2_u6svr"]

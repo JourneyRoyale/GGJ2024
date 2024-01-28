@@ -1,9 +1,9 @@
 extends AnimatedSprite3D
 
 #TODO: make this global
-var emojis = ["🤖", "👽", "🤡", "💩"]
 @export var cooldown = .5
 @onready var label = get_node("Label3D")
+@onready var emoji = get_node("Emoji3D");
 @onready var bubble : AnimatedSprite3D = get_node("Bubble")
 
 var current_emoji
@@ -30,8 +30,8 @@ func show_thought(time):
 		
 func show_random_thought_helper():
 	active = true
-	emojis.shuffle()
-	label.text = emojis[0]
+	current_emoji = randi_range(0, 7)
+	emoji.set_emoji(current_emoji)
 	bubble.show()
 	
 		
@@ -62,7 +62,7 @@ func specific_thought(thought, time):
 
 func show_specific_thought_helper(thought):
 	active = true
-	label.text = thought
+	emoji.set_emoji(thought)
 	bubble.show()
 	
 func specific_good_thought(thought, time):
@@ -85,16 +85,15 @@ func specific_bad_thought(thought, time):
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	print("audience member: 'hello world'")
-	label.text = ""
 
 func get_bubble_alignment():
 	return bubble_alignment
 	
 func get_current_emoji():
-	return label.text
+	return current_emoji
 	
 func clear_thought():
-	label.text = ""
+	emoji.reset_emojis()
 	bubble.play("blank")
 	bubble_alignment = BubbleAlignment.BLANK
 	bubble.hide()
@@ -106,10 +105,11 @@ func clear_thought():
 	
 	
 func check_for_match(emoji):
-	var match = active && emoji == label.text
+	var match = active && emoji == current_emoji
 	var success = match && bubble_alignment == BubbleAlignment.GOOD
 	if success:
-		specific_good_thought("🤩", cooldown)
+		#TODO: show success emote for audience
+		pass
 	return { 
 		"success" : success,
 		"heckler" : match && bubble_alignment == BubbleAlignment.BAD

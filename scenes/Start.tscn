@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://cwhsqyo035ghh"]
 
-[ext_resource type="PackedScene" path="res://new_ui_screen.tscn" id="1_eorej"]
+[ext_resource type="PackedScene" uid="uid://vxc02h1qnjha" path="res://new_ui_screen.tscn" id="1_eorej"]
 
 [sub_resource type="Environment" id="Environment_rbb27"]
 background_energy_multiplier = 1.22

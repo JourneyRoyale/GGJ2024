@@ -11,7 +11,7 @@ extends CharacterBody3D
 @onready var invulnerable_timer : Timer = get_node("InvulnerableTimer")
 @onready var stun_timer : Timer = get_node("StunTimer")
 @onready var animation_player : AnimationPlayer = get_node("AnimationPlayer")
-
+@onready var ui_screen = get_node("/root/Game/Ui Screen")
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
@@ -40,6 +40,13 @@ func on_spotlight_exited():
 func projectile_collided():
 	if invulnerable:
 		return
+	
+	if ui_screen:
+		ui_screen.createSplat()
+	else:
+		print("No UI Screen Node Found")
+	
+
 	game_manager.register_hit()
 	audio_manager.play_music('HitHurt', 'Sound Effect')
 	sprite.play("hit")

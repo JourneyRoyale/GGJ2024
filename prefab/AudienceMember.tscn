@@ -88,10 +88,9 @@ autoplay = "default"
 script = ExtResource("3_pmm4d")
 
 [node name="Bubble" type="AnimatedSprite3D" parent="."]
-transform = Transform3D(-10, 0, -1.50996e-06, 0, 10, 0, 1.50996e-06, 0, -10, 2.08165e-12, 7.566, -1)
+transform = Transform3D(-15, 0, -2.26494e-06, 0, 15, 0, 2.26494e-06, 0, -15, -5.79378, 9.92451, -1)
 sprite_frames = SubResource("SpriteFrames_tgvj7")
 animation = &"blank"
-frame_progress = 0.137298
 
 [node name="Emoji3D" type="Node3D" parent="."]
 transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 8.58216, 0)
@@ -99,34 +98,42 @@ script = ExtResource("7_tvgdt")
 emojis = [NodePath("Sprite2D"), NodePath("Sprite2D2"), NodePath("Sprite2D3"), NodePath("Sprite2D4"), NodePath("Sprite2D5"), NodePath("Sprite2D6"), NodePath("Sprite2D7"), NodePath("Sprite2D8")]
 
 [node name="Sprite2D" type="Sprite3D" parent="Emoji3D"]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, -14.8084, 6.79005, 0)
 visible = false
 texture = ExtResource("8_h1sl1")
 
 [node name="Sprite2D2" type="Sprite3D" parent="Emoji3D"]
+transform = Transform3D(1.25, 0, 0, 0, 1.25, 0, 0, 0, 1.25, -14.8084, 8.45737, 0)
 visible = false
 texture = ExtResource("9_yu3gg")
 
 [node name="Sprite2D3" type="Sprite3D" parent="Emoji3D"]
+transform = Transform3D(1.75, 0, 0, 0, 1.75, 0, 0, 0, 1.75, -14.8084, 7.85686, 0)
 visible = false
 texture = ExtResource("10_5ihaa")
 
 [node name="Sprite2D4" type="Sprite3D" parent="Emoji3D"]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -14.8084, 7.20687, 0)
 visible = false
 texture = ExtResource("10_3sxoi")
 
 [node name="Sprite2D5" type="Sprite3D" parent="Emoji3D"]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -14.8084, 8.23439, 0)
 visible = false
 texture = ExtResource("11_u223w")
 
 [node name="Sprite2D6" type="Sprite3D" parent="Emoji3D"]
+transform = Transform3D(1.75, 0, 0, 0, 1.75, 0, 0, 0, 1.75, -14.8084, 6.9858, 0)
 visible = false
 texture = ExtResource("12_lscrp")
 
 [node name="Sprite2D7" type="Sprite3D" parent="Emoji3D"]
+transform = Transform3D(1.75, 0, 0, 0, 1.75, 0, 0, 0, 1.75, -14.8084, 7.96533, 0)
 visible = false
 texture = ExtResource("13_s8jem")
 
 [node name="Sprite2D8" type="Sprite3D" parent="Emoji3D"]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -14.8084, 7.85686, 0)
 visible = false
 texture = ExtResource("14_qholi")
 

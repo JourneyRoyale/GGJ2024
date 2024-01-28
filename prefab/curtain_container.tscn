@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://c2hstesjai7p1"]
+[gd_scene load_steps=22 format=3 uid="uid://bhadpf1fsd2wq"]
 
 [ext_resource type="Script" path="res://scripts/curtain_container.gd" id="1_gu13d"]
 [ext_resource type="Texture2D" uid="uid://dck4vj44e6gg2" path="res://sprites/ui/CCCurtainSpriteSheet.png" id="1_ru10p"]

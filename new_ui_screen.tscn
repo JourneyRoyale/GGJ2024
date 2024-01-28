@@ -1,7 +1,7 @@
 [gd_scene load_steps=13 format=3 uid="uid://vxc02h1qnjha"]
 
 [ext_resource type="Theme" uid="uid://4c5xn5lj157e" path="res://theme/default.tres" id="1_8kqac"]
-[ext_resource type="PackedScene" uid="uid://c2hstesjai7p1" path="res://prefab/curtain_container.tscn" id="1_33gma"]
+[ext_resource type="PackedScene" uid="uid://bhadpf1fsd2wq" path="res://prefab/curtain_container.tscn" id="1_33gma"]
 [ext_resource type="Texture2D" uid="uid://ct1bgt227dwru" path="res://sprites/ui/GearIcon.png" id="2_wab3x"]
 [ext_resource type="Texture2D" uid="uid://d1fh5xoe5jk74" path="res://sprites/ui/Tomato_Splat_sprite.png" id="3_a8h4s"]
 [ext_resource type="Texture2D" uid="uid://rma688d35ap1" path="res://sprites/ui/White Rectangle With Gray.png" id="3_mjecg"]
@@ -235,7 +235,7 @@ theme = ExtResource("1_8kqac")
 alignment = 1
 
 [node name="TextureButton" type="TextureButton" parent="GameUI/MarginContainer/VBoxContainer/Top UI Bar"]
-custom_minimum_size = Vector2(50, 50)
+custom_minimum_size = Vector2(200, 200)
 layout_mode = 2
 size_flags_horizontal = 0
 theme = ExtResource("1_8kqac")
@@ -268,6 +268,7 @@ theme = ExtResource("1_8kqac")
 layout_mode = 2
 size_flags_horizontal = 8
 theme = ExtResource("1_8kqac")
+theme_override_font_sizes/font_size = 100
 text = "10:00"
 horizontal_alignment = 2
 

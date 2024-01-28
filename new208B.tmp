@@ -40,7 +40,6 @@ var packed_joke_button = load(\"res://prefab/JokeButton.tscn\")
 func _process(delta):
 	if (game_manager.isPlaying):
 		_sync_time()
-		_sync_laughter()
 
 func _input(event):
 	if event is InputEventKey and event.pressed:
@@ -55,8 +54,7 @@ func _sync_volume(node):
 	node.get_node(\"PanelContainer/GridContainer/Sound Effect Slider\").value = audio_manager.sound_effect_volume 
 
 func _sync_laughter():
-	print(game_manager.score)
-	laughter_meter.value = round_to_dec(game_manager.score / 100, 2)
+	laughter_meter.value = round_to_dec(game_manager.laughter, 2)
 
 func _sync_time():
 	timer.text = time_convert(game_manager.set_time - game_manager.timer)
@@ -78,7 +76,7 @@ func _on_start_game_pressed():
 	game_ui.visible = true
 	game_manager.isPlaying = true
 	var instance = game_scene.instantiate()
-	get_node(\"/root/Game/Game Holder\").add_child(instance)
+	get_node(\"/root/Game\").add_child(instance)
 
 func _on_how_to_play_pressed():
 	pass # Replace with function body.
@@ -111,7 +109,6 @@ func _on_pause_restart_pressed():
 	var instance = game_scene.instantiate()
 	get_node(\"/root/Game/Game Holder\").add_child(instance)
 	pause_screen.visible = false
-	game_manager.reset_setting()
 	pass
 
 func _on_pause_setting_pressed():
@@ -124,7 +121,6 @@ func _on_pause_setting_back_pressed():
 	pause_setting.visible = false
 
 func _on_pause_exit_pressed():
-	game_manager.reset_setting()
 	audio_manager.stop_music();
 	get_tree().change_scene_to_file(\"res://scenes/Start.tscn\")
 

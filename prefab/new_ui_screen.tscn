@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://vxc02h1qnjha"]
+[gd_scene load_steps=11 format=3 uid="uid://u6fvtnry7dqy"]
 
 [ext_resource type="Theme" uid="uid://4c5xn5lj157e" path="res://theme/default.tres" id="1_8kqac"]
 [ext_resource type="Texture2D" uid="uid://ct1bgt227dwru" path="res://sprites/ui/GearIcon.png" id="2_wab3x"]
@@ -10,7 +10,7 @@
 script/source = "extends Control
 
 #Scenc
-var game_scene = load(\"res://scenes/Game.tscn\")
+var game_scene = load(\"res://prefab/game.tscn\")
 
 #Other
 @onready var animation = get_node(\"TitleScreen/AnimationPlayer\")
@@ -40,13 +40,11 @@ var packed_joke_button = load(\"res://prefab/JokeButton.tscn\")
 func _process(delta):
 	if (game_manager.isPlaying):
 		_sync_time()
-		_sync_laughter()
 
 func _input(event):
 	if event is InputEventKey and event.pressed:
 		if event.keycode == KEY_ESCAPE:
-			print(current_scene_name)
-			if(current_scene_name == \"Game\"):
+			if(current_scene_name == \"DemoScene2\"):
 				pause_screen.visible = !pause_screen.visible
 
 func _sync_volume(node):
@@ -55,8 +53,7 @@ func _sync_volume(node):
 	node.get_node(\"PanelContainer/GridContainer/Sound Effect Slider\").value = audio_manager.sound_effect_volume 
 
 func _sync_laughter():
-	print(game_manager.score)
-	laughter_meter.value = round_to_dec(game_manager.score / 100, 2)
+	laughter_meter.value = round_to_dec(game_manager.laughter, 2)
 
 func _sync_time():
 	timer.text = time_convert(game_manager.set_time - game_manager.timer)
@@ -78,7 +75,7 @@ func _on_start_game_pressed():
 	game_ui.visible = true
 	game_manager.isPlaying = true
 	var instance = game_scene.instantiate()
-	get_node(\"/root/Game/Game Holder\").add_child(instance)
+	get_node(\"/root/Demo/Game Holder\").add_child(instance)
 
 func _on_how_to_play_pressed():
 	pass # Replace with function body.
@@ -106,12 +103,10 @@ func _on_pause_resume_pressed():
 	pause_screen.visible = false
 
 func _on_pause_restart_pressed():
-	print(get_node(\"/root/Game/Game Holder\").get_child(0))
-	get_node(\"/root/Game/Game Holder\").get_child(0).queue_free()
+	get_node(\"/root/Demo/Game Holder\").get_child(0).queue_free()
 	var instance = game_scene.instantiate()
-	get_node(\"/root/Game/Game Holder\").add_child(instance)
+	get_node(\"/root/Demo/Game Holder\").add_child(instance)
 	pause_screen.visible = false
-	game_manager.reset_setting()
 	pass
 
 func _on_pause_setting_pressed():
@@ -124,9 +119,7 @@ func _on_pause_setting_back_pressed():
 	pause_setting.visible = false
 
 func _on_pause_exit_pressed():
-	game_manager.reset_setting()
-	audio_manager.stop_music();
-	get_tree().change_scene_to_file(\"res://scenes/Start.tscn\")
+	get_tree().change_scene_to_file(\"res://scenes/DemoScene.tscn\")
 
 #Setting Slider
 func _on_master_slider_value_changed(value):

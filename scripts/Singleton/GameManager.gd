@@ -28,13 +28,24 @@ var isPlaying = false
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	score -= base_deplete_rate
-	if score <= 0:
-		get_tree().paused = true
-		audio_manager.play_music('HitHurt', 'Sound Effect')
-		await get_tree().create_timer(10).timeout
-		get_tree().reload_current_scene()
-		get_tree().paused = false
+	if(isPlaying):
+		score -= base_deplete_rate
+		timer += delta;
+		if score <= 0:
+			get_tree().paused = true
+			audio_manager.play_music('HitHurt', 'Sound Effect')
+			await get_tree().create_timer(5).timeout
+			get_tree().reload_current_scene()
+			reset_setting()
+			get_tree().paused = false
+	
+func reset_setting():
+	audio_manager.stop_music();
+	isPlaying = false
+	set_time = 600
+	score = 50.0
+	timer = 0;
+	combo = 0;
 	
 func register_match():
 	score += match_amount

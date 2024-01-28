@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="GGJ2024"
-run/main_scene="res://scenes/DemoScene.tscn"
+run/main_scene="res://scenes/Orthogonal.tscn"
 config/features=PackedStringArray("4.2", "GL Compatibility")
 config/icon="res://icon.svg"
 
@@ -26,7 +26,10 @@ AudioManager="*res://prefab/audio_manager.tscn"
 
 [display]
 
+window/size/viewport_width=1920
+window/size/viewport_height=1200
 window/size/initial_position_type=0
+window/stretch/mode="viewport"
 
 [dotnet]
 

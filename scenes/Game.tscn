@@ -7,7 +7,7 @@
 [ext_resource type="AudioStream" uid="uid://b77xbhcraw287" path="res://music/mixkit-arcade-game-complete-or-approved-mission-205.wav" id="5_t3uf5"]
 [ext_resource type="PackedScene" uid="uid://bun08wus37exn" path="res://prefab/spot_lights.tscn" id="6_dyasr"]
 [ext_resource type="PackedScene" uid="uid://b7efb0ou050m6" path="res://audience.tscn" id="7_woc5g"]
-[ext_resource type="PackedScene" uid="uid://5joxwbolv6ji" path="res://prefab/conveyor.tscn" id="8_mgmwt"]
+[ext_resource type="PackedScene" uid="uid://c83nqqnoj71kj" path="res://prefab/conveyor.tscn" id="8_mgmwt"]
 [ext_resource type="PackedScene" path="res://prefab/thats_all_folks.tscn" id="9_vj2xq"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_2nep6"]
@@ -29,6 +29,11 @@ points = PackedVector3Array(-0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5
 points = PackedVector3Array(-0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5)
 
 [node name="Perspective" type="Node3D"]
+
+[node name="Conveyor" parent="." instance=ExtResource("8_mgmwt")]
+position = Vector2(943, 945)
+egg_delay = 0.75
+egg_speed = 1.5
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.906308, 0.422618, 0, -0.422618, 0.906308, 2.08165e-12, 7.063, 5)
@@ -158,11 +163,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.15, 0.97, -6.535)
 
 [node name="Timer" type="Timer" parent="Audience"]
 autostart = true
-
-[node name="Conveyor" parent="Audience" instance=ExtResource("8_mgmwt")]
-position = Vector2(943, 945)
-egg_delay = 0.75
-egg_speed = 1.5
 
 [node name="ThatsAllFolks" parent="." node_paths=PackedStringArray("player") instance=ExtResource("9_vj2xq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 4.75, 2.147)

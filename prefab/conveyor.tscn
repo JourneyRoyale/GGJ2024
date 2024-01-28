@@ -1,0 +1,104 @@
+[gd_scene load_steps=12 format=3 uid="uid://c83nqqnoj71kj"]
+
+[ext_resource type="Texture2D" uid="uid://nv078o46l2pb" path="res://sprites/ui/ccConveyorSpritesheetv2.png" id="1_oo4fl"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bsaf3"]
+atlas = ExtResource("1_oo4fl")
+region = Rect2(0, 0, 1472, 350)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_toeg2"]
+atlas = ExtResource("1_oo4fl")
+region = Rect2(1472, 0, 1472, 350)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ff7pl"]
+atlas = ExtResource("1_oo4fl")
+region = Rect2(0, 350, 1472, 350)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_frxfi"]
+atlas = ExtResource("1_oo4fl")
+region = Rect2(1472, 350, 1472, 350)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hcou1"]
+atlas = ExtResource("1_oo4fl")
+region = Rect2(0, 700, 1472, 350)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0eydy"]
+atlas = ExtResource("1_oo4fl")
+region = Rect2(1472, 700, 1472, 350)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eivk3"]
+atlas = ExtResource("1_oo4fl")
+region = Rect2(0, 1050, 1472, 350)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_psn4w"]
+atlas = ExtResource("1_oo4fl")
+region = Rect2(1472, 1050, 1472, 350)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_kdphs"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bsaf3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_toeg2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ff7pl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_frxfi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hcou1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0eydy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eivk3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_psn4w")
+}],
+"loop": true,
+"name": &"default",
+"speed": 9.5
+}]
+
+[sub_resource type="GDScript" id="GDScript_8hxnp"]
+script/source = "extends Node2D
+
+var packed_egg = load(\"res://prefab/egg.tscn\")
+@export var egg_delay = 1.0;
+@export var egg_speed = 3.0
+@onready var spawn_point = get_node(\"Spawn Point\")
+@onready var spawn_list = get_node(\"Spawn List\")
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	add_joke()
+ 
+func add_joke():
+	await get_tree().create_timer(egg_delay).timeout
+	var instance = packed_egg.instantiate()
+	instance.speed = egg_speed;
+	spawn_list.add_child(instance)
+	instance.animation.play(\"Egg Animation\")
+	print(instance.position)
+	add_joke()
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	pass
+"
+
+[node name="Conveyor" type="AnimatedSprite2D"]
+position = Vector2(923, 944)
+sprite_frames = SubResource("SpriteFrames_kdphs")
+autoplay = "default"
+frame_progress = 0.0925617
+script = SubResource("GDScript_8hxnp")
+
+[node name="Spawn List" type="Node2D" parent="."]
+position = Vector2(-628, -95)

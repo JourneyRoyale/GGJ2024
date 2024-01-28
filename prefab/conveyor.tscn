@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://c83nqqnoj71kj"]
+[gd_scene load_steps=12 format=3 uid="uid://b5h5i641pvljq"]
 
 [ext_resource type="Texture2D" uid="uid://nv078o46l2pb" path="res://sprites/ui/ccConveyorSpritesheetv2.png" id="1_oo4fl"]
 
@@ -74,23 +74,14 @@ var packed_egg = load(\"res://prefab/egg.tscn\")
 @export var egg_speed = 3.0
 @onready var spawn_point = get_node(\"Spawn Point\")
 @onready var spawn_list = get_node(\"Spawn List\")
+@onready var timer = get_node(\"Timer\")
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	add_joke()
- 
-func add_joke():
-	await get_tree().create_timer(egg_delay).timeout
+func _on_timer_timeout():
 	var instance = packed_egg.instantiate()
 	instance.speed = egg_speed;
 	spawn_list.add_child(instance)
 	instance.animation.play(\"Egg Animation\")
 	print(instance.position)
-	add_joke()
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
 "
 
 [node name="Conveyor" type="AnimatedSprite2D"]
@@ -102,3 +93,9 @@ script = SubResource("GDScript_8hxnp")
 
 [node name="Spawn List" type="Node2D" parent="."]
 position = Vector2(-628, -95)
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 1.5
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

@@ -14,6 +14,7 @@ var move_time = 0.0
 var move_timer = 0.0
 var is_moving = true
 var current_direction = Vector3(1.0, 0, 0).normalized()  # Starts moving right
+@onready var animation_player = get_node("AnimationPlayer")
 
 var audience_reference
 
@@ -40,10 +41,12 @@ func _process(delta):
 
 func start_moving():
 	is_moving = true
+	animation_player.play("bounce")
 	move_time = randf_range(MOVE_TIME_MIN, MOVE_TIME_MAX)
 	move_timer = 0.0
 
 func stop_moving():
+	animation_player.stop()
 	is_moving = false
 	throw_tomato()
 

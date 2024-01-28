@@ -28,9 +28,6 @@ func clear_emoji():
 		
 func check_for_match(emoji):
 	if (active):
-		print("matching")
-		print(emoji)
-		print(current_emoji)
 		var match = emoji == current_emoji
 		var success = match
 		if success:

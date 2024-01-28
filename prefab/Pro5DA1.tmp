@@ -12,6 +12,7 @@ albedo_color = Color(1, 0, 0, 1)
 
 [node name="Projectile" type="Area3D" groups=["projectiles"]]
 script = ExtResource("1_32hu4")
+SPEED = 0.5
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_20eg4")

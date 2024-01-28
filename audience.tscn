@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://b7efb0ou050m6"]
 
-[ext_resource type="Script" path="res://Audience.gd" id="1_vnbmt"]
+[ext_resource type="Script" path="res://scripts/Audience.gd" id="1_vnbmt"]
 
 [node name="Audience" type="Node3D" groups=["AudienceManager"]]
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 1.15, 2.255, -4.675)

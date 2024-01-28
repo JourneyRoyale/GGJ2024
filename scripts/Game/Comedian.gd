@@ -7,8 +7,10 @@ extends CharacterBody3D
 
 @onready var sprite = get_node("Sprite")
 @onready var audio_manager = get_node("/root/AudioManager")
+@onready var game_manager = get_node("/root/GameManager")
 @onready var invulnerable_timer : Timer = get_node("InvulnerableTimer")
 @onready var stun_timer : Timer = get_node("StunTimer")
+@onready var animation_player : AnimationPlayer = get_node("AnimationPlayer")
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
@@ -33,38 +35,20 @@ func on_spotlight_entered():
 func on_spotlight_exited():
 	in_spotlight = false
 
-func stun_timeout():
-	stunned = false
-	invulnerable_timer.start(invulnerable_time)
-	sprite.play("idle_from_hit")
-	pass
-
-func invulnerable_timeout():
-	invulnerable = false
-	show()
-	pass
-
 func projectile_collided():
 	if invulnerable:
 		return
+	game_manager.register_hit()
 	audio_manager.play_music('HitHurt', 'Sound Effect')
 	sprite.play("hit")
+	animation_player.play("Invuln")
 	invulnerable = true
 	stunned = true
-	stun_timer.start(stun_time)
+	stun_timer.start()
+	invulnerable_timer.start()
 	#TODO: Notify gamemanager
 
 var inv_alt = 0
-
-func _process(delta):
-	if invulnerable:
-		inv_alt += delta
-		if inv_alt >= 1:
-			if visible:
-				hide()
-			else:
-				show()
-			inv_alt = 0
 
 func _physics_process(delta):
 	if stunned:
@@ -107,3 +91,14 @@ func _physics_process(delta):
 		sprite.play('new_animation');
 
 	move_and_slide()
+
+func _on_stun_timer_timeout():
+	stunned = false
+	invulnerable_timer.start(invulnerable_time)
+	sprite.play("idle_from_hit")
+
+func _on_invulnerable_timer_timeout():
+	invulnerable = false
+	animation_player.stop()
+	get_node("Sprite").visible = true
+	show()

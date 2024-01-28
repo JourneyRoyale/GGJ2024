@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://cikikj0y5ug6r"]
 
 [ext_resource type="Script" path="res://scripts/Heckler/HecklerAI.gd" id="1_qatk1"]
-[ext_resource type="Texture2D" uid="uid://dqlp4k0yku7x6" path="res://sprites/heckler-placeholder.png" id="2_f6gg0"]
+[ext_resource type="Texture2D" uid="uid://uc21wyoxrxib" path="res://sprites/audience/heckler.png" id="2_2t0e4"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_grwyp"]
 
@@ -35,8 +35,7 @@ transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0)
 shape = SubResource("CapsuleShape3D_grwyp")
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.984603, 0, 0, 0, 1, 0, 0, 0)
-texture = ExtResource("2_f6gg0")
+texture = ExtResource("2_2t0e4")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

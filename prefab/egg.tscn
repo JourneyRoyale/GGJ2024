@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://dxs8g7wkq48v2"]
+[gd_scene load_steps=18 format=3 uid="uid://cyhireyif4lth"]
 
 [ext_resource type="Texture2D" uid="uid://cmua1lqkbawoa" path="res://sprites/jokes/EggAsset-01.png" id="1_fw7gv"]
 [ext_resource type="Script" path="res://scripts/egg.gd" id="2_vyl8j"]
@@ -39,16 +39,77 @@ tracks/1/keys = {
 "values": [Vector2(0.01, 0.01), Vector2(0.025, 0.025), Vector2(0.06, 0.06), Vector2(0.075, 0.075), Vector2(0.1, 0.1)]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_2wry1"]
-_data = {
-"Egg Animation": SubResource("Animation_3nbh3")
+[sub_resource type="Animation" id="Animation_3ufdr"]
+resource_name = "Egg Animation Death"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 0,
+"values": []
 }
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_w4ga1"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2wry1"]
+_data = {
+"Egg Animation": SubResource("Animation_3nbh3"),
+"Egg Animation Death": SubResource("Animation_3ufdr")
+}
+
+[sub_resource type="Animation" id="Animation_xj6f1"]
+resource_name = "Egg Death"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.6, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1180, 145), Vector2(1250, 139), Vector2(1289, 194)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.6, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 0.523599, 1.309]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:self_modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.1, 0.6, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0.588235), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_848on"]
+_data = {
+"Egg Death": SubResource("Animation_xj6f1")
+}
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_m6j7k"]
 radius = 405.98
 height = 1207.9
 
 [node name="Egg" type="Sprite2D"]
+position = Vector2(1180, 145)
 scale = Vector2(0.01, 0.01)
 texture = ExtResource("1_fw7gv")
 script = ExtResource("2_vyl8j")
@@ -58,10 +119,15 @@ libraries = {
 "": SubResource("AnimationLibrary_2wry1")
 }
 
+[node name="AnimationPlayer2" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_848on")
+}
+
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource("CapsuleShape2D_w4ga1")
+shape = SubResource("CapsuleShape2D_m6j7k")
 
 [node name="Emoji" type="Node2D" parent="."]
 scale = Vector2(0.7, 0.7)
@@ -101,4 +167,3 @@ visible = false
 texture = ExtResource("10_jdkhd")
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
-[connection signal="input_event" from="Area2D" to="." method="_on_area_2d_input_event"]

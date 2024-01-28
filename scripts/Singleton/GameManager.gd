@@ -31,6 +31,8 @@ var emoji_list = [];
 
 @export var laughter_factor = 0.25;
 
+@export var laughter_penalty = 0.1;
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	create_audience()
@@ -60,7 +62,10 @@ func create_audience():
 
 
 # Polls all audience members in order to determine current laughter score. Called when joke is made.
+# Penalty is applied if joke does not land with any audience members.
 func poll_audience(audienceMembers_humored,audienceMembersCount):
+		if(audienceMembers_humored == 0):
+			laughter = min(laughter - laughter_penalty);
 		laughter = max(laughter + audienceMembers_humored * laughter_factor / audienceMembersCount,2);
 
 #Create a heckler.

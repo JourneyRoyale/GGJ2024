@@ -6,7 +6,7 @@
 [ext_resource type="AudioStream" uid="uid://b77xbhcraw287" path="res://music/mixkit-arcade-game-complete-or-approved-mission-205.wav" id="7_70iwb"]
 [ext_resource type="PackedScene" uid="uid://b7efb0ou050m6" path="res://audience.tscn" id="7_sgmdl"]
 [ext_resource type="PackedScene" uid="uid://bskgpd4m757s" path="res://prefab/ui_screen.tscn" id="8_g5q4x"]
-[ext_resource type="PackedScene" uid="uid://bun08wus37exn" path="res://prefab/spot_lights.tscn" id="8_l6oyf"]
+[ext_resource type="PackedScene" uid="uid://j3q2c8ojgweb" path="res://prefab/spot_lights.tscn" id="8_l6oyf"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_2nep6"]
 

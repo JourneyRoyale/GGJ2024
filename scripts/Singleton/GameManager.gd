@@ -49,5 +49,3 @@ func register_error():
 func register_hit():
 	score -= hit_amount
 	combo = 0
-
-

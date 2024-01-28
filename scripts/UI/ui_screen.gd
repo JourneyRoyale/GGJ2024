@@ -34,7 +34,7 @@ func _process(delta):
 func _input(event):
 	if event is InputEventKey and event.pressed:
 		if event.keycode == KEY_ESCAPE:
-			if(current_scene_name == "DemoScene2"):
+			if(current_scene_name == "DemoScene2" and title_screen.visible == false):
 				pause_screen.visible = !pause_screen.visible
 				get_tree().paused = pause_screen.visible 
 

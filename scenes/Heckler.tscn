@@ -1,9 +1,30 @@
-[gd_scene load_steps=4 format=3 uid="uid://bk2hnitd6h4eh"]
+[gd_scene load_steps=6 format=3 uid="uid://bqdtty1ekxhh"]
 
 [ext_resource type="Script" path="res://scripts/Heckler/HecklerAI.gd" id="1_qatk1"]
 [ext_resource type="Texture2D" uid="uid://dqlp4k0yku7x6" path="res://sprites/heckler-placeholder.png" id="2_f6gg0"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_grwyp"]
+
+[sub_resource type="Animation" id="Animation_i0uk2"]
+resource_name = "bounce"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite3D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(1, 1, 1), Vector3(1, 0.9, 1), Vector3(1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_f0bqg"]
+_data = {
+"bounce": SubResource("Animation_i0uk2")
+}
 
 [node name="Heckler" type="Area3D"]
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0.5, 0.152, 0.263)
@@ -14,4 +35,11 @@ transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0)
 shape = SubResource("CapsuleShape3D_grwyp")
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.984603, 0, 0, 0, 1, 0, 0, 0)
 texture = ExtResource("2_f6gg0")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_f0bqg")
+}
+autoplay = "bounce"

@@ -33,13 +33,11 @@ var game_scene = load(\"res://scenes/Game.tscn\")
 @onready var timer = get_node(\"GameUI/MarginContainer/VBoxContainer/Top UI Bar/Timer\")
 @onready var laughter_meter = get_node(\"GameUI/MarginContainer/VBoxContainer/Top UI Bar/Laughter Meter\")
 @onready var joke_bar = get_node(\"GameUI/MarginContainer/VBoxContainer/Joke Bar\")
-@onready var splat = get_node(\"GameUI/TomatoSplat\")
 var packed_joke_button = load(\"res://prefab/JokeButton.tscn\")
 
 @onready var audio_manager = get_node(\"/root/AudioManager\")
 @onready var game_manager = get_node(\"/root/GameManager\")
 @onready var current_scene_name = get_tree().get_current_scene().get_name()
-
 
 func _process(delta):
 	if (game_manager.isPlaying):
@@ -53,23 +51,16 @@ func _input(event):
 			if(current_scene_name == \"Game\"):
 				pause_screen.visible = !pause_screen.visible
 
-func createSplat():
-	if splat and splat.has_method(\"createSplat\"):
-		splat.createSplat()
-	else:
-		if not splat:
-			print(\"Splat Node does not exist\")
-		else:
-			print(\"Splat createSplat() method not found\")
-
 func _sync_volume(node):
 	node.get_node(\"PanelContainer/GridContainer/Master Slider\").value = audio_manager.master_volume
 	node.get_node(\"PanelContainer/GridContainer/Background Slider\").value = audio_manager.background_volume
 	node.get_node(\"PanelContainer/GridContainer/Sound Effect Slider\").value = audio_manager.sound_effect_volume 
 
 func _sync_laughter():
-	print(game_manager.score)
 	laughter_meter.value = round_to_dec(game_manager.score / 100, 2)
+	
+func createSplat():
+	get_node(\"GameUI/TomatoSplat\").createSplat()
 
 func _sync_time():
 	timer.text = time_convert(game_manager.set_time - game_manager.timer)
@@ -305,6 +296,7 @@ theme = ExtResource("1_8kqac")
 
 [node name="TomatoSplat" type="TextureRect" parent="GameUI"]
 modulate = Color(1, 1, 1, 0)
+layout_mode = 0
 offset_left = 122.0
 offset_top = 103.0
 offset_right = 1750.0

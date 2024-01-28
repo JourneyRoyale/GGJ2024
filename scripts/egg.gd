@@ -17,7 +17,6 @@ func _ready():
 func _process(delta):
 	if isAnimationFinished:
 		position.x += speed
-		print('test',position.x)
 		if position.x == 1180:
 			animation2.play("Egg Death")
 			get_node("Emoji").visible = false

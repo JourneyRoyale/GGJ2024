@@ -1,12 +1,13 @@
-[gd_scene load_steps=15 format=3 uid="uid://cjdeehnsaxqwk"]
+[gd_scene load_steps=16 format=3 uid="uid://b7csnprwq7vs3"]
 
-[ext_resource type="PackedScene" uid="uid://dp6j4bqf2uuos" path="res://scenes/comedian.tscn" id="1_41dwo"]
-[ext_resource type="PackedScene" uid="uid://bskgpd4m757s" path="res://prefab/ui_screen.tscn" id="3_op1ac"]
-[ext_resource type="PackedScene" uid="uid://dfddod52n51d5" path="res://scenes/AudienceMember.tscn" id="5_408j2"]
-[ext_resource type="Script" path="res://scripts/Singleton/AudioManager.gd" id="5_icdxn"]
-[ext_resource type="AudioStream" uid="uid://inflyfrfxqu7" path="res://music/refract.mp3" id="6_1aeq3"]
-[ext_resource type="AudioStream" uid="uid://b77xbhcraw287" path="res://music/mixkit-arcade-game-complete-or-approved-mission-205.wav" id="7_70iwb"]
-[ext_resource type="PackedScene" uid="uid://j3q2c8ojgweb" path="res://scenes/spot_lights.tscn" id="8_l6oyf"]
+[ext_resource type="PackedScene" uid="uid://dp6j4bqf2uuos" path="res://scenes/comedian.tscn" id="1_iwhlc"]
+[ext_resource type="PackedScene" uid="uid://dfddod52n51d5" path="res://scenes/AudienceMember.tscn" id="2_4xbxp"]
+[ext_resource type="PackedScene" uid="uid://bskgpd4m757s" path="res://prefab/ui_screen.tscn" id="3_gefno"]
+[ext_resource type="Script" path="res://scripts/ProjectileEmitter.gd" id="4_q6siy"]
+[ext_resource type="Script" path="res://scripts/Singleton/AudioManager.gd" id="5_ook24"]
+[ext_resource type="AudioStream" uid="uid://inflyfrfxqu7" path="res://music/refract.mp3" id="6_sjcxi"]
+[ext_resource type="AudioStream" uid="uid://b77xbhcraw287" path="res://music/mixkit-arcade-game-complete-or-approved-mission-205.wav" id="7_qnhad"]
+[ext_resource type="PackedScene" uid="uid://j3q2c8ojgweb" path="res://scenes/spot_lights.tscn" id="8_fvlkn"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_2nep6"]
 
@@ -34,7 +35,7 @@ transform = Transform3D(1, 0, 0, 0, 0.906308, 0.422618, 0, -0.422618, 0.906308, 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.00396917, 0.929172, -0.369628, 0.96977, 0.0866099, 0.228134, 0.243989, -0.359359, -0.900739, -0.278868, 0.456484, -0.769173)
 
-[node name="Comedian" parent="." instance=ExtResource("1_41dwo")]
+[node name="Comedian" parent="." instance=ExtResource("1_iwhlc")]
 transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 5.14236, 5.41365)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
@@ -67,28 +68,32 @@ mesh = SubResource("BoxMesh_ecs3e")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_j3y3t")
 
-[node name="AudienceMember" parent="." instance=ExtResource("5_408j2")]
+[node name="AudienceMember" parent="." instance=ExtResource("2_4xbxp")]
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 4.71457, 2.20556, -4.606)
 
-[node name="AudienceMember2" parent="." instance=ExtResource("5_408j2")]
+[node name="AudienceMember2" parent="." instance=ExtResource("2_4xbxp")]
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -2.21678, 2.25455, -4.67496)
 
-[node name="AudienceMember3" parent="." instance=ExtResource("5_408j2")]
+[node name="AudienceMember3" parent="." instance=ExtResource("2_4xbxp")]
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 1.15043, 2.25455, -4.67496)
 
-[node name="Ui Screen" parent="." instance=ExtResource("3_op1ac")]
+[node name="Ui Screen" parent="." instance=ExtResource("3_gefno")]
+
+[node name="ProjectileEmitter" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.95271, 5.40698)
+script = ExtResource("4_q6siy")
 
 [node name="AudioManager" type="Node3D" parent="."]
-script = ExtResource("5_icdxn")
+script = ExtResource("5_ook24")
 
 [node name="Background" type="Node3D" parent="AudioManager"]
 
 [node name="Refractor" type="AudioStreamPlayer" parent="AudioManager/Background"]
-stream = ExtResource("6_1aeq3")
+stream = ExtResource("6_sjcxi")
 
 [node name="Sound Effect" type="Node3D" parent="AudioManager"]
 
 [node name="Arcade" type="AudioStreamPlayer" parent="AudioManager/Sound Effect"]
-stream = ExtResource("7_70iwb")
+stream = ExtResource("7_qnhad")
 
-[node name="SpotLights" parent="." instance=ExtResource("8_l6oyf")]
+[node name="SpotLights" parent="." instance=ExtResource("8_fvlkn")]

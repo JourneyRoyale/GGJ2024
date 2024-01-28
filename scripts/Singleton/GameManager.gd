@@ -81,7 +81,6 @@ func reset_game():
 	audio_manager.stop_music();
 	get_tree().paused = false
 	get_tree().change_scene_to_file("res://scenes/Start.tscn")
-	ui_screen.game_ui.visible = false
 	
 func reset_setting():
 	reset_stats()

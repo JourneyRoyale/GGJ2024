@@ -235,6 +235,7 @@ custom_minimum_size = Vector2(200, 200)
 layout_mode = 2
 size_flags_horizontal = 0
 theme = ExtResource("1_8kqac")
+action_mode = 0
 texture_normal = ExtResource("2_wab3x")
 ignore_texture_size = true
 stretch_mode = 0
@@ -520,7 +521,7 @@ theme = ExtResource("1_8kqac")
 [node name="GridContainer" type="GridContainer" parent="TitleScreen/MarginContainer/VBoxContainer/Main Menu"]
 layout_mode = 2
 theme = ExtResource("1_8kqac")
-theme_override_constants/h_separation = 100
+theme_override_constants/h_separation = 300
 theme_override_constants/v_separation = 0
 columns = 5
 
@@ -539,14 +540,6 @@ size_flags_horizontal = 6
 size_flags_vertical = 4
 theme = ExtResource("1_8kqac")
 text = "Settings"
-
-[node name="How To Play" type="Button" parent="TitleScreen/MarginContainer/VBoxContainer/Main Menu/GridContainer"]
-custom_minimum_size = Vector2(250, 70)
-layout_mode = 2
-size_flags_horizontal = 6
-size_flags_vertical = 4
-theme = ExtResource("1_8kqac")
-text = "How To Play"
 
 [node name="Credits" type="Button" parent="TitleScreen/MarginContainer/VBoxContainer/Main Menu/GridContainer"]
 custom_minimum_size = Vector2(160, 70)
@@ -723,7 +716,7 @@ Parker Cameron - 2d Artist
 Maile Sakamoto - 2d Artist
 Quill McClure - 2d Artist
 Taniyah Powell - 2d Artist
-(Santafunny) - 2d Artist
+Jalen Roberts - 2d Artist
 Zack - Musician
 "
 horizontal_alignment = 1
@@ -749,7 +742,6 @@ libraries = {
 [connection signal="pressed" from="Pause Screen/MarginContainer/MarginContainer/VBoxContainer/Pause Setting/PanelContainer/GridContainer/Back" to="." method="_on_pause_setting_back_pressed"]
 [connection signal="pressed" from="TitleScreen/MarginContainer/VBoxContainer/Main Menu/GridContainer/Start Game" to="." method="_on_start_game_pressed"]
 [connection signal="pressed" from="TitleScreen/MarginContainer/VBoxContainer/Main Menu/GridContainer/Settings" to="." method="_on_settings_pressed"]
-[connection signal="pressed" from="TitleScreen/MarginContainer/VBoxContainer/Main Menu/GridContainer/How To Play" to="." method="_on_how_to_play_pressed"]
 [connection signal="pressed" from="TitleScreen/MarginContainer/VBoxContainer/Main Menu/GridContainer/Credits" to="." method="_on_credits_pressed"]
 [connection signal="pressed" from="TitleScreen/MarginContainer/VBoxContainer/Main Menu/GridContainer/Exit" to="." method="_on_exit_pressed"]
 [connection signal="value_changed" from="TitleScreen/MarginContainer/VBoxContainer/Setting/PanelContainer/GridContainer/Master Slider" to="." method="_on_master_slider_value_changed"]

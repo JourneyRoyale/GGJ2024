@@ -47,16 +47,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-mouse_filter = 1
 script = ExtResource("1_w5wnv")
-
-[node name="Conveyor" type="Control" parent="."]
-layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-grow_vertical = 0
-script = ExtResource("4_hjwm8")
 
 [node name="GameUI" type="Control" parent="."]
 layout_mode = 1
@@ -65,7 +56,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-mouse_filter = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="GameUI"]
 layout_mode = 1
@@ -129,7 +119,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-mouse_filter = 1
 
 [node name="MarginContainer" type="MarginContainer" parent="Pause Screen"]
 layout_mode = 1
@@ -250,7 +239,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-mouse_filter = 1
 
 [node name="Curtain Container" type="Node2D" parent="TitleScreen"]
 position = Vector2(577, -2)
@@ -381,6 +369,14 @@ text = "Back"
 libraries = {
 "": SubResource("AnimationLibrary_0rtmh")
 }
+
+[node name="Conveyor" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+grow_vertical = 0
+script = ExtResource("4_hjwm8")
 
 [connection signal="pressed" from="GameUI/MarginContainer/VBoxContainer/Top UI Bar/TextureButton" to="." method="_on_ui_gear_button_pressed"]
 [connection signal="pressed" from="Pause Screen/MarginContainer/MarginContainer/VBoxContainer/Pause Menu/Resume" to="." method="_on_pause_resume_pressed"]

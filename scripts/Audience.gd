@@ -55,6 +55,7 @@ func destroy_all_hecklers():
 
 func _spawn_heckler():
 	print("SPAWING HECKLER")
+	audio_manager.play_music("Boo", "Sound Effect")
 	var new_heckler
 	if heckler_factory == null:
 		heckler_factory = pre_heckler_factory.instantiate()

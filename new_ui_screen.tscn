@@ -48,7 +48,7 @@ func _input(event):
 	if event is InputEventKey and event.pressed:
 		if event.keycode == KEY_ESCAPE:
 			print(current_scene_name)
-			if(current_scene_name == \"Game\"):
+			if(current_scene_name == \"Game\" and title_screen.visible == false):
 				pause_screen.visible = !pause_screen.visible
 				get_tree().paused = pause_screen.visible 
 				print(\"Pause Screen Visiblity: \",pause_screen.visible)

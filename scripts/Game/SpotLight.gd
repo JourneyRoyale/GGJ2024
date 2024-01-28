@@ -36,11 +36,11 @@ func _on_area_3d_body_entered(body):
 		return
 	if body.is_in_group("Player"):
 		particles.emitting = true
-		#body.on_spotlight_entered()
+
 
 func _on_area_3d_body_exited(body):
 	if !active:
 		return
 	if body.is_in_group("Player"):
 		particles.emitting = false
-		#body.on_spotlight_exited()
+

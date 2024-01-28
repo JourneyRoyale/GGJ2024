@@ -15,14 +15,13 @@ var in_spotlight = false
 
 func on_spotlight_entered():
 	in_spotlight = true
-	audio_manager.play_music('Arcade', 'Sound Effect')
+	audio_manager.play_music('PowerUp', 'Sound Effect')
 	
 func on_spotlight_exited():
 	in_spotlight = false
-	audio_manager.play_music('Arcade', 'Sound Effect')
 
 func projectile_collided():
-	audio_manager.play_music('Arcade', 'Sound Effect')
+	audio_manager.play_music('HitHurt', 'Sound Effect')
 	#TODO: Notify gamemanager
 
 func _physics_process(delta):

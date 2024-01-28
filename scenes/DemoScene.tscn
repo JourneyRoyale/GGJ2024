@@ -11,12 +11,12 @@
 [sub_resource type="PlaneMesh" id="PlaneMesh_2nep6"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_344r5"]
-albedo_color = Color(0, 0.223529, 0.223529, 1)
+albedo_color = Color(0.219608, 0.219608, 0.219608, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_bhyeo"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0hve7"]
-albedo_color = Color(0.270588, 0.141176, 0, 1)
+albedo_color = Color(0.270588, 0.270588, 0.270588, 1)
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_v7e3w"]
 points = PackedVector3Array(-0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5)
@@ -24,7 +24,7 @@ points = PackedVector3Array(-0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5
 [sub_resource type="BoxMesh" id="BoxMesh_ecs3e"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_j3y3t"]
-albedo_color = Color(0.929412, 0.0941176, 0, 1)
+albedo_color = Color(0.521569, 0.521569, 0.521569, 1)
 
 [node name="DemoScene" type="Node3D"]
 
@@ -94,5 +94,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.217, 2.255, -4.675)
 
 [node name="spawn1" type="Node3D" parent="Audience"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.715, 2.206, -4.606)
+
+[node name="Members" type="Node" parent="Audience"]
 
 [node name="Ui Screen" parent="." instance=ExtResource("8_g5q4x")]

@@ -7,11 +7,24 @@ extends CharacterBody3D
 
 @onready var sprite = get_node("Sprite")
 @onready var audio_manager = get_node("/root/AudioManager")
+@onready var invulnerable_timer : Timer = get_node("InvulnerableTimer")
+@onready var stun_timer : Timer = get_node("StunTimer")
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 var in_spotlight = false
+
+var idle = "front"
+
+var last_move = "left"
+
+var invulnerable = false
+var stunned = false
+
+var invulnerable_time = 1
+var stun_time = .25
+
 
 func on_spotlight_entered():
 	in_spotlight = true
@@ -20,11 +33,44 @@ func on_spotlight_entered():
 func on_spotlight_exited():
 	in_spotlight = false
 
+func stun_timeout():
+	stunned = false
+	invulnerable_timer.start(invulnerable_time)
+	sprite.play("idle_from_hit")
+	pass
+
+func invulnerable_timeout():
+	invulnerable = false
+	show()
+	pass
+
 func projectile_collided():
+	if invulnerable:
+		return
 	audio_manager.play_music('HitHurt', 'Sound Effect')
+	sprite.play("hit")
+	invulnerable = true
+	stunned = true
+	stun_timer.start(stun_time)
 	#TODO: Notify gamemanager
 
+var inv_alt = 0
+
+func _process(delta):
+	if invulnerable:
+		inv_alt += delta
+		if inv_alt >= 1:
+			if visible:
+				hide()
+			else:
+				show()
+			inv_alt = 0
+
 func _physics_process(delta):
+	if stunned:
+		velocity.x = 0
+		velocity.z = 0
+		return
 	# Add the gravity.
 	if not is_on_floor():
 		velocity.y -= gravity * delta
@@ -43,6 +89,17 @@ func _physics_process(delta):
 	velocity.z = clamp(velocity.z, -SPEED, SPEED)
 	velocity.x = move_toward(velocity.x, 0, INERTIA)
 	velocity.z = move_toward(velocity.z, 0, INERTIA)
+	if direction.x > 0:
+		sprite.play("walk_right")
+		last_move = "right"
+	elif direction.x < 0:
+		sprite.play("walk_left")
+		last_move = "left"
+	else:
+		if last_move == "left":
+			sprite.play("idle_from_left")
+		elif last_move == "right":
+			sprite.play("idle_from_right")
 	
 	if (velocity.x == 0 and velocity.z == 0):
 		sprite.stop()

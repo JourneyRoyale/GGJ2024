@@ -15,6 +15,12 @@ shape = SubResource("CapsuleShape3D_qdsn5")
 
 [node name="Sprite" type="AnimatedSprite3D" parent="."]
 sprite_frames = ExtResource("2_u6svr")
-animation = &"new_animation"
-autoplay = "new_animation"
-frame_progress = 0.776392
+animation = &"idle_from_hit"
+autoplay = "idle_from_right"
+
+[node name="InvulnerableTimer" type="Timer" parent="."]
+
+[node name="StunTimer" type="Timer" parent="."]
+
+[connection signal="timeout" from="InvulnerableTimer" to="." method="invulnerable_timeout"]
+[connection signal="timeout" from="StunTimer" to="." method="stun_timeout"]

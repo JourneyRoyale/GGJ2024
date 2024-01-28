@@ -36,6 +36,8 @@ func _input(event):
 		if event.keycode == KEY_ESCAPE:
 			if(current_scene_name == "DemoScene2"):
 				pause_screen.visible = !pause_screen.visible
+				get_tree().paused = pause_screen.visible 
+
 
 func _sync_volume(node):
 	node.get_node("PanelContainer/GridContainer/Master Slider").value = audio_manager.master_volume
@@ -122,3 +124,5 @@ func _on_background_slider_value_changed(value):
 #Game UI
 func _on_ui_gear_button_pressed():
 	pause_screen.visible = !pause_screen.visible
+
+

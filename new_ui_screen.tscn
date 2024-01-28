@@ -2,7 +2,7 @@
 
 [ext_resource type="Theme" uid="uid://4c5xn5lj157e" path="res://theme/default.tres" id="1_8kqac"]
 [ext_resource type="Texture2D" uid="uid://ct1bgt227dwru" path="res://sprites/ui/GearIcon.png" id="2_wab3x"]
-[ext_resource type="Texture2D" uid="uid://d1fh5xoe5jk74" path="res://sprites/ui/Tomato_Splat_sprite.png" id="3_a8h4s"]
+[ext_resource type="Texture2D" path="res://sprites/ui/Tomato_Splat_sprite.png" id="3_a8h4s"]
 [ext_resource type="Texture2D" uid="uid://rma688d35ap1" path="res://sprites/ui/White Rectangle With Gray.png" id="3_mjecg"]
 [ext_resource type="Texture2D" uid="uid://284ju54ci7o1" path="res://sprites/curtain-placeholder.png" id="4_4dqbu"]
 [ext_resource type="Script" path="res://scripts/UI/TomatoSplat.gd" id="4_8xva2"]
@@ -50,6 +50,8 @@ func _input(event):
 			print(current_scene_name)
 			if(current_scene_name == \"Game\"):
 				pause_screen.visible = !pause_screen.visible
+				get_tree().paused = pause_screen.visible 
+				print(\"Pause Screen Visiblity: \",pause_screen.visible)
 
 func _sync_volume(node):
 	node.get_node(\"PanelContainer/GridContainer/Master Slider\").value = audio_manager.master_volume
@@ -108,6 +110,8 @@ func _on_exit_pressed():
 #Pause Menu
 func _on_pause_resume_pressed():
 	pause_screen.visible = false
+	get_tree().paused = pause_screen.visible 
+	print(\"Pause Screen Visiblity: \",pause_screen.visible)
 
 func _on_pause_restart_pressed():
 	print(get_node(\"/root/Game/Game Holder\").get_child(0))
@@ -115,6 +119,8 @@ func _on_pause_restart_pressed():
 	var instance = game_scene.instantiate()
 	get_node(\"/root/Game/Game Holder\").add_child(instance)
 	pause_screen.visible = false
+	get_tree().paused = pause_screen.visible 
+	print(\"Pause Screen Visiblity: \",pause_screen.visible)
 	game_manager.reset_setting()
 	pass
 
@@ -128,9 +134,11 @@ func _on_pause_setting_back_pressed():
 	pause_setting.visible = false
 
 func _on_pause_exit_pressed():
-	game_manager.reset_setting()
+	game_manager.exit_setting()
 	audio_manager.stop_music();
+	get_tree().paused = false
 	get_tree().change_scene_to_file(\"res://scenes/Start.tscn\")
+	game_ui.visible = false
 
 #Setting Slider
 func _on_master_slider_value_changed(value):
@@ -151,6 +159,8 @@ func _on_background_slider_value_changed(value):
 #Game UI
 func _on_ui_gear_button_pressed():
 	pause_screen.visible = !pause_screen.visible
+	get_tree().paused = pause_screen.visible 
+	print(\"Pause Screen Visiblity: \",pause_screen.visible)
 "
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_vuhmk"]
@@ -201,6 +211,7 @@ _data = {
 }
 
 [node name="Ui Screen" type="Control"]
+process_mode = 3
 z_index = 1
 layout_mode = 3
 anchors_preset = 15
@@ -295,6 +306,7 @@ size_flags_vertical = 8
 theme = ExtResource("1_8kqac")
 
 [node name="TomatoSplat" type="TextureRect" parent="GameUI"]
+process_mode = 1
 modulate = Color(1, 1, 1, 0)
 layout_mode = 0
 offset_left = 122.0

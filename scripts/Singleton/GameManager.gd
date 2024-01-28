@@ -40,13 +40,23 @@ func _process(delta):
 			#reset_setting()
 			#get_tree().paused = false
 	
-func reset_setting():
-	audio_manager.stop_music();
+func exit_setting():
+	reset_stats()
 	isPlaying = false
+	audio_manager.stop_music();
+
+	
+func reset_setting():
+	reset_stats()
+	audio_manager.stop_music()
+	audio_manager.play_music('Ragtime', 'Background')
+	
+func reset_stats():
 	set_time = 600
 	score = 50.0
 	timer = 0;
 	combo = 0;
+	
 	
 func register_match():
 	score += match_amount

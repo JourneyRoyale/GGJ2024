@@ -26,10 +26,11 @@ points = PackedVector3Array(-0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_j3y3t"]
 albedo_color = Color(0.929412, 0.0941176, 0, 1)
 
-[node name="DemoScene" type="Node3D"]
+[node name="DemoScene2" type="Node3D"]
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.906308, 0.422618, 0, -0.422618, 0.906308, 0, 7.063, 10)
+current = true
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.00396917, 0.929172, -0.369628, 0.96977, 0.0866099, 0.228134, 0.243989, -0.359359, -0.900739, -0.278868, 0.456484, -0.769173)

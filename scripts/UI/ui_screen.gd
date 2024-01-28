@@ -7,6 +7,7 @@ extends Control
 @onready var title_screen = get_node("TitleScreen")
 @onready var main_menu = get_node("TitleScreen/MarginContainer/VBoxContainer/Main Menu")
 @onready var setting = get_node("TitleScreen/MarginContainer/VBoxContainer/Setting")
+@onready var credits = get_node("TitleScreen/MarginContainer/VBoxContainer/Credits")
 
 #Pause Screen
 @onready var pause_screen = get_node("Pause Screen")
@@ -37,19 +38,20 @@ func _process(delta):
 		_sync_time()
 		
 func _add_joke():
-	await get_tree().create_timer(1).timeout
-	var instance = packed_joke_button.instantiate()
-	if(joke_bar):
-		if (joke_bar.get_child_count() == game_manager.max_emoji):
-			print(joke_bar.get_child_count())
-			game_manager.delete_emoji(game_manager.emoji_list[0])
-		
-		joke_bar.add_child(instance)
-		var child_ref = joke_bar.get_child(joke_bar.get_child_count() - 1)
-		print('test')
-
-		game_manager.create_emoji(child_ref)
-		_add_joke()
+	#await get_tree().create_timer(1).timeout
+	#var instance = packed_joke_button.instantiate()
+	#if(joke_bar):
+		#if (joke_bar.get_child_count() == game_manager.max_emoji):
+			#print(joke_bar.get_child_count())
+			#game_manager.delete_emoji(game_manager.emoji_list[0])
+		#
+		#joke_bar.add_child(instance)
+		#var child_ref = joke_bar.get_child(joke_bar.get_child_count() - 1)
+		#print('test')
+#
+		#game_manager.create_emoji(child_ref)
+		#_add_joke()
+	pass
 
 func _input(event):
 	if event is InputEventKey and event.pressed:
@@ -58,9 +60,9 @@ func _input(event):
 				pause_screen.visible = !pause_screen.visible
 
 func _sync_volume(node):
-	node.get_node("GridContainer/Master Slider").value = audio_manager.master_volume
-	node.get_node("GridContainer/Background Slider").value = audio_manager.background_volume
-	node.get_node("GridContainer/Sound Effect Slider").value = audio_manager.sound_effect_volume 
+	node.get_node("PanelContainer/GridContainer/Master Slider").value = audio_manager.master_volume
+	node.get_node("PanelContainer/GridContainer/Background Slider").value = audio_manager.background_volume
+	node.get_node("PanelContainer/GridContainer/Sound Effect Slider").value = audio_manager.sound_effect_volume 
 
 func _sync_laughter():
 	laughter_meter.value = round_to_dec(game_manager.laughter, 2)
@@ -85,6 +87,10 @@ func _on_start_game_pressed():
 
 func _on_how_to_play_pressed():
 	pass # Replace with function body.
+	
+func _on_credits_pressed():
+	credits.visible = true
+	main_menu.visible = false
 
 func _on_settings_pressed():
 	main_menu.visible = false
@@ -93,6 +99,7 @@ func _on_settings_pressed():
 
 func _on_back_pressed():
 	main_menu.visible = true
+	credits.visible = false
 	setting.visible = false
 
 func _on_exit_pressed():

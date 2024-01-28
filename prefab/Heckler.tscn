@@ -164,7 +164,7 @@ animations = [{
 }]
 
 [node name="Heckler" type="Area3D"]
-transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0.5, 0.152, 0.263)
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0.5, 0.152, 0.263)
 script = ExtResource("1_qatk1")
 
 [node name="HecklerCollider2" type="CollisionShape3D" parent="."]

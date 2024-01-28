@@ -31,6 +31,7 @@ var dead = false
 
 func _ready():
 	if !dead:
+		animation_player.play("default")
 		audio_manager.play_music('Ragtime', 'Background')
 	
 func thats_all_folks():
@@ -38,6 +39,9 @@ func thats_all_folks():
 		dead = true
 		audio_manager.stop_music()
 		audio_manager.play_music('Bwack', 'Sound Effect')
+		invulnerable = false
+		animation_player.stop()
+		animation_player.play("yoink")
 		sprite.play("yoink")
 
 func on_spotlight_entered():
@@ -53,13 +57,12 @@ func projectile_collided():
 	if !dead:
 		if invulnerable:
 			return
-	
+      
 	if ui_screen:
 		ui_screen.createSplat()
 	else:
 		print("No UI Screen Node Found")
-	
-
+    
 	game_manager.register_hit()
 	audio_manager.play_music('HitHurt', 'Sound Effect')
 	sprite.play("hit")
@@ -69,6 +72,7 @@ func projectile_collided():
 	stun_timer.start()
 	invulnerable_timer.start()
 	#TODO: Notify gamemanager
+
 
 var inv_alt = 0
 
@@ -116,13 +120,19 @@ func _physics_process(delta):
 
 func _on_stun_timer_timeout():
 	if !dead:
+		animation_player.play("Invuln")
 		stunned = false
+		stun_timer.stop()
 		invulnerable_timer.start(invulnerable_time)
+		print("starting invulnerable_time")
 		sprite.play("idle_from_hit")
 
 func _on_invulnerable_timer_timeout():
 	if !dead:
+		print("invuln off")
 		invulnerable = false
+		invulnerable_timer.stop()
 		animation_player.stop()
+		animation_player.play("default")
 		get_node("Sprite").visible = true
 		show()

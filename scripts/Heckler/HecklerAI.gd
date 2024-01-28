@@ -18,14 +18,13 @@ var current_direction = Vector3(1.0, 0, 0).normalized()  # Starts moving right
 var audience_reference
 
 var packed_projectile = load("res://prefab/Projectile.tscn")
+@onready var audio_manager = get_node("/root/AudioManager")
 
 func _ready():
-
 	randomize()
 	start_moving()
 
 func _process(delta):
-	#print("X position: ", position.x)
 	if is_moving:
 		position += current_direction * MOVE_SPEED * delta * 5
 		move_timer += delta

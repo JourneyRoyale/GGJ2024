@@ -1,8 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://b0c1svfnwvga0"]
+[gd_scene load_steps=7 format=3 uid="uid://b0c1svfnwvga0"]
 
 [ext_resource type="Script" path="res://scripts/Singleton/AudioManager.gd" id="1_iiesv"]
 [ext_resource type="AudioStream" uid="uid://inflyfrfxqu7" path="res://music/refract.mp3" id="2_opr78"]
 [ext_resource type="AudioStream" uid="uid://b77xbhcraw287" path="res://music/mixkit-arcade-game-complete-or-approved-mission-205.wav" id="3_s30sk"]
+[ext_resource type="AudioStream" uid="uid://b76e5nc2kfdqv" path="res://music/pickupCoin.wav" id="4_273d0"]
+[ext_resource type="AudioStream" uid="uid://chy1gkk1avfki" path="res://music/hitHurt.wav" id="5_benwr"]
+[ext_resource type="AudioStream" uid="uid://c3y3g40u8icik" path="res://music/powerUp.wav" id="6_7aqlw"]
 
 [node name="AudioManager" type="Node3D"]
 script = ExtResource("1_iiesv")
@@ -16,4 +19,16 @@ stream = ExtResource("2_opr78")
 
 [node name="Arcade" type="AudioStreamPlayer" parent="Sound Effect"]
 stream = ExtResource("3_s30sk")
+bus = &"Sound Effect"
+
+[node name="PickupCoin" type="AudioStreamPlayer" parent="Sound Effect"]
+stream = ExtResource("4_273d0")
+bus = &"Sound Effect"
+
+[node name="HitHurt" type="AudioStreamPlayer" parent="Sound Effect"]
+stream = ExtResource("5_benwr")
+bus = &"Sound Effect"
+
+[node name="PowerUp" type="AudioStreamPlayer" parent="Sound Effect"]
+stream = ExtResource("6_7aqlw")
 bus = &"Sound Effect"

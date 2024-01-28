@@ -3,6 +3,7 @@ extends Sprite2D
 @export var speed = 1.0
 @onready var emoji = get_node("Emoji");
 @onready var animation = get_node("AnimationPlayer")
+@onready var animation2 = get_node("AnimationPlayer2")
 var rng = RandomNumberGenerator.new()
 var emoji_num;
 var isAnimationFinished = false;
@@ -16,15 +17,19 @@ func _ready():
 func _process(delta):
 	if isAnimationFinished:
 		position.x += speed
-		if position.x > 1920:
-			queue_free()
+		if position.x == 1180:
+			animation2.play("Egg Death")
+			get_node("Emoji").visible = false
+			get_node("Area2D").visible = false
 
 func _on_area_2d_input_event(viewport, event, shape_idx):
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
 		get_tree().call_group("AudienceManager", "check_for_match", emoji_num)
-		print("test")
-		print(get_tree().get_current_scene().get_name())
 		queue_free()
 
 func _on_animation_player_animation_finished(anim_name):
 	isAnimationFinished = true;
+
+
+func _on_animation_player_2_animation_finished(anim_name):
+	queue_free()

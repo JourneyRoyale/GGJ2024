@@ -115,7 +115,6 @@ func _physics_process(delta):
 		sprite.stop()
 	else:
 		sprite.play('new_animation');
-
 	move_and_slide()
 
 func _on_stun_timer_timeout():

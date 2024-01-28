@@ -249,7 +249,7 @@ size_flags_horizontal = 3
 theme = ExtResource("1_8kqac")
 
 [node name="Laughter Meter" type="ProgressBar" parent="GameUI/MarginContainer/VBoxContainer/Top UI Bar"]
-custom_minimum_size = Vector2(500, 11)
+custom_minimum_size = Vector2(800, 60)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4

@@ -82,61 +82,61 @@ animations = [{
 }]
 
 [node name="AudienceMember" type="AnimatedSprite3D" groups=["Audience"]]
-transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0.0423704, 0.161299, 0.228875)
+transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, -0.137863, -0.567288, 0.135872)
 sprite_frames = SubResource("SpriteFrames_00nde")
 autoplay = "default"
 script = ExtResource("3_pmm4d")
 
 [node name="Bubble" type="AnimatedSprite3D" parent="."]
-transform = Transform3D(-15, 0, -2.26494e-06, 0, 15, 0, 2.26494e-06, 0, -15, -5.79378, 9.92451, -1)
+transform = Transform3D(-6.25, 0, -9.43724e-07, 0, 6.25, 0, 9.43724e-07, 0, -6.25, -3.49108, 7.15555, 0.199715)
 sprite_frames = SubResource("SpriteFrames_tgvj7")
 animation = &"blank"
 
 [node name="Emoji3D" type="Node3D" parent="."]
-transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 8.58216, 0)
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 8.63121, 1.19971)
 script = ExtResource("7_tvgdt")
 emojis = [NodePath("Sprite2D"), NodePath("Sprite2D2"), NodePath("Sprite2D3"), NodePath("Sprite2D4"), NodePath("Sprite2D5"), NodePath("Sprite2D6"), NodePath("Sprite2D7"), NodePath("Sprite2D8")]
 
 [node name="Sprite2D" type="Sprite3D" parent="Emoji3D"]
-transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, -14.8084, 6.79005, 0)
+transform = Transform3D(1.25, 0, 0, 0, 1.25, 0, 0, 0, 1.25, -17.3542, -4.7688, -2.24888)
 visible = false
 texture = ExtResource("8_h1sl1")
 
 [node name="Sprite2D2" type="Sprite3D" parent="Emoji3D"]
-transform = Transform3D(1.25, 0, 0, 0, 1.25, 0, 0, 0, 1.25, -14.8084, 8.45737, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.3542, -3.10149, -2.24888)
 visible = false
 texture = ExtResource("9_yu3gg")
 
 [node name="Sprite2D3" type="Sprite3D" parent="Emoji3D"]
-transform = Transform3D(1.75, 0, 0, 0, 1.75, 0, 0, 0, 1.75, -14.8084, 7.85686, 0)
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, -17.3542, -3.70202, -2.24888)
 visible = false
 texture = ExtResource("10_5ihaa")
 
 [node name="Sprite2D4" type="Sprite3D" parent="Emoji3D"]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -14.8084, 7.20687, 0)
+transform = Transform3D(1.75, 0, 0, 0, 1.75, 0, 0, 0, 1.75, -17.3542, -4.35198, -2.24888)
 visible = false
 texture = ExtResource("10_3sxoi")
 
 [node name="Sprite2D5" type="Sprite3D" parent="Emoji3D"]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -14.8084, 8.23439, 0)
+transform = Transform3D(1.75, 0, 0, 0, 1.75, 0, 0, 0, 1.75, -17.3542, -3.32446, -2.24888)
 visible = false
 texture = ExtResource("11_u223w")
 
 [node name="Sprite2D6" type="Sprite3D" parent="Emoji3D"]
-transform = Transform3D(1.75, 0, 0, 0, 1.75, 0, 0, 0, 1.75, -14.8084, 6.9858, 0)
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, -17.3542, -4.57306, -2.24888)
 visible = false
 texture = ExtResource("12_lscrp")
 
 [node name="Sprite2D7" type="Sprite3D" parent="Emoji3D"]
-transform = Transform3D(1.75, 0, 0, 0, 1.75, 0, 0, 0, 1.75, -14.8084, 7.96533, 0)
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, -17.3542, -3.59352, -2.24888)
 visible = false
 texture = ExtResource("13_s8jem")
 
 [node name="Sprite2D8" type="Sprite3D" parent="Emoji3D"]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -14.8084, 7.85686, 0)
+transform = Transform3D(1.75, 0, 0, 0, 1.75, 0, 0, 0, 1.75, -17.3542, -3.70202, -2.24888)
 visible = false
 texture = ExtResource("14_qholi")
 
 [node name="Chair" type="MeshInstance3D" parent="."]
-transform = Transform3D(-1.31134e-07, -1.04636e-15, -3, 1.04636e-15, 3, -1.04636e-15, 3, -1.04636e-15, -1.31134e-07, 0.247781, -10.5337, -2.27177)
+transform = Transform3D(-1.09278e-07, -8.71967e-16, -2.5, 8.71967e-16, 2.5, -8.71967e-16, 2.5, -8.71967e-16, -1.09278e-07, 0.247781, -10.5337, -2.27177)
 mesh = ExtResource("16_sogk5")

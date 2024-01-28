@@ -53,7 +53,7 @@ transform = Transform3D(0.669101, 0, -1.94217e-14, 0, 1, 0, 7.10543e-15, 0, 1, 3
 mesh = ExtResource("2_tyjfh")
 
 [node name="FloorMesh" type="MeshInstance3D" parent="Environment"]
-transform = Transform3D(400, 0, -1.27146e-06, 0, 20, 0, 2.54292e-05, 0, 20, 0, 0, 0)
+transform = Transform3D(400, 0, -1.27146e-06, 0, 20, 0, 2.54292e-05, 0, 20, 2.08165e-12, -5, 2.08165e-12)
 mesh = SubResource("PlaneMesh_2nep6")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_344r5")
@@ -109,55 +109,43 @@ stream = ExtResource("5_t3uf5")
 
 [node name="Audience" parent="." node_paths=PackedStringArray("heck") instance=ExtResource("7_woc5g")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.15, 2.255, -4.675)
-audience_positions = [NodePath("spawn1"), NodePath("spawn2"), NodePath("spawn3"), NodePath("spawn4"), NodePath("spawn5"), NodePath("spawn6"), NodePath("spawn7"), NodePath("spawn8"), NodePath("spawn9"), NodePath("spawn10"), NodePath("spawn11"), NodePath("spawn12"), NodePath("spawn13"), NodePath("spawn14")]
+audience_positions = [NodePath("spawn1"), NodePath("spawn2"), NodePath("spawn3"), NodePath("spawn4"), NodePath("spawn5"), NodePath("spawn6"), NodePath("spawn7"), NodePath("spawn8"), NodePath("spawn9"), NodePath("spawn10")]
 heck = NodePath("HECK")
 question_popup_rate = 0.25
 question_popup_lifespan = 4
 
 [node name="spawn1" type="Node3D" parent="Audience"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 1, -6.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 2.08165e-12, -10)
 
 [node name="spawn2" type="Node3D" parent="Audience"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 1, -6.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 2.08165e-12, -10)
 
 [node name="spawn3" type="Node3D" parent="Audience"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 1, -6.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, -10)
 
 [node name="spawn4" type="Node3D" parent="Audience"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 1, -6.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 2.08165e-12, -10)
 
 [node name="spawn5" type="Node3D" parent="Audience"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 1, -6.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 2.08165e-12, -10)
 
 [node name="spawn6" type="Node3D" parent="Audience"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.5, 1, -6.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 4, -15)
 
 [node name="spawn7" type="Node3D" parent="Audience"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 1, -6.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 4, -15)
 
 [node name="spawn8" type="Node3D" parent="Audience"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 2, -13)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, -15)
 
 [node name="spawn9" type="Node3D" parent="Audience"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 2, -13)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 4, -15)
 
 [node name="spawn10" type="Node3D" parent="Audience"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -13)
-
-[node name="spawn11" type="Node3D" parent="Audience"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 2, -13)
-
-[node name="spawn12" type="Node3D" parent="Audience"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 2, -13)
-
-[node name="spawn13" type="Node3D" parent="Audience"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.5, 2, -13)
-
-[node name="spawn14" type="Node3D" parent="Audience"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 2, -13)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 4, -15)
 
 [node name="HECK" type="Node3D" parent="Audience"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.15, 0.97, -6.535)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.15, -1, -1)
 
 [node name="Members" type="Node" parent="Audience"]
 

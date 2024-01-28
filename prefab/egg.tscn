@@ -21,15 +21,6 @@ scale = Vector2(0.1, 0.1)
 texture = ExtResource("1_fw7gv")
 script = ExtResource("2_vyl8j")
 
-[node name="Label" type="Label" parent="."]
-offset_left = -340.0
-offset_top = -260.0
-offset_right = 3109.0
-offset_bottom = 422.0
-theme_override_font_sizes/font_size = 500
-text = "
-"
-
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]

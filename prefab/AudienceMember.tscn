@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://d2ubdlbhl5wd5"]
+[gd_scene load_steps=20 format=3 uid="uid://d2ubdlbhl5wd5"]
 
 [ext_resource type="Texture2D" uid="uid://nei63u2nrds8" path="res://sprites/audience/audience.png" id="1_ad5hx"]
 [ext_resource type="Texture2D" uid="uid://b65jxkkklfumw" path="res://sprites/DF-Bases (1).png" id="2_7lufv"]
@@ -6,6 +6,14 @@
 [ext_resource type="Texture2D" uid="uid://cqotupq7p6lxa" path="res://sprites/q4soglmekmhdh1lrgisaiipi6t.png" id="4_uu4t2"]
 [ext_resource type="Texture2D" uid="uid://bg2vrkw1k74sx" path="res://sprites/blank.png" id="5_5ib5s"]
 [ext_resource type="Texture2D" uid="uid://d0ryqaas3hduy" path="res://sprites/kisspng-cvs-pharmacy-child-infant-mouth-disease-thought-bubble-5a746a3ec14798.4822727115175788147917.png" id="6_mfg7d"]
+[ext_resource type="Script" path="res://scripts/Emoji3D.gd" id="7_tvgdt"]
+[ext_resource type="Texture2D" uid="uid://ce583o7s2tbuj" path="res://sprites/jokes/ChickenDrumStickAsset-01.png" id="8_h1sl1"]
+[ext_resource type="Texture2D" uid="uid://dw2m80rhg0f7d" path="res://sprites/jokes/ChickenLogoAsset-01.png" id="9_yu3gg"]
+[ext_resource type="Texture2D" uid="uid://cmtnh448v0n0w" path="res://sprites/jokes/KnifeAsset-01.png" id="10_3sxoi"]
+[ext_resource type="Texture2D" uid="uid://dwugcfv3jrt3f" path="res://sprites/jokes/HeartAsset-01.png" id="11_u223w"]
+[ext_resource type="Texture2D" uid="uid://wqqosgek8bjo" path="res://sprites/jokes/CigarAsset-01.png" id="12_lscrp"]
+[ext_resource type="Texture2D" uid="uid://bx4txy78e8ma3" path="res://sprites/jokes/MoneyBagAsset-01.png" id="13_s8jem"]
+[ext_resource type="Texture2D" uid="uid://bmechf7hfuy7s" path="res://sprites/jokes/SkullAsset-01.png" id="14_qholi"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_yo082"]
 atlas = ExtResource("2_7lufv")
@@ -81,8 +89,41 @@ script = ExtResource("3_pmm4d")
 transform = Transform3D(-10, 0, -1.50996e-06, 0, 10, 0, 1.50996e-06, 0, -10, 2.08165e-12, 7.566, -1)
 sprite_frames = SubResource("SpriteFrames_tgvj7")
 animation = &"blank"
+frame_progress = 0.955094
 
-[node name="Label3D" type="Label3D" parent="."]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 7.56557, 0)
-text = "😀"
-font_size = 600
+[node name="Emoji3D" type="Node3D" parent="."]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 8.58216, 0)
+script = ExtResource("7_tvgdt")
+emojis = [NodePath("Sprite2D"), NodePath("Sprite2D2"), NodePath("Sprite2D3"), NodePath("Sprite2D4"), NodePath("Sprite2D5"), NodePath("Sprite2D6"), NodePath("Sprite2D7"), NodePath("Sprite2D8")]
+
+[node name="Sprite2D" type="Sprite3D" parent="Emoji3D"]
+visible = false
+texture = ExtResource("8_h1sl1")
+
+[node name="Sprite2D2" type="Sprite3D" parent="Emoji3D"]
+visible = false
+texture = ExtResource("9_yu3gg")
+
+[node name="Sprite2D3" type="Sprite3D" parent="Emoji3D"]
+visible = false
+texture = ExtResource("8_h1sl1")
+
+[node name="Sprite2D4" type="Sprite3D" parent="Emoji3D"]
+visible = false
+texture = ExtResource("10_3sxoi")
+
+[node name="Sprite2D5" type="Sprite3D" parent="Emoji3D"]
+visible = false
+texture = ExtResource("11_u223w")
+
+[node name="Sprite2D6" type="Sprite3D" parent="Emoji3D"]
+visible = false
+texture = ExtResource("12_lscrp")
+
+[node name="Sprite2D7" type="Sprite3D" parent="Emoji3D"]
+visible = false
+texture = ExtResource("13_s8jem")
+
+[node name="Sprite2D8" type="Sprite3D" parent="Emoji3D"]
+visible = false
+texture = ExtResource("14_qholi")

@@ -45,23 +45,23 @@ func _update():
 	var varied_timeout = question_popup_rate + rng.randf_range(question_popup_rate_deviance_min, question_popup_rate_deviance_max)
 	await get_tree().create_timer(varied_timeout).timeout
 	_update()
-
+	
 func _receive_joke(joke):
 	var heckler = false
 	var successes = 0
 	for member in audience_members:
 		var result = member.check_for_match(joke)
-		if joke["heckler"]:
+		if result["heckler"]:
 			heckler = true
 			break
 		else:
-			if joke["success"]:
+			if result["success"]:
 				successes += 1
 			else:
-				member.clear_thoughts()
+				member.clear_thought()
 	if heckler:
 		for member in audience_members:
-			member.clear_thoughts()
+			member.clear_thought()
 		successes = 0
 		_spawn_heckler()
 	elif successes > 0:

@@ -62,7 +62,7 @@ func specific_thought(thought, time):
 
 func show_specific_thought_helper(thought):
 	active = true
-	label.text = emojis.find(thought)
+	label.text = thought
 	bubble.show()
 	
 func specific_good_thought(thought, time):
@@ -106,11 +106,12 @@ func clear_thought():
 	
 	
 func check_for_match(emoji):
-	var success = emoji == label.text && bubble_alignment != BubbleAlignment.BAD && bubble_alignment != BubbleAlignment.BLANK
+	var match = active && emoji == label.text
+	var success = match && bubble_alignment == BubbleAlignment.GOOD
 	if success:
 		specific_good_thought("🤩", cooldown)
 	return { 
-		"success" : success && active,
-		"heckler" : success && bubble_alignment == BubbleAlignment.BAD && active
+		"success" : success,
+		"heckler" : match && bubble_alignment == BubbleAlignment.BAD
 	}
 		

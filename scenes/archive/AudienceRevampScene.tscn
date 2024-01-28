@@ -1,9 +1,9 @@
 [gd_scene load_steps=12 format=3 uid="uid://c36b3q0s4vu1m"]
 
-[ext_resource type="PackedScene" path="res://scenes/comedian.tscn" id="1_no3yk"]
-[ext_resource type="PackedScene" uid="uid://b7efb0ou050m6" path="res://audience.tscn" id="2_unsd2"]
-[ext_resource type="PackedScene" uid="uid://bskgpd4m757s" path="res://prefab/ui_screen.tscn" id="3_gikv1"]
-[ext_resource type="PackedScene" uid="uid://j3q2c8ojgweb" path="res://scenes/spot_lights.tscn" id="8_ejr53"]
+[ext_resource type="PackedScene" uid="uid://dp6j4bqf2uuos" path="res://prefab/comedian.tscn" id="1_kxxqg"]
+[ext_resource type="PackedScene" uid="uid://b7efb0ou050m6" path="res://audience.tscn" id="2_kidm2"]
+[ext_resource type="PackedScene" uid="uid://bskgpd4m757s" path="res://prefab/ui_screen.tscn" id="3_bvpcw"]
+[ext_resource type="PackedScene" uid="uid://j3q2c8ojgweb" path="res://prefab/spot_lights.tscn" id="4_dh6re"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_2nep6"]
 
@@ -31,7 +31,7 @@ transform = Transform3D(1, 0, 0, 0, 0.906308, 0.422618, 0, -0.422618, 0.906308, 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.00396917, 0.929172, -0.369628, 0.96977, 0.0866099, 0.228134, 0.243989, -0.359359, -0.900739, -0.278868, 0.456484, -0.769173)
 
-[node name="Comedian" parent="." instance=ExtResource("1_no3yk")]
+[node name="Comedian" parent="." instance=ExtResource("1_kxxqg")]
 transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 5.14236, 5.41365)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
@@ -64,10 +64,10 @@ mesh = SubResource("BoxMesh_ecs3e")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_j3y3t")
 
-[node name="Audience" parent="." instance=ExtResource("2_unsd2")]
+[node name="Audience" parent="." instance=ExtResource("2_kidm2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.15, 2.255, -4.675)
 audience_positions = [Vector3(4.715, 2.206, -4.606), Vector3(-2.217, 2.255, -4.675), Vector3(1.15, 2.255, -4.675)]
 
-[node name="Ui Screen" parent="." instance=ExtResource("3_gikv1")]
+[node name="Ui Screen" parent="." instance=ExtResource("3_bvpcw")]
 
-[node name="SpotLights" parent="." instance=ExtResource("8_ejr53")]
+[node name="SpotLights" parent="." instance=ExtResource("4_dh6re")]

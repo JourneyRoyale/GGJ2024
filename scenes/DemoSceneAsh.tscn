@@ -1,13 +1,13 @@
 [gd_scene load_steps=16 format=3 uid="uid://mpg704y53gq0"]
 
-[ext_resource type="PackedScene" uid="uid://dp6j4bqf2uuos" path="res://scenes/comedian.tscn" id="1_41dwo"]
+[ext_resource type="PackedScene" uid="uid://dp6j4bqf2uuos" path="res://prefab/comedian.tscn" id="1_41dwo"]
 [ext_resource type="PackedScene" uid="uid://bskgpd4m757s" path="res://prefab/ui_screen.tscn" id="3_c1404"]
-[ext_resource type="PackedScene" uid="uid://dfddod52n51d5" path="res://scenes/AudienceMember.tscn" id="5_408j2"]
+[ext_resource type="PackedScene" uid="uid://dfddod52n51d5" path="res://prefab/AudienceMember.tscn" id="5_408j2"]
 [ext_resource type="Script" path="res://scripts/Singleton/AudioManager.gd" id="7_511vy"]
 [ext_resource type="AudioStream" uid="uid://inflyfrfxqu7" path="res://music/refract.mp3" id="8_ph3rs"]
-[ext_resource type="PackedScene" uid="uid://bk2hnitd6h4eh" path="res://scenes/Heckler.tscn" id="9_o0x78"]
+[ext_resource type="PackedScene" uid="uid://bqdtty1ekxhh" path="res://prefab/Heckler.tscn" id="9_o0x78"]
 [ext_resource type="AudioStream" uid="uid://b77xbhcraw287" path="res://music/mixkit-arcade-game-complete-or-approved-mission-205.wav" id="9_rlvma"]
-[ext_resource type="PackedScene" uid="uid://j3q2c8ojgweb" path="res://scenes/spot_lights.tscn" id="10_i6wtp"]
+[ext_resource type="PackedScene" uid="uid://j3q2c8ojgweb" path="res://prefab/spot_lights.tscn" id="10_i6wtp"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_2nep6"]
 
@@ -31,6 +31,7 @@ albedo_color = Color(0.929412, 0.0941176, 0, 1)
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.906308, 0.422618, 0, -0.422618, 0.906308, 0, 7.063, 10)
+current = true
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.00396917, 0.929172, -0.369628, 0.96977, 0.0866099, 0.228134, 0.243989, -0.359359, -0.900739, -0.278868, 0.456484, -0.769173)

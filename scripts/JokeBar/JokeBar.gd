@@ -1,6 +1,6 @@
 extends HBoxContainer
 
-var packed_joke_button = load("res://scenes/JokeButton.tscn")
+var packed_joke_button = load("res://prefab/JokeButton.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

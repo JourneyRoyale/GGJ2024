@@ -1,12 +1,12 @@
 [gd_scene load_steps=15 format=3 uid="uid://cjdeehnsaxqwk"]
 
-[ext_resource type="PackedScene" uid="uid://dp6j4bqf2uuos" path="res://scenes/comedian.tscn" id="1_41dwo"]
+[ext_resource type="PackedScene" uid="uid://dp6j4bqf2uuos" path="res://prefab/comedian.tscn" id="1_41dwo"]
 [ext_resource type="PackedScene" uid="uid://bskgpd4m757s" path="res://prefab/ui_screen.tscn" id="3_op1ac"]
-[ext_resource type="PackedScene" uid="uid://dfddod52n51d5" path="res://scenes/AudienceMember.tscn" id="5_408j2"]
 [ext_resource type="Script" path="res://scripts/Singleton/AudioManager.gd" id="5_icdxn"]
 [ext_resource type="AudioStream" uid="uid://inflyfrfxqu7" path="res://music/refract.mp3" id="6_1aeq3"]
 [ext_resource type="AudioStream" uid="uid://b77xbhcraw287" path="res://music/mixkit-arcade-game-complete-or-approved-mission-205.wav" id="7_70iwb"]
-[ext_resource type="PackedScene" uid="uid://j3q2c8ojgweb" path="res://scenes/spot_lights.tscn" id="8_l6oyf"]
+[ext_resource type="PackedScene" uid="uid://b7efb0ou050m6" path="res://audience.tscn" id="7_sgmdl"]
+[ext_resource type="PackedScene" uid="uid://j3q2c8ojgweb" path="res://prefab/spot_lights.tscn" id="8_l6oyf"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_2nep6"]
 
@@ -67,15 +67,6 @@ mesh = SubResource("BoxMesh_ecs3e")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_j3y3t")
 
-[node name="AudienceMember" parent="." instance=ExtResource("5_408j2")]
-transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 4.71457, 2.20556, -4.606)
-
-[node name="AudienceMember2" parent="." instance=ExtResource("5_408j2")]
-transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -2.21678, 2.25455, -4.67496)
-
-[node name="AudienceMember3" parent="." instance=ExtResource("5_408j2")]
-transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 1.15043, 2.25455, -4.67496)
-
 [node name="Ui Screen" parent="." instance=ExtResource("3_op1ac")]
 
 [node name="AudioManager" type="Node3D" parent="."]
@@ -92,3 +83,16 @@ stream = ExtResource("6_1aeq3")
 stream = ExtResource("7_70iwb")
 
 [node name="SpotLights" parent="." instance=ExtResource("8_l6oyf")]
+
+[node name="Audience" parent="." instance=ExtResource("7_sgmdl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.15, 2.255, -4.675)
+audience_positions = [NodePath("spawn1"), NodePath("spawn2"), NodePath("spawn3")]
+
+[node name="spawn3" type="Node3D" parent="Audience"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.15, 2.255, -4.675)
+
+[node name="spawn2" type="Node3D" parent="Audience"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.217, 2.255, -4.675)
+
+[node name="spawn1" type="Node3D" parent="Audience"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.715, 2.206, -4.606)

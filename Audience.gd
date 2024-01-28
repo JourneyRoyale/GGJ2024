@@ -1,6 +1,6 @@
 extends Node3D
 
-@onready var pre_audience_factory = preload("res://scenes/AudienceMember.tscn")
+@onready var pre_audience_factory = preload("res://prefab/AudienceMember.tscn")
 var audience_factory
 
 @export var audience_positions = []
@@ -15,12 +15,12 @@ var rng : RandomNumberGenerator = RandomNumberGenerator.new()
 @export var question_popup_lifespan = 2
 
 func _ready():
-	for position in audience_positions:
+	for node in audience_positions:
 		print ("spawning audience member...")
-		_spawn(position)
+		_spawn(get_node(node))
 	_update()
 
-func _spawn(position):
+func _spawn(node):
 	var new_audience
 	if audience_factory == null:
 		audience_factory = pre_audience_factory.instantiate()
@@ -29,7 +29,7 @@ func _spawn(position):
 	else:
 		new_audience = audience_factory.duplicate()
 		add_child(new_audience)
-	new_audience.position = position
+	new_audience.position = node.position
 	audience_members.append(new_audience)
 
 func _spawn_heckler():

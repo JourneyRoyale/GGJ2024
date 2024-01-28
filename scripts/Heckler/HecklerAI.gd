@@ -15,7 +15,7 @@ var move_timer = 0.0
 var is_moving = true
 var current_direction = Vector3(1.0, 0, 0).normalized()  # Starts moving right
 
-var packed_projectile = load("res://scenes/Projectile.tscn")
+var packed_projectile = load("res://prefab/Projectile.tscn")
 
 func _ready():
 

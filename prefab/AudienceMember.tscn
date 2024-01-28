@@ -1,29 +1,29 @@
 [gd_scene load_steps=12 format=3 uid="uid://dfddod52n51d5"]
 
-[ext_resource type="Texture2D" uid="uid://b65jxkkklfumw" path="res://sprites/DF-Bases (1).png" id="1_8axol"]
-[ext_resource type="Texture2D" uid="uid://de2unrta476vq" path="res://sprites/audience-placeholder.png" id="1_a6k8n"]
-[ext_resource type="Script" path="res://scripts/Game/AudienceMember.gd" id="2_h3nul"]
-[ext_resource type="Texture2D" uid="uid://cqotupq7p6lxa" path="res://sprites/q4soglmekmhdh1lrgisaiipi6t.png" id="3_gomj7"]
-[ext_resource type="Texture2D" uid="uid://d0ryqaas3hduy" path="res://sprites/kisspng-cvs-pharmacy-child-infant-mouth-disease-thought-bubble-5a746a3ec14798.4822727115175788147917.png" id="4_5dafe"]
-[ext_resource type="Texture2D" uid="uid://bg2vrkw1k74sx" path="res://sprites/blank.png" id="4_gxp4p"]
+[ext_resource type="Texture2D" uid="uid://nei63u2nrds8" path="res://sprites/audience/audience.png" id="1_ad5hx"]
+[ext_resource type="Texture2D" uid="uid://b65jxkkklfumw" path="res://sprites/DF-Bases (1).png" id="2_7lufv"]
+[ext_resource type="Script" path="res://scripts/Game/AudienceMember.gd" id="3_pmm4d"]
+[ext_resource type="Texture2D" uid="uid://cqotupq7p6lxa" path="res://sprites/q4soglmekmhdh1lrgisaiipi6t.png" id="4_uu4t2"]
+[ext_resource type="Texture2D" uid="uid://bg2vrkw1k74sx" path="res://sprites/blank.png" id="5_5ib5s"]
+[ext_resource type="Texture2D" uid="uid://d0ryqaas3hduy" path="res://sprites/kisspng-cvs-pharmacy-child-infant-mouth-disease-thought-bubble-5a746a3ec14798.4822727115175788147917.png" id="6_mfg7d"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_yo082"]
-atlas = ExtResource("1_8axol")
+atlas = ExtResource("2_7lufv")
 region = Rect2(0, 448, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qrde3"]
-atlas = ExtResource("1_8axol")
+atlas = ExtResource("2_7lufv")
 region = Rect2(64, 448, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0vxdg"]
-atlas = ExtResource("1_8axol")
+atlas = ExtResource("2_7lufv")
 region = Rect2(128, 448, 64, 64)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_00nde"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_a6k8n")
+"texture": ExtResource("1_ad5hx")
 }],
 "loop": true,
 "name": &"default",
@@ -48,7 +48,7 @@ animations = [{
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("3_gomj7")
+"texture": ExtResource("4_uu4t2")
 }],
 "loop": true,
 "name": &"bad",
@@ -56,7 +56,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("4_gxp4p")
+"texture": ExtResource("5_5ib5s")
 }],
 "loop": true,
 "name": &"blank",
@@ -64,7 +64,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("4_5dafe")
+"texture": ExtResource("6_mfg7d")
 }],
 "loop": true,
 "name": &"good",
@@ -75,7 +75,7 @@ animations = [{
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0.0423704, 0.161299, 0.228875)
 sprite_frames = SubResource("SpriteFrames_00nde")
 autoplay = "default"
-script = ExtResource("2_h3nul")
+script = ExtResource("3_pmm4d")
 
 [node name="Bubble" type="AnimatedSprite3D" parent="."]
 transform = Transform3D(-10, 0, -1.50996e-06, 0, 10, 0, 1.50996e-06, 0, -10, 2.08165e-12, 7.566, -1)

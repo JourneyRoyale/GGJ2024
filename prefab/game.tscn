@@ -57,12 +57,14 @@ shape = SubResource("ConvexPolygonShape3D_v7e3w")
 
 [node name="MeshInstance3D3" type="MeshInstance3D" parent="StaticBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.1, -0.900706, 0.00265056, -0.000804007)
+visible = false
 mesh = SubResource("BoxMesh_ecs3e")
 skeleton = NodePath("../../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_j3y3t")
 
 [node name="MeshInstance3D4" type="MeshInstance3D" parent="StaticBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.1, 0.912698, 0.00410165, -0.00203091)
+visible = false
 mesh = SubResource("BoxMesh_ecs3e")
 skeleton = NodePath("../../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_j3y3t")

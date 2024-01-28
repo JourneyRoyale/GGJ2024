@@ -45,6 +45,7 @@ func _process(delta):
 		else:
 			current_time = 0
 			current_state = CANE_STATE.OFF
+			get_tree().call_group("Curtains", "end_game")
 		if player != null:
 			player.position.x = position.x
 		position.y = player.position.y

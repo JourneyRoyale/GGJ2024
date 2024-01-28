@@ -32,7 +32,7 @@ func _process(delta):
 		score -= base_deplete_rate
 		timer += delta;
 		if score <= 0:
-					get_tree().call_group("ThatsAllFolks", "start")
+			get_tree().call_group("ThatsAllFolks", "start")
 			#get_tree().paused = true
 			#audio_manager.play_music('HitHurt', 'Sound Effect')
 			#await get_tree().create_timer(5).timeout

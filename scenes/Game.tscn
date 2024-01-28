@@ -55,12 +55,14 @@ surface_material_override/0 = SubResource("StandardMaterial3D_344r5")
 
 [node name="LeftCurtainMesh" type="MeshInstance3D" parent="Environment"]
 transform = Transform3D(-20, 0, 1.27146e-07, 0, -20, 0, -1.27146e-06, 0, -2, -14, 2.08165e-12, -1.5)
+visible = false
 mesh = SubResource("QuadMesh_qyg0c")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_j3y3t")
 
 [node name="RightCurtainMesh" type="MeshInstance3D" parent="Environment"]
 transform = Transform3D(-20, 0, 1.27146e-07, 0, -20, 0, -1.27146e-06, 0, -2, 14, 2.08165e-12, -1.5)
+visible = false
 mesh = SubResource("QuadMesh_3dcyu")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_j3y3t")

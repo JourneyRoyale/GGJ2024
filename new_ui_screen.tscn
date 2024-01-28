@@ -1,9 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://vxc02h1qnjha"]
+[gd_scene load_steps=13 format=3 uid="uid://vxc02h1qnjha"]
 
 [ext_resource type="Theme" uid="uid://4c5xn5lj157e" path="res://theme/default.tres" id="1_8kqac"]
 [ext_resource type="Texture2D" uid="uid://ct1bgt227dwru" path="res://sprites/ui/GearIcon.png" id="2_wab3x"]
+[ext_resource type="Texture2D" uid="uid://d1fh5xoe5jk74" path="res://sprites/ui/Tomato_Splat_sprite.png" id="3_a8h4s"]
 [ext_resource type="Texture2D" uid="uid://rma688d35ap1" path="res://sprites/ui/White Rectangle With Gray.png" id="3_mjecg"]
 [ext_resource type="Texture2D" uid="uid://284ju54ci7o1" path="res://sprites/curtain-placeholder.png" id="4_4dqbu"]
+[ext_resource type="Script" path="res://scripts/UI/TomatoSplat.gd" id="4_8xva2"]
 [ext_resource type="Texture2D" uid="uid://jb6gm7433n5o" path="res://sprites/ui/titleLogo.png" id="5_so5fd"]
 
 [sub_resource type="GDScript" id="GDScript_y74go"]
@@ -31,11 +33,13 @@ var game_scene = load(\"res://scenes/Game.tscn\")
 @onready var timer = get_node(\"GameUI/MarginContainer/VBoxContainer/Top UI Bar/Timer\")
 @onready var laughter_meter = get_node(\"GameUI/MarginContainer/VBoxContainer/Top UI Bar/Laughter Meter\")
 @onready var joke_bar = get_node(\"GameUI/MarginContainer/VBoxContainer/Joke Bar\")
+@onready var splat = get_node(\"GameUI/TomatoSplat\")
 var packed_joke_button = load(\"res://prefab/JokeButton.tscn\")
 
 @onready var audio_manager = get_node(\"/root/AudioManager\")
 @onready var game_manager = get_node(\"/root/GameManager\")
 @onready var current_scene_name = get_tree().get_current_scene().get_name()
+
 
 func _process(delta):
 	if (game_manager.isPlaying):
@@ -48,6 +52,15 @@ func _input(event):
 			print(current_scene_name)
 			if(current_scene_name == \"Game\"):
 				pause_screen.visible = !pause_screen.visible
+
+func createSplat():
+	if splat and splat.has_method(\"createSplat\"):
+		splat.createSplat()
+	else:
+		if not splat:
+			print(\"Splat Node does not exist\")
+		else:
+			print(\"Splat createSplat() method not found\")
 
 func _sync_volume(node):
 	node.get_node(\"PanelContainer/GridContainer/Master Slider\").value = audio_manager.master_volume
@@ -289,6 +302,16 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 8
 theme = ExtResource("1_8kqac")
+
+[node name="TomatoSplat" type="TextureRect" parent="GameUI"]
+modulate = Color(1, 1, 1, 0)
+offset_left = 122.0
+offset_top = 103.0
+offset_right = 1750.0
+offset_bottom = 991.0
+texture = ExtResource("3_a8h4s")
+expand_mode = 1
+script = ExtResource("4_8xva2")
 
 [node name="Pause Screen" type="Control" parent="."]
 visible = false

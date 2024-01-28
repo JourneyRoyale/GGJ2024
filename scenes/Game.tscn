@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://csw4tv5xbyfi5"]
+[gd_scene load_steps=17 format=3 uid="uid://csw4tv5xbyfi5"]
 
 [ext_resource type="PackedScene" uid="uid://bal0jss3qcmho" path="res://prefab/comedian.tscn" id="1_tnip5"]
 [ext_resource type="ArrayMesh" uid="uid://b7s1g8w1atyl6" path="res://3D/StageAsset.obj" id="2_tyjfh"]
@@ -7,7 +7,12 @@
 [ext_resource type="AudioStream" uid="uid://b77xbhcraw287" path="res://music/mixkit-arcade-game-complete-or-approved-mission-205.wav" id="5_t3uf5"]
 [ext_resource type="PackedScene" uid="uid://bun08wus37exn" path="res://prefab/spot_lights.tscn" id="6_dyasr"]
 [ext_resource type="PackedScene" uid="uid://b7efb0ou050m6" path="res://audience.tscn" id="7_woc5g"]
+<<<<<<< HEAD
 [ext_resource type="PackedScene" uid="uid://5joxwbolv6ji" path="res://prefab/conveyor.tscn" id="8_xetmi"]
+=======
+[ext_resource type="PackedScene" uid="uid://5joxwbolv6ji" path="res://conveyor.tscn" id="8_mgmwt"]
+[ext_resource type="PackedScene" uid="uid://bdm3g6dbxt003" path="res://prefab/thats_all_folks.tscn" id="9_vj2xq"]
+>>>>>>> 1e440d5a78ab01fa50807b28527d4137542e274d
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_2nep6"]
 
@@ -158,5 +163,10 @@ autostart = true
 
 [node name="Conveyor" parent="." instance=ExtResource("8_xetmi")]
 position = Vector2(943, 945)
+
+[node name="ThatsAllFolks" parent="." node_paths=PackedStringArray("player") instance=ExtResource("9_vj2xq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 4.75, 2.147)
+player = NodePath("../Comedian")
+start_x = -15.0
 
 [connection signal="timeout" from="Audience/Timer" to="Audience" method="_on_timer_timeout"]

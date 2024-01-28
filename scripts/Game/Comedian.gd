@@ -11,7 +11,7 @@ extends CharacterBody3D
 @onready var invulnerable_timer : Timer = get_node("InvulnerableTimer")
 @onready var stun_timer : Timer = get_node("StunTimer")
 @onready var animation_player : AnimationPlayer = get_node("AnimationPlayer")
-
+@onready var ui_screen = get_node("/root/Game/Ui Screen")
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
@@ -27,19 +27,42 @@ var stunned = false
 var invulnerable_time = 1
 var stun_time = .25
 
+var dead = false
+
 func _ready():
-	audio_manager.play_music('Ragtime', 'Background')
+	if !dead:
+		animation_player.play("default")
+		audio_manager.play_music('Ragtime', 'Background')
+	
+func thats_all_folks():
+	if !dead:
+		dead = true
+		audio_manager.stop_music()
+		audio_manager.play_music('Bwack', 'Sound Effect')
+		invulnerable = false
+		animation_player.stop()
+		animation_player.play("yoink")
+		sprite.play("yoink")
 
 func on_spotlight_entered():
-	in_spotlight = true
-	audio_manager.play_music('PowerUp', 'Sound Effect')
+	if !dead:
+		in_spotlight = true
+		audio_manager.play_music('PowerUp', 'Sound Effect')
 	
 func on_spotlight_exited():
-	in_spotlight = false
+	if !dead:
+		in_spotlight = false
 
 func projectile_collided():
-	if invulnerable:
-		return
+	if !dead:
+		if invulnerable:
+			return
+	  
+	if ui_screen:
+		ui_screen.createSplat()
+	else:
+		print("No UI Screen Node Found")
+	
 	game_manager.register_hit()
 	audio_manager.play_music('HitHurt', 'Sound Effect')
 	sprite.play("hit")
@@ -50,10 +73,11 @@ func projectile_collided():
 	invulnerable_timer.start()
 	#TODO: Notify gamemanager
 
+
 var inv_alt = 0
 
 func _physics_process(delta):
-	if stunned:
+	if stunned or dead:
 		velocity.x = 0
 		velocity.z = 0
 		return
@@ -91,16 +115,23 @@ func _physics_process(delta):
 		sprite.stop()
 	else:
 		sprite.play('new_animation');
-
 	move_and_slide()
 
 func _on_stun_timer_timeout():
-	stunned = false
-	invulnerable_timer.start(invulnerable_time)
-	sprite.play("idle_from_hit")
+	if !dead:
+		animation_player.play("Invuln")
+		stunned = false
+		stun_timer.stop()
+		invulnerable_timer.start(invulnerable_time)
+		print("starting invulnerable_time")
+		sprite.play("idle_from_hit")
 
 func _on_invulnerable_timer_timeout():
-	invulnerable = false
-	animation_player.stop()
-	get_node("Sprite").visible = true
-	show()
+	if !dead:
+		print("invuln off")
+		invulnerable = false
+		invulnerable_timer.stop()
+		animation_player.stop()
+		animation_player.play("default")
+		get_node("Sprite").visible = true
+		show()

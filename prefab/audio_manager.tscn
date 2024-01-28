@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://b0c1svfnwvga0"]
+[gd_scene load_steps=9 format=3 uid="uid://b0c1svfnwvga0"]
 
 [ext_resource type="Script" path="res://scripts/Singleton/AudioManager.gd" id="1_iiesv"]
 [ext_resource type="AudioStream" uid="uid://d4i4ojt2hlhdx" path="res://music/MapleLeafRag_64kb.mp3" id="2_jo7hm"]
@@ -7,6 +7,7 @@
 [ext_resource type="AudioStream" uid="uid://b76e5nc2kfdqv" path="res://music/pickupCoin.wav" id="4_273d0"]
 [ext_resource type="AudioStream" uid="uid://chy1gkk1avfki" path="res://music/hitHurt.wav" id="5_benwr"]
 [ext_resource type="AudioStream" uid="uid://c3y3g40u8icik" path="res://music/powerUp.wav" id="6_7aqlw"]
+[ext_resource type="AudioStream" uid="uid://dpksda3v0shwm" path="res://music/673255__preacher13__bwack.wav" id="8_8m52v"]
 
 [node name="AudioManager" type="Node3D"]
 script = ExtResource("1_iiesv")
@@ -36,3 +37,6 @@ bus = &"Sound Effect"
 [node name="PowerUp" type="AudioStreamPlayer" parent="Sound Effect"]
 stream = ExtResource("6_7aqlw")
 bus = &"Sound Effect"
+
+[node name="Bwack" type="AudioStreamPlayer" parent="Sound Effect"]
+stream = ExtResource("8_8m52v")

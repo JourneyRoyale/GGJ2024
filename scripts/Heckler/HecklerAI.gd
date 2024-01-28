@@ -15,6 +15,7 @@ var move_timer = 0.0
 var is_moving = true
 var current_direction = Vector3(1.0, 0, 0).normalized()  # Starts moving right
 @onready var animation_player = get_node("AnimationPlayer")
+@onready var sprite = get_node("AnimatedSprite3D")
 
 var audience_reference
 
@@ -22,6 +23,7 @@ var packed_projectile = load("res://prefab/Projectile.tscn")
 @onready var audio_manager = get_node("/root/AudioManager")
 
 func _ready():
+	sprite.play("default")
 	randomize()
 	start_moving()
 
@@ -42,6 +44,7 @@ func _process(delta):
 func start_moving():
 	is_moving = true
 	animation_player.play("bounce")
+	sprite.play("default")
 	move_time = randf_range(MOVE_TIME_MIN, MOVE_TIME_MAX)
 	move_timer = 0.0
 
@@ -51,6 +54,8 @@ func stop_moving():
 	throw_tomato()
 
 func throw_tomato():
+	animation_player.play("throw")
+	sprite.play("throw")
 	if randi() % 2 == 0:
 		current_direction.x = 1.0  # Move right
 	else:

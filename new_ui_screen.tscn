@@ -213,6 +213,8 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_top = -60.0
+offset_bottom = -60.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_8kqac")
@@ -259,7 +261,7 @@ show_percentage = false
 
 [node name="PlayerScore" type="Label" parent="GameUI/MarginContainer/VBoxContainer/Top UI Bar"]
 clip_contents = true
-custom_minimum_size = Vector2(576, 0)
+custom_minimum_size = Vector2(500, 0)
 layout_mode = 2
 size_flags_horizontal = 8
 theme = ExtResource("1_8kqac")

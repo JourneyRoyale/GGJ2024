@@ -39,7 +39,7 @@ _data = {
 "curtains_open": SubResource("Animation_cx5om")
 }
 
-[node name="Ui Screen" type="Control"]
+[node name="Ui Screen2" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0

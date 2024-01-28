@@ -12,5 +12,5 @@ func _process(delta):
 func _on_body_entered(body):
 	if body.is_in_group("Player"):
 		body.projectile_collided()
-		body.position.z -= 1
+		body.position.z += 1
 		game_manager.register_hit()

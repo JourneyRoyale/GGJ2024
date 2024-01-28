@@ -18,7 +18,7 @@ var emoji_list = []
 @export var set_time = 600;
 
 @export var base_deplete_rate = 0.03;
-@export var error_amount = 5
+@export var error_amount = 10
 @export var match_amount = 10
 @export var hit_amount = 20
 @onready var audio_manager = get_node("/root/AudioManager")

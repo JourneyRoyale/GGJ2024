@@ -22,6 +22,7 @@ var rng : RandomNumberGenerator = RandomNumberGenerator.new()
 @export var question_popup_rate_deviance_max = 5
 @export var question_popup_lifespan = 2
 @onready var audio_manager = get_node("/root/AudioManager")
+@onready var timer = get_node("Timer")
 
 func _ready():
 	for node in audience_positions:
@@ -43,14 +44,7 @@ func _spawn(node):
 
 func do_emojis():
 	await get_tree().create_timer(randi_range(1, 5)).timeout
-	var children = members.get_children()
-	for i in children:
-		i.clear_emoji()
-	children.shuffle()
-	children[0].show_emoji()
-	do_emojis()
-	if (randi_range(0, 1)):
-		_spawn_heckler()
+
 			
 func destroy_all_hecklers():
 	print("heckler: 'okay maybe hes pretty good'")
@@ -111,4 +105,13 @@ func _update():
 		##todo: take hit to meter
 	#return successes
 				
-	
+
+func _on_timer_timeout():
+	var children = members.get_children()
+	for i in children:
+		i.clear_emoji()
+	children.shuffle()
+	children[0].show_emoji()
+	if (randi_range(0, 1)):
+		_spawn_heckler()
+	timer.wait_time = randi_range(0, 5)

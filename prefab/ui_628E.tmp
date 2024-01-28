@@ -59,7 +59,6 @@ grow_vertical = 0
 script = ExtResource("4_hjwm8")
 
 [node name="Timer" type="Timer" parent="Conveyor"]
-autostart = true
 
 [node name="GameUI" type="Control" parent="."]
 layout_mode = 1

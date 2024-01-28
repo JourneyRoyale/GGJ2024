@@ -1,7 +1,7 @@
 [gd_resource type="SpriteFrames" load_steps=6 format=3 uid="uid://cr383cnklcbny"]
 
 [ext_resource type="Texture2D" uid="uid://b65jxkkklfumw" path="res://sprites/DF-Bases (1).png" id="1_nqvad"]
-[ext_resource type="Texture2D" uid="uid://b543u18ylg826" path="res://sprites/player-placeholder.png" id="2_3mlo8"]
+[ext_resource type="Texture2D" uid="uid://dmbm3f1x30ueu" path="res://sprites/Comedian/IMG_2359.png" id="2_7bdex"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7sejg"]
 atlas = ExtResource("1_nqvad")
@@ -33,7 +33,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_3mlo8")
+"texture": ExtResource("2_7bdex")
 }],
 "loop": true,
 "name": &"new_animation",

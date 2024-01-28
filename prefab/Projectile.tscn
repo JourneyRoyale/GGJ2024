@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://ckcijwy1aysav"]
 
-[ext_resource type="Script" path="res://scripts/Game/Projectile.gd" id="1_saq74"]
+[ext_resource type="Script" path="res://scripts/Game/Projectile.gd" id="1_32hu4"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_20eg4"]
 
@@ -11,7 +11,7 @@ height = 1.0
 albedo_color = Color(1, 0, 0, 1)
 
 [node name="Projectile" type="Area3D" groups=["projectiles"]]
-script = ExtResource("1_saq74")
+script = ExtResource("1_32hu4")
 SPEED = 0.5
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]

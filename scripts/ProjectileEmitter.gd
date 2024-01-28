@@ -1,6 +1,6 @@
 extends Node3D
 
-var packed_projectile = load("res://scenes/Projectile.tscn")
+var packed_projectile = load("res://prefab/Projectile.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

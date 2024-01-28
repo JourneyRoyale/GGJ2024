@@ -37,9 +37,8 @@ shape = SubResource("CapsuleShape3D_qdsn5")
 
 [node name="Sprite" type="AnimatedSprite3D" parent="."]
 sprite_frames = ExtResource("2_u6svr")
-animation = &"new_animation"
+animation = &"yoink"
 autoplay = "new_animation"
-frame_progress = 0.776392
 
 [node name="StunTimer" type="Timer" parent="."]
 wait_time = 0.25

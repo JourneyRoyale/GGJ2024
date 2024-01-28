@@ -27,33 +27,46 @@ var stunned = false
 var invulnerable_time = 1
 var stun_time = .25
 
+var dead = false
+
 func _ready():
-	audio_manager.play_music('Ragtime', 'Background')
+	if !dead:
+		audio_manager.play_music('Ragtime', 'Background')
+	
+func thats_all_folks():
+	if !dead:
+		dead = true
+		audio_manager.stop_music()
+		audio_manager.play_music('Bwack', 'Sound Effect')
+		sprite.play("yoink")
 
 func on_spotlight_entered():
-	in_spotlight = true
-	audio_manager.play_music('PowerUp', 'Sound Effect')
+	if !dead:
+		in_spotlight = true
+		audio_manager.play_music('PowerUp', 'Sound Effect')
 	
 func on_spotlight_exited():
-	in_spotlight = false
+	if !dead:
+		in_spotlight = false
 
 func projectile_collided():
-	if invulnerable:
-		return
-	game_manager.register_hit()
-	audio_manager.play_music('HitHurt', 'Sound Effect')
-	sprite.play("hit")
-	animation_player.play("Invuln")
-	invulnerable = true
-	stunned = true
-	stun_timer.start()
-	invulnerable_timer.start()
-	#TODO: Notify gamemanager
+	if !dead:
+		if invulnerable:
+			return
+		game_manager.register_hit()
+		audio_manager.play_music('HitHurt', 'Sound Effect')
+		sprite.play("hit")
+		animation_player.play("Invuln")
+		invulnerable = true
+		stunned = true
+		stun_timer.start()
+		invulnerable_timer.start()
+		#TODO: Notify gamemanager
 
 var inv_alt = 0
 
 func _physics_process(delta):
-	if stunned:
+	if stunned or dead:
 		velocity.x = 0
 		velocity.z = 0
 		return
@@ -95,12 +108,14 @@ func _physics_process(delta):
 	move_and_slide()
 
 func _on_stun_timer_timeout():
-	stunned = false
-	invulnerable_timer.start(invulnerable_time)
-	sprite.play("idle_from_hit")
+	if !dead:
+		stunned = false
+		invulnerable_timer.start(invulnerable_time)
+		sprite.play("idle_from_hit")
 
 func _on_invulnerable_timer_timeout():
-	invulnerable = false
-	animation_player.stop()
-	get_node("Sprite").visible = true
-	show()
+	if !dead:
+		invulnerable = false
+		animation_player.stop()
+		get_node("Sprite").visible = true
+		show()

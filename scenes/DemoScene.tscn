@@ -5,8 +5,8 @@
 [ext_resource type="AudioStream" uid="uid://inflyfrfxqu7" path="res://music/refract.mp3" id="6_1aeq3"]
 [ext_resource type="AudioStream" uid="uid://b77xbhcraw287" path="res://music/mixkit-arcade-game-complete-or-approved-mission-205.wav" id="7_70iwb"]
 [ext_resource type="PackedScene" uid="uid://b7efb0ou050m6" path="res://audience.tscn" id="7_sgmdl"]
-[ext_resource type="PackedScene" path="res://prefab/spot_lights.tscn" id="8_l6oyf"]
-[ext_resource type="Script" path="res://scripts/Conveyor.gd" id="8_sc8yn"]
+[ext_resource type="PackedScene" uid="uid://bskgpd4m757s" path="res://prefab/ui_screen.tscn" id="8_g5q4x"]
+[ext_resource type="PackedScene" uid="uid://bun08wus37exn" path="res://prefab/spot_lights.tscn" id="8_l6oyf"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_2nep6"]
 
@@ -95,10 +95,4 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.217, 2.255, -4.675)
 [node name="spawn1" type="Node3D" parent="Audience"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.715, 2.206, -4.606)
 
-[node name="Conveyor" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-grow_vertical = 0
-script = ExtResource("8_sc8yn")
+[node name="Ui Screen" parent="." instance=ExtResource("8_g5q4x")]

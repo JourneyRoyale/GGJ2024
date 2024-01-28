@@ -23,7 +23,7 @@ func select_new_target_position():
 		target_position.x = rng.randf_range(target_x_range[0], target_x_range[1])
 		target_position.z = rng.randf_range(target_z_range[0], target_z_range[1])
 
-	print("NewTarget: " + str(target_position.x) + " " +  str(target_position.z))
+	#print("NewTarget: " + str(target_position.x) + " " +  str(target_position.z))
 	moving = true;
 
 func despawn():

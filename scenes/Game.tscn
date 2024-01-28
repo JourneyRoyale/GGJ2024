@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://csw4tv5xbyfi5"]
+[gd_scene load_steps=17 format=3 uid="uid://csw4tv5xbyfi5"]
 
 [ext_resource type="PackedScene" uid="uid://bal0jss3qcmho" path="res://prefab/comedian.tscn" id="1_tnip5"]
 [ext_resource type="ArrayMesh" uid="uid://b7s1g8w1atyl6" path="res://3D/StageAsset.obj" id="2_tyjfh"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://bun08wus37exn" path="res://prefab/spot_lights.tscn" id="6_dyasr"]
 [ext_resource type="PackedScene" uid="uid://b7efb0ou050m6" path="res://audience.tscn" id="7_woc5g"]
 [ext_resource type="PackedScene" uid="uid://5joxwbolv6ji" path="res://conveyor.tscn" id="8_mgmwt"]
+[ext_resource type="PackedScene" uid="uid://bdm3g6dbxt003" path="res://prefab/thats_all_folks.tscn" id="9_vj2xq"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_2nep6"]
 
@@ -103,6 +104,8 @@ stream = ExtResource("5_t3uf5")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.15, 2.255, -4.675)
 audience_positions = [NodePath("spawn1"), NodePath("spawn2"), NodePath("spawn3"), NodePath("spawn4"), NodePath("spawn5"), NodePath("spawn6"), NodePath("spawn7"), NodePath("spawn8"), NodePath("spawn9"), NodePath("spawn10"), NodePath("spawn11"), NodePath("spawn12"), NodePath("spawn13"), NodePath("spawn14")]
 heck = NodePath("HECK")
+question_popup_rate = 0.25
+question_popup_lifespan = 4
 
 [node name="spawn1" type="Node3D" parent="Audience"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 1, -6.5)
@@ -155,6 +158,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.15, 0.97, -6.535)
 autostart = true
 
 [node name="Conveyor" parent="Audience" instance=ExtResource("8_mgmwt")]
-position = Vector2(943, 1000)
+position = Vector2(943, 945)
+egg_delay = 0.75
+egg_speed = 1.5
+
+[node name="ThatsAllFolks" parent="." node_paths=PackedStringArray("player") instance=ExtResource("9_vj2xq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 4.75, 2.147)
+player = NodePath("../Comedian")
+start_x = -15.0
 
 [connection signal="timeout" from="Audience/Timer" to="Audience" method="_on_timer_timeout"]

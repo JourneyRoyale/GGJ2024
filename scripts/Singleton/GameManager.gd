@@ -24,6 +24,7 @@ var emoji_list = []
 @onready var audio_manager = get_node("/root/AudioManager")
 
 var spotlight = false
+var isPlaying = false
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):

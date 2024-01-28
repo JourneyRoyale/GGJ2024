@@ -1,11 +1,11 @@
-[gd_scene load_steps=14 format=3 uid="uid://v3rfy1yn8wwy"]
+[gd_scene load_steps=14 format=3 uid="uid://cc8i3qf66h2my"]
 
 [ext_resource type="PackedScene" uid="uid://bal0jss3qcmho" path="res://prefab/comedian.tscn" id="1_pplf1"]
 [ext_resource type="Script" path="res://scripts/Singleton/AudioManager.gd" id="2_dtwfq"]
 [ext_resource type="ArrayMesh" uid="uid://b7s1g8w1atyl6" path="res://3D/StageAsset.obj" id="2_hf10p"]
 [ext_resource type="AudioStream" uid="uid://inflyfrfxqu7" path="res://music/refract.mp3" id="3_sdfj4"]
 [ext_resource type="AudioStream" uid="uid://b77xbhcraw287" path="res://music/mixkit-arcade-game-complete-or-approved-mission-205.wav" id="4_ll3pq"]
-[ext_resource type="PackedScene" uid="uid://bun08wus37exn" path="res://prefab/spot_lights.tscn" id="5_iavp8"]
+[ext_resource type="PackedScene" uid="uid://j3q2c8ojgweb" path="res://prefab/spot_lights.tscn" id="5_iavp8"]
 [ext_resource type="PackedScene" uid="uid://b7efb0ou050m6" path="res://audience.tscn" id="6_qje8n"]
 [ext_resource type="PackedScene" uid="uid://bskgpd4m757s" path="res://prefab/ui_screen.tscn" id="7_jluwv"]
 

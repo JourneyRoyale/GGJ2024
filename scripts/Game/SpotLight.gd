@@ -6,6 +6,7 @@ var target_z_range = [0.0, 7.0]
 # TODO: replace with singleton RNG
 var rng = RandomNumberGenerator.new()
 @onready var particles : CPUParticles3D = get_node("Ground/CPUParticles3D")
+@onready var game_manager = get_node("/root/GameManager")
 var active = false
 
 func _ready():
@@ -32,15 +33,13 @@ func _process(delta):
 		select_new_target_position()
 
 func _on_area_3d_body_entered(body):
-	if !active:
-		return
 	if body.is_in_group("Player"):
 		particles.emitting = true
+		game_manager.spotlight = true
 
 
 func _on_area_3d_body_exited(body):
-	if !active:
-		return
 	if body.is_in_group("Player"):
 		particles.emitting = false
+		game_manager.spotlight = false
 

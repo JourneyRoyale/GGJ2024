@@ -17,9 +17,10 @@ var emoji_list = []
 
 @export var set_time = 600;
 
-@export var base_deplete_rate = 0.01;
+@export var base_deplete_rate = 0.03;
 @export var error_amount = 5
 @export var match_amount = 10
+@export var hit_amount = 20
 @onready var audio_manager = get_node("/root/AudioManager")
 
 var spotlight = false
@@ -38,6 +39,7 @@ func register_match():
 	score += match_amount
 	combo += 1
 	if (spotlight):
+		audio_manager.play_music('PowerUp', 'Sound Effect')
 		get_tree().call_group("AudienceManager", "destroy_all_hecklers")
 	
 func register_error():
@@ -45,6 +47,7 @@ func register_error():
 	combo = 0
 	
 func register_hit():
-	pass	
+	score -= hit_amount
+	combo = 0
 
 

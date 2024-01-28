@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://cxsv4epu1adg1"]
+[gd_scene load_steps=15 format=3 uid="uid://dxs8g7wkq48v2"]
 
 [ext_resource type="Texture2D" uid="uid://cmua1lqkbawoa" path="res://sprites/jokes/EggAsset-01.png" id="1_fw7gv"]
 [ext_resource type="Script" path="res://scripts/egg.gd" id="2_vyl8j"]

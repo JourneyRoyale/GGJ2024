@@ -43,7 +43,6 @@ frame_progress = 0.776392
 
 [node name="StunTimer" type="Timer" parent="."]
 wait_time = 0.25
-one_shot = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -51,7 +50,6 @@ libraries = {
 }
 
 [node name="InvulnerableTimer" type="Timer" parent="."]
-one_shot = true
 
 [connection signal="timeout" from="StunTimer" to="." method="_on_stun_timer_timeout"]
 [connection signal="timeout" from="InvulnerableTimer" to="." method="_on_invulnerable_timer_timeout"]

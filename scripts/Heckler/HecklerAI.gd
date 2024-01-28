@@ -14,18 +14,18 @@ var move_time = 0.0
 var move_timer = 0.0
 var is_moving = true
 var current_direction = Vector3(1.0, 0, 0).normalized()  # Starts moving right
+@onready var animation_player = get_node("AnimationPlayer")
 
 var audience_reference
 
 var packed_projectile = load("res://prefab/Projectile.tscn")
+@onready var audio_manager = get_node("/root/AudioManager")
 
 func _ready():
-
 	randomize()
 	start_moving()
 
 func _process(delta):
-	#print("X position: ", position.x)
 	if is_moving:
 		position += current_direction * MOVE_SPEED * delta * 5
 		move_timer += delta
@@ -41,10 +41,12 @@ func _process(delta):
 
 func start_moving():
 	is_moving = true
+	animation_player.play("bounce")
 	move_time = randf_range(MOVE_TIME_MIN, MOVE_TIME_MAX)
 	move_timer = 0.0
 
 func stop_moving():
+	animation_player.stop()
 	is_moving = false
 	throw_tomato()
 

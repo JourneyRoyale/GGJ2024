@@ -1,6 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://c1wv0nrjgmhqh"]
-
-[ext_resource type="Script" path="res://scripts/JokeBar/JokeButton.gd" id="1_121v7"]
+[gd_scene load_steps=4 format=3 uid="uid://bw05a4q4ddxbn"]
 
 [sub_resource type="FontFile" id="FontFile_esay5"]
 subpixel_positioning = 0
@@ -2075,8 +2073,29 @@ cache/0/43/0/kerning_overrides/43/0 = Vector2(0, 0)
 default_font = SubResource("FontFile_esay5")
 default_font_size = 43
 
+[sub_resource type="GDScript" id="GDScript_dhsn4"]
+script/source = "extends Button
+
+var emojis = [\"🤖\", \"👽\", \"🤡\", \"💩\"]
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	emojis.shuffle();
+	text = emojis[0]; 
+	pass # Replace with function body.
+
+func _pressed():
+	get_tree().call_group(\"AudienceManager\", \"_receive_joke\", text)
+	queue_free()
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	pass
+"
+
 [node name="Button" type="Button"]
 theme = SubResource("Theme_6tfbf")
 text = "😀
 "
-script = ExtResource("1_121v7")
+script = SubResource("GDScript_dhsn4")

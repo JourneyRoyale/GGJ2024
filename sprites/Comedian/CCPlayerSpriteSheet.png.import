@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dmbm3f1x30ueu"
-path.s3tc="res://.godot/imported/IMG_2359.png-27ee84b530e5fe9bb63948b421ede710.s3tc.ctex"
+uid="uid://dt0j8448q4gdm"
+path.s3tc="res://.godot/imported/CCPlayerSpriteSheet.png-82b0a6b5fa6be77960813645d8afd54e.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://sprites/Comedian/IMG_2359.png"
-dest_files=["res://.godot/imported/IMG_2359.png-27ee84b530e5fe9bb63948b421ede710.s3tc.ctex"]
+source_file="res://sprites/Comedian/CCPlayerSpriteSheet.png"
+dest_files=["res://.godot/imported/CCPlayerSpriteSheet.png-82b0a6b5fa6be77960813645d8afd54e.s3tc.ctex"]
 
 [params]
 

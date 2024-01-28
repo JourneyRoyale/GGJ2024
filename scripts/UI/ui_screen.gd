@@ -28,9 +28,8 @@ func _on_animation_player_animation_finished(anim_name):
 		game_manager.playing = true
 		
 func _process(delta):
-	if(game_manager.playing):
-		_sync_laughter()
-		_sync_time()
+	_sync_laughter()
+	_sync_time()
 
 func _input(event):
 	if event is InputEventKey and event.pressed:
@@ -44,7 +43,7 @@ func _sync_volume(node):
 	node.get_node("GridContainer/Sound Effect Slider").value = audio_manager.sound_effect_volume 
 
 func _sync_laughter():
-	laughter_meter.value = round_to_dec(game_manager.laughter, 2)
+	laughter_meter.value = round_to_dec(game_manager.score, 2)
 
 func _sync_time():
 	timer.text = time_convert(game_manager.set_time - game_manager.timer)

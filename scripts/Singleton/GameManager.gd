@@ -1,16 +1,10 @@
 extends Node
 
 # Measurement of how well peformance is going. Game over if reaches zero.
-var score = 0;
-
-# Flag for if you are actively performing the your set. 
-var playing;
-
-# Measure of audience satisfaction. Proportionally affects score rate.
-var laughter = 1;
-
+var score = 50.0;
 # Global game manager timer.
 var timer = 0;
+var combo = 0;
 
 #List off all audience members
 var audience_list;
@@ -23,58 +17,35 @@ var emoji_list = []
 
 @export var set_time = 600;
 
-@export var base_deplete_rate = 0.1;
+@export var base_deplete_rate = 0.03;
+@export var error_amount = 10
+@export var match_amount = 10
+@export var hit_amount = 20
+@onready var audio_manager = get_node("/root/AudioManager")
 
-@export var base_score_rate = 10;
-
-@export var max_emoji = 5 
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	create_audience()
-	playing = false
+var spotlight = false
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if(laughter <= 0):
-		playing = false
-		print("GAME OVER")
+	score -= base_deplete_rate
+	if score <= 0:
+		get_tree().paused = true
+		audio_manager.play_music('HitHurt', 'Sound Effect')
+		await get_tree().create_timer(10).timeout
+		get_tree().reload_current_scene()
+		get_tree().paused = false
 	
-	if(timer >= set_time):
-		print("GAME COMPLETE")
+func register_match():
+	score += match_amount
+	combo += 1
+	if (spotlight):
+		audio_manager.play_music('PowerUp', 'Sound Effect')
+		get_tree().call_group("AudienceManager", "destroy_all_hecklers")
 	
-	poll_audience()
+func register_error():
+	score -= error_amount
+	combo = 0
 	
-	# Score is improved proportionally to audience satisfaction and decreased inversely to how much time is left in set.
-	score = score + (base_score_rate * laughter) - (base_deplete_rate * timer / set_time)
-	
-	
-	
-	if(playing):
-		laughter -= .0001
-		timer += delta;
-
-#Populate the audience.
-func create_audience():
-	pass
-
-
-# Polls all audience members in order to determine current laughter score;
-func poll_audience():
-	pass
-
-#Create a heckler.
-func create_heckler():
-	pass
-	
-#Create emoji
-func create_emoji(nodeReference):
-	if(playing):
-		emoji_list.append(nodeReference)
-	
-func delete_emoji(nodeReference):
-	#if(playing):
-		#if(nodeReference):
-			#nodeReference.queue_free()
-			#emoji_list.pop_front()
-	pass
+func register_hit():
+	score -= hit_amount
+	combo = 0

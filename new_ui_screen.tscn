@@ -198,7 +198,6 @@ script = SubResource("GDScript_y74go")
 [node name="Curtain Container" parent="." instance=ExtResource("1_33gma")]
 
 [node name="GameUI" type="Control" parent="."]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -245,7 +244,8 @@ size_flags_horizontal = 3
 theme = ExtResource("1_8kqac")
 
 [node name="Laughter Meter" type="ProgressBar" parent="GameUI/MarginContainer/VBoxContainer/Top UI Bar"]
-custom_minimum_size = Vector2(800, 60)
+modulate = Color(1, 0.0588235, 0.0588235, 1)
+custom_minimum_size = Vector2(800, 42)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4

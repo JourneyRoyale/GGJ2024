@@ -50,7 +50,7 @@ func do_emojis():
 func destroy_all_hecklers():
 	print("heckler: 'okay maybe hes pretty good'")
 	for heckler in active_hecklers:
-		heckler.queue_free()
+		heckler.playDeath()
 	active_hecklers = []
 
 func _spawn_heckler():

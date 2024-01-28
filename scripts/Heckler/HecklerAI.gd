@@ -12,7 +12,7 @@ var THROW_DELAY = 0.6 #how long the heckler pauses to throw a tomato in seconds
 # Variables
 var move_time = 0.0
 var move_timer = 0.0
-var is_moving = true
+var is_moving = false
 var current_direction = Vector3(1.0, 0, 0).normalized()  # Starts moving right
 @onready var animation_player = get_node("AnimationPlayer")
 @onready var sprite = get_node("AnimatedSprite3D")
@@ -23,9 +23,8 @@ var packed_projectile = load("res://prefab/Projectile.tscn")
 @onready var audio_manager = get_node("/root/AudioManager")
 
 func _ready():
-	sprite.play("default")
-	randomize()
-	start_moving()
+	sprite.play("spawn")
+	print(sprite.animation.get_basename())
 
 func _process(delta):
 	if is_moving:
@@ -86,3 +85,15 @@ func _on_timer_timeout():
 	if timer_node:
 		timer_node.queue_free()  # Safely remove the timer node
 
+func playDeath():
+	sprite.play("death")
+
+func _on_animated_sprite_3d_animation_finished():
+	var anim_name = sprite.animation.get_basename()
+	if(anim_name == "spawn"):
+		sprite.play("default")
+		randomize()
+		start_moving()
+	if(anim_name == "death"):
+		queue_free()
+	pass # Replace with function body.

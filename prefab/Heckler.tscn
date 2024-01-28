@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://bqdtty1ekxhh"]
+[gd_scene load_steps=22 format=3 uid="uid://bqdtty1ekxhh"]
 
 [ext_resource type="Script" path="res://scripts/Heckler/HecklerAI.gd" id="1_qatk1"]
 [ext_resource type="Texture2D" uid="uid://ba465y51couoy" path="res://sprites/audience/hecklerSpriteSheet.png" id="2_0h3dp"]
@@ -42,6 +42,22 @@ _data = {
 "throw": SubResource("Animation_y5m52")
 }
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_uotkr"]
+atlas = ExtResource("2_0h3dp")
+region = Rect2(1600, 2400, 800, 1200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h1nty"]
+atlas = ExtResource("2_0h3dp")
+region = Rect2(2400, 2400, 800, 1200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_53rlq"]
+atlas = ExtResource("2_0h3dp")
+region = Rect2(0, 3600, 800, 1200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pik0k"]
+atlas = ExtResource("2_0h3dp")
+region = Rect2(800, 3600, 800, 1200)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_3l07t"]
 atlas = ExtResource("2_0h3dp")
 region = Rect2(800, 1200, 800, 1200)
@@ -49,6 +65,26 @@ region = Rect2(800, 1200, 800, 1200)
 [sub_resource type="AtlasTexture" id="AtlasTexture_k4jfs"]
 atlas = ExtResource("2_0h3dp")
 region = Rect2(1600, 1200, 800, 1200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pymcw"]
+atlas = ExtResource("2_0h3dp")
+region = Rect2(0, 0, 800, 1200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_coua4"]
+atlas = ExtResource("2_0h3dp")
+region = Rect2(800, 0, 800, 1200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vg62m"]
+atlas = ExtResource("2_0h3dp")
+region = Rect2(1600, 0, 800, 1200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d845v"]
+atlas = ExtResource("2_0h3dp")
+region = Rect2(2400, 0, 800, 1200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3gg12"]
+atlas = ExtResource("2_0h3dp")
+region = Rect2(0, 1200, 800, 1200)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jabce"]
 atlas = ExtResource("2_0h3dp")
@@ -66,6 +102,23 @@ region = Rect2(800, 2400, 800, 1200)
 animations = [{
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_uotkr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h1nty")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_53rlq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pik0k")
+}],
+"loop": false,
+"name": &"death",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_3l07t")
 }, {
 "duration": 1.0,
@@ -73,6 +126,26 @@ animations = [{
 }],
 "loop": true,
 "name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pymcw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_coua4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vg62m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d845v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3gg12")
+}],
+"loop": false,
+"name": &"spawn",
 "speed": 5.0
 }, {
 "frames": [{
@@ -106,5 +179,6 @@ autoplay = "bounce"
 
 [node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="."]
 sprite_frames = SubResource("SpriteFrames_gvphd")
-animation = &"throw"
-frame_progress = 0.734724
+animation = &"death"
+
+[connection signal="animation_finished" from="AnimatedSprite3D" to="." method="_on_animated_sprite_3d_animation_finished"]

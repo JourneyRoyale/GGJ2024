@@ -1,25 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://bskgpd4m757s"]
+[gd_scene load_steps=8 format=3 uid="uid://bskgpd4m757s"]
 
 [ext_resource type="Script" path="res://scripts/UI/ui_screen.gd" id="1_w5wnv"]
 [ext_resource type="Texture2D" uid="uid://nsxwa07hhb12" path="res://sprites/placeholder/Gear-icon-transparent-background.png" id="2_vtl00"]
 [ext_resource type="Texture2D" uid="uid://284ju54ci7o1" path="res://sprites/curtain-placeholder.png" id="3_upk2n"]
-[ext_resource type="Theme" uid="uid://4c5xn5lj157e" path="res://theme/default.tres" id="4_6c71v"]
-[ext_resource type="Texture2D" uid="uid://c7hm8j8x8h8nn" path="res://sprites/White Rectangle.png" id="5_4ayxl"]
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_vuhmk"]
-texture = ExtResource("5_4ayxl")
-texture_margin_left = 40.0
-texture_margin_top = 30.0
-texture_margin_right = 38.0
-texture_margin_bottom = 40.0
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c0ds5"]
-bg_color = Color(1, 1, 1, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(1, 1, 1, 1)
+[ext_resource type="Script" path="res://scripts/Conveyor.gd" id="4_hjwm8"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_jkbkj"]
 font_size = 46
@@ -63,7 +47,16 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 1
 script = ExtResource("1_w5wnv")
+
+[node name="Conveyor" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+grow_vertical = 0
+script = ExtResource("4_hjwm8")
 
 [node name="GameUI" type="Control" parent="."]
 layout_mode = 1
@@ -72,16 +65,14 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("4_6c71v")
+mouse_filter = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="GameUI"]
 layout_mode = 1
-anchors_preset = 15
+anchors_preset = 10
 anchor_right = 1.0
-anchor_bottom = 1.0
+offset_bottom = 154.0
 grow_horizontal = 2
-grow_vertical = 2
-theme = ExtResource("4_6c71v")
 theme_override_constants/margin_left = 50
 theme_override_constants/margin_top = 50
 theme_override_constants/margin_right = 50
@@ -89,18 +80,15 @@ theme_override_constants/margin_bottom = 50
 
 [node name="VBoxContainer" type="VBoxContainer" parent="GameUI/MarginContainer"]
 layout_mode = 2
-theme = ExtResource("4_6c71v")
 
 [node name="Top UI Bar" type="HBoxContainer" parent="GameUI/MarginContainer/VBoxContainer"]
 layout_mode = 2
-theme = ExtResource("4_6c71v")
 alignment = 1
 
 [node name="TextureButton" type="TextureButton" parent="GameUI/MarginContainer/VBoxContainer/Top UI Bar"]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 size_flags_horizontal = 0
-theme = ExtResource("4_6c71v")
 texture_normal = ExtResource("2_vtl00")
 ignore_texture_size = true
 stretch_mode = 0
@@ -108,14 +96,12 @@ stretch_mode = 0
 [node name="Seperator" type="Control" parent="GameUI/MarginContainer/VBoxContainer/Top UI Bar"]
 layout_mode = 2
 size_flags_horizontal = 3
-theme = ExtResource("4_6c71v")
 
 [node name="Laughter Meter" type="ProgressBar" parent="GameUI/MarginContainer/VBoxContainer/Top UI Bar"]
 custom_minimum_size = Vector2(500, 11)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
-theme = ExtResource("4_6c71v")
 theme_override_font_sizes/font_size = 1
 max_value = 2.0
 value = 1.0
@@ -124,27 +110,16 @@ show_percentage = false
 [node name="Seperator2" type="Control" parent="GameUI/MarginContainer/VBoxContainer/Top UI Bar"]
 layout_mode = 2
 size_flags_horizontal = 3
-theme = ExtResource("4_6c71v")
 
 [node name="Timer" type="Label" parent="GameUI/MarginContainer/VBoxContainer/Top UI Bar"]
 layout_mode = 2
 size_flags_horizontal = 8
-theme = ExtResource("4_6c71v")
 text = "10:00"
 horizontal_alignment = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="GameUI/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
-theme = ExtResource("4_6c71v")
-
-[node name="Joke Bar" type="HBoxContainer" parent="GameUI/MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 150)
-layout_direction = 3
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 8
-theme = ExtResource("4_6c71v")
 
 [node name="Pause Screen" type="Control" parent="."]
 visible = false
@@ -154,7 +129,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("4_6c71v")
+mouse_filter = 1
 
 [node name="MarginContainer" type="MarginContainer" parent="Pause Screen"]
 layout_mode = 1
@@ -163,16 +138,13 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("4_6c71v")
 
 [node name="ColorRect" type="ColorRect" parent="Pause Screen/MarginContainer"]
 layout_mode = 2
-theme = ExtResource("4_6c71v")
 color = Color(0.0980392, 0.0980392, 0.0980392, 0.615686)
 
 [node name="MarginContainer" type="MarginContainer" parent="Pause Screen/MarginContainer"]
 layout_mode = 2
-theme = ExtResource("4_6c71v")
 theme_override_constants/margin_left = 100
 theme_override_constants/margin_top = 100
 theme_override_constants/margin_right = 100
@@ -180,164 +152,105 @@ theme_override_constants/margin_bottom = 50
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Pause Screen/MarginContainer/MarginContainer"]
 layout_mode = 2
-theme = ExtResource("4_6c71v")
 
 [node name="Label" type="Label" parent="Pause Screen/MarginContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
-theme = ExtResource("4_6c71v")
 theme_override_font_sizes/font_size = 75
 text = "Pause"
 horizontal_alignment = 1
 
-[node name="Pause Menu" type="VBoxContainer" parent="Pause Screen/MarginContainer/MarginContainer/VBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="Pause Screen/MarginContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="MarginContainer" type="MarginContainer" parent="Pause Screen/MarginContainer/MarginContainer/VBoxContainer/Pause Menu"]
+[node name="Pause Menu" type="GridContainer" parent="Pause Screen/MarginContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
-size_flags_vertical = 3
-theme = ExtResource("4_6c71v")
-
-[node name="GridContainer" type="GridContainer" parent="Pause Screen/MarginContainer/MarginContainer/VBoxContainer/Pause Menu"]
-layout_mode = 2
-theme = ExtResource("4_6c71v")
 theme_override_constants/h_separation = 50
 columns = 4
 
-[node name="Resume" type="Button" parent="Pause Screen/MarginContainer/MarginContainer/VBoxContainer/Pause Menu/GridContainer"]
+[node name="Resume" type="Button" parent="Pause Screen/MarginContainer/MarginContainer/VBoxContainer/Pause Menu"]
 layout_mode = 2
 size_flags_horizontal = 3
-theme = ExtResource("4_6c71v")
 text = "Resume"
 
-[node name="Restart" type="Button" parent="Pause Screen/MarginContainer/MarginContainer/VBoxContainer/Pause Menu/GridContainer"]
+[node name="Restart" type="Button" parent="Pause Screen/MarginContainer/MarginContainer/VBoxContainer/Pause Menu"]
 layout_mode = 2
 size_flags_horizontal = 3
-theme = ExtResource("4_6c71v")
 text = "Restart"
 
-[node name="Setting" type="Button" parent="Pause Screen/MarginContainer/MarginContainer/VBoxContainer/Pause Menu/GridContainer"]
+[node name="Setting" type="Button" parent="Pause Screen/MarginContainer/MarginContainer/VBoxContainer/Pause Menu"]
 layout_mode = 2
 size_flags_horizontal = 3
-theme = ExtResource("4_6c71v")
 text = "Setting
 "
 
-[node name="Exit" type="Button" parent="Pause Screen/MarginContainer/MarginContainer/VBoxContainer/Pause Menu/GridContainer"]
+[node name="Exit" type="Button" parent="Pause Screen/MarginContainer/MarginContainer/VBoxContainer/Pause Menu"]
 layout_mode = 2
 size_flags_horizontal = 3
-theme = ExtResource("4_6c71v")
 text = "Exit
 "
 
 [node name="Pause Setting" type="VBoxContainer" parent="Pause Screen/MarginContainer/MarginContainer/VBoxContainer"]
 visible = false
 layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 3
-theme = ExtResource("4_6c71v")
 alignment = 1
 
-[node name="PanelContainer" type="PanelContainer" parent="Pause Screen/MarginContainer/MarginContainer/VBoxContainer/Pause Setting"]
-custom_minimum_size = Vector2(500, 0)
+[node name="GridContainer" type="GridContainer" parent="Pause Screen/MarginContainer/MarginContainer/VBoxContainer/Pause Setting"]
 layout_mode = 2
-size_flags_vertical = 4
-theme_override_styles/panel = SubResource("StyleBoxTexture_vuhmk")
-
-[node name="MarginContainer" type="MarginContainer" parent="Pause Screen/MarginContainer/MarginContainer/VBoxContainer/Pause Setting/PanelContainer"]
-layout_mode = 2
-theme_override_constants/margin_left = 20
-theme_override_constants/margin_top = 20
-theme_override_constants/margin_right = 20
-theme_override_constants/margin_bottom = 20
-
-[node name="GridContainer" type="GridContainer" parent="Pause Screen/MarginContainer/MarginContainer/VBoxContainer/Pause Setting/PanelContainer"]
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-size_flags_vertical = 4
-theme = ExtResource("4_6c71v")
 theme_override_constants/h_separation = 16
-theme_override_constants/v_separation = 16
 
-[node name="MarginContainer" type="MarginContainer" parent="Pause Screen/MarginContainer/MarginContainer/VBoxContainer/Pause Setting/PanelContainer/GridContainer"]
+[node name="Master Label" type="Label" parent="Pause Screen/MarginContainer/MarginContainer/VBoxContainer/Pause Setting/GridContainer"]
 layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-theme_override_constants/margin_bottom = 20
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Pause Screen/MarginContainer/MarginContainer/VBoxContainer/Pause Setting/PanelContainer/GridContainer/MarginContainer"]
-layout_mode = 2
-
-[node name="Volume Control" type="Label" parent="Pause Screen/MarginContainer/MarginContainer/VBoxContainer/Pause Setting/PanelContainer/GridContainer/MarginContainer/VBoxContainer"]
-layout_mode = 2
-theme = ExtResource("4_6c71v")
-theme_override_font_sizes/font_size = 40
-text = "Volume Control"
-horizontal_alignment = 1
-
-[node name="HSeparator" type="HSeparator" parent="Pause Screen/MarginContainer/MarginContainer/VBoxContainer/Pause Setting/PanelContainer/GridContainer/MarginContainer/VBoxContainer"]
-layout_mode = 2
-theme_override_constants/separation = 5
-theme_override_styles/separator = SubResource("StyleBoxFlat_c0ds5")
-
-[node name="Master Label" type="Label" parent="Pause Screen/MarginContainer/MarginContainer/VBoxContainer/Pause Setting/PanelContainer/GridContainer"]
-layout_mode = 2
-theme = ExtResource("4_6c71v")
-theme_override_font_sizes/font_size = 40
 text = "Master"
 horizontal_alignment = 1
 
-[node name="Master Slider" type="HSlider" parent="Pause Screen/MarginContainer/MarginContainer/VBoxContainer/Pause Setting/PanelContainer/GridContainer"]
+[node name="Master Slider" type="HSlider" parent="Pause Screen/MarginContainer/MarginContainer/VBoxContainer/Pause Setting/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
-theme = ExtResource("4_6c71v")
 max_value = 1.0
 step = 0.05
 value = 1.0
 
-[node name="Background Label" type="Label" parent="Pause Screen/MarginContainer/MarginContainer/VBoxContainer/Pause Setting/PanelContainer/GridContainer"]
+[node name="Background Label" type="Label" parent="Pause Screen/MarginContainer/MarginContainer/VBoxContainer/Pause Setting/GridContainer"]
 layout_mode = 2
-theme = ExtResource("4_6c71v")
 text = "Background"
 horizontal_alignment = 1
 
-[node name="Background Slider" type="HSlider" parent="Pause Screen/MarginContainer/MarginContainer/VBoxContainer/Pause Setting/PanelContainer/GridContainer"]
+[node name="Background Slider" type="HSlider" parent="Pause Screen/MarginContainer/MarginContainer/VBoxContainer/Pause Setting/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
-theme = ExtResource("4_6c71v")
 max_value = 1.0
 step = 0.05
 value = 1.0
 
-[node name="Sound Effect Label" type="Label" parent="Pause Screen/MarginContainer/MarginContainer/VBoxContainer/Pause Setting/PanelContainer/GridContainer"]
+[node name="Sound Effect Label" type="Label" parent="Pause Screen/MarginContainer/MarginContainer/VBoxContainer/Pause Setting/GridContainer"]
 layout_mode = 2
-theme = ExtResource("4_6c71v")
 text = "Sound Effect"
 horizontal_alignment = 1
 
-[node name="Sound Effect Slider" type="HSlider" parent="Pause Screen/MarginContainer/MarginContainer/VBoxContainer/Pause Setting/PanelContainer/GridContainer"]
+[node name="Sound Effect Slider" type="HSlider" parent="Pause Screen/MarginContainer/MarginContainer/VBoxContainer/Pause Setting/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
-theme = ExtResource("4_6c71v")
 max_value = 1.0
 step = 0.05
 value = 1.0
 
-[node name="Back" type="Button" parent="Pause Screen/MarginContainer/MarginContainer/VBoxContainer/Pause Setting/PanelContainer/GridContainer"]
+[node name="Back" type="Button" parent="Pause Screen/MarginContainer/MarginContainer/VBoxContainer/Pause Setting/GridContainer"]
 layout_mode = 2
-theme = ExtResource("4_6c71v")
 text = "Back"
 
 [node name="TitleScreen" type="Control" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 1
 
 [node name="Curtain Container" type="Node2D" parent="TitleScreen"]
 position = Vector2(577, -2)
@@ -365,7 +278,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("4_6c71v")
 theme_override_constants/margin_left = 100
 theme_override_constants/margin_top = 100
 theme_override_constants/margin_right = 100
@@ -373,238 +285,96 @@ theme_override_constants/margin_bottom = 50
 
 [node name="VBoxContainer" type="VBoxContainer" parent="TitleScreen/MarginContainer"]
 layout_mode = 2
-theme = ExtResource("4_6c71v")
 
 [node name="Title Label" type="Label" parent="TitleScreen/MarginContainer/VBoxContainer"]
 layout_mode = 2
-theme = ExtResource("4_6c71v")
 text = "Giggle Gauntlet 😂😂😂"
 label_settings = SubResource("LabelSettings_jkbkj")
 horizontal_alignment = 1
 
-[node name="Main Menu" type="VBoxContainer" parent="TitleScreen/MarginContainer/VBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="TitleScreen/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="MarginContainer" type="MarginContainer" parent="TitleScreen/MarginContainer/VBoxContainer/Main Menu"]
+[node name="Main Menu" type="GridContainer" parent="TitleScreen/MarginContainer/VBoxContainer"]
 layout_mode = 2
-size_flags_vertical = 3
-theme = ExtResource("4_6c71v")
+theme_override_constants/h_separation = 50
+columns = 4
 
-[node name="GridContainer" type="GridContainer" parent="TitleScreen/MarginContainer/VBoxContainer/Main Menu"]
+[node name="Start Game" type="Button" parent="TitleScreen/MarginContainer/VBoxContainer/Main Menu"]
 layout_mode = 2
-theme = ExtResource("4_6c71v")
-theme_override_constants/h_separation = 100
-theme_override_constants/v_separation = 0
-columns = 5
-
-[node name="Start Game" type="Button" parent="TitleScreen/MarginContainer/VBoxContainer/Main Menu/GridContainer"]
-custom_minimum_size = Vector2(250, 70)
-layout_mode = 2
-size_flags_horizontal = 4
+size_flags_horizontal = 3
 size_flags_vertical = 4
-theme = ExtResource("4_6c71v")
 text = "Start Game"
 
-[node name="Settings" type="Button" parent="TitleScreen/MarginContainer/VBoxContainer/Main Menu/GridContainer"]
-custom_minimum_size = Vector2(180, 70)
+[node name="Settings" type="Button" parent="TitleScreen/MarginContainer/VBoxContainer/Main Menu"]
 layout_mode = 2
-size_flags_horizontal = 6
+size_flags_horizontal = 3
 size_flags_vertical = 4
-theme = ExtResource("4_6c71v")
 text = "Settings"
 
-[node name="How To Play" type="Button" parent="TitleScreen/MarginContainer/VBoxContainer/Main Menu/GridContainer"]
-custom_minimum_size = Vector2(250, 70)
+[node name="How To Play" type="Button" parent="TitleScreen/MarginContainer/VBoxContainer/Main Menu"]
 layout_mode = 2
-size_flags_horizontal = 6
+size_flags_horizontal = 3
 size_flags_vertical = 4
-theme = ExtResource("4_6c71v")
 text = "How To Play"
 
-[node name="Credits" type="Button" parent="TitleScreen/MarginContainer/VBoxContainer/Main Menu/GridContainer"]
-custom_minimum_size = Vector2(160, 70)
+[node name="Exit" type="Button" parent="TitleScreen/MarginContainer/VBoxContainer/Main Menu"]
 layout_mode = 2
-size_flags_horizontal = 6
+size_flags_horizontal = 3
 size_flags_vertical = 4
-theme = ExtResource("4_6c71v")
-text = "Credits
-"
-
-[node name="Exit" type="Button" parent="TitleScreen/MarginContainer/VBoxContainer/Main Menu/GridContainer"]
-custom_minimum_size = Vector2(100, 70)
-layout_mode = 2
-size_flags_horizontal = 6
-size_flags_vertical = 4
-theme = ExtResource("4_6c71v")
 text = "Exit"
 
 [node name="Setting" type="VBoxContainer" parent="TitleScreen/MarginContainer/VBoxContainer"]
 visible = false
 layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 3
-theme = ExtResource("4_6c71v")
 alignment = 1
 
-[node name="PanelContainer" type="PanelContainer" parent="TitleScreen/MarginContainer/VBoxContainer/Setting"]
-custom_minimum_size = Vector2(500, 0)
+[node name="GridContainer" type="GridContainer" parent="TitleScreen/MarginContainer/VBoxContainer/Setting"]
 layout_mode = 2
-size_flags_vertical = 4
-theme_override_styles/panel = SubResource("StyleBoxTexture_vuhmk")
-
-[node name="MarginContainer" type="MarginContainer" parent="TitleScreen/MarginContainer/VBoxContainer/Setting/PanelContainer"]
-layout_mode = 2
-theme_override_constants/margin_left = 20
-theme_override_constants/margin_top = 20
-theme_override_constants/margin_right = 20
-theme_override_constants/margin_bottom = 20
-
-[node name="GridContainer" type="GridContainer" parent="TitleScreen/MarginContainer/VBoxContainer/Setting/PanelContainer"]
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-size_flags_vertical = 4
-theme = ExtResource("4_6c71v")
 theme_override_constants/h_separation = 16
-theme_override_constants/v_separation = 16
 
-[node name="MarginContainer" type="MarginContainer" parent="TitleScreen/MarginContainer/VBoxContainer/Setting/PanelContainer/GridContainer"]
+[node name="Master Label" type="Label" parent="TitleScreen/MarginContainer/VBoxContainer/Setting/GridContainer"]
 layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-theme_override_constants/margin_bottom = 20
-
-[node name="VBoxContainer" type="VBoxContainer" parent="TitleScreen/MarginContainer/VBoxContainer/Setting/PanelContainer/GridContainer/MarginContainer"]
-layout_mode = 2
-
-[node name="Volume Control" type="Label" parent="TitleScreen/MarginContainer/VBoxContainer/Setting/PanelContainer/GridContainer/MarginContainer/VBoxContainer"]
-layout_mode = 2
-theme = ExtResource("4_6c71v")
-theme_override_font_sizes/font_size = 40
-text = "Volume Control"
-horizontal_alignment = 1
-
-[node name="HSeparator" type="HSeparator" parent="TitleScreen/MarginContainer/VBoxContainer/Setting/PanelContainer/GridContainer/MarginContainer/VBoxContainer"]
-layout_mode = 2
-theme_override_constants/separation = 5
-theme_override_styles/separator = SubResource("StyleBoxFlat_c0ds5")
-
-[node name="Master Label" type="Label" parent="TitleScreen/MarginContainer/VBoxContainer/Setting/PanelContainer/GridContainer"]
-layout_mode = 2
-theme = ExtResource("4_6c71v")
-theme_override_font_sizes/font_size = 40
 text = "Master"
 horizontal_alignment = 1
 
-[node name="Master Slider" type="HSlider" parent="TitleScreen/MarginContainer/VBoxContainer/Setting/PanelContainer/GridContainer"]
+[node name="Master Slider" type="HSlider" parent="TitleScreen/MarginContainer/VBoxContainer/Setting/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
-theme = ExtResource("4_6c71v")
 max_value = 1.0
 step = 0.05
 value = 1.0
 
-[node name="Background Label" type="Label" parent="TitleScreen/MarginContainer/VBoxContainer/Setting/PanelContainer/GridContainer"]
+[node name="Background Label" type="Label" parent="TitleScreen/MarginContainer/VBoxContainer/Setting/GridContainer"]
 layout_mode = 2
-theme = ExtResource("4_6c71v")
 text = "Background"
 horizontal_alignment = 1
 
-[node name="Background Slider" type="HSlider" parent="TitleScreen/MarginContainer/VBoxContainer/Setting/PanelContainer/GridContainer"]
+[node name="Background Slider" type="HSlider" parent="TitleScreen/MarginContainer/VBoxContainer/Setting/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
-theme = ExtResource("4_6c71v")
 max_value = 1.0
 step = 0.05
 value = 1.0
 
-[node name="Sound Effect Label" type="Label" parent="TitleScreen/MarginContainer/VBoxContainer/Setting/PanelContainer/GridContainer"]
+[node name="Sound Effect Label" type="Label" parent="TitleScreen/MarginContainer/VBoxContainer/Setting/GridContainer"]
 layout_mode = 2
-theme = ExtResource("4_6c71v")
 text = "Sound Effect"
 horizontal_alignment = 1
 
-[node name="Sound Effect Slider" type="HSlider" parent="TitleScreen/MarginContainer/VBoxContainer/Setting/PanelContainer/GridContainer"]
+[node name="Sound Effect Slider" type="HSlider" parent="TitleScreen/MarginContainer/VBoxContainer/Setting/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
-theme = ExtResource("4_6c71v")
 max_value = 1.0
 step = 0.05
 value = 1.0
 
-[node name="Back" type="Button" parent="TitleScreen/MarginContainer/VBoxContainer/Setting/PanelContainer/GridContainer"]
+[node name="Back" type="Button" parent="TitleScreen/MarginContainer/VBoxContainer/Setting/GridContainer"]
 layout_mode = 2
-theme = ExtResource("4_6c71v")
-text = "Back"
-
-[node name="Credits" type="PanelContainer" parent="TitleScreen/MarginContainer/VBoxContainer"]
-visible = false
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 6
-theme_override_styles/panel = SubResource("StyleBoxTexture_vuhmk")
-
-[node name="MarginContainer" type="MarginContainer" parent="TitleScreen/MarginContainer/VBoxContainer/Credits"]
-layout_mode = 2
-theme_override_constants/margin_left = 20
-theme_override_constants/margin_top = 20
-theme_override_constants/margin_right = 20
-theme_override_constants/margin_bottom = 20
-
-[node name="GridContainer" type="GridContainer" parent="TitleScreen/MarginContainer/VBoxContainer/Credits"]
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-size_flags_vertical = 4
-theme = ExtResource("4_6c71v")
-theme_override_constants/h_separation = 16
-theme_override_constants/v_separation = 16
-
-[node name="MarginContainer" type="MarginContainer" parent="TitleScreen/MarginContainer/VBoxContainer/Credits/GridContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-theme_override_constants/margin_bottom = 20
-
-[node name="VBoxContainer" type="VBoxContainer" parent="TitleScreen/MarginContainer/VBoxContainer/Credits/GridContainer/MarginContainer"]
-layout_mode = 2
-
-[node name="Credits" type="Label" parent="TitleScreen/MarginContainer/VBoxContainer/Credits/GridContainer/MarginContainer/VBoxContainer"]
-layout_mode = 2
-theme = ExtResource("4_6c71v")
-theme_override_font_sizes/font_size = 40
-text = "Credits"
-horizontal_alignment = 1
-
-[node name="HSeparator" type="HSeparator" parent="TitleScreen/MarginContainer/VBoxContainer/Credits/GridContainer/MarginContainer/VBoxContainer"]
-layout_mode = 2
-theme_override_constants/separation = 5
-theme_override_styles/separator = SubResource("StyleBoxFlat_c0ds5")
-
-[node name="Master Label" type="Label" parent="TitleScreen/MarginContainer/VBoxContainer/Credits/GridContainer"]
-layout_mode = 2
-theme = ExtResource("4_6c71v")
-theme_override_font_sizes/font_size = 40
-text = "Journey Jennings - Project Manager / Engineer
-Ashley Trace - Engineer
-Amita Karunakaran - Engineer
-Jack Valladares - Engineer
-Hieu Dinh - Engineer
-Tinley Hampton - 3d Artist
-Parker Cameron - 2d Artist
-Maile Sakamoto - 2d Artist
-Quill McClure - 2d Artist
-Taniyah Powell - 2d Artist
-(Santafunny) - 2d Artist
-Zack - Musician
-"
-horizontal_alignment = 1
-
-[node name="Back" type="Button" parent="TitleScreen/MarginContainer/VBoxContainer/Credits/GridContainer"]
-layout_mode = 2
-theme = ExtResource("4_6c71v")
 text = "Back"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="TitleScreen"]
@@ -613,22 +383,18 @@ libraries = {
 }
 
 [connection signal="pressed" from="GameUI/MarginContainer/VBoxContainer/Top UI Bar/TextureButton" to="." method="_on_ui_gear_button_pressed"]
-[connection signal="pressed" from="Pause Screen/MarginContainer/MarginContainer/VBoxContainer/Pause Menu/GridContainer/Resume" to="." method="_on_pause_resume_pressed"]
-[connection signal="pressed" from="Pause Screen/MarginContainer/MarginContainer/VBoxContainer/Pause Menu/GridContainer/Restart" to="." method="_on_pause_restart_pressed"]
-[connection signal="pressed" from="Pause Screen/MarginContainer/MarginContainer/VBoxContainer/Pause Menu/GridContainer/Setting" to="." method="_on_pause_setting_pressed"]
-[connection signal="pressed" from="Pause Screen/MarginContainer/MarginContainer/VBoxContainer/Pause Menu/GridContainer/Exit" to="." method="_on_pause_exit_pressed"]
-[connection signal="value_changed" from="Pause Screen/MarginContainer/MarginContainer/VBoxContainer/Pause Setting/PanelContainer/GridContainer/Master Slider" to="." method="_on_master_slider_value_changed"]
-[connection signal="value_changed" from="Pause Screen/MarginContainer/MarginContainer/VBoxContainer/Pause Setting/PanelContainer/GridContainer/Background Slider" to="." method="_on_background_slider_value_changed"]
-[connection signal="value_changed" from="Pause Screen/MarginContainer/MarginContainer/VBoxContainer/Pause Setting/PanelContainer/GridContainer/Sound Effect Slider" to="." method="_on_sound_effect_slider_value_changed"]
-[connection signal="pressed" from="Pause Screen/MarginContainer/MarginContainer/VBoxContainer/Pause Setting/PanelContainer/GridContainer/Back" to="." method="_on_pause_setting_back_pressed"]
-[connection signal="pressed" from="TitleScreen/MarginContainer/VBoxContainer/Main Menu/GridContainer/Start Game" to="." method="_on_start_game_pressed"]
-[connection signal="pressed" from="TitleScreen/MarginContainer/VBoxContainer/Main Menu/GridContainer/Settings" to="." method="_on_settings_pressed"]
-[connection signal="pressed" from="TitleScreen/MarginContainer/VBoxContainer/Main Menu/GridContainer/How To Play" to="." method="_on_how_to_play_pressed"]
-[connection signal="pressed" from="TitleScreen/MarginContainer/VBoxContainer/Main Menu/GridContainer/Credits" to="." method="_on_credits_pressed"]
-[connection signal="pressed" from="TitleScreen/MarginContainer/VBoxContainer/Main Menu/GridContainer/Exit" to="." method="_on_exit_pressed"]
-[connection signal="value_changed" from="TitleScreen/MarginContainer/VBoxContainer/Setting/PanelContainer/GridContainer/Master Slider" to="." method="_on_master_slider_value_changed"]
-[connection signal="value_changed" from="TitleScreen/MarginContainer/VBoxContainer/Setting/PanelContainer/GridContainer/Background Slider" to="." method="_on_background_slider_value_changed"]
-[connection signal="value_changed" from="TitleScreen/MarginContainer/VBoxContainer/Setting/PanelContainer/GridContainer/Sound Effect Slider" to="." method="_on_sound_effect_slider_value_changed"]
-[connection signal="pressed" from="TitleScreen/MarginContainer/VBoxContainer/Setting/PanelContainer/GridContainer/Back" to="." method="_on_back_pressed"]
-[connection signal="pressed" from="TitleScreen/MarginContainer/VBoxContainer/Credits/GridContainer/Back" to="." method="_on_back_pressed"]
+[connection signal="pressed" from="Pause Screen/MarginContainer/MarginContainer/VBoxContainer/Pause Menu/Resume" to="." method="_on_pause_resume_pressed"]
+[connection signal="pressed" from="Pause Screen/MarginContainer/MarginContainer/VBoxContainer/Pause Menu/Restart" to="." method="_on_pause_restart_pressed"]
+[connection signal="pressed" from="Pause Screen/MarginContainer/MarginContainer/VBoxContainer/Pause Menu/Setting" to="." method="_on_pause_setting_pressed"]
+[connection signal="pressed" from="Pause Screen/MarginContainer/MarginContainer/VBoxContainer/Pause Menu/Exit" to="." method="_on_pause_exit_pressed"]
+[connection signal="value_changed" from="Pause Screen/MarginContainer/MarginContainer/VBoxContainer/Pause Setting/GridContainer/Master Slider" to="." method="_on_master_slider_value_changed"]
+[connection signal="value_changed" from="Pause Screen/MarginContainer/MarginContainer/VBoxContainer/Pause Setting/GridContainer/Background Slider" to="." method="_on_background_slider_value_changed"]
+[connection signal="value_changed" from="Pause Screen/MarginContainer/MarginContainer/VBoxContainer/Pause Setting/GridContainer/Sound Effect Slider" to="." method="_on_sound_effect_slider_value_changed"]
+[connection signal="pressed" from="Pause Screen/MarginContainer/MarginContainer/VBoxContainer/Pause Setting/GridContainer/Back" to="." method="_on_pause_setting_back_pressed"]
+[connection signal="pressed" from="TitleScreen/MarginContainer/VBoxContainer/Main Menu/Start Game" to="." method="_on_start_game_pressed"]
+[connection signal="pressed" from="TitleScreen/MarginContainer/VBoxContainer/Main Menu/Settings" to="." method="_on_settings_pressed"]
+[connection signal="pressed" from="TitleScreen/MarginContainer/VBoxContainer/Main Menu/How To Play" to="." method="_on_how_to_play_pressed"]
+[connection signal="pressed" from="TitleScreen/MarginContainer/VBoxContainer/Main Menu/Exit" to="." method="_on_exit_pressed"]
+[connection signal="value_changed" from="TitleScreen/MarginContainer/VBoxContainer/Setting/GridContainer/Master Slider" to="." method="_on_master_slider_value_changed"]
+[connection signal="pressed" from="TitleScreen/MarginContainer/VBoxContainer/Setting/GridContainer/Back" to="." method="_on_back_pressed"]
 [connection signal="animation_finished" from="TitleScreen/AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

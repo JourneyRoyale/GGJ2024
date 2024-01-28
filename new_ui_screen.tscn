@@ -30,7 +30,7 @@ var game_scene = load(\"res://scenes/Game.tscn\")
 
 #Game UI
 @onready var game_ui = get_node(\"GameUI\")
-@onready var timer = get_node(\"GameUI/MarginContainer/VBoxContainer/Top UI Bar/Timer\")
+@onready var score = get_node(\"GameUI/MarginContainer/VBoxContainer/Top UI Bar/PlayerScore\")
 @onready var laughter_meter = get_node(\"GameUI/MarginContainer/VBoxContainer/Top UI Bar/Laughter Meter\")
 @onready var joke_bar = get_node(\"GameUI/MarginContainer/VBoxContainer/Joke Bar\")
 var packed_joke_button = load(\"res://prefab/JokeButton.tscn\")
@@ -41,7 +41,7 @@ var packed_joke_button = load(\"res://prefab/JokeButton.tscn\")
 
 func _process(delta):
 	if (game_manager.isPlaying):
-		_sync_time()
+		_sync_score()
 		_sync_laughter()
 
 func _input(event):
@@ -60,21 +60,17 @@ func _sync_volume(node):
 
 func _sync_laughter():
 	laughter_meter.value = round_to_dec(game_manager.score / 100, 2)
+	print(\"Laughter Meter Value: \", laughter_meter.value )
 	
 func createSplat():
 	get_node(\"GameUI/TomatoSplat\").createSplat()
 
-func _sync_time():
-	timer.text = time_convert(game_manager.set_time - game_manager.timer)
+func _sync_score():
+	score.text = str(int(game_manager.player_score))
 	
 func round_to_dec(num, digit):
 	return round(num * pow(10.0, digit)) / pow(10.0, digit)
 
-func time_convert(time_in_sec):
-	time_in_sec = int(time_in_sec)
-	var seconds = time_in_sec%60
-	var minutes = (time_in_sec/60)%60
-	return \"%02d:%02d\" % [minutes, seconds]
 
 #Main Menu
 func _on_start_game_pressed():
@@ -255,21 +251,18 @@ size_flags_horizontal = 3
 size_flags_vertical = 4
 theme = ExtResource("1_8kqac")
 theme_override_font_sizes/font_size = 1
-max_value = 2.0
+max_value = 1.0
 value = 1.0
 show_percentage = false
 
-[node name="Seperator2" type="Control" parent="GameUI/MarginContainer/VBoxContainer/Top UI Bar"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme = ExtResource("1_8kqac")
-
-[node name="Timer" type="Label" parent="GameUI/MarginContainer/VBoxContainer/Top UI Bar"]
+[node name="PlayerScore" type="Label" parent="GameUI/MarginContainer/VBoxContainer/Top UI Bar"]
+clip_contents = true
+custom_minimum_size = Vector2(576, 0)
 layout_mode = 2
 size_flags_horizontal = 8
 theme = ExtResource("1_8kqac")
 theme_override_font_sizes/font_size = 100
-text = "10:00"
+text = "0"
 horizontal_alignment = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="GameUI/MarginContainer/VBoxContainer"]

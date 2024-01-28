@@ -9,65 +9,78 @@
 [ext_resource type="PackedScene" uid="uid://b7efb0ou050m6" path="res://audience.tscn" id="6_qje8n"]
 [ext_resource type="PackedScene" uid="uid://bskgpd4m757s" path="res://prefab/ui_screen.tscn" id="7_jluwv"]
 
-[sub_resource type="PlaneMesh" id="PlaneMesh_2nep6"]
+[sub_resource type="PlaneMesh" id="PlaneMesh_j60il"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_344r5"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tjyg5"]
 albedo_color = Color(0.219608, 0.219608, 0.219608, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_v23qb"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_60c1h"]
+albedo_color = Color(0.521569, 0.521569, 0.521569, 1)
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_v7e3w"]
 points = PackedVector3Array(-0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5)
 
-[sub_resource type="BoxMesh" id="BoxMesh_ecs3e"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_j3y3t"]
-albedo_color = Color(0.521569, 0.521569, 0.521569, 1)
-
 [node name="Orthogonal" type="Node3D"]
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.906308, 0.422618, 0, -0.422618, 0.906308, 0, 7.063, 10)
+transform = Transform3D(1, -5.95416e-16, 2.4663e-16, 2.4663e-16, 0.707107, 0.707107, -5.95416e-16, -0.707107, 0.707107, 2.08165e-12, 7.063, 2)
 projection = 1
-current = true
 size = 12.0
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.00396917, 0.929172, -0.369628, 0.96977, 0.0866099, 0.228134, 0.243989, -0.359359, -0.900739, -0.278868, 0.456484, -0.769173)
 
-[node name="Comedian" parent="." node_paths=PackedStringArray("camera_ref") instance=ExtResource("1_pplf1")]
+[node name="Comedian" parent="." instance=ExtResource("1_pplf1")]
 transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 5.14236, 5.41365)
-camera_ref = NodePath("../Camera3D")
 
-[node name="StaticBody3D2" type="StaticBody3D" parent="."]
-transform = Transform3D(-0.5, 0, -7.54979e-08, 0, 0.5, 0, 7.54979e-08, 0, -0.5, 0, 0, 0)
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D2"]
-transform = Transform3D(1, 0, -1.29082e-14, 0, 1, 0, 1.29082e-14, 0, 1, 2.73313e-08, 0, -0.312633)
-mesh = ExtResource("2_hf10p")
-skeleton = NodePath("../../StaticBody3D2")
-
-[node name="StaticBody3D" type="StaticBody3D" parent="."]
+[node name="Environment" type="StaticBody3D" parent="."]
 transform = Transform3D(-20, 0, -1.74846e-06, 0, 20, 0, 1.74846e-06, 0, -20, 0, 0, 0)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
-mesh = SubResource("PlaneMesh_2nep6")
+[node name="Floor" type="MeshInstance3D" parent="Environment"]
+mesh = SubResource("PlaneMesh_j60il")
 skeleton = NodePath("../..")
-surface_material_override/0 = SubResource("StandardMaterial3D_344r5")
+surface_material_override/0 = SubResource("StandardMaterial3D_tjyg5")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.10567e-05, -0.439361, -0.414402)
+[node name="CurtainRight" type="MeshInstance3D" parent="Environment"]
+transform = Transform3D(1, -1.02157e-16, 2.4663e-17, 2.4663e-16, 0.707107, -0.0707107, -1.02157e-16, 0.707107, 0.0707107, -0.900706, 0.00265056, -0.000804007)
+mesh = SubResource("BoxMesh_v23qb")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_60c1h")
+
+[node name="CurtainLeft" type="MeshInstance3D" parent="Environment"]
+transform = Transform3D(1, -1.02157e-16, 2.4663e-17, 2.4663e-16, 0.707107, -0.0707107, -1.02157e-16, 0.707107, 0.0707107, 0.912698, 0.00410165, -0.00203091)
+mesh = SubResource("BoxMesh_v23qb")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_60c1h")
+
+[node name="Stage" type="StaticBody3D" parent="."]
+transform = Transform3D(-0.5, 0, -7.54979e-08, 0, 0.5, 0, 7.54979e-08, 0, -0.5, 0, 0, 0)
+
+[node name="StageMesh" type="MeshInstance3D" parent="Stage"]
+transform = Transform3D(1.01545, 0, -1.71528e-14, 0, 1.01545, 0, 1.42109e-14, 0, 1.01545, 2.73313e-08, 0, -0.312633)
+mesh = ExtResource("2_hf10p")
+
+[node name="EastWall" type="CollisionShape3D" parent="Stage"]
+transform = Transform3D(22, 0, -5.59441e-06, 0, 22, 0, 5.59441e-06, 0, 22, -22, 2.08165e-12, -4.5)
 shape = SubResource("ConvexPolygonShape3D_v7e3w")
 
-[node name="MeshInstance3D3" type="MeshInstance3D" parent="StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.1, -0.900706, 0.00265056, -0.000804007)
-mesh = SubResource("BoxMesh_ecs3e")
-skeleton = NodePath("../..")
-surface_material_override/0 = SubResource("StandardMaterial3D_j3y3t")
+[node name="WestWall" type="CollisionShape3D" parent="Stage"]
+transform = Transform3D(22, 0, -2.7972e-06, 0, 22, 0, 2.7972e-06, 0, 22, 22, 2.08165e-12, -4.5)
+shape = SubResource("ConvexPolygonShape3D_v7e3w")
 
-[node name="MeshInstance3D4" type="MeshInstance3D" parent="StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.1, 0.912698, 0.00410165, -0.00203091)
-mesh = SubResource("BoxMesh_ecs3e")
-skeleton = NodePath("../..")
-surface_material_override/0 = SubResource("StandardMaterial3D_j3y3t")
+[node name="StageCollider" type="CollisionShape3D" parent="Stage"]
+transform = Transform3D(22, 0, -1.3986e-06, 0, 22, 0, 1.3986e-06, 0, 22, 0.0838487, -10.3852, -4.71413)
+shape = SubResource("ConvexPolygonShape3D_v7e3w")
+
+[node name="NorthWall" type="CollisionShape3D" parent="Stage"]
+transform = Transform3D(22, 0, -2.7972e-06, 0, 22, 0, 2.7972e-06, 0, 22, 2.08165e-12, 2.08165e-12, 17)
+shape = SubResource("ConvexPolygonShape3D_v7e3w")
+
+[node name="SouthWall" type="CollisionShape3D" parent="Stage"]
+transform = Transform3D(22, 0, -2.7972e-06, 0, 22, 0, 2.7972e-06, 0, 22, 2.08165e-12, 2.08165e-12, -25)
+shape = SubResource("ConvexPolygonShape3D_v7e3w")
 
 [node name="AudioManager" type="Node3D" parent="."]
 script = ExtResource("2_dtwfq")

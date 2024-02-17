@@ -22,7 +22,7 @@ var joke_combo = 0;
 var laughter_score = 50.0;
 var player_score = 0;
 
-# Lane Constraints for Hecklers and Player
+# Lane Constraints for Player
 var lane_x_positions = [-6, -3, 0, 3, 6];
 var clamped_y_position = 1.945;
 var clamped_z_position = -0.529;

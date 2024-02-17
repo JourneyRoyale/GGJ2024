@@ -43,6 +43,10 @@ transform = Transform3D(0.00396917, 0.929172, -0.369628, 0.96977, 0.0866099, 0.2
 
 [node name="Comedian" parent="." instance=ExtResource("2_ulwln")]
 transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 1.9454, -0.529)
+ACCEL = null
+SPEED = null
+JUMP_VELOCITY = null
+INERTIA = null
 
 [node name="Environment" type="StaticBody3D" parent="."]
 transform = Transform3D(-1, 0, -1.50996e-07, 0, 1, 0, 1.50996e-07, 0, -1, 0, 0, 0)

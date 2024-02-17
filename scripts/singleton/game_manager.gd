@@ -6,11 +6,15 @@ extends Node
 
 # Export
 @export var set_time = 600;
-@export var player_score_base_increase_rate = .02;
-@export var player_score_increase_rate_multiplier = 1;
+#Commenting out just in case we want to re-implement gradually increasing score	
+#@export var player_score_base_increase_rate = .02;
+#@export var player_score_increase_rate_multiplier = 1;
+@export var multiplier_increase_frequency: int = 3; #How many jokes in the combo before multiplier goes up
 @export var error_amount = 10
 @export var match_amount = 10
 @export var hit_amount = 20
+@export var additional_multiplier: int = 0;
+@export var joke_combo: int = 0;
 
 # Variable
 var spotlight = false
@@ -18,7 +22,7 @@ var isPlaying = false
 var spotlight_bonus = 0
 var time_since_last_increase = 0.0
 var increase_interval = 5.0 
-var joke_combo = 0;
+
 var laughter_score = 50.0;
 var player_score = 0;
 
@@ -31,29 +35,32 @@ var clamped_z_position = -0.529;
 func _process(delta):
 	if(isPlaying):
 		#give a score multiplier based on spotlight status
-		if(spotlight):
-			spotlight_bonus = .5
-		else:
-			spotlight_bonus = 0
-			
-		player_score += player_score_base_increase_rate * (player_score_increase_rate_multiplier + spotlight_bonus)
+		#if(spotlight):
+		#	spotlight_bonus = .5
+		#else:
+		#	spotlight_bonus = 0
 		
-		time_since_last_increase += delta
+		#Commenting out just in case we want to re-implement gradually increasing score	
+		#player_score += player_score_base_increase_rate * (player_score_increase_rate_multiplier + spotlight_bonus)
 		
-		if time_since_last_increase >= increase_interval:
-			player_score_increase_rate_multiplier += 0.1 
-			time_since_last_increase = 0 
+		#time_since_last_increase += delta
+		
+		#if time_since_last_increase >= increase_interval:
+		#	player_score_increase_rate_multiplier += 0.1 
+		#	time_since_last_increase = 0 
+		additional_multiplier = (joke_combo / multiplier_increase_frequency)
+		additional_multiplier = int(additional_multiplier)
 		
 		if laughter_score <= 0:
 			get_tree().call_group("ThatsAllFolks", "start")
 
 
 func _successful_joke_score_increase():
-	if(spotlight):
-		spotlight_bonus = .5
-	else:
-		spotlight_bonus = 0
-	player_score += 50*(player_score_increase_rate_multiplier + spotlight_bonus)
+	#if(spotlight):
+	#	spotlight_bonus = .5
+	#else:
+	#	spotlight_bonus = 0
+	player_score += 50 * (1 + additional_multiplier)
 	
 func _tomato_score_decrease():
 	player_score = max(player_score-50, 0)

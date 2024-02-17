@@ -1,10 +1,6 @@
 extends CharacterBody3D
 
-@export var ACCEL = 1
-@export var SPEED = 7
-@export var JUMP_VELOCITY = 5.0
-@export var INERTIA = 0.3
-
+# On Ready
 @onready var sprite = get_node("Sprite")
 @onready var audio_manager = get_node("/root/AudioManager")
 @onready var game_manager = get_node("/root/GameManager")
@@ -12,52 +8,30 @@ extends CharacterBody3D
 @onready var stun_timer : Timer = get_node("StunTimer")
 @onready var animation_player : AnimationPlayer = get_node("AnimationPlayer")
 @onready var ui_screen = get_node("/root/Game/Ui Screen")
-# Get the gravity from the project settings to be synced with RigidBody nodes.
+
+# Export
+@export var ACCEL = 1
+@export var SPEED = 7
+@export var JUMP_VELOCITY = 5.0
+@export var INERTIA = 0.3
+
+# Constant
+var invulnerable_time = 1
+var stun_time = .25
+
+# Variable
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 var in_spotlight = false
 var idle = "front"
 var last_move = "left"
 var invulnerable = false
 var stunned = false
-var invulnerable_time = 1
-var stun_time = .25
 var dead = false 
-var inv_alt = 0
 
 func _ready():
 	if !dead:
 		animation_player.play("default")
 		audio_manager.play_music('Ragtime', 'Background')
-	
-func thats_all_folks():
-	if !dead:
-		dead = true
-		audio_manager.stop_music()
-		audio_manager.play_music('Bwack', 'Sound Effect')
-		invulnerable = false
-		animation_player.stop()
-		animation_player.play("yoink")
-		sprite.play("yoink")
-
-func projectile_collided():
-	if !dead:
-		if invulnerable:
-			return
-	  
-	if ui_screen:
-		ui_screen.createSplat()
-	else:
-		print("No UI Screen Node Found")
-	
-	game_manager.register_hit()
-	audio_manager.play_music('HitHurt', 'Sound Effect')
-	sprite.play("hit")
-	animation_player.play("Invuln")
-	invulnerable = true
-	stunned = true
-	stun_timer.start()
-	invulnerable_timer.start()
-	#TODO: Notify gamemanager
 
 func _physics_process(delta):
 	if stunned or dead:
@@ -65,10 +39,10 @@ func _physics_process(delta):
 		velocity.z = 0
 		return
 	
-	# Disable jump
 	# Add the gravity.
 	if not is_on_floor():
 		velocity.y -= gravity * delta
+	
 	# Handle jump.
 	#if Input.is_action_just_pressed("ui_accept") and is_on_floor():
 		#velocity.y = JUMP_VELOCITY
@@ -83,6 +57,7 @@ func _physics_process(delta):
 	velocity.z = clamp(velocity.z, -SPEED, SPEED)
 	velocity.x = move_toward(velocity.x, 0, INERTIA)
 	velocity.z = move_toward(velocity.z, 0, INERTIA)
+	
 	if direction.x > 0:
 		sprite.play("walk_right")
 		last_move = "right"
@@ -100,6 +75,7 @@ func _physics_process(delta):
 		
 	move_and_slide()
 
+# On stun timeout
 func _on_stun_timer_timeout():
 	if !dead:
 		animation_player.play("Invuln")
@@ -108,6 +84,7 @@ func _on_stun_timer_timeout():
 		invulnerable_timer.start(invulnerable_time)
 		sprite.play("idle_from_hit")
 
+# On invulnerablility timeout
 func _on_invulnerable_timer_timeout():
 	if !dead:
 		invulnerable = false
@@ -116,7 +93,36 @@ func _on_invulnerable_timer_timeout():
 		animation_player.play("default")
 		get_node("Sprite").visible = true
 		show()
-		
+
+# Play Game Over Animation
+func thats_all_folks():
+	if !dead:
+		dead = true
+		audio_manager.stop_music()
+		audio_manager.play_music('Bwack', 'Sound Effect')
+		invulnerable = false
+		animation_player.stop()
+		animation_player.play("yoink")
+		sprite.play("yoink")
+
+# On Tomato hit player
+func projectile_collided():
+	if dead or invulnerable:
+		return
+	  
+	if ui_screen:
+		ui_screen.createSplat()
+	else:
+		print("No UI Screen Node Found")
+	
+	game_manager.register_hit()
+	audio_manager.play_music('HitHurt', 'Sound Effect')
+	sprite.play("hit")
+	animation_player.play("Invuln")
+	invulnerable = true
+	stunned = true
+	stun_timer.start()
+	invulnerable_timer.start()
 
 # Not Used Anymore
 #func on_spotlight_entered():

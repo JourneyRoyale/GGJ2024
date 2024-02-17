@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://cuu5jhh8kojql"
+path="res://.godot/imported/Player Hurt.wav-e4254af6d1d5829e3f1c1d3ff0423e97.sample"
+
+[deps]
+
+source_file="res://music/Archive/Player Hurt.wav"
+dest_files=["res://.godot/imported/Player Hurt.wav-e4254af6d1d5829e3f1c1d3ff0423e97.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

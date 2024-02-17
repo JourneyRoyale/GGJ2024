@@ -1,16 +1,55 @@
 [gd_scene load_steps=18 format=3 uid="uid://cyhireyif4lth"]
 
-[ext_resource type="Texture2D" uid="uid://cmua1lqkbawoa" path="res://sprites/jokes/EggAsset-01.png" id="1_fw7gv"]
+[ext_resource type="Texture2D" uid="uid://cmua1lqkbawoa" path="res://sprites/jokes/egg.png" id="1_fw7gv"]
 [ext_resource type="Script" path="res://scripts/egg/egg.gd" id="2_vyl8j"]
 [ext_resource type="Script" path="res://scripts/egg/emoji.gd" id="3_a18lg"]
-[ext_resource type="Texture2D" uid="uid://ce583o7s2tbuj" path="res://sprites/jokes/ChickenDrumStickAsset-01.png" id="4_gy0yv"]
-[ext_resource type="Texture2D" uid="uid://dw2m80rhg0f7d" path="res://sprites/jokes/ChickenLogoAsset-01.png" id="5_1x2lv"]
-[ext_resource type="Texture2D" uid="uid://886it5vm2ecu" path="res://sprites/jokes/AlcoholAsset-01.png" id="6_1gqa6"]
-[ext_resource type="Texture2D" uid="uid://cmtnh448v0n0w" path="res://sprites/jokes/KnifeAsset-01.png" id="6_7g03r"]
-[ext_resource type="Texture2D" uid="uid://dwugcfv3jrt3f" path="res://sprites/jokes/HeartAsset-01.png" id="7_ib3wg"]
-[ext_resource type="Texture2D" uid="uid://wqqosgek8bjo" path="res://sprites/jokes/CigarAsset-01.png" id="8_y4vey"]
-[ext_resource type="Texture2D" uid="uid://bx4txy78e8ma3" path="res://sprites/jokes/MoneyBagAsset-01.png" id="9_4tgkj"]
-[ext_resource type="Texture2D" uid="uid://bmechf7hfuy7s" path="res://sprites/jokes/SkullAsset-01.png" id="10_jdkhd"]
+[ext_resource type="Texture2D" uid="uid://ce583o7s2tbuj" path="res://sprites/jokes/chicken_drumstick.png" id="4_gy0yv"]
+[ext_resource type="Texture2D" uid="uid://dw2m80rhg0f7d" path="res://sprites/jokes/chicken.png" id="5_1x2lv"]
+[ext_resource type="Texture2D" uid="uid://886it5vm2ecu" path="res://sprites/jokes/alcohol.png" id="6_1gqa6"]
+[ext_resource type="Texture2D" uid="uid://cmtnh448v0n0w" path="res://sprites/jokes/knife.png" id="6_7g03r"]
+[ext_resource type="Texture2D" uid="uid://dwugcfv3jrt3f" path="res://sprites/jokes/heart.png" id="7_ib3wg"]
+[ext_resource type="Texture2D" uid="uid://wqqosgek8bjo" path="res://sprites/jokes/cigar.png" id="8_y4vey"]
+[ext_resource type="Texture2D" uid="uid://bx4txy78e8ma3" path="res://sprites/jokes/money_bag.png" id="9_4tgkj"]
+[ext_resource type="Texture2D" uid="uid://bmechf7hfuy7s" path="res://sprites/jokes/skull.png" id="10_jdkhd"]
+
+[sub_resource type="Animation" id="Animation_3ufdr"]
+resource_name = "Egg Animation Death"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.6, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1180, 145), Vector2(1250, 139), Vector2(1289, 194)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.6, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 0.523599, 1.309]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:self_modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.1, 0.6, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0.588235), Color(1, 1, 1, 0)]
+}
 
 [sub_resource type="Animation" id="Animation_3nbh3"]
 resource_name = "Egg Animation"
@@ -39,25 +78,10 @@ tracks/1/keys = {
 "values": [Vector2(0.01, 0.01), Vector2(0.04, 0.04), Vector2(0.06, 0.06), Vector2(0.1, 0.1), Vector2(0.14, 0.14)]
 }
 
-[sub_resource type="Animation" id="Animation_3ufdr"]
-resource_name = "Egg Animation Death"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(),
-"transitions": PackedFloat32Array(),
-"update": 0,
-"values": []
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_2wry1"]
 _data = {
-"Egg Animation": SubResource("Animation_3nbh3"),
-"Egg Animation Death": SubResource("Animation_3ufdr")
+"Egg Death": SubResource("Animation_3ufdr"),
+"Egg Spawn": SubResource("Animation_3nbh3")
 }
 
 [sub_resource type="Animation" id="Animation_xj6f1"]
@@ -109,6 +133,7 @@ radius = 405.98
 height = 1207.9
 
 [node name="Egg" type="Sprite2D"]
+position = Vector2(1180, 145)
 scale = Vector2(0.01, 0.01)
 texture = ExtResource("1_fw7gv")
 script = ExtResource("2_vyl8j")
@@ -131,37 +156,37 @@ shape = SubResource("CapsuleShape2D_m6j7k")
 [node name="Emoji" type="Node2D" parent="."]
 scale = Vector2(0.7, 0.7)
 script = ExtResource("3_a18lg")
-emojis = [NodePath("Sprite2D"), NodePath("Sprite2D2"), NodePath("Sprite2D3"), NodePath("Sprite2D4"), NodePath("Sprite2D5"), NodePath("Sprite2D6"), NodePath("Sprite2D7"), NodePath("Sprite2D8")]
+emojis = [NodePath("Chicken Drumstick"), NodePath("Chicken"), NodePath("Alcohol"), NodePath("Knife"), NodePath("Heart"), NodePath("Cigar"), NodePath("Money Bag"), NodePath("Skull")]
 
-[node name="Sprite2D" type="Sprite2D" parent="Emoji"]
+[node name="Chicken Drumstick" type="Sprite2D" parent="Emoji"]
 visible = false
 texture = ExtResource("4_gy0yv")
 
-[node name="Sprite2D2" type="Sprite2D" parent="Emoji"]
+[node name="Chicken" type="Sprite2D" parent="Emoji"]
 visible = false
 texture = ExtResource("5_1x2lv")
 
-[node name="Sprite2D3" type="Sprite2D" parent="Emoji"]
+[node name="Alcohol" type="Sprite2D" parent="Emoji"]
 visible = false
 texture = ExtResource("6_1gqa6")
 
-[node name="Sprite2D4" type="Sprite2D" parent="Emoji"]
+[node name="Knife" type="Sprite2D" parent="Emoji"]
 visible = false
 texture = ExtResource("6_7g03r")
 
-[node name="Sprite2D5" type="Sprite2D" parent="Emoji"]
+[node name="Heart" type="Sprite2D" parent="Emoji"]
 visible = false
 texture = ExtResource("7_ib3wg")
 
-[node name="Sprite2D6" type="Sprite2D" parent="Emoji"]
+[node name="Cigar" type="Sprite2D" parent="Emoji"]
 visible = false
 texture = ExtResource("8_y4vey")
 
-[node name="Sprite2D7" type="Sprite2D" parent="Emoji"]
+[node name="Money Bag" type="Sprite2D" parent="Emoji"]
 visible = false
 texture = ExtResource("9_4tgkj")
 
-[node name="Sprite2D8" type="Sprite2D" parent="Emoji"]
+[node name="Skull" type="Sprite2D" parent="Emoji"]
 visible = false
 texture = ExtResource("10_jdkhd")
 

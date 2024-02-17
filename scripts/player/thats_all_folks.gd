@@ -1,31 +1,25 @@
 extends Node3D
 
+# On Ready
+@onready var game_manager = get_node("/root/GameManager")
+
+# Constant
 var in_time = 1
 var out_time = 1
 var current_time = 0
-@onready var game_manager = get_node("/root/GameManager")
-@export var player : Node3D
 
+# Export
+@export var player : Node3D
 @export var start_x : float = -20.0
+
+# Enum
+enum CANE_STATE { OFF, IN, OUT }
+
+# Variable
+var current_state = CANE_STATE.OFF
 var target_x : float = 0.0
 
-enum CANE_STATE { OFF, IN, OUT }
-var current_state = CANE_STATE.OFF
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	current_state = CANE_STATE.OFF
-
-func start():
-	if current_state == CANE_STATE.OFF:
-		current_time = 0
-		position.x = start_x
-		position.y = player.position.y
-		position.z = player.position.z
-		target_x = player.position.x
-		current_state = CANE_STATE.IN
-
-# Called every frame. 'delta' is the elapsed time since the previous framea
+# Move Cane until it hits player
 func _process(delta):
 	if game_manager.isPlaying == true:
 		if current_state == CANE_STATE.IN:
@@ -51,5 +45,14 @@ func _process(delta):
 				player.position.x = position.x
 			position.y = player.position.y
 			position.z = player.position.z
-		
-		
+
+# Set cane starting
+func start():
+	if current_state == CANE_STATE.OFF:
+		current_time = 0
+		position.x = start_x
+		position.y = player.position.y
+		position.z = player.position.z
+		target_x = player.position.x
+		current_state = CANE_STATE.IN
+

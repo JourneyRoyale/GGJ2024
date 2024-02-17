@@ -4,8 +4,8 @@
 [ext_resource type="PackedScene" uid="uid://bal0jss3qcmho" path="res://prefab/player/comedian.tscn" id="2_ulwln"]
 [ext_resource type="ArrayMesh" uid="uid://b7s1g8w1atyl6" path="res://3D/StageAsset.obj" id="3_rpgsj"]
 [ext_resource type="Script" path="res://scripts/singleton/audio_manager.gd" id="4_rfoap"]
-[ext_resource type="AudioStream" uid="uid://inflyfrfxqu7" path="res://music/refract.mp3" id="5_o2jcn"]
-[ext_resource type="AudioStream" uid="uid://b77xbhcraw287" path="res://music/mixkit-arcade-game-complete-or-approved-mission-205.wav" id="6_k7vlq"]
+[ext_resource type="AudioStream" uid="uid://inflyfrfxqu7" path="res://music/Archive/refract.mp3" id="5_o2jcn"]
+[ext_resource type="AudioStream" uid="uid://b77xbhcraw287" path="res://music/Archive/mixkit-arcade-game-complete-or-approved-mission-205.wav" id="6_k7vlq"]
 [ext_resource type="PackedScene" uid="uid://b7efb0ou050m6" path="res://prefab/audience/audience.tscn" id="7_haojk"]
 [ext_resource type="PackedScene" uid="uid://dylmrkofcgcmw" path="res://prefab/player/thats_all_folks.tscn" id="8_sca7o"]
 
@@ -104,14 +104,10 @@ stream = ExtResource("5_o2jcn")
 [node name="Arcade" type="AudioStreamPlayer" parent="AudioManager/Sound Effect"]
 stream = ExtResource("6_k7vlq")
 
-[node name="Audience" parent="." node_paths=PackedStringArray("heck") instance=ExtResource("7_haojk")]
+[node name="Audience" parent="." node_paths=PackedStringArray("heckler_position") instance=ExtResource("7_haojk")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.15, 2.255, -4.675)
 audience_positions = [NodePath("spawn1"), NodePath("spawn2"), NodePath("spawn3"), NodePath("spawn4"), NodePath("spawn5"), NodePath("spawn6"), NodePath("spawn7"), NodePath("spawn8"), NodePath("spawn9"), NodePath("spawn10")]
-heck = NodePath("HECK")
-question_popup_rate = 0.25
-question_popup_rate_deviance_min = -0.5
-question_popup_rate_deviance_max = 5
-question_popup_lifespan = 4
+heckler_position = NodePath("HecklerPosition")
 
 [node name="spawn1" type="Node3D" parent="Audience"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 2.08165e-12, -10)
@@ -143,7 +139,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 4, -15)
 [node name="spawn10" type="Node3D" parent="Audience"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 4, -15)
 
-[node name="HECK" type="Node3D" parent="Audience"]
+[node name="HecklerPosition" type="Node3D" parent="Audience"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.15, -1, -1)
 
 [node name="Members" type="Node" parent="Audience"]

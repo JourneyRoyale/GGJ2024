@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://dylmrkofcgcmw"]
 
 [ext_resource type="Script" path="res://scripts/player/thats_all_folks.gd" id="1_r5oal"]
-[ext_resource type="Texture2D" uid="uid://d4f3s4j0cf5rw" path="res://sprites/Cane_Sprite.png" id="2_7bqsd"]
+[ext_resource type="Texture2D" uid="uid://d4f3s4j0cf5rw" path="res://sprites/comedian/cane_sprite.png" id="2_7bqsd"]
 
 [node name="ThatsAllFolks" type="Node3D" groups=["ThatsAllFolks"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20, 4.75, 2.147)

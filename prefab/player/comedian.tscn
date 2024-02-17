@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://bal0jss3qcmho"]
 
 [ext_resource type="Script" path="res://scripts/game/comedian.gd" id="1_joff3"]
-[ext_resource type="SpriteFrames" uid="uid://cr383cnklcbny" path="res://sprites/spriteframes.tres" id="2_u6svr"]
+[ext_resource type="SpriteFrames" uid="uid://cr383cnklcbny" path="res://sprites/audience/comedian_animation.tres" id="2_u6svr"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_qdsn5"]
 

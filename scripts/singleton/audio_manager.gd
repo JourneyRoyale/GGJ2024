@@ -10,18 +10,16 @@ var master_volume = .5
 var background_volume = .5
 var sound_effect_volume = .5
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
+# Find music under node and return
+func _find_music(music_name, audio_type):
+	var child_node = get_node(audio_type)
+	
+	if(child_node != null):
+		return child_node.get_node(music_name)
+	else:
+		return null
 
-func _input(event):
-	if event is InputEventKey and event.pressed:
-		if event.keycode == KEY_Z:
-			play_music('Refractor','Background')
-		elif event.keycode == KEY_X:
-			play_music('Arcade','Sound Effect')
-
-
+# Play Music
 func play_music(music_name, audio_type):
 	var found_music = false;
 	var new_music = _find_music(music_name, audio_type)
@@ -39,14 +37,7 @@ func play_music(music_name, audio_type):
 	else:
 		print(audio_type, ', ', music_name, ' not found')
 
+# Stop Music
 func stop_music():
 	if current_music != null:
 		current_music._set_playing(false)
-
-func _find_music(music_name, audio_type):
-	var child_node = get_node(audio_type)
-
-	if(child_node != null):
-		return child_node.get_node(music_name)
-	else:
-		return null

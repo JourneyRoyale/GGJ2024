@@ -5,6 +5,9 @@ var game_scene = load("res://scenes/game.tscn")
 
 #Other
 @onready var animation = get_node("TitleScreen/AnimationPlayer")
+@onready var audio_manager = get_node("/root/AudioManager")
+@onready var game_manager = get_node("/root/GameManager")
+@onready var current_scene_name = get_tree().get_current_scene().get_name()
 
 #Title Screen
 @onready var title_screen = get_node("TitleScreen")
@@ -23,10 +26,6 @@ var game_scene = load("res://scenes/game.tscn")
 @onready var laughter_meter = get_node("GameUI/MarginContainer/VBoxContainer/Top UI Bar/Laughter Meter")
 @onready var joke_bar = get_node("GameUI/MarginContainer/VBoxContainer/Joke Bar")
 
-@onready var audio_manager = get_node("/root/AudioManager")
-@onready var game_manager = get_node("/root/GameManager")
-@onready var current_scene_name = get_tree().get_current_scene().get_name()
-
 func _process(delta):
 	if (game_manager.isPlaying):
 		_sync_score()
@@ -35,32 +34,27 @@ func _process(delta):
 func _input(event):
 	if event is InputEventKey and event.pressed:
 		if event.keycode == KEY_ESCAPE:
-			if(current_scene_name == "Game" and title_screen.visible == false):
+			if(current_scene_name != "start" and title_screen.visible == false):
 				pause_screen.visible = !pause_screen.visible
 				get_tree().paused = pause_screen.visible 
+
+
+func _sync_score():
+	score.text = str(int(game_manager.player_score))
+
+func _sync_laughter():
+	laughter_meter.value = _round_to_dec(game_manager.score / 100, 2)
 
 func _sync_volume(node):
 	node.get_node("PanelContainer/GridContainer/Master Slider").value = audio_manager.master_volume
 	node.get_node("PanelContainer/GridContainer/Background Slider").value = audio_manager.background_volume
 	node.get_node("PanelContainer/GridContainer/Sound Effect Slider").value = audio_manager.sound_effect_volume 
 
-func _sync_laughter():
-	laughter_meter.value = round_to_dec(game_manager.score / 100, 2)
-	
-func createSplat():
-	get_node("GameUI/TomatoSplat").createSplat()
-
-func _sync_score():
-	score.text = str(int(game_manager.player_score))
-	
-func round_to_dec(num, digit):
+func _round_to_dec(num, digit):
 	return round(num * pow(10.0, digit)) / pow(10.0, digit)
-
 
 #Main Menu
 func _on_start_game_pressed():
-	#if animation != null:
-	#	animation.play("curtains_open")
 	get_tree().call_group("Curtains", "start_game")
 	title_screen.visible = false
 	game_ui.visible = true
@@ -139,3 +133,6 @@ func _on_background_slider_value_changed(value):
 func _on_ui_gear_button_pressed():
 	pause_screen.visible = !pause_screen.visible
 	get_tree().paused = pause_screen.visible 
+
+func createSplat():
+	get_node("GameUI/TomatoSplat").createSplat()

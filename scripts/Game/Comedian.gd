@@ -18,62 +18,54 @@ extends CharacterBody3D
 # Constant
 var invulnerable_time = 1
 var stun_time = .25
+var clamped_y_position = 1.945
+var clamped_z_position = -0.529
 
 # Variable
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 var in_spotlight = false
-var idle = "front"
-var last_move = "left"
+var idle = "front";
+var last_move = "left";
+var is_moving = false;
 var invulnerable = false
 var stunned = false
 var dead = false 
+var lanes = [];
+var current_lane_index = 2;
+
 
 func _ready():
+	lanes = game_manager.lane_x_positions;
 	if !dead:
-		animation_player.play("default")
 		audio_manager.play_music('Ragtime', 'Background')
+		sprite.play("idle_from_left")
+		animation_player.play("default")
 
 func _physics_process(delta):
 	if stunned or dead:
-		velocity.x = 0
-		velocity.z = 0
 		return
 	
-	# Add the gravity.
-	if not is_on_floor():
-		velocity.y -= gravity * delta
-	
-	# Handle jump.
-	#if Input.is_action_just_pressed("ui_accept") and is_on_floor():
-		#velocity.y = JUMP_VELOCITY
-
-	# Get the input direction and handle the movement/deceleration.
-	# As good practice, you should replace UI actions with custom gameplay actions.
-	var input_dir = Input.get_vector("move_left", "move_right", "move_up", "move_down")
-	var direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
-	velocity.x += direction.x * ACCEL
-	velocity.z += direction.z * ACCEL
-	velocity.x = clamp(velocity.x, -SPEED, SPEED)
-	velocity.z = clamp(velocity.z, -SPEED, SPEED)
-	velocity.x = move_toward(velocity.x, 0, INERTIA)
-	velocity.z = move_toward(velocity.z, 0, INERTIA)
-	
-	if direction.x > 0:
-		sprite.play("walk_right")
-		last_move = "right"
-	elif direction.x < 0:
+	#movement in lanes
+	if Input.is_action_just_pressed("move_left"):
+		current_lane_index = max(current_lane_index - 1, 0) 
 		sprite.play("walk_left")
-		last_move = "left"
-	else:
-		if last_move == "left":
-			sprite.play("idle_from_left")
-		elif last_move == "right":
-			sprite.play("idle_from_right")
-	
-	if (velocity.x == 0 and velocity.z == 0):
-		sprite.stop()
+		is_moving = true;
+
+	if Input.is_action_just_pressed("move_right"):
+		current_lane_index = min(current_lane_index + 1, lanes.size() - 1)
+		sprite.play("walk_right")
+		is_moving = true;
 		
-	move_and_slide()
+	var target_position = Vector3(lanes[current_lane_index], clamped_y_position, clamped_z_position)
+	transform.origin = transform.origin.lerp(target_position, 0.1)
+	
+	if transform.origin.distance_to(target_position) < 0.1: # Threshold can be adjusted
+		if is_moving: # Check if we were moving to stop the sprite animation
+			if last_move == "left":
+				sprite.play("idle_from_left")
+			elif last_move == "right":
+				sprite.play("idle_from_right")
+			is_moving = false;
 
 # On stun timeout
 func _on_stun_timer_timeout():

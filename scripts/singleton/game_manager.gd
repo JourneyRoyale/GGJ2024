@@ -6,7 +6,6 @@ extends Node
 
 # Export
 @export var set_time = 600;
-@export var base_deplete_rate = 2;
 @export var player_score_base_increase_rate = .02;
 @export var player_score_increase_rate_multiplier = 1;
 @export var error_amount = 10
@@ -23,6 +22,11 @@ var joke_combo = 0;
 var laughter_score = 50.0;
 var player_score = 0;
 
+# Lane Constraints for Hecklers and Player
+var lane_x_positions = [-6, -3, 0, 3, 6];
+var clamped_y_position = 1.945;
+var clamped_z_position = -0.529;
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if(isPlaying):
@@ -32,7 +36,6 @@ func _process(delta):
 		else:
 			spotlight_bonus = 0
 			
-		laughter_score -= base_deplete_rate
 		player_score += player_score_base_increase_rate * (player_score_increase_rate_multiplier + spotlight_bonus)
 		
 		time_since_last_increase += delta

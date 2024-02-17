@@ -6,7 +6,6 @@ extends Node
 
 # Export
 @export var set_time = 600;
-@export var base_deplete_rate = 2;
 @export var player_score_base_increase_rate = .02;
 @export var player_score_increase_rate_multiplier = 1;
 @export var error_amount = 10
@@ -32,7 +31,6 @@ func _process(delta):
 		else:
 			spotlight_bonus = 0
 			
-		laughter_score -= base_deplete_rate
 		player_score += player_score_base_increase_rate * (player_score_increase_rate_multiplier + spotlight_bonus)
 		
 		time_since_last_increase += delta

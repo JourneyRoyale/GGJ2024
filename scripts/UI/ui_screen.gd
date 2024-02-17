@@ -43,7 +43,7 @@ func _sync_score():
 	score.text = str(int(game_manager.player_score))
 
 func _sync_laughter():
-	laughter_meter.value = _round_to_dec(game_manager.score / 100, 2)
+	laughter_meter.value = _round_to_dec(game_manager.laughter_score / 100, 2)
 
 func _sync_volume(node):
 	node.get_node("PanelContainer/GridContainer/Master Slider").value = audio_manager.master_volume

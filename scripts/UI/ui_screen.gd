@@ -25,11 +25,13 @@ var game_scene = load("res://scenes/game.tscn")
 @onready var score = get_node("GameUI/MarginContainer/VBoxContainer/Top UI Bar/PlayerScore")
 @onready var laughter_meter = get_node("GameUI/MarginContainer/VBoxContainer/Top UI Bar/Laughter Meter")
 @onready var joke_bar = get_node("GameUI/MarginContainer/VBoxContainer/Joke Bar")
+@onready var combo_counter = get_node("GameUI/ComboCounter")
 
 func _process(delta):
 	if (game_manager.isPlaying):
 		_sync_score()
 		_sync_laughter()
+		_sync_combo_counter()
 
 func _input(event):
 	if event is InputEventKey and event.pressed:
@@ -44,6 +46,11 @@ func _sync_score():
 
 func _sync_laughter():
 	laughter_meter.value = _round_to_dec(game_manager.laughter_score / 100, 2)
+
+func _sync_combo_counter():
+	combo_counter.visible = game_manager.additional_multiplier > 0
+	combo_counter.text = str(game_manager.additional_multiplier + 1) + "x"
+	
 
 func _sync_volume(node):
 	node.get_node("PanelContainer/GridContainer/Master Slider").value = audio_manager.master_volume

@@ -14,20 +14,15 @@ extends CharacterBody3D
 @onready var ui_screen = get_node("/root/Game/Ui Screen")
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
-
 var in_spotlight = false
-
 var idle = "front"
-
 var last_move = "left"
-
 var invulnerable = false
 var stunned = false
-
 var invulnerable_time = 1
 var stun_time = .25
-
-var dead = false
+var dead = false 
+var inv_alt = 0
 
 func _ready():
 	if !dead:
@@ -43,15 +38,6 @@ func thats_all_folks():
 		animation_player.stop()
 		animation_player.play("yoink")
 		sprite.play("yoink")
-
-func on_spotlight_entered():
-	if !dead:
-		in_spotlight = true
-		audio_manager.play_music('PowerUp', 'Sound Effect')
-	
-func on_spotlight_exited():
-	if !dead:
-		in_spotlight = false
 
 func projectile_collided():
 	if !dead:
@@ -73,21 +59,19 @@ func projectile_collided():
 	invulnerable_timer.start()
 	#TODO: Notify gamemanager
 
-
-var inv_alt = 0
-
 func _physics_process(delta):
 	if stunned or dead:
 		velocity.x = 0
 		velocity.z = 0
 		return
+	
+	# Disable jump
 	# Add the gravity.
 	if not is_on_floor():
 		velocity.y -= gravity * delta
-
 	# Handle jump.
-	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
-		velocity.y = JUMP_VELOCITY
+	#if Input.is_action_just_pressed("ui_accept") and is_on_floor():
+		#velocity.y = JUMP_VELOCITY
 
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
@@ -113,8 +97,7 @@ func _physics_process(delta):
 	
 	if (velocity.x == 0 and velocity.z == 0):
 		sprite.stop()
-	else:
-		sprite.play('new_animation');
+		
 	move_and_slide()
 
 func _on_stun_timer_timeout():
@@ -123,15 +106,24 @@ func _on_stun_timer_timeout():
 		stunned = false
 		stun_timer.stop()
 		invulnerable_timer.start(invulnerable_time)
-		print("starting invulnerable_time")
 		sprite.play("idle_from_hit")
 
 func _on_invulnerable_timer_timeout():
 	if !dead:
-		print("invuln off")
 		invulnerable = false
 		invulnerable_timer.stop()
 		animation_player.stop()
 		animation_player.play("default")
 		get_node("Sprite").visible = true
 		show()
+		
+
+# Not Used Anymore
+#func on_spotlight_entered():
+	#if !dead:
+		#in_spotlight = true
+		#audio_manager.play_music('PowerUp', 'Sound Effect')
+	#
+#func on_spotlight_exited():
+	#if !dead:
+		#in_spotlight = false

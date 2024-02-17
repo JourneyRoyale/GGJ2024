@@ -1,7 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://c7k74o0tq45d2"]
-
-[ext_resource type="Script" path="res://scripts/Singleton/GameManager.gd" id="1_jywg1"]
-
-[node name="GameManager" type="Node3D"]
-script = ExtResource("1_jywg1")
-base_deplete_rate = 0.01

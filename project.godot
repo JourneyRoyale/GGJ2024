@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Comedy Coop"
-run/main_scene="res://scenes/Start.tscn"
+run/main_scene="res://scenes/start.tscn"
 config/features=PackedStringArray("4.2", "GL Compatibility")
 config/icon="res://icon.svg"
 
@@ -21,8 +21,8 @@ buses/default_bus_layout="res://music/audio_bus_layout.tres"
 
 [autoload]
 
-GameManager="*res://prefab/game_manager.tscn"
-AudioManager="*res://prefab/audio_manager.tscn"
+GameManager="*res://prefab/singleton/game_manager.tscn"
+AudioManager="*res://prefab/singleton/audio_manager.tscn"
 
 [display]
 

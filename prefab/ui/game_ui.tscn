@@ -1,0 +1,604 @@
+[gd_scene load_steps=13 format=3 uid="uid://vxc02h1qnjha"]
+
+[ext_resource type="Theme" uid="uid://4c5xn5lj157e" path="res://theme/default.tres" id="1_8kqac"]
+[ext_resource type="PackedScene" uid="uid://c2hstesjai7p1" path="res://prefab/ui/curtain_container.tscn" id="1_33gma"]
+[ext_resource type="Script" path="res://scripts/ui/ui_screen.gd" id="1_x86dp"]
+[ext_resource type="Texture2D" uid="uid://ct1bgt227dwru" path="res://sprites/ui/GearIcon.png" id="2_wab3x"]
+[ext_resource type="Texture2D" uid="uid://d1fh5xoe5jk74" path="res://sprites/ui/Tomato_Splat_sprite.png" id="3_a8h4s"]
+[ext_resource type="Texture2D" uid="uid://rma688d35ap1" path="res://sprites/ui/White Rectangle With Gray.png" id="3_mjecg"]
+[ext_resource type="Script" path="res://scripts/ui/tomato_splat.gd" id="4_8xva2"]
+[ext_resource type="Texture2D" uid="uid://jb6gm7433n5o" path="res://sprites/ui/titleLogo.png" id="5_so5fd"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_vuhmk"]
+texture = ExtResource("3_mjecg")
+texture_margin_left = 40.0
+texture_margin_top = 30.0
+texture_margin_right = 38.0
+texture_margin_bottom = 40.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c0ds5"]
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+
+[sub_resource type="Animation" id="Animation_cx5om"]
+resource_name = "curtains_open"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0rtmh"]
+_data = {
+"curtains_open": SubResource("Animation_cx5om")
+}
+
+[node name="Ui Screen" type="Control"]
+process_mode = 3
+z_index = 1
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+script = ExtResource("1_x86dp")
+
+[node name="Curtain Container" parent="." instance=ExtResource("1_33gma")]
+
+[node name="GameUI" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+theme = ExtResource("1_8kqac")
+
+[node name="MarginContainer" type="MarginContainer" parent="GameUI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -60.0
+offset_bottom = -60.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_8kqac")
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 50
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GameUI/MarginContainer"]
+layout_mode = 2
+theme = ExtResource("1_8kqac")
+
+[node name="Top UI Bar" type="HBoxContainer" parent="GameUI/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_8kqac")
+alignment = 1
+
+[node name="TextureButton" type="TextureButton" parent="GameUI/MarginContainer/VBoxContainer/Top UI Bar"]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 2
+size_flags_horizontal = 0
+theme = ExtResource("1_8kqac")
+action_mode = 0
+texture_normal = ExtResource("2_wab3x")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="Seperator" type="Control" parent="GameUI/MarginContainer/VBoxContainer/Top UI Bar"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("1_8kqac")
+
+[node name="Laughter Meter" type="ProgressBar" parent="GameUI/MarginContainer/VBoxContainer/Top UI Bar"]
+modulate = Color(1, 0.0588235, 0.0588235, 1)
+custom_minimum_size = Vector2(800, 42)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme = ExtResource("1_8kqac")
+theme_override_font_sizes/font_size = 1
+max_value = 1.0
+value = 1.0
+show_percentage = false
+
+[node name="PlayerScore" type="Label" parent="GameUI/MarginContainer/VBoxContainer/Top UI Bar"]
+clip_contents = true
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+theme = ExtResource("1_8kqac")
+theme_override_font_sizes/font_size = 100
+text = "0"
+horizontal_alignment = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="GameUI/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("1_8kqac")
+
+[node name="Joke Bar" type="HBoxContainer" parent="GameUI/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 150)
+layout_direction = 3
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 8
+theme = ExtResource("1_8kqac")
+
+[node name="TomatoSplat" type="TextureRect" parent="GameUI"]
+process_mode = 1
+modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = 122.0
+offset_top = 103.0
+offset_right = 1750.0
+offset_bottom = 991.0
+texture = ExtResource("3_a8h4s")
+expand_mode = 1
+script = ExtResource("4_8xva2")
+
+[node name="Pause Screen" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_8kqac")
+
+[node name="MarginContainer" type="MarginContainer" parent="Pause Screen"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_8kqac")
+
+[node name="ColorRect" type="ColorRect" parent="Pause Screen/MarginContainer"]
+layout_mode = 2
+theme = ExtResource("1_8kqac")
+color = Color(0.0980392, 0.0980392, 0.0980392, 0.615686)
+
+[node name="MarginContainer" type="MarginContainer" parent="Pause Screen/MarginContainer"]
+layout_mode = 2
+theme = ExtResource("1_8kqac")
+theme_override_constants/margin_left = 100
+theme_override_constants/margin_top = 100
+theme_override_constants/margin_right = 100
+theme_override_constants/margin_bottom = 50
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Pause Screen/MarginContainer/MarginContainer"]
+layout_mode = 2
+theme = ExtResource("1_8kqac")
+
+[node name="Label" type="Label" parent="Pause Screen/MarginContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_8kqac")
+theme_override_font_sizes/font_size = 75
+text = "Pause"
+horizontal_alignment = 1
+
+[node name="Pause Menu" type="VBoxContainer" parent="Pause Screen/MarginContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="Pause Screen/MarginContainer/MarginContainer/VBoxContainer/Pause Menu"]
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("1_8kqac")
+
+[node name="GridContainer" type="GridContainer" parent="Pause Screen/MarginContainer/MarginContainer/VBoxContainer/Pause Menu"]
+layout_mode = 2
+theme = ExtResource("1_8kqac")
+theme_override_constants/h_separation = 50
+columns = 4
+
+[node name="Resume" type="Button" parent="Pause Screen/MarginContainer/MarginContainer/VBoxContainer/Pause Menu/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("1_8kqac")
+text = "Resume"
+
+[node name="Restart" type="Button" parent="Pause Screen/MarginContainer/MarginContainer/VBoxContainer/Pause Menu/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("1_8kqac")
+text = "Restart"
+
+[node name="Setting" type="Button" parent="Pause Screen/MarginContainer/MarginContainer/VBoxContainer/Pause Menu/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("1_8kqac")
+text = "Setting
+"
+
+[node name="Exit" type="Button" parent="Pause Screen/MarginContainer/MarginContainer/VBoxContainer/Pause Menu/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("1_8kqac")
+text = "Exit
+"
+
+[node name="Pause Setting" type="VBoxContainer" parent="Pause Screen/MarginContainer/MarginContainer/VBoxContainer"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+theme = ExtResource("1_8kqac")
+alignment = 1
+
+[node name="PanelContainer" type="PanelContainer" parent="Pause Screen/MarginContainer/MarginContainer/VBoxContainer/Pause Setting"]
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxTexture_vuhmk")
+
+[node name="MarginContainer" type="MarginContainer" parent="Pause Screen/MarginContainer/MarginContainer/VBoxContainer/Pause Setting/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="GridContainer" type="GridContainer" parent="Pause Screen/MarginContainer/MarginContainer/VBoxContainer/Pause Setting/PanelContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_vertical = 4
+theme = ExtResource("1_8kqac")
+theme_override_constants/h_separation = 16
+theme_override_constants/v_separation = 16
+
+[node name="MarginContainer" type="MarginContainer" parent="Pause Screen/MarginContainer/MarginContainer/VBoxContainer/Pause Setting/PanelContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Pause Screen/MarginContainer/MarginContainer/VBoxContainer/Pause Setting/PanelContainer/GridContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="Volume Control" type="Label" parent="Pause Screen/MarginContainer/MarginContainer/VBoxContainer/Pause Setting/PanelContainer/GridContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_8kqac")
+theme_override_font_sizes/font_size = 40
+text = "Volume Control"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="Pause Screen/MarginContainer/MarginContainer/VBoxContainer/Pause Setting/PanelContainer/GridContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 5
+theme_override_styles/separator = SubResource("StyleBoxFlat_c0ds5")
+
+[node name="Master Label" type="Label" parent="Pause Screen/MarginContainer/MarginContainer/VBoxContainer/Pause Setting/PanelContainer/GridContainer"]
+layout_mode = 2
+theme = ExtResource("1_8kqac")
+theme_override_font_sizes/font_size = 40
+text = "Master"
+horizontal_alignment = 1
+
+[node name="Master Slider" type="HSlider" parent="Pause Screen/MarginContainer/MarginContainer/VBoxContainer/Pause Setting/PanelContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme = ExtResource("1_8kqac")
+max_value = 1.0
+step = 0.05
+value = 1.0
+
+[node name="Background Label" type="Label" parent="Pause Screen/MarginContainer/MarginContainer/VBoxContainer/Pause Setting/PanelContainer/GridContainer"]
+layout_mode = 2
+theme = ExtResource("1_8kqac")
+text = "Background"
+horizontal_alignment = 1
+
+[node name="Background Slider" type="HSlider" parent="Pause Screen/MarginContainer/MarginContainer/VBoxContainer/Pause Setting/PanelContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme = ExtResource("1_8kqac")
+max_value = 1.0
+step = 0.05
+value = 1.0
+
+[node name="Sound Effect Label" type="Label" parent="Pause Screen/MarginContainer/MarginContainer/VBoxContainer/Pause Setting/PanelContainer/GridContainer"]
+layout_mode = 2
+theme = ExtResource("1_8kqac")
+text = "Sound Effect"
+horizontal_alignment = 1
+
+[node name="Sound Effect Slider" type="HSlider" parent="Pause Screen/MarginContainer/MarginContainer/VBoxContainer/Pause Setting/PanelContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme = ExtResource("1_8kqac")
+max_value = 1.0
+step = 0.05
+value = 1.0
+
+[node name="Back" type="Button" parent="Pause Screen/MarginContainer/MarginContainer/VBoxContainer/Pause Setting/PanelContainer/GridContainer"]
+layout_mode = 2
+theme = ExtResource("1_8kqac")
+text = "Back"
+
+[node name="TitleScreen" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="TitleScreen"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_8kqac")
+theme_override_constants/margin_left = 100
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 100
+theme_override_constants/margin_bottom = 50
+
+[node name="TextureRect" type="TextureRect" parent="TitleScreen/MarginContainer"]
+custom_minimum_size = Vector2(500, 800)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("5_so5fd")
+expand_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TitleScreen/MarginContainer"]
+layout_mode = 2
+theme = ExtResource("1_8kqac")
+
+[node name="Main Menu" type="VBoxContainer" parent="TitleScreen/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="TitleScreen/MarginContainer/VBoxContainer/Main Menu"]
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("1_8kqac")
+
+[node name="GridContainer" type="GridContainer" parent="TitleScreen/MarginContainer/VBoxContainer/Main Menu"]
+layout_mode = 2
+theme = ExtResource("1_8kqac")
+theme_override_constants/h_separation = 300
+theme_override_constants/v_separation = 0
+columns = 5
+
+[node name="Start Game" type="Button" parent="TitleScreen/MarginContainer/VBoxContainer/Main Menu/GridContainer"]
+custom_minimum_size = Vector2(250, 70)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("1_8kqac")
+text = "Start Game"
+
+[node name="Settings" type="Button" parent="TitleScreen/MarginContainer/VBoxContainer/Main Menu/GridContainer"]
+custom_minimum_size = Vector2(180, 70)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+theme = ExtResource("1_8kqac")
+text = "Settings"
+
+[node name="Credits" type="Button" parent="TitleScreen/MarginContainer/VBoxContainer/Main Menu/GridContainer"]
+custom_minimum_size = Vector2(160, 70)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+theme = ExtResource("1_8kqac")
+text = "Credits
+"
+
+[node name="Exit" type="Button" parent="TitleScreen/MarginContainer/VBoxContainer/Main Menu/GridContainer"]
+custom_minimum_size = Vector2(100, 70)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+theme = ExtResource("1_8kqac")
+text = "Exit"
+
+[node name="Setting" type="VBoxContainer" parent="TitleScreen/MarginContainer/VBoxContainer"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+theme = ExtResource("1_8kqac")
+alignment = 1
+
+[node name="PanelContainer" type="PanelContainer" parent="TitleScreen/MarginContainer/VBoxContainer/Setting"]
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxTexture_vuhmk")
+
+[node name="MarginContainer" type="MarginContainer" parent="TitleScreen/MarginContainer/VBoxContainer/Setting/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="GridContainer" type="GridContainer" parent="TitleScreen/MarginContainer/VBoxContainer/Setting/PanelContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_vertical = 4
+theme = ExtResource("1_8kqac")
+theme_override_constants/h_separation = 16
+theme_override_constants/v_separation = 16
+
+[node name="MarginContainer" type="MarginContainer" parent="TitleScreen/MarginContainer/VBoxContainer/Setting/PanelContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TitleScreen/MarginContainer/VBoxContainer/Setting/PanelContainer/GridContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="Volume Control" type="Label" parent="TitleScreen/MarginContainer/VBoxContainer/Setting/PanelContainer/GridContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_8kqac")
+theme_override_font_sizes/font_size = 40
+text = "Volume Control"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="TitleScreen/MarginContainer/VBoxContainer/Setting/PanelContainer/GridContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 5
+theme_override_styles/separator = SubResource("StyleBoxFlat_c0ds5")
+
+[node name="Master Label" type="Label" parent="TitleScreen/MarginContainer/VBoxContainer/Setting/PanelContainer/GridContainer"]
+layout_mode = 2
+theme = ExtResource("1_8kqac")
+theme_override_font_sizes/font_size = 40
+text = "Master"
+horizontal_alignment = 1
+
+[node name="Master Slider" type="HSlider" parent="TitleScreen/MarginContainer/VBoxContainer/Setting/PanelContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme = ExtResource("1_8kqac")
+max_value = 1.0
+step = 0.05
+value = 1.0
+
+[node name="Background Label" type="Label" parent="TitleScreen/MarginContainer/VBoxContainer/Setting/PanelContainer/GridContainer"]
+layout_mode = 2
+theme = ExtResource("1_8kqac")
+text = "Background"
+horizontal_alignment = 1
+
+[node name="Background Slider" type="HSlider" parent="TitleScreen/MarginContainer/VBoxContainer/Setting/PanelContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme = ExtResource("1_8kqac")
+max_value = 1.0
+step = 0.05
+value = 1.0
+
+[node name="Sound Effect Label" type="Label" parent="TitleScreen/MarginContainer/VBoxContainer/Setting/PanelContainer/GridContainer"]
+layout_mode = 2
+theme = ExtResource("1_8kqac")
+text = "Sound Effect"
+horizontal_alignment = 1
+
+[node name="Sound Effect Slider" type="HSlider" parent="TitleScreen/MarginContainer/VBoxContainer/Setting/PanelContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme = ExtResource("1_8kqac")
+max_value = 1.0
+step = 0.05
+value = 1.0
+
+[node name="Back" type="Button" parent="TitleScreen/MarginContainer/VBoxContainer/Setting/PanelContainer/GridContainer"]
+layout_mode = 2
+theme = ExtResource("1_8kqac")
+text = "Back"
+
+[node name="Credits" type="PanelContainer" parent="TitleScreen/MarginContainer/VBoxContainer"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+theme_override_styles/panel = SubResource("StyleBoxTexture_vuhmk")
+
+[node name="MarginContainer" type="MarginContainer" parent="TitleScreen/MarginContainer/VBoxContainer/Credits"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="GridContainer" type="GridContainer" parent="TitleScreen/MarginContainer/VBoxContainer/Credits"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_vertical = 4
+theme = ExtResource("1_8kqac")
+theme_override_constants/h_separation = 16
+theme_override_constants/v_separation = 16
+
+[node name="MarginContainer" type="MarginContainer" parent="TitleScreen/MarginContainer/VBoxContainer/Credits/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TitleScreen/MarginContainer/VBoxContainer/Credits/GridContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="Credits" type="Label" parent="TitleScreen/MarginContainer/VBoxContainer/Credits/GridContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_8kqac")
+theme_override_font_sizes/font_size = 40
+text = "Credits"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="TitleScreen/MarginContainer/VBoxContainer/Credits/GridContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 5
+theme_override_styles/separator = SubResource("StyleBoxFlat_c0ds5")
+
+[node name="Master Label" type="Label" parent="TitleScreen/MarginContainer/VBoxContainer/Credits/GridContainer"]
+layout_mode = 2
+theme = ExtResource("1_8kqac")
+theme_override_font_sizes/font_size = 40
+text = "Journey Jennings - Project Manager / Engineer
+Ashley Trace - Engineer
+Amita Karunakaran - Engineer
+Jack Valladares - Engineer
+Hieu Dinh - Engineer
+Tinley Hampton - 3d Artist
+Parker Cameron - 2d Artist
+Maile Sakamoto - 2d Artist
+Quill McClure - 2d Artist
+Taniyah Powell - 2d Artist
+Jalen Roberts - 2d Artist
+Zack - Musician
+"
+horizontal_alignment = 1
+
+[node name="Back" type="Button" parent="TitleScreen/MarginContainer/VBoxContainer/Credits/GridContainer"]
+layout_mode = 2
+theme = ExtResource("1_8kqac")
+text = "Back"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="TitleScreen"]
+libraries = {
+"": SubResource("AnimationLibrary_0rtmh")
+}
+
+[connection signal="pressed" from="GameUI/MarginContainer/VBoxContainer/Top UI Bar/TextureButton" to="." method="_on_ui_gear_button_pressed"]
+[connection signal="pressed" from="Pause Screen/MarginContainer/MarginContainer/VBoxContainer/Pause Menu/GridContainer/Resume" to="." method="_on_pause_resume_pressed"]
+[connection signal="pressed" from="Pause Screen/MarginContainer/MarginContainer/VBoxContainer/Pause Menu/GridContainer/Restart" to="." method="_on_pause_restart_pressed"]
+[connection signal="pressed" from="Pause Screen/MarginContainer/MarginContainer/VBoxContainer/Pause Menu/GridContainer/Setting" to="." method="_on_pause_setting_pressed"]
+[connection signal="pressed" from="Pause Screen/MarginContainer/MarginContainer/VBoxContainer/Pause Menu/GridContainer/Exit" to="." method="_on_pause_exit_pressed"]
+[connection signal="value_changed" from="Pause Screen/MarginContainer/MarginContainer/VBoxContainer/Pause Setting/PanelContainer/GridContainer/Master Slider" to="." method="_on_master_slider_value_changed"]
+[connection signal="value_changed" from="Pause Screen/MarginContainer/MarginContainer/VBoxContainer/Pause Setting/PanelContainer/GridContainer/Background Slider" to="." method="_on_background_slider_value_changed"]
+[connection signal="value_changed" from="Pause Screen/MarginContainer/MarginContainer/VBoxContainer/Pause Setting/PanelContainer/GridContainer/Sound Effect Slider" to="." method="_on_sound_effect_slider_value_changed"]
+[connection signal="pressed" from="Pause Screen/MarginContainer/MarginContainer/VBoxContainer/Pause Setting/PanelContainer/GridContainer/Back" to="." method="_on_pause_setting_back_pressed"]
+[connection signal="pressed" from="TitleScreen/MarginContainer/VBoxContainer/Main Menu/GridContainer/Start Game" to="." method="_on_start_game_pressed"]
+[connection signal="pressed" from="TitleScreen/MarginContainer/VBoxContainer/Main Menu/GridContainer/Settings" to="." method="_on_settings_pressed"]
+[connection signal="pressed" from="TitleScreen/MarginContainer/VBoxContainer/Main Menu/GridContainer/Credits" to="." method="_on_credits_pressed"]
+[connection signal="pressed" from="TitleScreen/MarginContainer/VBoxContainer/Main Menu/GridContainer/Exit" to="." method="_on_exit_pressed"]
+[connection signal="value_changed" from="TitleScreen/MarginContainer/VBoxContainer/Setting/PanelContainer/GridContainer/Master Slider" to="." method="_on_master_slider_value_changed"]
+[connection signal="value_changed" from="TitleScreen/MarginContainer/VBoxContainer/Setting/PanelContainer/GridContainer/Background Slider" to="." method="_on_background_slider_value_changed"]
+[connection signal="value_changed" from="TitleScreen/MarginContainer/VBoxContainer/Setting/PanelContainer/GridContainer/Sound Effect Slider" to="." method="_on_sound_effect_slider_value_changed"]
+[connection signal="pressed" from="TitleScreen/MarginContainer/VBoxContainer/Setting/PanelContainer/GridContainer/Back" to="." method="_on_back_pressed"]
+[connection signal="pressed" from="TitleScreen/MarginContainer/VBoxContainer/Credits/GridContainer/Back" to="." method="_on_back_pressed"]
+[connection signal="animation_finished" from="TitleScreen/AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

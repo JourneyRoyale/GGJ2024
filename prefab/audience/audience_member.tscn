@@ -1,0 +1,142 @@
+[gd_scene load_steps=22 format=3 uid="uid://d2ubdlbhl5wd5"]
+
+[ext_resource type="Texture2D" uid="uid://nei63u2nrds8" path="res://sprites/audience/audience.png" id="1_gi6vs"]
+[ext_resource type="Texture2D" uid="uid://b65jxkkklfumw" path="res://sprites/DF-Bases (1).png" id="2_vxe7x"]
+[ext_resource type="Script" path="res://scripts/game/audience_member.gd" id="3_n8tsr"]
+[ext_resource type="Texture2D" uid="uid://cqotupq7p6lxa" path="res://sprites/q4soglmekmhdh1lrgisaiipi6t.png" id="4_c44j3"]
+[ext_resource type="Texture2D" uid="uid://bg2vrkw1k74sx" path="res://sprites/blank.png" id="5_ltfok"]
+[ext_resource type="Texture2D" uid="uid://d0ryqaas3hduy" path="res://sprites/kisspng-cvs-pharmacy-child-infant-mouth-disease-thought-bubble-5a746a3ec14798.4822727115175788147917.png" id="6_0pbua"]
+[ext_resource type="Script" path="res://scripts/audience/emoji_3d.gd" id="7_37e7p"]
+[ext_resource type="Texture2D" uid="uid://ce583o7s2tbuj" path="res://sprites/jokes/ChickenDrumStickAsset-01.png" id="8_jqe7i"]
+[ext_resource type="Texture2D" uid="uid://dw2m80rhg0f7d" path="res://sprites/jokes/ChickenLogoAsset-01.png" id="9_lebfv"]
+[ext_resource type="Texture2D" uid="uid://886it5vm2ecu" path="res://sprites/jokes/AlcoholAsset-01.png" id="10_5cfh1"]
+[ext_resource type="Texture2D" uid="uid://cmtnh448v0n0w" path="res://sprites/jokes/KnifeAsset-01.png" id="11_oo3gj"]
+[ext_resource type="Texture2D" uid="uid://dwugcfv3jrt3f" path="res://sprites/jokes/HeartAsset-01.png" id="12_eyuju"]
+[ext_resource type="Texture2D" uid="uid://wqqosgek8bjo" path="res://sprites/jokes/CigarAsset-01.png" id="13_epg7q"]
+[ext_resource type="Texture2D" uid="uid://bx4txy78e8ma3" path="res://sprites/jokes/MoneyBagAsset-01.png" id="14_qsfng"]
+[ext_resource type="Texture2D" uid="uid://bmechf7hfuy7s" path="res://sprites/jokes/SkullAsset-01.png" id="15_6ttmu"]
+[ext_resource type="ArrayMesh" uid="uid://chre72e6kwwts" path="res://3D/SeatingAsset.obj" id="16_sw4x1"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yo082"]
+atlas = ExtResource("2_vxe7x")
+region = Rect2(0, 448, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qrde3"]
+atlas = ExtResource("2_vxe7x")
+region = Rect2(64, 448, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0vxdg"]
+atlas = ExtResource("2_vxe7x")
+region = Rect2(128, 448, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_00nde"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_gi6vs")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yo082")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qrde3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0vxdg")
+}],
+"loop": true,
+"name": &"new_animation",
+"speed": 5.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_tgvj7"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_c44j3")
+}],
+"loop": true,
+"name": &"bad",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_ltfok")
+}],
+"loop": true,
+"name": &"blank",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_0pbua")
+}],
+"loop": true,
+"name": &"good",
+"speed": 5.0
+}]
+
+[node name="AudienceMember" type="AnimatedSprite3D" groups=["Audience"]]
+transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, -0.137863, -0.567288, 0.135872)
+sprite_frames = SubResource("SpriteFrames_00nde")
+autoplay = "default"
+script = ExtResource("3_n8tsr")
+
+[node name="Bubble" type="AnimatedSprite3D" parent="."]
+transform = Transform3D(-6.25, 0, -9.43724e-07, 0, 6.25, 0, 9.43724e-07, 0, -6.25, -3.49108, 7.15555, 0.199715)
+sprite_frames = SubResource("SpriteFrames_tgvj7")
+animation = &"blank"
+
+[node name="Emoji3D" type="Node3D" parent="."]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 8.63121, 1.19971)
+script = ExtResource("7_37e7p")
+emojis = [NodePath("Sprite2D"), NodePath("Sprite2D2"), NodePath("Sprite2D3"), NodePath("Sprite2D4"), NodePath("Sprite2D5"), NodePath("Sprite2D6"), NodePath("Sprite2D7"), NodePath("Sprite2D8")]
+
+[node name="Sprite2D" type="Sprite3D" parent="Emoji3D"]
+transform = Transform3D(1.25, 0, 0, 0, 1.25, 0, 0, 0, 1.25, -17.3542, -4.7688, -2.24888)
+visible = false
+texture = ExtResource("8_jqe7i")
+
+[node name="Sprite2D2" type="Sprite3D" parent="Emoji3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.3542, -3.10149, -2.24888)
+visible = false
+texture = ExtResource("9_lebfv")
+
+[node name="Sprite2D3" type="Sprite3D" parent="Emoji3D"]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, -17.3542, -3.70202, -2.24888)
+visible = false
+texture = ExtResource("10_5cfh1")
+
+[node name="Sprite2D4" type="Sprite3D" parent="Emoji3D"]
+transform = Transform3D(1.75, 0, 0, 0, 1.75, 0, 0, 0, 1.75, -17.3542, -4.35198, -2.24888)
+visible = false
+texture = ExtResource("11_oo3gj")
+
+[node name="Sprite2D5" type="Sprite3D" parent="Emoji3D"]
+transform = Transform3D(1.75, 0, 0, 0, 1.75, 0, 0, 0, 1.75, -17.3542, -3.32446, -2.24888)
+visible = false
+texture = ExtResource("12_eyuju")
+
+[node name="Sprite2D6" type="Sprite3D" parent="Emoji3D"]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, -17.3542, -4.57306, -2.24888)
+visible = false
+texture = ExtResource("13_epg7q")
+
+[node name="Sprite2D7" type="Sprite3D" parent="Emoji3D"]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, -17.3542, -3.59352, -2.24888)
+visible = false
+texture = ExtResource("14_qsfng")
+
+[node name="Sprite2D8" type="Sprite3D" parent="Emoji3D"]
+transform = Transform3D(1.75, 0, 0, 0, 1.75, 0, 0, 0, 1.75, -17.3542, -3.70202, -2.24888)
+visible = false
+texture = ExtResource("15_6ttmu")
+
+[node name="Chair" type="MeshInstance3D" parent="."]
+transform = Transform3D(-1.09278e-07, -8.71967e-16, -2.5, 8.71967e-16, 2.5, -8.71967e-16, 2.5, -8.71967e-16, -1.09278e-07, 0.247781, -10.5337, -2.27177)
+mesh = ExtResource("16_sw4x1")

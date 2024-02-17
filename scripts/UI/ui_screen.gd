@@ -1,5 +1,8 @@
 extends Control
 
+#Scenc
+var game_scene = load("res://scenes/game.tscn")
+
 #Other
 @onready var animation = get_node("TitleScreen/AnimationPlayer")
 
@@ -15,29 +18,26 @@ extends Control
 @onready var pause_setting = get_node("Pause Screen/MarginContainer/MarginContainer/VBoxContainer/Pause Setting")
 
 #Game UI
-@onready var timer = get_node("GameUI/MarginContainer/VBoxContainer/Top UI Bar/Timer")
+@onready var game_ui = get_node("GameUI")
+@onready var score = get_node("GameUI/MarginContainer/VBoxContainer/Top UI Bar/PlayerScore")
 @onready var laughter_meter = get_node("GameUI/MarginContainer/VBoxContainer/Top UI Bar/Laughter Meter")
 @onready var joke_bar = get_node("GameUI/MarginContainer/VBoxContainer/Joke Bar")
-var packed_joke_button = load("res://prefab/JokeButton.tscn")
 
 @onready var audio_manager = get_node("/root/AudioManager")
 @onready var game_manager = get_node("/root/GameManager")
 @onready var current_scene_name = get_tree().get_current_scene().get_name()
 
-func _on_animation_player_animation_finished(anim_name):
-	if anim_name == "curtains_open":
-		game_manager.playing = true
-		
 func _process(delta):
-	pass
+	if (game_manager.isPlaying):
+		_sync_score()
+		_sync_laughter()
 
 func _input(event):
 	if event is InputEventKey and event.pressed:
 		if event.keycode == KEY_ESCAPE:
-			if(current_scene_name == "DemoScene2"):
+			if(current_scene_name == "Game" and title_screen.visible == false):
 				pause_screen.visible = !pause_screen.visible
 				get_tree().paused = pause_screen.visible 
-
 
 func _sync_volume(node):
 	node.get_node("PanelContainer/GridContainer/Master Slider").value = audio_manager.master_volume
@@ -45,25 +45,28 @@ func _sync_volume(node):
 	node.get_node("PanelContainer/GridContainer/Sound Effect Slider").value = audio_manager.sound_effect_volume 
 
 func _sync_laughter():
-	laughter_meter.value = round_to_dec(game_manager.laughter, 2)
+	laughter_meter.value = round_to_dec(game_manager.score / 100, 2)
+	
+func createSplat():
+	get_node("GameUI/TomatoSplat").createSplat()
 
-func _sync_time():
-	timer.text = time_convert(game_manager.set_time - game_manager.timer)
+func _sync_score():
+	score.text = str(int(game_manager.player_score))
 	
 func round_to_dec(num, digit):
 	return round(num * pow(10.0, digit)) / pow(10.0, digit)
 
-func time_convert(time_in_sec):
-	time_in_sec = int(time_in_sec)
-	var seconds = time_in_sec%60
-	var minutes = (time_in_sec/60)%60
-	return "%02d:%02d" % [minutes, seconds]
 
 #Main Menu
 func _on_start_game_pressed():
-	if animation != null:
-		animation.play("curtains_open")
+	#if animation != null:
+	#	animation.play("curtains_open")
+	get_tree().call_group("Curtains", "start_game")
 	title_screen.visible = false
+	game_ui.visible = true
+	game_manager.isPlaying = true
+	var instance = game_scene.instantiate()
+	get_node("/root/Game/Game Holder").add_child(instance)
 
 func _on_how_to_play_pressed():
 	pass # Replace with function body.
@@ -89,8 +92,15 @@ func _on_exit_pressed():
 #Pause Menu
 func _on_pause_resume_pressed():
 	pause_screen.visible = false
+	get_tree().paused = pause_screen.visible 
 
 func _on_pause_restart_pressed():
+	get_node("/root/Game/Game Holder").get_child(0).queue_free()
+	var instance = game_scene.instantiate()
+	get_node("/root/Game/Game Holder").add_child(instance)
+	pause_screen.visible = false
+	get_tree().paused = pause_screen.visible 
+	game_manager.reset_setting()
 	pass
 
 func _on_pause_setting_pressed():
@@ -103,7 +113,11 @@ func _on_pause_setting_back_pressed():
 	pause_setting.visible = false
 
 func _on_pause_exit_pressed():
-	get_tree().change_scene_to_file("res://scenes/DemoScene.tscn")
+	game_manager.exit_setting()
+	audio_manager.stop_music();
+	get_tree().paused = false
+	get_tree().change_scene_to_file("res://scenes/start.tscn")
+	game_ui.visible = false
 
 #Setting Slider
 func _on_master_slider_value_changed(value):
@@ -124,5 +138,4 @@ func _on_background_slider_value_changed(value):
 #Game UI
 func _on_ui_gear_button_pressed():
 	pause_screen.visible = !pause_screen.visible
-
-
+	get_tree().paused = pause_screen.visible 

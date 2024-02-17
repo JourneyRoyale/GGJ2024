@@ -69,7 +69,7 @@ animations = [{
 [sub_resource type="GDScript" id="GDScript_8hxnp"]
 script/source = "extends Node2D
 
-var packed_egg = load(\"res://prefab/Egg/egg.tscn\")
+var packed_egg = load(\"res://prefab/egg/egg.tscn\")
 @export var egg_delay = 1.0;
 @export var egg_speed = 3.0
 @onready var spawn_point = get_node(\"Spawn Point\")

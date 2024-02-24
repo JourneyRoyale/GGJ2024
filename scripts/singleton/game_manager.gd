@@ -26,8 +26,11 @@ var increase_interval = 5.0
 var laughter_score = 50.0;
 var player_score = 0;
 
-# Lane Constraints for Player
+# Lane Constraints for Player and Heckler
 var lane_x_positions = [-6, -3, 0, 3, 6];
+var heckler_lane_x_positions = [-6.2, -4.8, -1.8, 1.2, 4.2];
+var filled_lane_x_positions = [false, false, false, false, false]
+
 var clamped_y_position = 1.945;
 var clamped_z_position = -0.529;
 

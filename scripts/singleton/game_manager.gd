@@ -28,7 +28,7 @@ var player_score = 0;
 
 # Lane Constraints for Player and Heckler
 var lane_x_positions = [-6, -3, 0, 3, 6];
-var heckler_lane_x_positions = [-7.8, -4.8, -1.8, 1.2, 4.2];
+var heckler_lane_x_positions = [-6.2, -4.8, -1.8, 1.2, 4.2];
 var filled_lane_x_positions = [false, false, false, false, false]
 
 var clamped_y_position = 1.945;

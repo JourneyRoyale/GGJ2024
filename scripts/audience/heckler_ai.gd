@@ -4,6 +4,7 @@ extends Area3D
 @onready var animation_player = get_node("AnimationPlayer")
 @onready var sprite = get_node("AnimatedSprite3D")
 @onready var audio_manager = get_node("/root/AudioManager")
+@onready var game_manager = get_node("/root/GameManager")
 
 # Constants
 var MOVE_SPEED = 1.0
@@ -21,25 +22,38 @@ var move_timer = 0.0
 var is_moving = false
 var current_direction = Vector3(1.0, 0, 0).normalized()  # Starts moving right
 var packed_projectile = load("res://prefab/audience/projectile.tscn")
+var lanes = [];
+var current_lane = 0
 
 # Play Spawn Animation When Spawned
 func _ready():
 	sprite.play("spawn")
+	lanes = game_manager.heckler_lane_x_positions;
+	print("Lanes: ", lanes)
+	
 
 # Handle Heckler Movement
 func _process(delta):
 	if is_moving:
 		position += current_direction * MOVE_SPEED * delta * 5
 		move_timer += delta
-		
-		if move_timer > move_time:
-			_stop_moving()
+	
 		
 		# Check boundaries
 		if position.x <= LEFT_BOUNDARY and current_direction.x < 0:
 			current_direction.x = -current_direction.x  # Change to moving right
 		elif position.x >= RIGHT_BOUNDARY and current_direction.x > 0:
 			current_direction.x = -current_direction.x  # Change to moving left
+				
+		for lane_index in range(lanes.size()):
+			print("lane_x: ", lane_index)
+			print("lane value: ", lanes[lane_index])
+			if abs(position.x - lanes[lane_index]) < 0.02 and move_timer > move_time and not game_manager.filled_lane_x_positions[lane_index]:
+				print("Stopping in lane", lane_index, " as ", position.x, " == ", lanes[lane_index])  
+				game_manager.filled_lane_x_positions[lane_index] = true
+				current_lane = lane_index
+				_stop_moving()
+				break
 
 # Start Heckler Movement
 func _start_moving():
@@ -48,6 +62,7 @@ func _start_moving():
 	sprite.play("default")
 	move_time = randf_range(MOVE_TIME_MIN, MOVE_TIME_MAX)
 	move_timer = 0.0
+	game_manager.filled_lane_x_positions[current_lane] = false
 
 # Stop Heckler Movement To Throw Tomato
 func _stop_moving():
@@ -57,6 +72,7 @@ func _stop_moving():
 
 # Throw Tomato
 func _throw_tomato():
+	print("Filled Lanes: ", game_manager.filled_lane_x_positions)
 	is_moving = false
 	animation_player.play("throw")
 	sprite.play("throw")
@@ -78,21 +94,19 @@ func _create_throw_timer():
 	add_child(timer)  # Add the timer to the node tree
 	timer.start()
 
-# Move after throwing finished
 func _on_timer_timeout():
 	var instance = packed_projectile.instantiate()
-	# Add the projectile as a sibling rather than a child
+
 	if get_parent():
 		get_parent().add_child(instance)
 		instance.global_transform = global_transform 
-	
+
 	_start_moving()
 	
 	# Remove throw timer 
 	var timer_node = get_node("ThrowTimer")
 	if timer_node:
 		timer_node.queue_free()  # Safely remove the timer node
-
 # On Animation Finished
 func _on_animated_sprite_3d_animation_finished():
 	var anim_name = sprite.animation.get_basename()

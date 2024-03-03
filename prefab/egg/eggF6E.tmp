@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://cyhireyif4lth"]
+[gd_scene load_steps=18 format=3 uid="uid://cyhireyif4lth"]
 
 [ext_resource type="Texture2D" uid="uid://cmua1lqkbawoa" path="res://sprites/jokes/egg.png" id="1_fw7gv"]
 [ext_resource type="Script" path="res://scripts/egg/egg.gd" id="2_vyl8j"]
@@ -11,10 +11,6 @@
 [ext_resource type="Texture2D" uid="uid://wqqosgek8bjo" path="res://sprites/jokes/cigar.png" id="8_y4vey"]
 [ext_resource type="Texture2D" uid="uid://bx4txy78e8ma3" path="res://sprites/jokes/money_bag.png" id="9_4tgkj"]
 [ext_resource type="Texture2D" uid="uid://bmechf7hfuy7s" path="res://sprites/jokes/skull.png" id="10_jdkhd"]
-
-[sub_resource type="LabelSettings" id="LabelSettings_ufp1h"]
-font_size = 100
-font_color = Color(0, 0, 0, 1)
 
 [sub_resource type="Animation" id="Animation_3ufdr"]
 resource_name = "Egg Animation Death"
@@ -141,22 +137,7 @@ position = Vector2(1180, 145)
 scale = Vector2(0.1, 0.1)
 texture = ExtResource("1_fw7gv")
 script = ExtResource("2_vyl8j")
-
-[node name="Label" type="Label" parent="."]
-anchors_preset = -1
-anchor_left = 0.508
-anchor_top = 0.548
-anchor_right = 0.508
-anchor_bottom = 0.548
-offset_left = -765.0
-offset_top = -885.0
-offset_right = -675.0
-offset_bottom = -748.0
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(4, 4)
-text = "1"
-label_settings = SubResource("LabelSettings_ufp1h")
+speed = null
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -174,7 +155,6 @@ libraries = {
 shape = SubResource("CapsuleShape2D_m6j7k")
 
 [node name="Emoji" type="Node2D" parent="."]
-visible = false
 scale = Vector2(0.7, 0.7)
 script = ExtResource("3_a18lg")
 emojis = [NodePath("Chicken Drumstick"), NodePath("Chicken"), NodePath("Alcohol"), NodePath("Knife"), NodePath("Heart"), NodePath("Cigar"), NodePath("Money Bag"), NodePath("Skull")]

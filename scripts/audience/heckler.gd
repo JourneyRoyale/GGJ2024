@@ -26,7 +26,7 @@ var assigned_seat
 var assigned_floor
 var lanes = [];
 var current_lane = 0
-var health = 2
+var health = 5
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")

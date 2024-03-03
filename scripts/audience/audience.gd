@@ -68,8 +68,8 @@ func _on_timer_timeout():
 	children = children.slice(0, rand_children)
 	var num_children = children.size()
 	var force = randi_range(0, num_children-1)
-	for i in children:
-		i.show_emoji()
+	#for i in children:
+	#	i.show_emoji()
 	
 	var occupied_chair = chair_positions.filter(func(x): return get_node(x).occupied)
 	if (occupied_chair.size() < max_audience):
@@ -85,19 +85,6 @@ func hurt_all_hecklers():
 		if(heckler.health <= 0):
 			heckler.play_death()
 
-# Check Egg Click If Matched
-func check_for_match(egg,distance):
-	var emoji = egg.emoji_num
-	var matched = false
-	for i in members.get_children():
-		if i.check_for_match(emoji):
-			matched = true;
-	if (matched):
-		audio_manager.play_music('PickupCoin', 'Sound Effect')
-		game_manager.register_match(distance)
-	else:
-		audio_manager.play_music('HitHurt', 'Sound Effect')		
-		game_manager.register_error()
 
 func get_empty_chair():
 	var filter_chair = chair_positions.filter(func(x): return !get_node(x).occupied)

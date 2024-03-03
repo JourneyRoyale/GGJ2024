@@ -4,4 +4,3 @@
 
 [node name="GameManager" type="Node3D"]
 script = ExtResource("1_jywg1")
-base_deplete_rate = 0.01

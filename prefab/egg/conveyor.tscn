@@ -70,12 +70,7 @@ animations = [{
 [sub_resource type="GDScript" id="GDScript_8hxnp"]
 script/source = "extends Node2D
 
-# On Ready
-@onready var spawn_point = get_node(\"Spawn Point\")
-@onready var spawn_list = get_node(\"Spawn List\")
-@onready var timer = get_node(\"Timer\")
-@onready var egg_select = get_node(\"Egg Select\")
-@onready var packed_egg = load(\"res://prefab/egg/egg.tscn\")
+
 
 # Export
 @export var is_dynamic_egg = false;
@@ -93,27 +88,8 @@ func _input(event):
 			get_tree().call_group(\"AudienceManager\", \"check_for_match\", selected_egg, select_distance)
 			selected_egg.queue_free()
 
-# On timer expire create egg
-func _on_timer_timeout():
-	var instance = packed_egg.instantiate()
-	instance.speed = egg_speed;
-	spawn_list.add_child(instance)
-	instance.animation.play(\"Egg Animation\")
-	
-	if(is_dynamic_egg):
-		if(dynamic_egg_delay.size() > 0):
-			var delay = dynamic_egg_delay.pop_front()
-			timer.start(delay)
-		else:
-			timer.start()
 
-func _on_area_2d_area_entered(area):
-	selected_egg = area.get_parent()
-	
 
-func _on_area_2d_area_exited(area):
-	if (selected_egg.get_parent() == area):
-		selected_egg = null
 
 
 
@@ -129,7 +105,9 @@ autoplay = "default"
 frame_progress = 0.0925617
 script = SubResource("GDScript_8hxnp")
 is_dynamic_egg = true
+flat_egg_delay = null
 dynamic_egg_delay = [3, 1, 5, 2]
+egg_speed = null
 
 [node name="Spawn List" type="Node2D" parent="."]
 position = Vector2(-628, -95)

@@ -4,6 +4,7 @@ extends CharacterBody3D
 @onready var animation_player = get_node("AnimationPlayer")
 @onready var sprite = get_node("AnimatedSprite3D")
 @onready var audio_manager = get_node("/root/AudioManager")
+@onready var game_manager = get_node("/root/GameManager")
 
 # Constants
 var MOVE_SPEED = 1.0
@@ -22,6 +23,8 @@ var is_moving = false
 var current_direction = Vector3(1.0, 0, 0).normalized()  # Starts moving right
 var packed_projectile = load("res://prefab/audience/projectile.tscn")
 var assigned_floor
+var lanes = [];
+var current_lane = 0
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
@@ -30,6 +33,8 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 # Play Spawn Animation When Spawned
 func _ready():
 	sprite.play("spawn")
+	lanes = game_manager.heckler_lane_x_positions;
+	print("Lanes: ", lanes)
 
 func _physics_process(delta):
 	# Add the gravity.
@@ -48,6 +53,16 @@ func _physics_process(delta):
 			current_direction.x = -current_direction.x  # Change to moving right
 		elif position.x >= RIGHT_BOUNDARY and current_direction.x > 0:
 			current_direction.x = -current_direction.x  # Change to moving left
+			
+		for lane_index in range(lanes.size()):
+			print("lane_x: ", lane_index)
+			print("lane value: ", lanes[lane_index])
+			if abs(position.x - lanes[lane_index]) < 0.02 and move_timer > move_time and not game_manager.filled_lane_x_positions[lane_index]:
+				print("Stopping in lane", lane_index, " as ", position.x, " == ", lanes[lane_index])  
+				game_manager.filled_lane_x_positions[lane_index] = true
+				current_lane = lane_index
+				_stop_moving()
+				break
 	move_and_slide()
 
 # Start Heckler Movement

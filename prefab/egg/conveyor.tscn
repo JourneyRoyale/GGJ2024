@@ -1,6 +1,7 @@
-[gd_scene load_steps=12 format=3 uid="uid://b5h5i641pvljq"]
+[gd_scene load_steps=14 format=3 uid="uid://b5h5i641pvljq"]
 
 [ext_resource type="Texture2D" uid="uid://nv078o46l2pb" path="res://sprites/ui/ccConveyorSpritesheetv2.png" id="1_oo4fl"]
+[ext_resource type="Texture2D" uid="uid://bf6811aw6xjje" path="res://sprites/ui/Egg Select.png" id="2_2qiwo"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_bsaf3"]
 atlas = ExtResource("1_oo4fl")
@@ -73,11 +74,24 @@ script/source = "extends Node2D
 @onready var spawn_point = get_node(\"Spawn Point\")
 @onready var spawn_list = get_node(\"Spawn List\")
 @onready var timer = get_node(\"Timer\")
+@onready var egg_select = get_node(\"Egg Select\")
 @onready var packed_egg = load(\"res://prefab/egg/egg.tscn\")
 
 # Export
-@export var egg_delay = 1.0;
+@export var is_dynamic_egg = false;
+@export var flat_egg_delay = 1.0;
+@export var dynamic_egg_delay = [];
 @export var egg_speed = 3.0
+
+# Variable
+var selected_egg = null
+
+func _input(event):
+	if event is InputEventKey and event.pressed:
+		if event.keycode == KEY_SPACE and selected_egg != null:
+			var select_distance = selected_egg.returnMiddleDistance(egg_select.get_node(\"Egg Middle\").global_position)
+			get_tree().call_group(\"AudienceManager\", \"check_for_match\", selected_egg, select_distance)
+			selected_egg.queue_free()
 
 # On timer expire create egg
 func _on_timer_timeout():
@@ -85,7 +99,28 @@ func _on_timer_timeout():
 	instance.speed = egg_speed;
 	spawn_list.add_child(instance)
 	instance.animation.play(\"Egg Animation\")
+	
+	if(is_dynamic_egg):
+		if(dynamic_egg_delay.size() > 0):
+			var delay = dynamic_egg_delay.pop_front()
+			timer.start(delay)
+		else:
+			timer.start()
+
+func _on_area_2d_area_entered(area):
+	selected_egg = area.get_parent()
+	
+
+func _on_area_2d_area_exited(area):
+	if (selected_egg.get_parent() == area):
+		selected_egg = null
+
+
+
 "
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_de7nb"]
+size = Vector2(36, 36.2)
 
 [node name="Conveyor" type="AnimatedSprite2D"]
 position = Vector2(923, 944)
@@ -93,6 +128,8 @@ sprite_frames = SubResource("SpriteFrames_kdphs")
 autoplay = "default"
 frame_progress = 0.0925617
 script = SubResource("GDScript_8hxnp")
+is_dynamic_egg = true
+dynamic_egg_delay = [3, 1, 5, 2]
 
 [node name="Spawn List" type="Node2D" parent="."]
 position = Vector2(-628, -95)
@@ -101,4 +138,20 @@ position = Vector2(-628, -95)
 wait_time = 1.5
 autostart = true
 
+[node name="Egg Select" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.588235)
+position = Vector2(0, 75)
+scale = Vector2(0.5, 5)
+texture = ExtResource("2_2qiwo")
+
+[node name="Egg Middle" type="Node2D" parent="Egg Select"]
+
+[node name="Area2D" type="Area2D" parent="Egg Select"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Egg Select/Area2D"]
+position = Vector2(0, -0.100006)
+shape = SubResource("RectangleShape2D_de7nb")
+
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="area_entered" from="Egg Select/Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="area_exited" from="Egg Select/Area2D" to="." method="_on_area_2d_area_exited"]

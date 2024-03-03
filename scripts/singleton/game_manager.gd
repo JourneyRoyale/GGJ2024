@@ -92,8 +92,8 @@ func reset_default():
 	joke_combo = 0;
 
 # Increase Score from egg match
-func register_match():
-	laughter_score += match_amount
+func register_match(distance):
+	laughter_score += match_amount - (distance / 10) 
 	_successful_joke_score_increase()
 	joke_combo += 1
 	if (spotlight):

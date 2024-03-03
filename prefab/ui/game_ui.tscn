@@ -61,6 +61,7 @@ theme = ExtResource("1_8kqac")
 clip_contents = true
 custom_minimum_size = Vector2(10, 0)
 layout_direction = 1
+layout_mode = 0
 offset_left = 1412.0
 offset_top = 126.0
 offset_right = 1865.0

@@ -190,6 +190,8 @@ texture = ExtResource("9_4tgkj")
 visible = false
 texture = ExtResource("10_jdkhd")
 
+[node name="MiddlePoint" type="Node2D" parent="."]
+
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="animation_finished" from="AnimationPlayer2" to="." method="_on_animation_player_2_animation_finished"]
 [connection signal="input_event" from="Area2D" to="." method="_on_area_2d_input_event"]

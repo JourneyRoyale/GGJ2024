@@ -1,0 +1,225 @@
+[gd_scene load_steps=33 format=3 uid="uid://d2ubdlbhl5wd5"]
+
+[ext_resource type="Texture2D" uid="uid://doe18snyjnn3j" path="res://sprites/audience/hecklerspritesheet03.png" id="1_okiwh"]
+[ext_resource type="Script" path="res://scripts/game/audience_member.gd" id="3_n8tsr"]
+[ext_resource type="Texture2D" uid="uid://b6msiin56cq0y" path="res://sprites/bubble/Bubble Storming Animation1.png" id="3_skduk"]
+[ext_resource type="Texture2D" uid="uid://duq6o8o1cmdhl" path="res://sprites/bubble/Bubble Storming Animation2.png" id="4_y6evq"]
+[ext_resource type="Texture2D" uid="uid://bktyml4oshk2i" path="res://sprites/bubble/Bubble Storming Animation3.png" id="5_jlq63"]
+[ext_resource type="Texture2D" uid="uid://cflcowh6llit1" path="res://sprites/bubble/Bubble Storming Animation4.png" id="6_5tyyb"]
+[ext_resource type="Script" path="res://scripts/audience/emoji_3d.gd" id="7_37e7p"]
+[ext_resource type="Texture2D" uid="uid://dxn2fatjk2okf" path="res://sprites/bubble/Bubble Animation6.png" id="7_gcdny"]
+[ext_resource type="Texture2D" uid="uid://bpwvsksc3reb" path="res://sprites/bubble/Bubble Animation1.png" id="8_5qo4a"]
+[ext_resource type="Texture2D" uid="uid://ce583o7s2tbuj" path="res://sprites/jokes/chicken_drumstick.png" id="8_obr2r"]
+[ext_resource type="Texture2D" uid="uid://dw2m80rhg0f7d" path="res://sprites/jokes/chicken.png" id="9_jsmsk"]
+[ext_resource type="Texture2D" uid="uid://yqfs3oslctoi" path="res://sprites/bubble/Bubble Animation2.png" id="9_qx3ij"]
+[ext_resource type="Texture2D" uid="uid://difqtkw2ehmv0" path="res://sprites/bubble/Bubble Animation3.png" id="10_5irgj"]
+[ext_resource type="Texture2D" uid="uid://886it5vm2ecu" path="res://sprites/jokes/alcohol.png" id="10_d2sk1"]
+[ext_resource type="Texture2D" uid="uid://cmtnh448v0n0w" path="res://sprites/jokes/knife.png" id="11_lt7ii"]
+[ext_resource type="Texture2D" uid="uid://dd5aynaecit0i" path="res://sprites/bubble/Bubble Animation4.png" id="11_uxgwx"]
+[ext_resource type="Texture2D" uid="uid://dwugcfv3jrt3f" path="res://sprites/jokes/heart.png" id="12_cdamo"]
+[ext_resource type="Texture2D" uid="uid://bx7wik1iayf7x" path="res://sprites/bubble/Bubble Animation5.png" id="12_xakr6"]
+[ext_resource type="Texture2D" uid="uid://wqqosgek8bjo" path="res://sprites/jokes/cigar.png" id="13_n3k1d"]
+[ext_resource type="Texture2D" uid="uid://bx4txy78e8ma3" path="res://sprites/jokes/money_bag.png" id="14_kgjn5"]
+[ext_resource type="Texture2D" uid="uid://bmechf7hfuy7s" path="res://sprites/jokes/skull.png" id="15_6ttmu"]
+[ext_resource type="ArrayMesh" uid="uid://chre72e6kwwts" path="res://3D/SeatingAsset.obj" id="16_sw4x1"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rcwyr"]
+atlas = ExtResource("1_okiwh")
+region = Rect2(800, 1200, 800, 1200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lwtn5"]
+atlas = ExtResource("1_okiwh")
+region = Rect2(3200, 0, 800, 1200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pjsln"]
+atlas = ExtResource("1_okiwh")
+region = Rect2(4000, 0, 800, 1200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1afkq"]
+atlas = ExtResource("1_okiwh")
+region = Rect2(2400, 0, 800, 1200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i2ihd"]
+atlas = ExtResource("1_okiwh")
+region = Rect2(0, 0, 800, 1200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h4u4d"]
+atlas = ExtResource("1_okiwh")
+region = Rect2(800, 0, 800, 1200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pymeg"]
+atlas = ExtResource("1_okiwh")
+region = Rect2(1600, 0, 800, 1200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ogjem"]
+atlas = ExtResource("1_okiwh")
+region = Rect2(2400, 0, 800, 1200)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_00nde"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rcwyr")
+}],
+"loop": true,
+"name": &"Annoyed",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lwtn5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pjsln")
+}],
+"loop": true,
+"name": &"Laughing",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1afkq")
+}],
+"loop": true,
+"name": &"Sit",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i2ihd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h4u4d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pymeg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ogjem")
+}],
+"loop": true,
+"name": &"Sitting",
+"speed": 5.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_tgvj7"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_skduk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_y6evq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_jlq63")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_5tyyb")
+}],
+"loop": false,
+"name": &"bad",
+"speed": 10.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"blank",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_gcdny")
+}],
+"loop": false,
+"name": &"show",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_5qo4a")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_qx3ij")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_5irgj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_uxgwx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_xakr6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_gcdny")
+}],
+"loop": false,
+"name": &"showing",
+"speed": 10.0
+}]
+
+[node name="AudienceMember" type="AnimatedSprite3D" groups=["Audience"]]
+transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 0, 0, 0)
+sprite_frames = SubResource("SpriteFrames_00nde")
+animation = &"Annoyed"
+autoplay = "Sit"
+script = ExtResource("3_n8tsr")
+
+[node name="Bubble" type="AnimatedSprite3D" parent="."]
+transform = Transform3D(-0.75, 0, -1.13247e-07, 0, 0.75, 0, 1.13247e-07, 0, -0.75, -3.11, 6.913, 0.02)
+visible = false
+sprite_frames = SubResource("SpriteFrames_tgvj7")
+animation = &"show"
+autoplay = "blank"
+
+[node name="Emoji3D" type="Node3D" parent="."]
+transform = Transform3D(0.11, 0, 0, 0, 0.11, 0, 0, 0, 0.11, -1.576, 8.048, 0.6)
+script = ExtResource("7_37e7p")
+emojis = [NodePath("Chicken Drumstick"), NodePath("Chicken"), NodePath("Alcohol"), NodePath("Knife"), NodePath("Heart"), NodePath("Cigar"), NodePath("Money Bag"), NodePath("Skull")]
+
+[node name="Chicken Drumstick" type="Sprite3D" parent="Emoji3D"]
+transform = Transform3D(1.25, 0, 0, 0, 1.25, 0, 0, 0, 1.25, -17.354, -4.769, 0)
+visible = false
+texture = ExtResource("8_obr2r")
+
+[node name="Chicken" type="Sprite3D" parent="Emoji3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.3542, -3.10149, 0)
+visible = false
+texture = ExtResource("9_jsmsk")
+
+[node name="Alcohol" type="Sprite3D" parent="Emoji3D"]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, -17.3542, -3.70202, 0)
+visible = false
+texture = ExtResource("10_d2sk1")
+
+[node name="Knife" type="Sprite3D" parent="Emoji3D"]
+transform = Transform3D(1.75, 0, 0, 0, 1.75, 0, 0, 0, 1.75, -17.3542, -4.35198, 0)
+visible = false
+texture = ExtResource("11_lt7ii")
+
+[node name="Heart" type="Sprite3D" parent="Emoji3D"]
+transform = Transform3D(1.75, 0, 0, 0, 1.75, 0, 0, 0, 1.75, -17.3542, -3.32446, 0)
+visible = false
+texture = ExtResource("12_cdamo")
+
+[node name="Cigar" type="Sprite3D" parent="Emoji3D"]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, -17.3542, -4.57306, 0)
+visible = false
+texture = ExtResource("13_n3k1d")
+
+[node name="Money Bag" type="Sprite3D" parent="Emoji3D"]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, -17.3542, -3.59352, 0)
+visible = false
+texture = ExtResource("14_kgjn5")
+
+[node name="Skull" type="Sprite3D" parent="Emoji3D"]
+transform = Transform3D(1.75, 0, 0, 0, 1.75, 0, 0, 0, 1.75, -17.3542, -3.70202, 0)
+visible = false
+texture = ExtResource("15_6ttmu")
+
+[node name="Chair" type="MeshInstance3D" parent="."]
+transform = Transform3D(-1.09278e-07, -8.71967e-16, -2.5, 8.71967e-16, 2.5, -8.71967e-16, 2.5, -8.71967e-16, -1.09278e-07, 0.247781, -10.5337, -2.27177)
+visible = false
+mesh = ExtResource("16_sw4x1")
+
+[connection signal="animation_finished" from="Bubble" to="." method="_on_bubble_animation_finished"]

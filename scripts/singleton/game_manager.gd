@@ -99,9 +99,7 @@ func register_match(distance):
 	laughter_score += match_amount - (distance / 10) 
 	_successful_joke_score_increase()
 	joke_combo += 1
-	if (spotlight):
-		audio_manager.play_music('PowerUp', 'Sound Effect')
-		get_tree().call_group("AudienceManager", "destroy_all_hecklers")
+	get_tree().call_group("AudienceManager", "hurt_all_hecklers")
 
 # Decrease score from wrong egg match
 func register_error():

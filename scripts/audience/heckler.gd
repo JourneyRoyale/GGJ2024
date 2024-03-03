@@ -22,9 +22,11 @@ var move_timer = 0.0
 var is_moving = false
 var current_direction = Vector3(1.0, 0, 0).normalized()  # Starts moving right
 var packed_projectile = load("res://prefab/audience/projectile.tscn")
+var assigned_seat
 var assigned_floor
 var lanes = [];
 var current_lane = 0
+var health = 2
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
@@ -129,7 +131,7 @@ func _on_animated_sprite_3d_animation_finished():
 	
 	#On Animation death finished, destory node
 	if(anim_name == "death"):
-		queue_free()
+		get_tree().call_group("AudienceManager", "kill_heckler", self)
 
 # Play Death Animation
 func play_death():

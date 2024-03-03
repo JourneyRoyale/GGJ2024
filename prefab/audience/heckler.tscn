@@ -1,46 +1,7 @@
-[gd_scene load_steps=22 format=3 uid="uid://bqdtty1ekxhh"]
+[gd_scene load_steps=22 format=3 uid="uid://da06l8cak6mi1"]
 
-[ext_resource type="Script" path="res://scripts/audience/heckler_ai.gd" id="1_e2atq"]
+[ext_resource type="Script" path="res://scripts/audience/heckler.gd" id="1_6dw6o"]
 [ext_resource type="Texture2D" uid="uid://ba465y51couoy" path="res://sprites/audience/heckler_spritesheet.png" id="2_ujtwj"]
-
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_grwyp"]
-
-[sub_resource type="Animation" id="Animation_i0uk2"]
-resource_name = "bounce"
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("AnimatedSprite3D:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5, 1),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector3(1, 1, 1), Vector3(1, 0.9, 1), Vector3(1, 1, 1)]
-}
-
-[sub_resource type="Animation" id="Animation_y5m52"]
-resource_name = "throw"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("AnimatedSprite3D:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5, 1),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector3(1, 1, 1), Vector3(1.1, 1.25, 1), Vector3(1, 1, 1)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_f0bqg"]
-_data = {
-"bounce": SubResource("Animation_i0uk2"),
-"throw": SubResource("Animation_y5m52")
-}
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_uotkr"]
 atlas = ExtResource("2_ujtwj")
@@ -163,22 +124,65 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Heckler" type="Area3D"]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0.5, 0.152, 0.263)
-script = ExtResource("1_e2atq")
+[sub_resource type="BoxShape3D" id="BoxShape3D_4fehv"]
+size = Vector3(1, 6, 1)
 
-[node name="HecklerCollider2" type="CollisionShape3D" parent="."]
-transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0)
-shape = SubResource("CapsuleShape3D_grwyp")
+[sub_resource type="Animation" id="Animation_i0uk2"]
+resource_name = "bounce"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite3D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(1, 1, 1), Vector3(1, 0.9, 1), Vector3(1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_y5m52"]
+resource_name = "throw"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite3D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(1, 1, 1), Vector3(1.1, 1.25, 1), Vector3(1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_f0bqg"]
+_data = {
+"bounce": SubResource("Animation_i0uk2"),
+"throw": SubResource("Animation_y5m52")
+}
+
+[node name="Heckler" type="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+collision_layer = 2
+script = ExtResource("1_6dw6o")
+
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="."]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+sprite_frames = SubResource("SpriteFrames_gvphd")
+animation = &"death"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+shape = SubResource("BoxShape3D_4fehv")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("")
 libraries = {
 "": SubResource("AnimationLibrary_f0bqg")
 }
 autoplay = "bounce"
-
-[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="."]
-sprite_frames = SubResource("SpriteFrames_gvphd")
-animation = &"death"
 
 [connection signal="animation_finished" from="AnimatedSprite3D" to="." method="_on_animated_sprite_3d_animation_finished"]

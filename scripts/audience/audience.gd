@@ -2,7 +2,7 @@ extends Node3D
 
 # On Ready 
 @onready var pre_audience_factory = preload("res://prefab/audience/audience_member.tscn")
-@onready var pre_heckler_factory = preload("res://prefab/audience/new_heckler.tscn")
+@onready var pre_heckler_factory = preload("res://prefab/audience/heckler.tscn")
 @onready var members = get_node('Members')
 @onready var heckler = get_node('Heckler')
 @onready var audio_manager = get_node("/root/AudioManager")
@@ -14,6 +14,7 @@ extends Node3D
 @export var spawn_point = []
 @export var navigation_level = []
 @export var max_heckler = 5
+@export var max_audience = 10
 @export var starting_audience = 5
 
 # Variable
@@ -36,7 +37,6 @@ var rng : RandomNumberGenerator = RandomNumberGenerator.new()
 func _ready():
 	var shuffled_array = chair_positions.duplicate()
 	shuffled_array.shuffle()
-	var starting_audience = 5
 	var chosen_audience = shuffled_array.slice(0, starting_audience)
 	for chair_node in chosen_audience:
 		print('spawning')
@@ -72,17 +72,18 @@ func _on_timer_timeout():
 		i.show_emoji()
 	
 	var occupied_chair = chair_positions.filter(func(x): return get_node(x).occupied)
-	if (occupied_chair.size() < chair_positions.size()):
+	if (occupied_chair.size() < max_audience):
 		spawn_point.shuffle()
 		_spawn_audience(get_empty_chair(), get_node(spawn_point[0]))
 	
 	timer.wait_time = randi_range(4, 7)
 
 # Destory all current Heckler
-func destroy_all_hecklers():
+func hurt_all_hecklers():
 	for heckler in active_hecklers:
-		heckler.play_death()
-	active_hecklers = []
+		heckler.health -= 1
+		if(heckler.health <= 0):
+			heckler.play_death()
 
 # Check Egg Click If Matched
 func check_for_match(egg,distance):
@@ -105,16 +106,22 @@ func get_empty_chair():
 
 # Spawn a heckler
 func spawn_heckler(audience):
-	audio_manager.play_music("Boo", "Sound Effect")
-	var new_heckler
-	if heckler_factory == null:
-		heckler_factory = pre_heckler_factory.instantiate()
+	if (active_hecklers.size() < max_heckler):
+		audio_manager.play_music("Boo", "Sound Effect")
+		var new_heckler
+		if heckler_factory == null:
+			heckler_factory = pre_heckler_factory.instantiate()
 
-	new_heckler = heckler_factory.duplicate()
-	heckler.add_child(new_heckler)
-	active_hecklers.append(new_heckler)
-	
-	print("From Audience: ",audience.global_transform.origin)
-	new_heckler.position = audience.global_transform.origin
-	audience_members.erase(audience)
-	audience.queue_free()
+		new_heckler = heckler_factory.duplicate()
+		heckler.add_child(new_heckler)
+		active_hecklers.append(new_heckler)
+		
+		new_heckler.assigned_seat = audience.assigned_seat
+		new_heckler.position = audience.global_transform.origin
+		audience_members.erase(audience)
+		audience.queue_free()
+
+func kill_heckler(heckler):
+	active_hecklers.erase(heckler)
+	heckler.assigned_seat.occupied = false
+	heckler.queue_free()

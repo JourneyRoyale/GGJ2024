@@ -49,6 +49,7 @@ size = Vector3(5, 1, 1)
 
 [node name="Conveyor" parent="." instance=ExtResource("1_pi8vo")]
 position = Vector2(943, 945)
+is_dynamic_egg = false
 egg_speed = 1.5
 
 [node name="Camera3D" type="Camera3D" parent="."]
@@ -126,6 +127,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.15, 2.255, -4.675)
 chair_positions = [NodePath("Stage/Floor/Bottom Floor/Chair/Chair"), NodePath("Stage/Floor/Bottom Floor/Chair/Chair2"), NodePath("Stage/Floor/Bottom Floor/Chair/Chair3"), NodePath("Stage/Floor/Bottom Floor/Chair/Chair4"), NodePath("Stage/Floor/Bottom Floor/Chair/Chair5"), NodePath("Stage/Floor/Middle Floor/Chair/Chair6"), NodePath("Stage/Floor/Middle Floor/Chair/Chair7"), NodePath("Stage/Floor/Middle Floor/Chair/Chair8"), NodePath("Stage/Floor/Middle Floor/Chair/Chair9"), NodePath("Stage/Floor/Middle Floor/Chair/Chair10")]
 spawn_point = [NodePath("Stage/Left Stair/Spawn Point"), NodePath("Stage/Right Stair/Spawn Point")]
 navigation_level = [NodePath("Stage/Floor/Middle Floor/Movement"), NodePath("Stage/Floor/Bottom Floor/Movement")]
+max_heckler = 2
+starting_audience = 3
 
 [node name="Stage" type="Node3D" parent="Audience"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.5)

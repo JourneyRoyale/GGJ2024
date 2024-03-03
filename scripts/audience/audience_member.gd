@@ -89,7 +89,7 @@ func _on_bubble_animation_finished():
 	if(current_animation == "showing"):
 		bubble.play("show")
 		emoji.show()
-		timer.start()
+		timer.start(emoji_hold)
 	if(current_animation == "bad"):
 		clear_emoji()
 		bubble.play("blank")
@@ -106,8 +106,6 @@ func _on_animation_finished():
 func _on_patience_timeout():
 	if(sprite.animation == "annoyed"):
 		get_tree().call_group("AudienceManager", "spawn_heckler", self)
-		print("From Audience Member: ",global_transform.origin)
-		print("From Audience Member 2: ",self.global_transform.origin)
 	else:	
 		emoji.hide()
 		bubble.play("bad")
@@ -138,10 +136,5 @@ func check_for_match(emoji):
 		if success:
 			clear_emoji()
 			sprite.play("laughing")
-		elif (sprite.animation == "sitting"):
-			bubble.play("bad")
-			sprite.play("annoyed")
-		elif (sprite.animation == "annoyed"):
-			get_tree().call_group("AudienceManager", "spawn_heckler", self)
 		return success
 

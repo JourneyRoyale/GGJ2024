@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://cwhsqyo035ghh"]
+
+[ext_resource type="PackedScene" uid="uid://vxc02h1qnjha" path="res://prefab/ui/game_ui.tscn" id="1_ul7dk"]
+
+[sub_resource type="Environment" id="Environment_rbb27"]
+background_energy_multiplier = 1.22
+ambient_light_color = Color(0.909804, 0.909804, 0.909804, 1)
+ambient_light_energy = 5.9
+reflected_light_source = 2
+fog_enabled = true
+
+[node name="Game" type="Node3D"]
+
+[node name="Game Holder" type="Node3D" parent="."]
+process_mode = 1
+
+[node name="Ui Screen" parent="." instance=ExtResource("1_ul7dk")]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_rbb27")

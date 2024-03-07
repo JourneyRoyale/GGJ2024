@@ -115,28 +115,29 @@ func register_hit():
 
 
 func spawn_egg():
-	var available_positions = []
-	for i in range(egg_filled_lane_x_positions.size()):
-		if not egg_filled_lane_x_positions[i]:
-			available_positions.append(i)
-	
-	if available_positions.size() > 0:
-		var chosen_index = available_positions[randi() % available_positions.size()]
-		egg_filled_lane_x_positions[chosen_index] = true
+	if (isPlaying):
+		var available_positions = []
+		for i in range(egg_filled_lane_x_positions.size()):
+			if not egg_filled_lane_x_positions[i]:
+				available_positions.append(i)
 		
-		var egg_instance = packed_egg.instantiate()
-		egg_instance.initialize(chosen_index, .5)
-		game_ui.add_child(egg_instance)
-		egg_instance.global_transform.origin.x = egg_lane_x_positions[chosen_index]
-		egg_instance.global_transform.origin.y = 950 # Replace with your Y
-		
-	var timer = Timer.new()  
-	timer.wait_time = 1.5
-	timer.one_shot = true 
-	timer.connect("timeout", Callable(self, "spawn_egg"))
-	timer.name = "ThrowTimer"
-	add_child(timer)
-	timer.start()
+		if available_positions.size() > 0:
+			var chosen_index = available_positions[randi() % available_positions.size()]
+			egg_filled_lane_x_positions[chosen_index] = true
+			
+			var egg_instance = packed_egg.instantiate()
+			egg_instance.initialize(chosen_index, .5)
+			game_ui.add_child(egg_instance)
+			egg_instance.global_transform.origin.x = egg_lane_x_positions[chosen_index]
+			egg_instance.global_transform.origin.y = 950 # Replace with your Y
+			
+		var timer = Timer.new()  
+		timer.wait_time = 1.5
+		timer.one_shot = true 
+		timer.connect("timeout", Callable(self, "spawn_egg"))
+		timer.name = "ThrowTimer"
+		add_child(timer)
+		timer.start()
 
 func free_egg_index(lane_index, didTimeout):
 	if(didTimeout):

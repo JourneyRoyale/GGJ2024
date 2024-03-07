@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://csw4tv5xbyfi5"]
+[gd_scene load_steps=29 format=3 uid="uid://csw4tv5xbyfi5"]
 
 [ext_resource type="PackedScene" uid="uid://bal0jss3qcmho" path="res://prefab/player/comedian.tscn" id="2_ulwln"]
 [ext_resource type="ArrayMesh" uid="uid://b7s1g8w1atyl6" path="res://3d/StageAsset.obj" id="3_rpgsj"]
@@ -43,6 +43,24 @@ size = Vector3(31, 1, 9)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_70q15"]
 size = Vector3(5, 1, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_gq5py"]
+size = Vector3(1, 20, 21)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_hos3m"]
+size = Vector3(1, 20, 21)
+
+[sub_resource type="BoxMesh" id="BoxMesh_1uugn"]
+size = Vector3(33, 20, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_mtlg1"]
+size = Vector3(33, 20, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_7f816"]
+size = Vector3(33, 1, 22)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_5bvv7"]
+size = Vector3(33, 1, 20)
 
 [node name="Perspective" type="Node3D"]
 
@@ -185,7 +203,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, -5, -4.5)
 collision_mask = 3
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="Audience/Stage/Floor/Bottom Floor"]
-transform = Transform3D(31, 0, 0, 0, 1, 0, 0, 0, 9, 0, 0, 0)
+transform = Transform3D(31, 0, 0, 0, 1, 0, 0, 0, 13, 0, 0, 0)
 mesh = SubResource("BoxMesh_g8wpu")
 skeleton = NodePath("../../..")
 
@@ -422,6 +440,50 @@ skeleton = NodePath("../../../..")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Audience/Stage/Right Stair/Stair8"]
 shape = SubResource("BoxShape3D_70q15")
+
+[node name="Left Wall" type="StaticBody3D" parent="Audience/Stage"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17, 4.5, -8.5)
+collision_mask = 3
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Audience/Stage/Left Wall"]
+mesh = SubResource("BoxMesh_gq5py")
+skeleton = NodePath("../../../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Audience/Stage/Left Wall"]
+shape = SubResource("BoxShape3D_hos3m")
+
+[node name="Right Wall" type="StaticBody3D" parent="Audience/Stage"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 4.5, -8.5)
+collision_mask = 3
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Audience/Stage/Right Wall"]
+mesh = SubResource("BoxMesh_gq5py")
+skeleton = NodePath("../../../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Audience/Stage/Right Wall"]
+shape = SubResource("BoxShape3D_hos3m")
+
+[node name="Back Wall" type="StaticBody3D" parent="Audience/Stage"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 4.5, -19.5)
+collision_mask = 3
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Audience/Stage/Back Wall"]
+mesh = SubResource("BoxMesh_1uugn")
+skeleton = NodePath("../../../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Audience/Stage/Back Wall"]
+shape = SubResource("BoxShape3D_mtlg1")
+
+[node name="Top Wall" type="StaticBody3D" parent="Audience/Stage"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 15, -9)
+collision_mask = 3
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Audience/Stage/Top Wall"]
+mesh = SubResource("BoxMesh_7f816")
+skeleton = NodePath("../../../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Audience/Stage/Top Wall"]
+shape = SubResource("BoxShape3D_5bvv7")
 
 [node name="Members" type="Node" parent="Audience"]
 

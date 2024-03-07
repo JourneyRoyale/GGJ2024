@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://bky7n6468r137"]
 
-[ext_resource type="ArrayMesh" uid="uid://chre72e6kwwts" path="res://3D/SeatingAsset.obj" id="1_hwiu0"]
+[ext_resource type="ArrayMesh" uid="uid://chre72e6kwwts" path="res://3d/SeatingAsset.obj" id="1_hwiu0"]
 [ext_resource type="Script" path="res://scripts/audience/chair.gd" id="2_n2ky4"]
 
 [node name="Chair" type="MeshInstance3D"]

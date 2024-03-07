@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://c3y3g40u8icik"
-path="res://.godot/imported/Spotlight Powerup.wav-baecb5026801bfa68510faa64cf0cee4.sample"
+path="res://.godot/imported/Spotlight Powerup.wav-9cd1819eca510b5fb6285f874447401d.sample"
 
 [deps]
 
-source_file="res://music/Sound Effect/Spotlight Powerup.wav"
-dest_files=["res://.godot/imported/Spotlight Powerup.wav-baecb5026801bfa68510faa64cf0cee4.sample"]
+source_file="res://music/sound effect/Spotlight Powerup.wav"
+dest_files=["res://.godot/imported/Spotlight Powerup.wav-9cd1819eca510b5fb6285f874447401d.sample"]
 
 [params]
 

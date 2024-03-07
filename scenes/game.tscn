@@ -1,10 +1,10 @@
 [gd_scene load_steps=23 format=3 uid="uid://csw4tv5xbyfi5"]
 
 [ext_resource type="PackedScene" uid="uid://bal0jss3qcmho" path="res://prefab/player/comedian.tscn" id="2_ulwln"]
-[ext_resource type="ArrayMesh" uid="uid://b7s1g8w1atyl6" path="res://3D/StageAsset.obj" id="3_rpgsj"]
+[ext_resource type="ArrayMesh" uid="uid://b7s1g8w1atyl6" path="res://3d/StageAsset.obj" id="3_rpgsj"]
 [ext_resource type="Script" path="res://scripts/singleton/audio_manager.gd" id="4_rfoap"]
-[ext_resource type="AudioStream" uid="uid://inflyfrfxqu7" path="res://music/Archive/refract.mp3" id="5_o2jcn"]
-[ext_resource type="AudioStream" uid="uid://b77xbhcraw287" path="res://music/Archive/mixkit-arcade-game-complete-or-approved-mission-205.wav" id="6_k7vlq"]
+[ext_resource type="AudioStream" uid="uid://inflyfrfxqu7" path="res://music/archive/refract.mp3" id="5_o2jcn"]
+[ext_resource type="AudioStream" uid="uid://b77xbhcraw287" path="res://music/archive/mixkit-arcade-game-complete-or-approved-mission-205.wav" id="6_k7vlq"]
 [ext_resource type="PackedScene" uid="uid://b7efb0ou050m6" path="res://prefab/audience/audience.tscn" id="7_haojk"]
 [ext_resource type="PackedScene" uid="uid://bky7n6468r137" path="res://prefab/audience/chair.tscn" id="8_0pnj3"]
 [ext_resource type="Texture2D" uid="uid://bywn7ojtp28f1" path="res://sprites/Shading.png" id="8_ab4ig"]

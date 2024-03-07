@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://b76e5nc2kfdqv"
-path="res://.godot/imported/Correct Joke.wav-a795f15e7ce847e029ebe7b28ca08478.sample"
+path="res://.godot/imported/Correct Joke.wav-c3184b0ae2bcb6ecf7451732b685efed.sample"
 
 [deps]
 
-source_file="res://music/Sound Effect/Correct Joke.wav"
-dest_files=["res://.godot/imported/Correct Joke.wav-a795f15e7ce847e029ebe7b28ca08478.sample"]
+source_file="res://music/sound effect/Correct Joke.wav"
+dest_files=["res://.godot/imported/Correct Joke.wav-c3184b0ae2bcb6ecf7451732b685efed.sample"]
 
 [params]
 

@@ -28,6 +28,7 @@ var time_since_last_increase = 0.0
 var increase_interval = 5.0 
 
 var laughter_score = 50.0;
+var laughter_score_max = 100.0;
 var player_score = 0;
 
 
@@ -43,15 +44,17 @@ var egg_filled_lane_x_positions = [false, false, false, false, false]
 var clamped_y_position = 1.945;
 var clamped_z_position = -0.529;
 
+var BPM = 125.0;
+
 #Egg Spawn Timer
 func _ready():
-	var timer = Timer.new()  
-	timer.wait_time = 1.5
-	timer.one_shot = true  # Make sure it only ticks once
-	timer.connect("timeout", Callable(self, "spawn_egg"))
-	timer.name = "ThrowTimer"  # Naming the timer for easier identification
-	add_child(timer)  # Add the timer to the node tree
-	timer.start()
+	
+	var beatTimer = Timer.new()
+	beatTimer.wait_time = 60.0 / BPM
+	beatTimer.autostart = true
+	beatTimer.connect("timeout", Callable(self, "spawn_egg"))
+	add_child(beatTimer)  # Add the timer to the node tree
+	beatTimer.start()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -98,6 +101,7 @@ func reset_default():
 # Increase Score from egg match
 func register_match():
 	laughter_score += 10
+	laughter_score = clamp(laughter_score, 0, laughter_score_max)
 	_successful_joke_score_increase()
 	joke_combo += 1
 	get_tree().call_group("AudienceManager", "hurt_all_hecklers")
@@ -130,14 +134,6 @@ func spawn_egg():
 			game_ui.add_child(egg_instance)
 			egg_instance.global_transform.origin.x = egg_lane_x_positions[chosen_index]
 			egg_instance.global_transform.origin.y = 950 # Replace with your Y
-			
-		var timer = Timer.new()  
-		timer.wait_time = 1.5
-		timer.one_shot = true 
-		timer.connect("timeout", Callable(self, "spawn_egg"))
-		timer.name = "ThrowTimer"
-		add_child(timer)
-		timer.start()
 
 func free_egg_index(lane_index, didTimeout):
 	if(didTimeout):

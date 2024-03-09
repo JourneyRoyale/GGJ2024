@@ -7,7 +7,6 @@ extends Node3D
 @onready var heckler = get_node('Heckler')
 @onready var audio_manager = get_node("/root/AudioManager")
 @onready var game_manager = get_node("/root/GameManager")
-@onready var camera = get_node("/root/Game/Game Holder/Perspective/Camera3D")
 @onready var timer = get_node("Timer")
 
 # Export
@@ -24,6 +23,7 @@ var heckler_factory
 var active_hecklers = []
 var audience_members = []
 var collision_layer = 1
+var audience_emoji = []
 
 var rng : RandomNumberGenerator = RandomNumberGenerator.new()
 
@@ -69,8 +69,8 @@ func _on_timer_timeout():
 	children = children.slice(0, rand_children)
 	var num_children = children.size()
 	var force = randi_range(0, num_children-1)
-	#for i in children:
-	#	i.show_emoji()
+	for i in children:
+		i.show_emoji()
 	
 	var occupied_chair = chair_positions.filter(func(x): return get_node(x).occupied)
 	if (occupied_chair.size() < max_audience):
@@ -86,6 +86,19 @@ func hurt_all_hecklers():
 		if(heckler.health <= 0):
 			heckler.play_death()
 
+# Check Egg Click If Matched
+func check_for_match(egg,distance):
+	var emoji = egg.emoji_num
+	var matched = false
+	for i in members.get_children():
+		if i.check_for_match(emoji):
+			matched = true;
+	if (matched):
+		audio_manager.play_music('PickupCoin', 'Sound Effect')
+		game_manager.register_match(distance)
+	else:
+		audio_manager.play_music('HitHurt', 'Sound Effect')		
+		game_manager.register_error()
 
 func get_empty_chair():
 	var filter_chair = chair_positions.filter(func(x): return !get_node(x).occupied)
@@ -103,9 +116,9 @@ func spawn_heckler(audience):
 		new_heckler = heckler_factory.duplicate()
 		heckler.add_child(new_heckler)
 		active_hecklers.append(new_heckler)
+		
 		new_heckler.assigned_seat = audience.assigned_seat
 		new_heckler.position = audience.global_transform.origin
-		new_heckler.translate(Vector3(0,0,1))
 		audience_members.erase(audience)
 		audience.queue_free()
 
@@ -113,3 +126,9 @@ func kill_heckler(heckler):
 	active_hecklers.erase(heckler)
 	heckler.assigned_seat.occupied = false
 	heckler.queue_free()
+	
+func delete_emoji(index):
+	audience_emoji.erase(index)
+	
+func add_emoji(index):
+	audience_emoji.append(index)

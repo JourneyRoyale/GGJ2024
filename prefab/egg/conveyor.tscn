@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://nv078o46l2pb" path="res://sprites/ui/ccConveyorSpritesheetv2.png" id="1_oo4fl"]
 [ext_resource type="Texture2D" uid="uid://bf6811aw6xjje" path="res://sprites/ui/Egg Select.png" id="2_2qiwo"]
+[ext_resource type="Script" path="res://scripts/egg/conveyor.gd" id="2_kse8i"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_bsaf3"]
 atlas = ExtResource("1_oo4fl")
@@ -67,34 +68,6 @@ animations = [{
 "speed": 9.5
 }]
 
-[sub_resource type="GDScript" id="GDScript_8hxnp"]
-script/source = "extends Node2D
-
-
-
-# Export
-@export var is_dynamic_egg = false;
-@export var flat_egg_delay = 1.0;
-@export var dynamic_egg_delay = [];
-@export var egg_speed = 3.0
-
-# Variable
-var selected_egg = null
-
-func _input(event):
-	if event is InputEventKey and event.pressed:
-		if event.keycode == KEY_SPACE and selected_egg != null:
-			var select_distance = selected_egg.returnMiddleDistance(egg_select.get_node(\"Egg Middle\").global_position)
-			get_tree().call_group(\"AudienceManager\", \"check_for_match\", selected_egg, select_distance)
-			selected_egg.queue_free()
-
-
-
-
-
-
-"
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_de7nb"]
 size = Vector2(36, 36.2)
 
@@ -103,11 +76,7 @@ position = Vector2(923, 944)
 sprite_frames = SubResource("SpriteFrames_kdphs")
 autoplay = "default"
 frame_progress = 0.0925617
-script = SubResource("GDScript_8hxnp")
-is_dynamic_egg = true
-flat_egg_delay = null
-dynamic_egg_delay = [3, 1, 5, 2]
-egg_speed = null
+script = ExtResource("2_kse8i")
 
 [node name="Spawn List" type="Node2D" parent="."]
 position = Vector2(-628, -95)

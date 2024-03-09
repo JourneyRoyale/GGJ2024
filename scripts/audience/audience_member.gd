@@ -30,7 +30,6 @@ var is_seated = false
 var assigned_seat
 var assigned_floor
 var audience_emotional_state = AudienceEmotionalState.NEUTRAL
-var camera_position
 
 # Const
 const SPEED = 5.0
@@ -84,6 +83,16 @@ func _move_to_seat(delta, spawn_position):
 		global_transform.origin.x = spawn_position.x
 		velocity.x = 0
 
+# Change Bubble animation base on finished animation
+func _on_bubble_animation_finished():
+	var current_animation = bubble.get_animation()
+	if(current_animation == "showing"):
+		bubble.play("show")
+		emoji.show()
+		timer.start(emoji_hold)
+	if(current_animation == "bad"):
+		clear_emoji()
+		bubble.play("blank")
 
 # Change Sprite animation base on finished animation
 func _on_animation_finished():
@@ -92,41 +101,44 @@ func _on_animation_finished():
 	if (sprite.animation == "sitting"):
 		sprite.play("sit")
 		in_progress = false
-		var coin_flip = randi() % 2 == 0 
-		print(coin_flip, " for inevitable heckler")
-		if coin_flip:
-			var timer = Timer.new()  
-			timer.wait_time = 1 
-			timer.one_shot = true  
-			var callable = Callable( self, "_auto_heckler")
-			timer.connect("timeout", callable) 
-			add_child(timer) 
-			timer.start()  
 
 # When audience patience runs out
 func _on_patience_timeout():
 	if(sprite.animation == "annoyed"):
 		get_tree().call_group("AudienceManager", "spawn_heckler", self)
+		emoji.hide()
+		bubble.play("bad")
+		sprite.play("annoyed")
+		game_manager.register_annoyed()
 	else:	
 		emoji.hide()
 		bubble.play("bad")
 		sprite.play("annoyed")
-		
-# When audience patience runs out
-func _auto_heckler():
-	get_tree().call_group("AudienceManager", "spawn_heckler", self)
 
+# Show Emoji
+func show_emoji():
+	if (!in_progress and is_seated and !active):
+		in_progress = true
+		active = true
+		current_emoji = randi_range(0, 7)
+		emoji.set_emoji(current_emoji)
+		bubble.play("showing")
+		bubble.show()
+
+# Clear out emoji
+func clear_emoji():
+	in_progress = false
+	active = false
+	bubble.hide()
+	emoji.hide()
+	emoji.reset_emojis()
 
 # Check if emoji provided match with current
-func successful_joke():
-	var match = emoji == current_emoji
-	var success = match
-	if success:
-		sprite.play("laughing")
-	return success
-	
-func look_at_camera():
-	var sprite_position = Vector3(0,global_transform.origin.y,0)
-	var camera_position = Vector3(0,camera_position.y,0)
-	var direction_vector = (camera_position - sprite_position).normalized()
-	look_at(direction_vector, Vector3(0, 1, 0))
+func check_for_match(emoji):
+	if (active):
+		var match = emoji == current_emoji
+		var success = match
+		if success:
+			clear_emoji()
+			sprite.play("laughing")
+		return success

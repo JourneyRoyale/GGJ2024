@@ -1,5 +1,6 @@
-[gd_scene load_steps=31 format=3 uid="uid://csw4tv5xbyfi5"]
+[gd_scene load_steps=32 format=3 uid="uid://csw4tv5xbyfi5"]
 
+[ext_resource type="PackedScene" uid="uid://b5h5i641pvljq" path="res://prefab/egg/conveyor.tscn" id="1_6kait"]
 [ext_resource type="PackedScene" uid="uid://bal0jss3qcmho" path="res://prefab/player/comedian.tscn" id="2_ulwln"]
 [ext_resource type="Texture2D" uid="uid://ds4xivuulp5n1" path="res://sprites/stage/Left Door.png" id="3_oaavj"]
 [ext_resource type="ArrayMesh" uid="uid://b7s1g8w1atyl6" path="res://3d/StageAsset.obj" id="3_rpgsj"]
@@ -66,6 +67,11 @@ size = Vector3(33, 1, 22)
 size = Vector3(33, 1, 20)
 
 [node name="Perspective" type="Node3D"]
+
+[node name="Conveyor" parent="." instance=ExtResource("1_6kait")]
+position = Vector2(943, 945)
+is_dynamic_egg = false
+egg_speed = 1.5
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.906308, 0.422618, 0, -0.422618, 0.906308, 0, 7.063, 5)

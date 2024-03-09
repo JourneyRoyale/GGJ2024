@@ -7,6 +7,7 @@ extends Node3D
 @onready var heckler = get_node('Heckler')
 @onready var audio_manager = get_node("/root/AudioManager")
 @onready var game_manager = get_node("/root/GameManager")
+@onready var camera = get_node("/root/Game/Game Holder/Perspective/Camera3D")
 @onready var timer = get_node("Timer")
 
 # Export
@@ -102,9 +103,9 @@ func spawn_heckler(audience):
 		new_heckler = heckler_factory.duplicate()
 		heckler.add_child(new_heckler)
 		active_hecklers.append(new_heckler)
-		
 		new_heckler.assigned_seat = audience.assigned_seat
 		new_heckler.position = audience.global_transform.origin
+		new_heckler.translate(Vector3(0,0,1))
 		audience_members.erase(audience)
 		audience.queue_free()
 

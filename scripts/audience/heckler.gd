@@ -17,6 +17,7 @@ var THROW_DELAY = 0.6 #how long the heckler pauses to throw a tomato in seconds
 
 # Variables
 var audience_reference
+var camera_position
 var move_time = 0.0
 var move_timer = 0.0
 var is_moving = false
@@ -55,7 +56,7 @@ func _physics_process(delta):
 			current_direction.x = -current_direction.x  # Change to moving right
 		elif position.x >= RIGHT_BOUNDARY and current_direction.x > 0:
 			current_direction.x = -current_direction.x  # Change to moving left
-			
+		
 		for lane_index in range(lanes.size()):
 			print("lane_x: ", lane_index)
 			print("lane value: ", lanes[lane_index])
@@ -136,3 +137,9 @@ func _on_animated_sprite_3d_animation_finished():
 # Play Death Animation
 func play_death():
 	sprite.play("death")
+
+func look_at_camera():
+	var sprite_position = Vector3(0,global_transform.origin.y,0)
+	var camera_position = Vector3(0,camera_position.y,0)
+	var direction_vector = (camera_position - sprite_position).normalized()
+	look_at(direction_vector, Vector3(0, 1, 0))

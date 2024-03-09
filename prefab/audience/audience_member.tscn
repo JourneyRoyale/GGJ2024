@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://duh7fuk66vote"]
+[gd_scene load_steps=38 format=3 uid="uid://duh7fuk66vote"]
 
 [ext_resource type="Script" path="res://scripts/audience/audience_member.gd" id="1_pr3yx"]
 [ext_resource type="Texture2D" uid="uid://b6msiin56cq0y" path="res://sprites/bubble/Bubble Storming Animation1.png" id="4_bpnxi"]
@@ -80,6 +80,26 @@ animations = [{
 "name": &"showing",
 "speed": 10.0
 }]
+
+[sub_resource type="Shader" id="Shader_ki023"]
+code = "// Mandatory line to define 2D shaders
+shader_type canvas_item;
+
+// Allows us to assign a normal map to the shader in the Inspector
+uniform sampler2D normal_map;
+
+void fragment(){
+	// Converts the texture data into a unit vector, with each channel in the [-1, 1] range
+
+NORMAL = 2.0 * texture(normal_map, UV).rgb - 1.0;
+}"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_5fdmp"]
+load_path = "res://.godot/imported/hecklerspritesheet03_normal.png-23023d5d9b1b0f7e886588000ccbecae.s3tc.ctex"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jgtyf"]
+shader = SubResource("Shader_ki023")
+shader_parameter/normal_map = SubResource("CompressedTexture2D_5fdmp")
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_56h30"]
 atlas = ExtResource("12_3lwko")
@@ -196,8 +216,9 @@ autoplay = "blank"
 
 [node name="Sprite" type="AnimatedSprite3D" parent="."]
 transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 0, 0, 0)
+material_overlay = SubResource("ShaderMaterial_jgtyf")
 sprite_frames = SubResource("SpriteFrames_6gm35")
-animation = &"walking"
+animation = &"annoyed"
 
 [node name="Emoji3D" type="Node3D" parent="."]
 transform = Transform3D(0.066, 0, 0, 0, 0.066, 0, 0, 0, 0.066, -0.945601, 4.8288, 0.360001)

@@ -1,13 +1,16 @@
 [gd_scene load_steps=3 format=3 uid="uid://bky7n6468r137"]
 
-[ext_resource type="ArrayMesh" uid="uid://chre72e6kwwts" path="res://3d/SeatingAsset.obj" id="1_hwiu0"]
 [ext_resource type="Script" path="res://scripts/audience/chair.gd" id="2_n2ky4"]
+[ext_resource type="Texture2D" uid="uid://d2d0e02f64eh3" path="res://sprites/stage/Chair.png" id="3_x0tad"]
 
 [node name="Chair" type="MeshInstance3D"]
-transform = Transform3D(-6.55671e-08, -5.2318e-16, -1.5, 5.2318e-16, 1.5, -5.2318e-16, 1.5, -5.2318e-16, -6.55671e-08, 0, 0, 0)
-mesh = ExtResource("1_hwiu0")
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)
 skeleton = NodePath("")
 script = ExtResource("2_n2ky4")
 
 [node name="Spawn Point" type="Node3D" parent="."]
-transform = Transform3D(1, -2.64698e-23, -7.10543e-15, 7.94093e-23, 1, -6.41634e-23, 7.10543e-15, -1.12238e-23, 1, 1.1021, 4.51099, -1.32051e-08)
+transform = Transform3D(1, -2.64698e-23, -3.55271e-15, 7.94093e-23, 1, -6.41634e-23, 3.55271e-15, -1.12238e-23, 1, 0, 4.511, 0.5)
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(0.6, 0, 0, 0, 0.8, 0, 0, 0, 1, 0, 3.588, 0)
+texture = ExtResource("3_x0tad")

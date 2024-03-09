@@ -1,7 +1,8 @@
-[gd_scene load_steps=22 format=3 uid="uid://da06l8cak6mi1"]
+[gd_scene load_steps=27 format=3 uid="uid://da06l8cak6mi1"]
 
 [ext_resource type="Script" path="res://scripts/audience/heckler.gd" id="1_6dw6o"]
 [ext_resource type="Texture2D" uid="uid://ba465y51couoy" path="res://sprites/audience/heckler_spritesheet.png" id="2_ujtwj"]
+[ext_resource type="Texture2D" uid="uid://doe18snyjnn3j" path="res://sprites/audience/hecklerspritesheet03.png" id="3_e8qr8"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_uotkr"]
 atlas = ExtResource("2_ujtwj")
@@ -26,6 +27,22 @@ region = Rect2(800, 1200, 800, 1200)
 [sub_resource type="AtlasTexture" id="AtlasTexture_k4jfs"]
 atlas = ExtResource("2_ujtwj")
 region = Rect2(1600, 1200, 800, 1200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dt7ua"]
+atlas = ExtResource("3_e8qr8")
+region = Rect2(2400, 0, 800, 1200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x1sw0"]
+atlas = ExtResource("3_e8qr8")
+region = Rect2(1600, 0, 800, 1200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t2i8y"]
+atlas = ExtResource("3_e8qr8")
+region = Rect2(800, 0, 800, 1200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1to7h"]
+atlas = ExtResource("3_e8qr8")
+region = Rect2(0, 0, 800, 1200)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_pymcw"]
 atlas = ExtResource("2_ujtwj")
@@ -90,6 +107,18 @@ animations = [{
 "speed": 5.0
 }, {
 "frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dt7ua")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x1sw0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t2i8y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1to7h")
+}, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_pymcw")
 }, {
@@ -172,7 +201,9 @@ script = ExtResource("1_6dw6o")
 [node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="."]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 sprite_frames = SubResource("SpriteFrames_gvphd")
-animation = &"death"
+animation = &"spawn"
+frame = 8
+frame_progress = 1.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)

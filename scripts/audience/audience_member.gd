@@ -30,6 +30,7 @@ var is_seated = false
 var assigned_seat
 var assigned_floor
 var audience_emotional_state = AudienceEmotionalState.NEUTRAL
+var camera_position
 
 # Const
 const SPEED = 5.0
@@ -123,4 +124,9 @@ func successful_joke():
 	if success:
 		sprite.play("laughing")
 	return success
-
+	
+func look_at_camera():
+	var sprite_position = Vector3(0,global_transform.origin.y,0)
+	var camera_position = Vector3(0,camera_position.y,0)
+	var direction_vector = (camera_position - sprite_position).normalized()
+	look_at(direction_vector, Vector3(0, 1, 0))

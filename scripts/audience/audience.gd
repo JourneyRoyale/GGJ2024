@@ -126,9 +126,10 @@ func kill_heckler(heckler):
 	active_hecklers.erase(heckler)
 	heckler.assigned_seat.occupied = false
 	heckler.queue_free()
-	
+
 func delete_emoji(index):
 	audience_emoji.erase(index)
-	
+
 func add_emoji(index):
 	audience_emoji.append(index)
+

@@ -42,8 +42,7 @@ func _on_area_2d_area_entered(area):
 	
 
 func _on_area_2d_area_exited(area):
-	if (selected_egg.get_parent() == area):
-		selected_egg = null
+	selected_egg = null
 
 
 

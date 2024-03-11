@@ -70,8 +70,8 @@ size = Vector3(33, 1, 20)
 
 [node name="Conveyor" parent="." instance=ExtResource("1_6kait")]
 position = Vector2(943, 945)
-is_dynamic_egg = false
-egg_speed = 1.5
+flat_egg_delay = 0.5
+egg_speed = 10.0
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.906308, 0.422618, 0, -0.422618, 0.906308, 0, 7.063, 5)
@@ -480,7 +480,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.15, 2.255, -4.675)
 chair_positions = [NodePath("../Environment/Stage/Floor/Bottom Floor/Chair/Chair"), NodePath("../Environment/Stage/Floor/Bottom Floor/Chair/Chair2"), NodePath("../Environment/Stage/Floor/Bottom Floor/Chair/Chair3"), NodePath("../Environment/Stage/Floor/Bottom Floor/Chair/Chair4"), NodePath("../Environment/Stage/Floor/Bottom Floor/Chair/Chair5"), NodePath("../Environment/Stage/Floor/Middle Floor/Chair/Chair6"), NodePath("../Environment/Stage/Floor/Middle Floor/Chair/Chair7"), NodePath("../Environment/Stage/Floor/Middle Floor/Chair/Chair8"), NodePath("../Environment/Stage/Floor/Middle Floor/Chair/Chair9"), NodePath("../Environment/Stage/Floor/Middle Floor/Chair/Chair10")]
 spawn_point = [NodePath("../Environment/Stage/Stair/Left Stair/Spawn Point"), NodePath("../Environment/Stage/Stair/Right Stair/Spawn Point")]
 navigation_level = [NodePath("../Environment/Stage/Floor/Middle Floor/Movement"), NodePath("../Environment/Stage/Floor/Bottom Floor/Movement")]
-max_heckler = 2
+max_heckler = 7
 starting_audience = 7
 
 [node name="Members" type="Node" parent="Audience"]

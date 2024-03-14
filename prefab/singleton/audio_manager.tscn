@@ -1,9 +1,7 @@
-[gd_scene load_steps=10 format=3 uid="uid://b0c1svfnwvga0"]
+[gd_scene load_steps=8 format=3 uid="uid://b0c1svfnwvga0"]
 
 [ext_resource type="Script" path="res://scripts/singleton/audio_manager.gd" id="1_iiesv"]
-[ext_resource type="AudioStream" uid="uid://inflyfrfxqu7" path="res://music/archive/refract.mp3" id="2_opr78"]
 [ext_resource type="AudioStream" uid="uid://d0v6g7rnc6bch" path="res://music/background/Ragtime.wav" id="2_xmib4"]
-[ext_resource type="AudioStream" uid="uid://b77xbhcraw287" path="res://music/archive/mixkit-arcade-game-complete-or-approved-mission-205.wav" id="3_s30sk"]
 [ext_resource type="AudioStream" uid="uid://b76e5nc2kfdqv" path="res://music/sound effect/Correct Joke.wav" id="4_273d0"]
 [ext_resource type="AudioStream" uid="uid://chy1gkk1avfki" path="res://music/sound effect/Player Hurt.wav" id="5_benwr"]
 [ext_resource type="AudioStream" uid="uid://c3y3g40u8icik" path="res://music/sound effect/Spotlight Powerup.wav" id="6_7aqlw"]
@@ -18,24 +16,17 @@ script = ExtResource("1_iiesv")
 [node name="Ragtime" type="AudioStreamPlayer" parent="Background"]
 stream = ExtResource("2_xmib4")
 
-[node name="Refractor" type="AudioStreamPlayer" parent="Background"]
-stream = ExtResource("2_opr78")
-
 [node name="Sound Effect" type="Node3D" parent="."]
 
-[node name="Arcade" type="AudioStreamPlayer" parent="Sound Effect"]
-stream = ExtResource("3_s30sk")
-bus = &"Sound Effect"
-
-[node name="PickupCoin" type="AudioStreamPlayer" parent="Sound Effect"]
+[node name="Success" type="AudioStreamPlayer" parent="Sound Effect"]
 stream = ExtResource("4_273d0")
 bus = &"Sound Effect"
 
-[node name="HitHurt" type="AudioStreamPlayer" parent="Sound Effect"]
+[node name="Hurt" type="AudioStreamPlayer" parent="Sound Effect"]
 stream = ExtResource("5_benwr")
 bus = &"Sound Effect"
 
-[node name="PowerUp" type="AudioStreamPlayer" parent="Sound Effect"]
+[node name="Power Up" type="AudioStreamPlayer" parent="Sound Effect"]
 stream = ExtResource("6_7aqlw")
 bus = &"Sound Effect"
 

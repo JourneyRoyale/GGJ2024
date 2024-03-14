@@ -1,13 +1,26 @@
 extends MeshInstance3D
+class_name Chair
 
-var occupied = false
-@onready var camera = get_node("/root/Game/Game Holder/Perspective/Camera3D")
+# Onready
+@onready var spawn_point_node : Node3D = get_node("Spawn Point")
 
-#func _ready():
-	#look_at_camera()
-#
-#func look_at_camera():
-	#var sprite_position = Vector3(0,global_transform.origin.y,0)
-	#var camera_position = Vector3(0,camera.global_transform.origin.y,0)
-	#var direction_vector = (camera_position - sprite_position).normalized()
-	#look_at(direction_vector, Vector3(0, 0, 0))
+# Local variable
+var occupied : bool = false
+var current_entity : Node3D
+
+func seat_entity(entity : Node3D, spawn_point : Node3D) -> void :
+	entity.position = spawn_point.global_transform.origin
+	entity.assigned_chair = self
+	entity.assigned_floor = self.get_parent().get_parent()
+	current_entity = entity
+	occupied = true
+
+func clear_chair() -> void :
+	occupied = false
+	current_entity = null
+
+func get_chair_spawn_point() -> Node3D :
+	return spawn_point_node
+
+func get_chair_position() -> Vector3 :
+	return spawn_point_node.global_transform.origin

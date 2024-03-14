@@ -1,78 +1,78 @@
 [gd_scene load_steps=22 format=3 uid="uid://c2hstesjai7p1"]
 
-[ext_resource type="Script" path="res://scripts/ui/curtain_container.gd" id="1_jdact"]
-[ext_resource type="Texture2D" uid="uid://dck4vj44e6gg2" path="res://sprites/ui/CCCurtainSpriteSheet.png" id="2_djb7o"]
+[ext_resource type="Script" path="res://scripts/ui/curtain_container.gd" id="1_5h47u"]
+[ext_resource type="Texture2D" uid="uid://dck4vj44e6gg2" path="res://sprites/ui/CCCurtainSpriteSheet.png" id="2_yrs5d"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2w86n"]
-atlas = ExtResource("2_djb7o")
+atlas = ExtResource("2_yrs5d")
 region = Rect2(2564, 4338, 1282, 1446)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rbb2r"]
-atlas = ExtResource("2_djb7o")
+atlas = ExtResource("2_yrs5d")
 region = Rect2(0, 0, 1282, 1446)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hwfgf"]
-atlas = ExtResource("2_djb7o")
+atlas = ExtResource("2_yrs5d")
 region = Rect2(2564, 0, 1282, 1446)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_snwq8"]
-atlas = ExtResource("2_djb7o")
+atlas = ExtResource("2_yrs5d")
 region = Rect2(0, 1446, 1282, 1446)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2mt6f"]
-atlas = ExtResource("2_djb7o")
+atlas = ExtResource("2_yrs5d")
 region = Rect2(2564, 1446, 1282, 1446)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xc5j2"]
-atlas = ExtResource("2_djb7o")
+atlas = ExtResource("2_yrs5d")
 region = Rect2(0, 2892, 1282, 1446)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gjero"]
-atlas = ExtResource("2_djb7o")
+atlas = ExtResource("2_yrs5d")
 region = Rect2(2564, 2892, 1282, 1446)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8aaxq"]
-atlas = ExtResource("2_djb7o")
+atlas = ExtResource("2_yrs5d")
 region = Rect2(0, 4338, 1282, 1446)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5hqjd"]
-atlas = ExtResource("2_djb7o")
+atlas = ExtResource("2_yrs5d")
 region = Rect2(2564, 4338, 1282, 1446)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_sb4r8"]
-atlas = ExtResource("2_djb7o")
+atlas = ExtResource("2_yrs5d")
 region = Rect2(0, 0, 1282, 1446)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4wiso"]
-atlas = ExtResource("2_djb7o")
+atlas = ExtResource("2_yrs5d")
 region = Rect2(2564, 4338, 1282, 1446)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ul4yf"]
-atlas = ExtResource("2_djb7o")
+atlas = ExtResource("2_yrs5d")
 region = Rect2(0, 4338, 1282, 1446)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0v0i1"]
-atlas = ExtResource("2_djb7o")
+atlas = ExtResource("2_yrs5d")
 region = Rect2(2564, 2892, 1282, 1446)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3ifry"]
-atlas = ExtResource("2_djb7o")
+atlas = ExtResource("2_yrs5d")
 region = Rect2(0, 2892, 1282, 1446)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_woxda"]
-atlas = ExtResource("2_djb7o")
+atlas = ExtResource("2_yrs5d")
 region = Rect2(2564, 1446, 1282, 1446)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_82ar1"]
-atlas = ExtResource("2_djb7o")
+atlas = ExtResource("2_yrs5d")
 region = Rect2(0, 1446, 1282, 1446)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dq8rx"]
-atlas = ExtResource("2_djb7o")
+atlas = ExtResource("2_yrs5d")
 region = Rect2(2564, 0, 1282, 1446)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_aulra"]
-atlas = ExtResource("2_djb7o")
+atlas = ExtResource("2_yrs5d")
 region = Rect2(0, 0, 1282, 1446)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_5diy7"]
@@ -152,22 +152,22 @@ animations = [{
 "speed": 10.0
 }]
 
-[node name="Curtain Container" type="Node2D" groups=["Curtains"]]
+[node name="Curtain" type="Node2D" groups=["Curtains"]]
 position = Vector2(577, -2)
-script = ExtResource("1_jdact")
+script = ExtResource("1_5h47u")
 
-[node name="LeftCurtain" type="AnimatedSprite2D" parent="."]
+[node name="Left Curtain" type="AnimatedSprite2D" parent="."]
 position = Vector2(-100, 543)
 rotation = 3.14159
 scale = Vector2(-0.775, -0.775)
 sprite_frames = SubResource("SpriteFrames_5diy7")
 animation = &"closed"
 
-[node name="RightCurtain" type="AnimatedSprite2D" parent="."]
+[node name="Right Curtain" type="AnimatedSprite2D" parent="."]
 position = Vector2(870, 543)
 scale = Vector2(-0.775, 0.775)
 sprite_frames = SubResource("SpriteFrames_5diy7")
 animation = &"closed"
 
-[connection signal="animation_finished" from="LeftCurtain" to="." method="_on_left_curtain_animation_finished"]
-[connection signal="animation_finished" from="RightCurtain" to="." method="_on_right_curtain_animation_finished"]
+[connection signal="animation_finished" from="Left Curtain" to="." method="_on_left_curtain_animation_finished"]
+[connection signal="animation_finished" from="Right Curtain" to="." method="_on_right_curtain_animation_finished"]

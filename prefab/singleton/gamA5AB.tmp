@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=3 uid="uid://c7k74o0tq45d2"]
+
+[ext_resource type="Script" path="res://scripts/singleton/game_manager.gd" id="1_jywg1"]
+[ext_resource type="PackedScene" uid="uid://csw4tv5xbyfi5" path="res://scenes/game.tscn" id="2_06g04"]
+[ext_resource type="PackedScene" uid="uid://cwhsqyo035ghh" path="res://scenes/start.tscn" id="2_j3ben"]
+[ext_resource type="Resource" uid="uid://cwgkk8aucdit0" path="res://resources/data/Level 1/level_1.tres" id="3_me5q5"]
+
+[node name="GameManager" type="Node3D"]
+script = ExtResource("1_jywg1")
+level_resource_dictionary = {
+ExtResource("2_06g04"): ExtResource("3_me5q5")
+}
+main_menu = ExtResource("2_j3ben")
+multiplier_increase_frequency = null
+error_amount = null
+match_amount = null
+hit_amount = null
+annoyed_amount = null
+additional_multiplier = null
+joke_combo = null

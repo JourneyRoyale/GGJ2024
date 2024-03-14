@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c5ec8hwtgw0mf"
-path="res://.godot/imported/Translucent shader_FinalVersion-01.png-4f9964e3689b6f679e5b003602113a5f.ctex"
+uid="uid://ccn7b717tmmck"
+path="res://.godot/imported/bar.png-8ff4867c463eded2884328c4452485ee.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scripts/Translucent shader_FinalVersion-01.png"
-dest_files=["res://.godot/imported/Translucent shader_FinalVersion-01.png-4f9964e3689b6f679e5b003602113a5f.ctex"]
+source_file="res://sprites/bar.png"
+dest_files=["res://.godot/imported/bar.png-8ff4867c463eded2884328c4452485ee.ctex"]
 
 [params]
 

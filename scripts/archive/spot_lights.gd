@@ -2,7 +2,7 @@ extends Node3D
 
 # On Ready
 @onready var particles : CPUParticles3D = get_node("Ground/CPUParticles3D")
-@onready var game_manager = get_node("/root/GameManager")
+@onready var game_manager = get_node("/root/Game_Manager")
 
 # Export
 @export var minDistance = 5

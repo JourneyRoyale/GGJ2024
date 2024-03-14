@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://bun08wus37exn"]
 
-[ext_resource type="Script" path="res://scripts/game/spot_lights.gd" id="1_calee"]
+[ext_resource type="Script" path="res://scripts/archive/spot_lights.gd" id="1_calee"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_18f50"]
 radius = 0.05

@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="HecklerResource" load_steps=2 format=3 uid="uid://dayn312ruukda"]
+
+[ext_resource type="Script" path="res://resources/script/heckler_resource.gd" id="1_xvkv3"]
+
+[resource]
+script = ExtResource("1_xvkv3")
+move_speed = 0.5
+aggressiveness = 2.0
+throw_delay = 1.0
+move_time = {
+"max": 5.0,
+"min": 2.0
+}

@@ -1,15 +1,15 @@
 [gd_scene load_steps=24 format=3 uid="uid://caw0xuwrjtxet"]
 
-[ext_resource type="PackedScene" uid="uid://b5h5i641pvljq" path="res://prefab/egg/conveyor.tscn" id="1_pi8vo"]
+[ext_resource type="PackedScene" uid="uid://b5h5i641pvljq" path="res://prefab/archive/conveyor.tscn" id="1_pi8vo"]
 [ext_resource type="PackedScene" uid="uid://bal0jss3qcmho" path="res://prefab/player/comedian.tscn" id="2_ulwln"]
 [ext_resource type="ArrayMesh" uid="uid://b7s1g8w1atyl6" path="res://3d/StageAsset.obj" id="3_rpgsj"]
 [ext_resource type="Script" path="res://scripts/singleton/audio_manager.gd" id="4_rfoap"]
 [ext_resource type="AudioStream" uid="uid://inflyfrfxqu7" path="res://music/archive/refract.mp3" id="5_o2jcn"]
 [ext_resource type="AudioStream" uid="uid://b77xbhcraw287" path="res://music/archive/mixkit-arcade-game-complete-or-approved-mission-205.wav" id="6_k7vlq"]
-[ext_resource type="PackedScene" uid="uid://b7efb0ou050m6" path="res://prefab/audience/audience.tscn" id="7_haojk"]
+[ext_resource type="PackedScene" uid="uid://b7efb0ou050m6" path="res://prefab/audience/audience_manager.tscn" id="7_haojk"]
 [ext_resource type="PackedScene" uid="uid://bky7n6468r137" path="res://prefab/audience/chair.tscn" id="8_0pnj3"]
 [ext_resource type="Texture2D" uid="uid://bywn7ojtp28f1" path="res://sprites/Shading.png" id="8_ab4ig"]
-[ext_resource type="PackedScene" uid="uid://dylmrkofcgcmw" path="res://prefab/player/thats_all_folks.tscn" id="8_sca7o"]
+[ext_resource type="PackedScene" uid="uid://dylmrkofcgcmw" path="res://prefab/game/thats_all_folks.tscn" id="8_sca7o"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_2nep6"]
 
@@ -123,11 +123,6 @@ stream = ExtResource("6_k7vlq")
 
 [node name="Audience" parent="." instance=ExtResource("7_haojk")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.15, 2.255, -4.675)
-chair_positions = [NodePath("Stage/Floor/Bottom Floor/Chair/Chair"), NodePath("Stage/Floor/Bottom Floor/Chair/Chair2"), NodePath("Stage/Floor/Bottom Floor/Chair/Chair3"), NodePath("Stage/Floor/Bottom Floor/Chair/Chair4"), NodePath("Stage/Floor/Bottom Floor/Chair/Chair5"), NodePath("Stage/Floor/Middle Floor/Chair/Chair6"), NodePath("Stage/Floor/Middle Floor/Chair/Chair7"), NodePath("Stage/Floor/Middle Floor/Chair/Chair8"), NodePath("Stage/Floor/Middle Floor/Chair/Chair9"), NodePath("Stage/Floor/Middle Floor/Chair/Chair10")]
-spawn_point = [NodePath("Stage/Left Stair/Spawn Point"), NodePath("Stage/Right Stair/Spawn Point")]
-navigation_level = [NodePath("Stage/Floor/Middle Floor/Movement"), NodePath("Stage/Floor/Bottom Floor/Movement")]
-max_heckler = 2
-starting_audience = 3
 
 [node name="Stage" type="Node3D" parent="Audience"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.5)

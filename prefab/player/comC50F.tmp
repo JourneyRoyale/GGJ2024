@@ -1,9 +1,8 @@
-[gd_scene load_steps=21 format=3 uid="uid://bal0jss3qcmho"]
+[gd_scene load_steps=20 format=3 uid="uid://bal0jss3qcmho"]
 
-[ext_resource type="Script" path="res://scripts/player/comedian.gd" id="1_joff3"]
+[ext_resource type="Script" path="res://scripts/game/comedian.gd" id="1_joff3"]
 [ext_resource type="SpriteFrames" uid="uid://cr383cnklcbny" path="res://sprites/audience/comedian_animation.tres" id="2_u6svr"]
-[ext_resource type="Script" path="res://prefab/player/Joke.gd" id="3_6brw2"]
-[ext_resource type="Script" path="res://scripts/player/egg.gd" id="3_brlam"]
+[ext_resource type="Script" path="res://scripts/egg/comedian_egg.gd" id="3_8xvri"]
 [ext_resource type="Texture2D" uid="uid://cmua1lqkbawoa" path="res://sprites/jokes/egg.png" id="3_r35bd"]
 [ext_resource type="Texture2D" uid="uid://dhqbu5fgns7xw" path="res://sprites/EggOutline.png" id="3_ugrcy"]
 [ext_resource type="Script" path="res://scripts/audience/emoji.gd" id="4_aixek"]
@@ -97,14 +96,14 @@ wait_time = 0.25
 
 [node name="Joke" type="Node3D" parent="."]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 2.9616, 0)
-script = ExtResource("3_6brw2")
 
 [node name="Egg" type="Node3D" parent="Joke"]
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 10.052, 0)
-script = ExtResource("3_brlam")
+script = ExtResource("3_8xvri")
+scale_duration = 5.0
 
 [node name="Emoji" type="Node3D" parent="Joke/Egg"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.1)
 script = ExtResource("4_aixek")
 
 [node name="Alcohol" type="Sprite3D" parent="Joke/Egg/Emoji"]
@@ -118,7 +117,7 @@ visible = false
 texture = ExtResource("7_aokrd")
 
 [node name="Chicken Drumstick" type="Sprite3D" parent="Joke/Egg/Emoji"]
-transform = Transform3D(0.35, 0, 0, 0, 0.35, 0, 0, 0, 0.35, 0, -0.5, 0)
+transform = Transform3D(0.35, 0, 0, 0, 0.35, 0, 0, 0, 0.35, 0, -0.522839, 0)
 visible = false
 texture = ExtResource("6_0j30y")
 

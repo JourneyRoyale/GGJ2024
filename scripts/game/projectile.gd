@@ -1,8 +1,8 @@
 extends Area3D
 
 # On Ready
-@onready var game_manager = get_node("/root/GameManager")
-@onready var audio_manager = get_node("/root/AudioManager")
+@onready var game_manager = get_node("/root/Game_Manager")
+@onready var audio_manager = get_node("/root/Audio_Manager")
 
 # Export
 @export var SPEED = 10

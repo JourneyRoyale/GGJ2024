@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="AudienceResource" load_steps=2 format=3 uid="uid://csir6pojr1jrv"]
+
+[ext_resource type="Script" path="res://resources/script/audience_resource.gd" id="1_vs6ae"]
+
+[resource]
+script = ExtResource("1_vs6ae")
+audience_patience = 4
+audience_move_speed = 5.0

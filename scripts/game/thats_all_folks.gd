@@ -1,7 +1,7 @@
 extends Node3D
 
 # On Ready
-@onready var game_manager = get_node("/root/GameManager")
+@onready var game_manager : GameManager = get_node("/root/Game_Manager")
 
 # Constant
 var in_time = 1
@@ -20,8 +20,8 @@ var current_state = CANE_STATE.OFF
 var target_x : float = 0.0
 
 # Move Cane until it hits player
-func _process(delta):
-	if game_manager.isPlaying == true:
+func _process(delta : float) -> void :
+	if game_manager.is_playing == true:
 		if current_state == CANE_STATE.IN:
 			if current_time < in_time:
 				current_time += delta
@@ -39,7 +39,7 @@ func _process(delta):
 			else:
 				current_time = 0
 				current_state = CANE_STATE.OFF
-				game_manager.isPlaying = false
+				game_manager.is_playing = false
 				get_tree().call_group("Curtains", "end_game")
 			if player != null:
 				player.position.x = position.x
@@ -47,7 +47,7 @@ func _process(delta):
 			position.z = player.position.z
 
 # Set cane starting
-func start():
+func start() -> void :
 	if current_state == CANE_STATE.OFF:
 		current_time = 0
 		position.x = start_x

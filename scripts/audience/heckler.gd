@@ -1,28 +1,29 @@
 extends CharacterBody3D
+class_name Heckler
 
 # On Ready
-@onready var animation_player = get_node("AnimationPlayer")
-@onready var sprite = get_node("AnimatedSprite3D")
-@onready var audio_manager = get_node("/root/AudioManager")
-@onready var game_manager = get_node("/root/GameManager")
+@onready var game_manager : GameManager = get_node("/root/Game_Manager")
+@onready var audio_manager : AudioManager = get_node("/root/Audio_Manager")
+@onready var animation_player : AnimationPlayer = get_node("AnimationPlayer")
+@onready var sprite : AnimatedSprite3D = get_node("AnimatedSprite3D")
+@onready var throw_delay_timer : Timer = get_node("Throw Delay Timer")
+@onready var walk_timer : Timer = get_node("Walk Timer")
 
 # Constants
-var MOVE_SPEED = 1.0
-var MOVE_TIME_MIN = 2.0
-var MOVE_TIME_MAX = 5.0
-var AGGRESSIVENESS = 0.5 # TO-DO - implement aggressiveness variable that causes heckler to stop early in front of player
-var LEFT_BOUNDARY = -7
-var RIGHT_BOUNDARY = 7
-var THROW_DELAY = 0.6 #how long the heckler pauses to throw a tomato in seconds
+var LEFT_BOUNDARY : int = -7
+var RIGHT_BOUNDARY :int = 7
 
-# Variables
-var audience_reference
-var move_time = 0.0
-var move_timer = 0.0
+# Init variable from resources
+var move_speed : float
+var aggressiveness : float
+var throw_delay : float
+var move_time : Dictionary
+
+# Local variable
+var packed_projectile = load("res://prefab/audience/projectile.tscn")
 var is_moving = false
 var current_direction = Vector3(1.0, 0, 0).normalized()  # Starts moving right
-var packed_projectile = load("res://prefab/audience/projectile.tscn")
-var assigned_seat
+var assigned_chair : Chair
 var assigned_floor
 var lanes = [];
 var current_lane = 0
@@ -31,24 +32,26 @@ var health = 2
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
+func _init_resources() -> void :
+	var heckler_resource : HecklerResource = game_manager.level_resource.heckler
+
+	move_time = heckler_resource.move_time
+	move_speed = heckler_resource.move_speed
+	aggressiveness = heckler_resource.aggressiveness
+	throw_delay = heckler_resource.throw_delay
 
 # Play Spawn Animation When Spawned
-func _ready():
+func _ready() -> void :
+	_init_resources()
 	sprite.play("spawn")
 	lanes = game_manager.heckler_lane_x_positions;
-	print("Lanes: ", lanes)
 
-func _physics_process(delta):
-	# Add the gravity.
-	#if not is_on_floor():
-		#velocity.y -= gravity * 100 * delta
+func _physics_process(delta : float) -> void :
+	if not is_on_floor():
+		velocity.y -= gravity * move_speed * delta
 
 	if is_moving:
-		position += current_direction * MOVE_SPEED * delta * 5
-		move_timer += delta
-		
-		if move_timer > move_time:
-			_stop_moving()
+		position += current_direction * move_speed * delta * 5
 		
 		# Check boundaries
 		if position.x <= LEFT_BOUNDARY and current_direction.x < 0:
@@ -57,14 +60,12 @@ func _physics_process(delta):
 			current_direction.x = -current_direction.x  # Change to moving left
 			
 		for lane_index in range(lanes.size()):
-			print("lane_x: ", lane_index)
-			print("lane value: ", lanes[lane_index])
-			if abs(position.x - lanes[lane_index]) < 0.02 and move_timer > move_time and not game_manager.filled_lane_x_positions[lane_index]:
-				print("Stopping in lane", lane_index, " as ", position.x, " == ", lanes[lane_index])  
+			if abs(position.x - lanes[lane_index]) < 0.02 and not game_manager.filled_lane_x_positions[lane_index]:
 				game_manager.filled_lane_x_positions[lane_index] = true
 				current_lane = lane_index
 				_stop_moving()
 				break
+	
 	move_and_slide()
 
 # Start Heckler Movement
@@ -72,8 +73,7 @@ func _start_moving():
 	is_moving = true
 	animation_player.play("bounce")
 	sprite.play("default")
-	move_time = randf_range(MOVE_TIME_MIN, MOVE_TIME_MAX)
-	move_timer = 0.0
+	walk_timer.start(game_manager.rng.randi_range(move_time["min"], move_time["max"]))
 
 # Stop Heckler Movement To Throw Tomato
 func _stop_moving():
@@ -92,20 +92,10 @@ func _throw_tomato():
 	else:
 		current_direction.x = -1.0  # Move left
 	
-	_create_throw_timer()
-
-# Wait to throw tomato
-func _create_throw_timer():
-	var timer = Timer.new()  
-	timer.wait_time = THROW_DELAY  # Set the wait time (1.5 seconds)
-	timer.one_shot = true  # Make sure it only ticks once
-	timer.connect("timeout", Callable(self, "_on_timer_timeout"))
-	timer.name = "ThrowTimer"  # Naming the timer for easier identification
-	add_child(timer)  # Add the timer to the node tree
-	timer.start()
+	throw_delay_timer.start(throw_delay)
 
 # Move after throwing finished
-func _on_timer_timeout():
+func _on_throw_timer_timeout() -> void :
 	var instance = packed_projectile.instantiate()
 	# Add the projectile as a sibling rather than a child
 	if get_parent():
@@ -113,26 +103,23 @@ func _on_timer_timeout():
 		instance.global_transform = global_transform 
 	
 	_start_moving()
-	
-	# Remove throw timer 
-	var timer_node = get_node("ThrowTimer")
-	if timer_node:
-		timer_node.queue_free()  # Safely remove the timer node
+
+func _on_walk_timer_timeout() -> void :
+	_stop_moving()
 
 # On Animation Finished
-func _on_animated_sprite_3d_animation_finished():
+func _on_animated_sprite_3d_animation_finished() -> void :
 	var anim_name = sprite.animation.get_basename()
 	
 	#Spawn animation finish, start moving
 	if(anim_name == "spawn"):
 		sprite.play("default")
-		randomize()
 		_start_moving()
 	
-	#On Animation death finished, destory node
+	#On animation death finished, destory heckler
 	if(anim_name == "death"):
 		get_tree().call_group("AudienceManager", "kill_heckler", self)
 
 # Play Death Animation
-func play_death():
+func play_death() -> void :
 	sprite.play("death")

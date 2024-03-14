@@ -1,4 +1,5 @@
 extends Sprite2D
+class_name Egg
 
 # On Ready
 @onready var emoji = get_node("Emoji");
@@ -26,12 +27,12 @@ func _ready():
 	
 	emoji.set_emoji(new_audience_emoji[0])
 	emoji_num = new_audience_emoji[0]
-	animation.play("Egg Spawn")
+	#animation.play("Egg Spawn")
 
 # Check if egg past boundary
 func _process(delta):
-	if isSpawned:
-		position.x += speed
+	if true:
+		position.x += speed * delta
 		if position.x == 1180:
 			animation.play("Egg Death")
 			get_node("Emoji").visible = false

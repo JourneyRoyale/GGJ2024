@@ -21,8 +21,8 @@ buses/default_bus_layout="res://music/audio_bus_layout.tres"
 
 [autoload]
 
-GameManager="*res://prefab/singleton/game_manager.tscn"
-AudioManager="*res://prefab/singleton/audio_manager.tscn"
+Game_Manager="*res://prefab/singleton/game_manager.tscn"
+Audio_Manager="*res://prefab/singleton/audio_manager.tscn"
 
 [display]
 

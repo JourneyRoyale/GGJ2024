@@ -95,6 +95,8 @@ wait_time = 0.25
 
 [node name="InvulnerableTimer" type="Timer" parent="."]
 
+[node name="FlyTimer" type="Timer" parent="."]
+
 [node name="Joke" type="Node3D" parent="."]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 2.9616, 0)
 script = ExtResource("3_6brw2")
@@ -157,3 +159,4 @@ texture = ExtResource("3_ugrcy")
 
 [connection signal="timeout" from="StunTimer" to="." method="_on_stun_timer_timeout"]
 [connection signal="timeout" from="InvulnerableTimer" to="." method="_on_invulnerable_timer_timeout"]
+[connection signal="timeout" from="FlyTimer" to="." method="_on_fly_timer_timeout"]

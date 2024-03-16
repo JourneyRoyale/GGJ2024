@@ -1,11 +1,11 @@
 [gd_resource type="Resource" script_class="LevelResource" load_steps=3 format=3 uid="uid://cwgkk8aucdit0"]
 
-[ext_resource type="PackedScene" uid="uid://csw4tv5xbyfi5" path="res://scenes/game.tscn" id="1_5bl16"]
+[ext_resource type="PackedScene" uid="uid://csw4tv5xbyfi5" path="res://scenes/Level 1.tscn" id="1_7yin8"]
 [ext_resource type="Script" path="res://resources/script/level_resource.gd" id="4_trvdi"]
 
 [resource]
 script = ExtResource("4_trvdi")
-scene = ExtResource("1_5bl16")
+scene = ExtResource("1_7yin8")
 level = 1
 time = 60
 background_music = 0

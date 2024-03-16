@@ -10,8 +10,6 @@ class_name Heckler
 @onready var walk_timer : Timer = get_node("Walk Timer")
 
 # Constants
-var LEFT_BOUNDARY : int = -7
-var RIGHT_BOUNDARY :int = 7
 
 # Init variable from resources
 var move_speed : float
@@ -28,6 +26,7 @@ var assigned_floor
 var lanes = [];
 var current_lane = 0
 var health = 2
+var boundary : Dictionary
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
@@ -54,19 +53,16 @@ func _physics_process(delta : float) -> void :
 		position += current_direction * move_speed * delta * 5
 		
 		# Check boundaries
-		if position.x <= LEFT_BOUNDARY and current_direction.x < 0:
+		if position.x <= boundary["left"] and current_direction.x < 0:
 			current_direction.x = -current_direction.x  # Change to moving right
-		elif position.x >= RIGHT_BOUNDARY and current_direction.x > 0:
+		elif position.x >= boundary["right"] and current_direction.x > 0:
 			current_direction.x = -current_direction.x  # Change to moving left
-			
-		for lane_index in range(lanes.size()):
-			if abs(position.x - lanes[lane_index]) < 0.02 and not game_manager.filled_lane_x_positions[lane_index]:
-				game_manager.filled_lane_x_positions[lane_index] = true
-				current_lane = lane_index
-				_stop_moving()
-				break
 	
 	move_and_slide()
+
+func _set_move_boundary():
+	var chair_group : Node3D = assigned_chair.get_parent()
+	boundary = {"left" : chair_group.get_node("Left").global_transform.origin.x, "right" : chair_group.get_node("Right").global_transform.origin.x}
 
 # Start Heckler Movement
 func _start_moving():
@@ -113,6 +109,7 @@ func _on_animated_sprite_3d_animation_finished() -> void :
 	
 	#Spawn animation finish, start moving
 	if(anim_name == "spawn"):
+		_set_move_boundary()
 		sprite.play("default")
 		_start_moving()
 	

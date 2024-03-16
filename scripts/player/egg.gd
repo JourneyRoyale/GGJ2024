@@ -37,14 +37,6 @@ func _process(delta : float) -> void :
 		reset_egg()
 	pass
 
-func _input(event : InputEvent) -> void :
-	if event is InputEventKey and event.pressed:
-		if event.keycode == KEY_SPACE:
-			get_tree().call_group("AudienceManager", "check_for_match", self, timing())
-			reset_egg()
-		if event.keycode == KEY_R:
-			emoji.set_random_emoji()
-
 func reset_egg() -> void :
 	scale = Vector3(0.1,0.1,0.1)
 	time_elapsed = 0.

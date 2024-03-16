@@ -7,8 +7,12 @@ class_name Comedian
 @onready var sprite : AnimatedSprite3D = get_node("Sprite")
 @onready var invulnerable_timer : Timer = get_node("InvulnerableTimer")
 @onready var stun_timer : Timer = get_node("StunTimer")
+@onready var fly_timer : Timer = get_node("FlyTimer")
 @onready var animation_player : AnimationPlayer = get_node("AnimationPlayer")
 @onready var ui_screen = get_node("/root/Game/Ui Screen")
+@onready var collision : CollisionShape3D = get_node("CollisionShape3D")
+@onready var joke : Joke = get_node("Joke")
+@onready var egg : Egg = get_node("Joke/Egg")
 
 # Export
 const ACCEL = 1
@@ -19,6 +23,7 @@ const INERTIA = 0.3
 # Init variable from resources
 var invulnerable_time = 1
 var stun_time = .25
+var fly_time = 1
 
 # Local variable
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
@@ -28,6 +33,8 @@ var is_moving = false;
 var is_stunned = false
 var is_dead = false 
 var is_invulnerable = false
+var is_flying = false
+var is_falling = false
 
 func _init_resources() -> void :
 	var level_resource : LevelResource = game_manager.level_resource
@@ -39,6 +46,16 @@ func _ready() -> void :
 	if not is_dead:
 		audio_manager.play_music(int(Shared.E_BACKGROUND_MUSIC.RAGTIME), Shared.E_AudioType.BACKGROUND)
 		animation_player.play("default")
+
+func _input(event : InputEvent) -> void :
+	if event is InputEventKey and event.pressed:
+		if event.keycode == KEY_Z and not is_flying:
+			get_tree().call_group("AudienceManager", "check_for_match", egg, egg.timing())
+			egg.reset_egg()
+		if event.keycode == KEY_X:
+			egg.emoji.set_random_emoji()
+		if event.keycode == KEY_C and is_on_floor():
+			velocity.y = JUMP_VELOCITY
 
 func _physics_process(delta : float) -> void :
 	if not is_stunned or is_dead:
@@ -64,6 +81,16 @@ func _physics_process(delta : float) -> void :
 			elif last_move == "right":
 				sprite.play("idle_from_right")
 		
+		
+		if is_flying:
+			position.y = 4
+		elif is_on_floor():
+			is_falling = false
+		elif is_falling:
+			velocity.y -= gravity * 2 * delta
+		elif position.y >= 4:
+			_fly()
+		
 		if (velocity.x == 0 and velocity.z == 0):
 			sprite.stop()
 	
@@ -87,6 +114,24 @@ func _on_invulnerable_timer_timeout() -> void :
 		animation_player.play("default")
 		get_node("Sprite").visible = true
 		show()
+
+func _on_fly_timer_timeout():
+	_falling()
+
+func _fly():
+	is_flying = true
+	is_falling = false
+	is_invulnerable = true
+	collision.disabled = true
+	joke.visible = false
+	fly_timer.start(fly_time)
+
+func _falling():
+	is_flying = false
+	is_falling = true
+	is_invulnerable = false
+	collision.disabled = false
+	joke.visible = true
 
 # Play Game Over Animation
 func thats_all_folks() -> void :

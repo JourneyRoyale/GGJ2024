@@ -11,7 +11,6 @@ class_name AudienceManager
 @onready var timer : Timer = get_node("Timer")
 
 # Export
-@export var chair_list : Array[NodePath] = []
 @export var spawn_point_list : Array[NodePath] = []
 @export var navigation_level_list : Array[NodePath] = []
 
@@ -27,6 +26,7 @@ var audience_factory : Audience
 var heckler_factory : Heckler
 var heckler_list : Array[Heckler] = [] 
 var audience_node_list : Array[Audience] = []
+var chair_list : Array[Chair] = []
 
 func _init_resources() -> void :
 	var level_resource : LevelResource = game_manager.level_resource
@@ -43,14 +43,13 @@ func _ready() -> void :
 
 # Spawn starting audience
 func _spawn_starting_audience() -> void :
-	var chair_list_shuff : Array[NodePath] = chair_list.duplicate()
+	var chair_list_shuff : Array[Chair] = chair_list.duplicate()
 	chair_list_shuff.shuffle()
 	
 	var rng_starting_audience : int = game_manager.rng.randi_range( starting_audience["min"], starting_audience["max"])
 	
-	var chosen_chair : Array[NodePath] = chair_list_shuff.slice(0, rng_starting_audience)
-	for chair_path : NodePath in chosen_chair:
-		var chair : Chair = get_node(chair_path)
+	var chosen_chair : Array[Chair] = chair_list_shuff.slice(0, rng_starting_audience)
+	for chair : Chair in chosen_chair:
 		_spawn_audience(chair, chair.get_chair_spawn_point())
 
 # Spawn a audience
@@ -72,7 +71,7 @@ func _on_timer_timeout() -> void :
 	for audience_node in free_audience_node_list:
 		audience_node.show_emoji(emoji_variety)
 	
-	var occupied_chair_list : Array[NodePath] = chair_list.filter(func(x): return get_node(x).occupied)
+	var occupied_chair_list : Array[Chair] = chair_list.filter(func(x): return x.occupied)
 	if (occupied_chair_list.size() < chair_list.size()):
 		var spawn_point_list_ran_path : Array[NodePath] = spawn_point_list.duplicate()
 		spawn_point_list_ran_path.shuffle()
@@ -82,15 +81,18 @@ func _on_timer_timeout() -> void :
 
 # Get all unoccupied chair
 func _get_empty_chair() -> Chair :
-	var empty_chair_list : Array[NodePath] = chair_list.filter(func(x): return !get_node(x).occupied)
+	var empty_chair_list : Array[Chair] = chair_list.filter(func(x): return !x.occupied)
 	empty_chair_list.shuffle()
-	return get_node(empty_chair_list[0])
+	return empty_chair_list[0]
 
 func _get_emoji_variety() -> Array[Shared.E_Emoji] :
 	var chosen_emoji_list = emoji_list.duplicate()
 	chosen_emoji_list.shuffle()
 	chosen_emoji_list = chosen_emoji_list.slice(0,game_manager.rng.randi_range(emoji_variety["min"], emoji_variety["max"]))
 	return chosen_emoji_list
+
+func track_chair(chair : Chair) -> void :
+	chair_list.append(chair)
 
 # Spawn a heckler
 func spawn_heckler(audience) -> void :

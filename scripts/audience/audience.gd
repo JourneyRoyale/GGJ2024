@@ -39,7 +39,7 @@ func _ready():
 func _physics_process(delta : float) -> void :
 	# Fall if not on floor
 	if not is_on_floor():
-			velocity.y -= gravity * delta
+			velocity.y -= gravity * 2 * delta
 	
 	# If not seated, move to be seated
 	if (!is_seated):

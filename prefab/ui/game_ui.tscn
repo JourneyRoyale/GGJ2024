@@ -389,17 +389,26 @@ theme = ExtResource("1_8kqac")
 [node name="GridContainer" type="GridContainer" parent="TitleScreen/MarginContainer/VBoxContainer/Main Menu"]
 layout_mode = 2
 theme = ExtResource("1_8kqac")
-theme_override_constants/h_separation = 300
+theme_override_constants/h_separation = 190
 theme_override_constants/v_separation = 0
 columns = 5
 
-[node name="Start Game" type="Button" parent="TitleScreen/MarginContainer/VBoxContainer/Main Menu/GridContainer"]
+[node name="Start" type="Button" parent="TitleScreen/MarginContainer/VBoxContainer/Main Menu/GridContainer"]
 custom_minimum_size = Vector2(250, 70)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme = ExtResource("1_8kqac")
-text = "Start Game"
+text = "Start
+"
+
+[node name="Versus" type="Button" parent="TitleScreen/MarginContainer/VBoxContainer/Main Menu/GridContainer"]
+custom_minimum_size = Vector2(170, 70)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+theme = ExtResource("1_8kqac")
+text = "Versus"
 
 [node name="Settings" type="Button" parent="TitleScreen/MarginContainer/VBoxContainer/Main Menu/GridContainer"]
 custom_minimum_size = Vector2(180, 70)
@@ -425,6 +434,59 @@ size_flags_horizontal = 6
 size_flags_vertical = 4
 theme = ExtResource("1_8kqac")
 text = "Exit"
+
+[node name="Level Selection" type="VBoxContainer" parent="TitleScreen/MarginContainer/VBoxContainer"]
+visible = false
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="TitleScreen/MarginContainer/VBoxContainer/Level Selection"]
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("1_8kqac")
+
+[node name="GridContainer" type="GridContainer" parent="TitleScreen/MarginContainer/VBoxContainer/Level Selection"]
+layout_mode = 2
+theme = ExtResource("1_8kqac")
+theme_override_constants/h_separation = 240
+theme_override_constants/v_separation = 0
+columns = 4
+
+[node name="Level 1" type="Button" parent="TitleScreen/MarginContainer/VBoxContainer/Level Selection/GridContainer"]
+custom_minimum_size = Vector2(250, 70)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("1_8kqac")
+text = "Level 1
+"
+
+[node name="Level 2" type="Button" parent="TitleScreen/MarginContainer/VBoxContainer/Level Selection/GridContainer"]
+custom_minimum_size = Vector2(250, 70)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+theme = ExtResource("1_8kqac")
+text = "Level 2
+"
+
+[node name="Level 3" type="Button" parent="TitleScreen/MarginContainer/VBoxContainer/Level Selection/GridContainer"]
+custom_minimum_size = Vector2(250, 70)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+theme = ExtResource("1_8kqac")
+text = "Level 3
+"
+
+[node name="Back" type="Button" parent="TitleScreen/MarginContainer/VBoxContainer/Level Selection/GridContainer"]
+custom_minimum_size = Vector2(250, 70)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+theme = ExtResource("1_8kqac")
+text = "Back
+"
 
 [node name="Setting" type="VBoxContainer" parent="TitleScreen/MarginContainer/VBoxContainer"]
 visible = false
@@ -608,10 +670,15 @@ libraries = {
 [connection signal="value_changed" from="Pause Screen/MarginContainer/MarginContainer/VBoxContainer/Pause Setting/PanelContainer/GridContainer/Background Slider" to="." method="_on_background_slider_value_changed"]
 [connection signal="value_changed" from="Pause Screen/MarginContainer/MarginContainer/VBoxContainer/Pause Setting/PanelContainer/GridContainer/Sound Effect Slider" to="." method="_on_sound_effect_slider_value_changed"]
 [connection signal="pressed" from="Pause Screen/MarginContainer/MarginContainer/VBoxContainer/Pause Setting/PanelContainer/GridContainer/Back" to="." method="_on_pause_setting_back_pressed"]
-[connection signal="pressed" from="TitleScreen/MarginContainer/VBoxContainer/Main Menu/GridContainer/Start Game" to="." method="_on_start_game_pressed"]
+[connection signal="pressed" from="TitleScreen/MarginContainer/VBoxContainer/Main Menu/GridContainer/Start" to="." method="_on_start_game_pressed"]
+[connection signal="pressed" from="TitleScreen/MarginContainer/VBoxContainer/Main Menu/GridContainer/Versus" to="." method="_on_settings_pressed"]
 [connection signal="pressed" from="TitleScreen/MarginContainer/VBoxContainer/Main Menu/GridContainer/Settings" to="." method="_on_settings_pressed"]
 [connection signal="pressed" from="TitleScreen/MarginContainer/VBoxContainer/Main Menu/GridContainer/Credits" to="." method="_on_credits_pressed"]
 [connection signal="pressed" from="TitleScreen/MarginContainer/VBoxContainer/Main Menu/GridContainer/Exit" to="." method="_on_exit_pressed"]
+[connection signal="pressed" from="TitleScreen/MarginContainer/VBoxContainer/Level Selection/GridContainer/Level 1" to="." method="_on_level_pressed" binds= [1]]
+[connection signal="pressed" from="TitleScreen/MarginContainer/VBoxContainer/Level Selection/GridContainer/Level 2" to="." method="_on_level_pressed" binds= [2]]
+[connection signal="pressed" from="TitleScreen/MarginContainer/VBoxContainer/Level Selection/GridContainer/Level 3" to="." method="_on_level_pressed" binds= [3]]
+[connection signal="pressed" from="TitleScreen/MarginContainer/VBoxContainer/Level Selection/GridContainer/Back" to="." method="_on_level_back_pressed"]
 [connection signal="value_changed" from="TitleScreen/MarginContainer/VBoxContainer/Setting/PanelContainer/GridContainer/Master Slider" to="." method="_on_master_slider_value_changed"]
 [connection signal="value_changed" from="TitleScreen/MarginContainer/VBoxContainer/Setting/PanelContainer/GridContainer/Background Slider" to="." method="_on_background_slider_value_changed"]
 [connection signal="value_changed" from="TitleScreen/MarginContainer/VBoxContainer/Setting/PanelContainer/GridContainer/Sound Effect Slider" to="." method="_on_sound_effect_slider_value_changed"]

@@ -9,6 +9,7 @@ class_name UIManager
 #Title Screen
 @onready var title_screen : Control = get_node("TitleScreen")
 @onready var main_menu : Control = get_node("TitleScreen/MarginContainer/VBoxContainer/Main Menu")
+@onready var level_selection : Control = get_node("TitleScreen/MarginContainer/VBoxContainer/Level Selection")
 @onready var setting : Control = get_node("TitleScreen/MarginContainer/VBoxContainer/Setting")
 @onready var credits : Control = get_node("TitleScreen/MarginContainer/VBoxContainer/Credits")
 @onready var exit_button : Button = get_node("TitleScreen/MarginContainer/VBoxContainer/Main Menu/GridContainer/Exit")
@@ -62,14 +63,12 @@ func _round_to_dec(num : float, digit : int) -> float :
 
 #Main Menu
 func _on_start_game_pressed() -> void :
-	get_tree().call_group("Curtains", "start_game")
-	title_screen.visible = false
-	game_ui.visible = true
-	game_manager.load_level(1)
+	level_selection.visible = true
+	main_menu.visible = false
 
 func _on_how_to_play_pressed() -> void :
 	pass # Replace with function body.
-	
+
 func _on_credits_pressed() -> void :
 	credits.visible = true
 	main_menu.visible = false
@@ -132,3 +131,13 @@ func _on_ui_gear_button_pressed() -> void :
 
 func createSplat() -> void :
 	get_node("GameUI/TomatoSplat").createSplat()
+
+func _on_level_pressed(index : int) -> void :
+	get_tree().call_group("Curtains", "start_game")
+	title_screen.visible = false
+	game_ui.visible = true
+	game_manager.load_level(index)
+
+func _on_level_back_pressed():
+	level_selection.visible = false
+	main_menu.visible = true

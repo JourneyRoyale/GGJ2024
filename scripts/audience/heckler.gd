@@ -93,10 +93,22 @@ func _throw_tomato():
 # Move after throwing finished
 func _on_throw_timer_timeout() -> void :
 	var instance = packed_projectile.instantiate()
-	# Add the projectile as a sibling rather than a child
+	# Randomly determine if this projectile should be a boomerang
+	if randi() % 100 < 30: # 30% chance for Boomerang
+		instance.type = instance.ProjectileType.Boomerang
+		print("Spawned Boomerang")
+	elif randi() % 100 < 60: # 30% chance for Brick
+		instance.type = instance.ProjectileType.Brick
+		print("Spawned Brick")
+	else:
+		instance.type = instance.ProjectileType.Tomato
+		print("Spawned Tomato")
+	
+	# Configure other properties of the instance as needed
+	# Add the projectile to the scene
 	if get_parent():
 		get_parent().add_child(instance)
-		instance.global_transform = global_transform 
+		instance.global_transform = global_transform
 	
 	_start_moving()
 

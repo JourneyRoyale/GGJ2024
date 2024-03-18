@@ -7,6 +7,7 @@ class_name Comedian
 @onready var sprite : AnimatedSprite3D = get_node("Sprite")
 @onready var invulnerable_timer : Timer = get_node("InvulnerableTimer")
 @onready var stun_timer : Timer = get_node("StunTimer")
+@onready var brick_stun_timer : Timer = get_node("BrickStunTimer")
 @onready var fly_timer : Timer = get_node("FlyTimer")
 @onready var animation_player : AnimationPlayer = get_node("AnimationPlayer")
 @onready var ui_screen = get_node("/root/Game/Ui Screen")
@@ -49,16 +50,17 @@ func _ready() -> void :
 
 func _input(event : InputEvent) -> void :
 	if event is InputEventKey and event.pressed:
-		if event.keycode == KEY_Z and not is_flying:
+		if event.keycode == KEY_E and not is_flying:
 			get_tree().call_group("AudienceManager", "check_for_match", egg, egg.timing())
 			egg.reset_egg()
-		if event.keycode == KEY_X:
+		if event.keycode == KEY_F:
 			egg.emoji.set_random_emoji()
-		if event.keycode == KEY_C and is_on_floor():
+		if event.keycode == KEY_Q and is_on_floor():
 			velocity.y = JUMP_VELOCITY
 
 func _physics_process(delta : float) -> void :
-	if not is_stunned or is_dead:
+	print("Is Stunned: ", is_stunned)
+	if not is_stunned and not is_dead:
 		var input_dir = Input.get_vector("move_left", "move_right", "move_up", "move_down")
 		var direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 
@@ -94,7 +96,7 @@ func _physics_process(delta : float) -> void :
 		if (velocity.x == 0 and velocity.z == 0):
 			sprite.stop()
 	
-	move_and_slide()
+		move_and_slide()
 
 # On stun timeout
 func _on_stun_timer_timeout() -> void :
@@ -145,15 +147,19 @@ func thats_all_folks() -> void :
 		sprite.play("yoink")
 
 # On Tomato hit player
-func projectile_collided() -> void :
+func projectile_collided(is_brick) -> void :
 	if not is_dead or is_invulnerable:
-		ui_screen.createSplat()
 		
 		game_manager.register_hurt()
 		audio_manager.play_music(int(Shared.E_SOUND_EFFECT.HURT), Shared.E_AudioType.SOUND_EFFECT)
 		sprite.play("hit")
-		animation_player.play("Invuln")
+
 		is_invulnerable = true
 		is_stunned = true
-		stun_timer.start()
-		invulnerable_timer.start()
+		if is_brick:
+			brick_stun_timer.start()
+		else:
+			ui_screen.createSplat()
+			animation_player.play("Invuln")
+			stun_timer.start()
+			invulnerable_timer.start()

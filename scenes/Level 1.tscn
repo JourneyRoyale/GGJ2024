@@ -480,4 +480,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 4.75, 2.147)
 player = NodePath("../Comedian")
 start_x = -15.0
 
+[node name="Area3D" type="Area3D" parent="."]
+
 [connection signal="timeout" from="Audience/Timer" to="Audience" method="_on_timer_timeout"]

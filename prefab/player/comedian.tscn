@@ -90,8 +90,6 @@ libraries = {
 "": SubResource("AnimationLibrary_crh5k")
 }
 
-[node name="BrickStunTimer" type="Timer" parent="."]
-
 [node name="StunTimer" type="Timer" parent="."]
 wait_time = 0.25
 
@@ -159,7 +157,6 @@ texture = ExtResource("3_r35bd")
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 10.021, 1)
 texture = ExtResource("3_ugrcy")
 
-[connection signal="timeout" from="BrickStunTimer" to="." method="_on_stun_timer_timeout"]
 [connection signal="timeout" from="StunTimer" to="." method="_on_stun_timer_timeout"]
 [connection signal="timeout" from="InvulnerableTimer" to="." method="_on_invulnerable_timer_timeout"]
 [connection signal="timeout" from="FlyTimer" to="." method="_on_fly_timer_timeout"]

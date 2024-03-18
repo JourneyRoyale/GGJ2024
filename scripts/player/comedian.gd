@@ -7,7 +7,6 @@ class_name Comedian
 @onready var sprite : AnimatedSprite3D = get_node("Sprite")
 @onready var invulnerable_timer : Timer = get_node("InvulnerableTimer")
 @onready var stun_timer : Timer = get_node("StunTimer")
-@onready var brick_stun_timer : Timer = get_node("BrickStunTimer")
 @onready var fly_timer : Timer = get_node("FlyTimer")
 @onready var animation_player : AnimationPlayer = get_node("AnimationPlayer")
 @onready var ui_screen = get_node("/root/Game/Ui Screen")
@@ -22,9 +21,9 @@ const JUMP_VELOCITY = 5.0
 const INERTIA = 0.3
 
 # Init variable from resources
-var invulnerable_time = 1
-var stun_time = .25
-var fly_time = 1
+var invulnerable_time
+var stun_time
+var fly_time
 
 # Local variable
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
@@ -38,12 +37,14 @@ var is_flying = false
 var is_falling = false
 
 func _init_resources() -> void :
-	var level_resource : LevelResource = game_manager.level_resource
+	var comedian_resources : ComedianResource = game_manager.level_resource.comedian
 
-	invulnerable_time = level_resource.invulnerable_time
-	stun_time = level_resource.stun_time
+	invulnerable_time = comedian_resources.invulnerable_time
+	fly_time = comedian_resources.fly_time
+	stun_time = comedian_resources.stun_time
 
 func _ready() -> void :
+	_init_resources()
 	if not is_dead:
 		audio_manager.play_music(int(Shared.E_BACKGROUND_MUSIC.RAGTIME), Shared.E_AudioType.BACKGROUND)
 		animation_player.play("default")
@@ -157,9 +158,9 @@ func projectile_collided(is_brick) -> void :
 		is_invulnerable = true
 		is_stunned = true
 		if is_brick:
-			brick_stun_timer.start()
+			stun_timer.start(stun_time["brick"])
 		else:
 			ui_screen.createSplat()
 			animation_player.play("Invuln")
-			stun_timer.start()
+			stun_timer.start(stun_time["tomato"])
 			invulnerable_timer.start()

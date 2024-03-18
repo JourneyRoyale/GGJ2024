@@ -3,8 +3,8 @@ class_name GameManager
 
 # On Ready
 @onready var audio_manager : AudioManager = get_node("/root/Audio_Manager")
-@onready var ui_screen = get_node("/root/Game/Ui Screen")
-@onready var game_holder = get_node("/root/Game/Game Holder")
+@onready var ui_screen : Control = get_node("/root/Game/Ui Screen")
+@onready var game_holder : Node3D = get_node("/root/Game/Game Holder")
 
 # Export
 @export var level_resource_dictionary : Dictionary = {}
@@ -33,6 +33,11 @@ func _init_resources() -> void :
 	match_amount = level_resource.match_amount
 	hit_amount = level_resource.hit_amount
 	annoyed_amount = level_resource.annoyed_amount
+
+func _reset_on_ready() -> void :
+	audio_manager = get_node("/root/Audio_Manager")
+	ui_screen = get_node("/root/Game/Ui Screen")
+	game_holder = get_node("/root/Game/Game Holder") 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta : float) -> void :
@@ -79,6 +84,7 @@ func restart_level() -> void :
 	load_level(level_resource.level)
 
 func load_level(index) -> void :
+	_reset_on_ready()
 	# Clear out current level
 	if game_holder.get_child_count() > 0:
 		for holder_scene in game_holder.get_children():

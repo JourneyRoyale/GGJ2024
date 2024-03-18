@@ -1,0 +1,33 @@
+[gd_resource type="Resource" script_class="LevelResource" load_steps=3 format=3 uid="uid://d4hs7a042pdhw"]
+
+[ext_resource type="PackedScene" uid="uid://ccw2wtei1viya" path="res://scenes/Level 2.tscn" id="1_auwbw"]
+[ext_resource type="Script" path="res://resources/script/level_resource.gd" id="2_f1vd8"]
+
+[resource]
+script = ExtResource("2_f1vd8")
+scene = ExtResource("1_auwbw")
+level = 2
+time = 60
+background_music = 0
+emoji_list = Array[int]([0, 1, 2, 3, 4, 5, 6, 7])
+emoji_variety = {
+"max": 7,
+"min": 3
+}
+max_heckler = 5
+max_heckler_per_floor = 5
+starting_audience = {
+"max": 10,
+"min": 5
+}
+audience_rate = {
+"max": 7,
+"min": 4
+}
+multiplier_increase_frequency = 3
+error_amount = 10
+match_amount = 10
+hit_amount = 20
+annoyed_amount = 1
+scale_duration = 2.0
+target_scale = Vector3(1.2, 1.2, 1.2)

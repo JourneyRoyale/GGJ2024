@@ -1,0 +1,224 @@
+[gd_scene load_steps=27 format=3 uid="uid://ddlli0nhcmjnx"]
+
+[ext_resource type="Script" path="res://scripts/audience/heckler.gd" id="1_ovnxo"]
+[ext_resource type="Texture2D" uid="uid://ba465y51couoy" path="res://sprites/audience/heckler_spritesheet.png" id="2_dxxm6"]
+[ext_resource type="Texture2D" uid="uid://doe18snyjnn3j" path="res://sprites/audience/hecklerspritesheet03.png" id="3_mdme8"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uotkr"]
+atlas = ExtResource("2_dxxm6")
+region = Rect2(1600, 2400, 800, 1200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h1nty"]
+atlas = ExtResource("2_dxxm6")
+region = Rect2(2400, 2400, 800, 1200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_53rlq"]
+atlas = ExtResource("2_dxxm6")
+region = Rect2(0, 3600, 800, 1200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pik0k"]
+atlas = ExtResource("2_dxxm6")
+region = Rect2(800, 3600, 800, 1200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3l07t"]
+atlas = ExtResource("2_dxxm6")
+region = Rect2(800, 1200, 800, 1200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k4jfs"]
+atlas = ExtResource("2_dxxm6")
+region = Rect2(1600, 1200, 800, 1200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dt7ua"]
+atlas = ExtResource("3_mdme8")
+region = Rect2(2400, 0, 800, 1200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x1sw0"]
+atlas = ExtResource("3_mdme8")
+region = Rect2(1600, 0, 800, 1200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t2i8y"]
+atlas = ExtResource("3_mdme8")
+region = Rect2(800, 0, 800, 1200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1to7h"]
+atlas = ExtResource("3_mdme8")
+region = Rect2(0, 0, 800, 1200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pymcw"]
+atlas = ExtResource("2_dxxm6")
+region = Rect2(0, 0, 800, 1200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_coua4"]
+atlas = ExtResource("2_dxxm6")
+region = Rect2(800, 0, 800, 1200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vg62m"]
+atlas = ExtResource("2_dxxm6")
+region = Rect2(1600, 0, 800, 1200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d845v"]
+atlas = ExtResource("2_dxxm6")
+region = Rect2(2400, 0, 800, 1200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3gg12"]
+atlas = ExtResource("2_dxxm6")
+region = Rect2(0, 1200, 800, 1200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jabce"]
+atlas = ExtResource("2_dxxm6")
+region = Rect2(2400, 1200, 800, 1200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r8ouh"]
+atlas = ExtResource("2_dxxm6")
+region = Rect2(0, 2400, 800, 1200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h2pxv"]
+atlas = ExtResource("2_dxxm6")
+region = Rect2(800, 2400, 800, 1200)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_gvphd"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uotkr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h1nty")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_53rlq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pik0k")
+}],
+"loop": false,
+"name": &"death",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3l07t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k4jfs")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dt7ua")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x1sw0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t2i8y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1to7h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pymcw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_coua4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vg62m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d845v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3gg12")
+}],
+"loop": false,
+"name": &"spawn",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jabce")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r8ouh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h2pxv")
+}],
+"loop": true,
+"name": &"throw",
+"speed": 5.0
+}]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_4fehv"]
+size = Vector3(1, 6, 1)
+
+[sub_resource type="Animation" id="Animation_i0uk2"]
+resource_name = "bounce"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite3D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(1, 1, 1), Vector3(1, 0.9, 1), Vector3(1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_y5m52"]
+resource_name = "throw"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite3D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(1, 1, 1), Vector3(1.1, 1.25, 1), Vector3(1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_f0bqg"]
+_data = {
+"bounce": SubResource("Animation_i0uk2"),
+"throw": SubResource("Animation_y5m52")
+}
+
+[node name="Heckler" type="CharacterBody3D"]
+collision_layer = 2
+script = ExtResource("1_ovnxo")
+
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="."]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 3, 0)
+billboard = 1
+shaded = true
+sprite_frames = SubResource("SpriteFrames_gvphd")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+shape = SubResource("BoxShape3D_4fehv")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("")
+libraries = {
+"": SubResource("AnimationLibrary_f0bqg")
+}
+autoplay = "bounce"
+
+[node name="Throw Delay Timer" type="Timer" parent="."]
+one_shot = true
+
+[node name="Walk Timer" type="Timer" parent="."]
+
+[connection signal="animation_finished" from="AnimatedSprite3D" to="." method="_on_animated_sprite_3d_animation_finished"]
+[connection signal="timeout" from="Throw Delay Timer" to="." method="_on_throw_timer_timeout"]
+[connection signal="timeout" from="Walk Timer" to="." method="_on_walk_timer_timeout"]

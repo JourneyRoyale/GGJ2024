@@ -1,26 +1,23 @@
-[gd_scene load_steps=32 format=3 uid="uid://csw4tv5xbyfi5"]
+[gd_scene load_steps=31 format=3 uid="uid://b2julnkap4gjv"]
 
-[ext_resource type="Script" path="res://scripts/player/camera.gd" id="1_71yqj"]
-[ext_resource type="PackedScene" uid="uid://bal0jss3qcmho" path="res://prefab/player/comedian.tscn" id="2_n8686"]
-[ext_resource type="ArrayMesh" uid="uid://b7s1g8w1atyl6" path="res://3d/StageAsset.obj" id="3_n0km2"]
-[ext_resource type="Texture2D" uid="uid://ds7qhftov3n4r" path="res://sprites/stage/Background Stage.png" id="4_kwdiu"]
-[ext_resource type="PackedScene" uid="uid://bky7n6468r137" path="res://prefab/audience/chair.tscn" id="5_5cfmn"]
-[ext_resource type="Texture2D" uid="uid://ds4xivuulp5n1" path="res://sprites/stage/Left Door.png" id="6_nqgv6"]
-[ext_resource type="Texture2D" uid="uid://ca1mchkan5mk3" path="res://sprites/stage/Right Door.png" id="7_ivvyr"]
-[ext_resource type="Script" path="res://scripts/singleton/audio_manager.gd" id="8_r2o3p"]
-[ext_resource type="AudioStream" uid="uid://inflyfrfxqu7" path="res://music/archive/refract.mp3" id="9_kp04q"]
-[ext_resource type="AudioStream" uid="uid://b77xbhcraw287" path="res://music/archive/mixkit-arcade-game-complete-or-approved-mission-205.wav" id="10_ofj1t"]
-[ext_resource type="PackedScene" uid="uid://b7efb0ou050m6" path="res://prefab/audience/audience_manager.tscn" id="11_c8qvp"]
-[ext_resource type="PackedScene" uid="uid://dylmrkofcgcmw" path="res://prefab/game/thats_all_folks.tscn" id="12_rvjx6"]
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_0t7yu"]
-size = Vector3(16, 9, 0.01)
+[ext_resource type="Script" path="res://scripts/player/camera.gd" id="1_cqvms"]
+[ext_resource type="PackedScene" uid="uid://bal0jss3qcmho" path="res://prefab/player/comedian.tscn" id="2_hxhw7"]
+[ext_resource type="ArrayMesh" uid="uid://b7s1g8w1atyl6" path="res://3d/StageAsset.obj" id="3_wwgc3"]
+[ext_resource type="PackedScene" uid="uid://bky7n6468r137" path="res://prefab/audience/chair.tscn" id="4_g0mvw"]
+[ext_resource type="Texture2D" uid="uid://ds7qhftov3n4r" path="res://sprites/stage/Background Stage.png" id="5_b48uw"]
+[ext_resource type="Texture2D" uid="uid://ds4xivuulp5n1" path="res://sprites/stage/Left Door.png" id="6_0fjk0"]
+[ext_resource type="Texture2D" uid="uid://ca1mchkan5mk3" path="res://sprites/stage/Right Door.png" id="7_bq8a4"]
+[ext_resource type="Script" path="res://scripts/singleton/audio_manager.gd" id="8_84nvy"]
+[ext_resource type="AudioStream" uid="uid://inflyfrfxqu7" path="res://music/archive/refract.mp3" id="9_2ybo4"]
+[ext_resource type="AudioStream" uid="uid://b77xbhcraw287" path="res://music/archive/mixkit-arcade-game-complete-or-approved-mission-205.wav" id="10_ahgnq"]
+[ext_resource type="PackedScene" uid="uid://b7efb0ou050m6" path="res://prefab/audience/audience_manager.tscn" id="11_68fd2"]
+[ext_resource type="PackedScene" uid="uid://dylmrkofcgcmw" path="res://prefab/game/thats_all_folks.tscn" id="12_k4m0n"]
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_v7e3w"]
 points = PackedVector3Array(-0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jhlhp"]
-albedo_texture = ExtResource("4_kwdiu")
+albedo_texture = ExtResource("5_b48uw")
 
 [sub_resource type="BoxMesh" id="BoxMesh_g8wpu"]
 
@@ -31,7 +28,7 @@ size = Vector3(31, 1, 5)
 size = Vector3(21, 1, 5)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pqrd7"]
-albedo_texture = ExtResource("4_kwdiu")
+albedo_texture = ExtResource("5_b48uw")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_kgj0g"]
 size = Vector3(31, 1, 9)
@@ -42,7 +39,7 @@ size = Vector3(31, 1, 9)
 size = Vector3(5, 1, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_w053c"]
-albedo_texture = ExtResource("4_kwdiu")
+albedo_texture = ExtResource("5_b48uw")
 
 [sub_resource type="BoxMesh" id="BoxMesh_gq5py"]
 size = Vector3(1, 20, 21)
@@ -51,10 +48,10 @@ size = Vector3(1, 20, 21)
 size = Vector3(1, 20, 21)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2mg7d"]
-albedo_texture = ExtResource("4_kwdiu")
+albedo_texture = ExtResource("5_b48uw")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7cnxl"]
-albedo_texture = ExtResource("4_kwdiu")
+albedo_texture = ExtResource("5_b48uw")
 
 [sub_resource type="BoxMesh" id="BoxMesh_1uugn"]
 size = Vector3(33, 20, 1)
@@ -73,19 +70,19 @@ size = Vector3(33, 1, 20)
 [node name="Camera3D" type="Camera3D" parent="." groups=["Camera"]]
 transform = Transform3D(1, 0, 0, 0, 0.906308, 0.422618, 0, -0.422618, 0.906308, 0, 7.063, 5)
 current = true
-script = ExtResource("1_71yqj")
+script = ExtResource("1_cqvms")
 
-[node name="Camera Panel" type="Area3D" parent="Camera3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4)
+[node name="Lighting" type="Node" parent="."]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Camera3D/Camera Panel"]
-shape = SubResource("BoxShape3D_0t7yu")
+[node name="StageLight2" type="OmniLight3D" parent="Lighting"]
+transform = Transform3D(1, 0, 0, 0, -1, -8.74228e-08, 0, 8.74228e-08, -1, 0, 10.1203, -15.1506)
+light_energy = 0.732
+light_indirect_energy = 3.909
+light_volumetric_fog_energy = 2.939
+omni_range = 25.0
+omni_attenuation = 0.210224
 
-[node name="Spawner" type="Node3D" parent="Camera3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4)
-
-[node name="OmniLight3D" type="OmniLight3D" parent="."]
-
+[node name="StageLight" type="OmniLight3D" parent="Lighting"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 5.63702, 4.59269)
 light_energy = 1.646
 light_indirect_energy = 3.909
@@ -134,7 +131,7 @@ directional_shadow_fade_start = 0.35
 directional_shadow_pancake_size = 23.0
 sky_mode = 1
 
-[node name="Comedian" parent="." instance=ExtResource("2_n8686")]
+[node name="Comedian" parent="." instance=ExtResource("2_hxhw7")]
 transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 2, 0)
 
 [node name="Environment" type="StaticBody3D" parent="."]
@@ -142,7 +139,7 @@ transform = Transform3D(-1, 0, -1.50996e-07, 0, 1, 0, 1.50996e-07, 0, -1, 0, 0, 
 
 [node name="StageMesh" type="MeshInstance3D" parent="Environment"]
 transform = Transform3D(0.669101, 0, -1.42109e-14, 0, 1, 0, 7.10543e-15, 0, 1, 3.26278e-07, 0, -2.29246)
-mesh = ExtResource("3_n0km2")
+mesh = ExtResource("3_wwgc3")
 
 [node name="StageCollider" type="CollisionShape3D" parent="Environment"]
 transform = Transform3D(20, 0, -1.27146e-06, 0, 20, 0, 1.27146e-06, 0, 20, 0.000220904, -9.45486, -3.27823)
@@ -156,19 +153,19 @@ transform = Transform3D(-1, 0, 1.50996e-07, 0, 1, 0, -1.50996e-07, 0, -1, -1.15,
 [node name="Chair Group 1" type="Node3D" parent="Environment/Stage/Floor"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, -4.5, -4.5)
 
-[node name="Chair" parent="Environment/Stage/Floor/Chair Group 1" instance=ExtResource("5_5cfmn")]
+[node name="Chair" parent="Environment/Stage/Floor/Chair Group 1" instance=ExtResource("4_g0mvw")]
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, -8, 0, -0.5)
 
-[node name="Chair2" parent="Environment/Stage/Floor/Chair Group 1" instance=ExtResource("5_5cfmn")]
+[node name="Chair2" parent="Environment/Stage/Floor/Chair Group 1" instance=ExtResource("4_g0mvw")]
 transform = Transform3D(1.5, -5.2318e-16, 0, 5.2318e-16, 1.5, -5.2318e-16, 1.82478e-31, 5.2318e-16, 1.5, -4, 0, -0.5)
 
-[node name="Chair3" parent="Environment/Stage/Floor/Chair Group 1" instance=ExtResource("5_5cfmn")]
+[node name="Chair3" parent="Environment/Stage/Floor/Chair Group 1" instance=ExtResource("4_g0mvw")]
 transform = Transform3D(1.5, -5.2318e-16, 0, 5.2318e-16, 1.5, -5.2318e-16, 1.82478e-31, 5.2318e-16, 1.5, 0, 0, -0.5)
 
-[node name="Chair4" parent="Environment/Stage/Floor/Chair Group 1" instance=ExtResource("5_5cfmn")]
+[node name="Chair4" parent="Environment/Stage/Floor/Chair Group 1" instance=ExtResource("4_g0mvw")]
 transform = Transform3D(1.5, -5.2318e-16, 0, 5.2318e-16, 1.5, -5.2318e-16, 1.82478e-31, 5.2318e-16, 1.5, 4, 0, -0.5)
 
-[node name="Chair5" parent="Environment/Stage/Floor/Chair Group 1" instance=ExtResource("5_5cfmn")]
+[node name="Chair5" parent="Environment/Stage/Floor/Chair Group 1" instance=ExtResource("4_g0mvw")]
 transform = Transform3D(1.5, -5.2318e-16, 0, 5.2318e-16, 1.5, -5.2318e-16, 1.82478e-31, 5.2318e-16, 1.5, 8, 0, -0.5)
 
 [node name="Left" type="Node3D" parent="Environment/Stage/Floor/Chair Group 1"]
@@ -180,19 +177,19 @@ transform = Transform3D(-6.55668e-08, -5.2318e-16, -1.5, 5.2318e-16, 1.5, -5.231
 [node name="Chair Group 2" type="Node3D" parent="Environment/Stage/Floor"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, -0.5, -11.5)
 
-[node name="Chair6" parent="Environment/Stage/Floor/Chair Group 2" instance=ExtResource("5_5cfmn")]
+[node name="Chair6" parent="Environment/Stage/Floor/Chair Group 2" instance=ExtResource("4_g0mvw")]
 transform = Transform3D(1.5, -5.2318e-16, 0, 5.2318e-16, 1.5, -5.2318e-16, 1.82478e-31, 5.2318e-16, 1.5, -8, 0, 0.999999)
 
-[node name="Chair7" parent="Environment/Stage/Floor/Chair Group 2" instance=ExtResource("5_5cfmn")]
+[node name="Chair7" parent="Environment/Stage/Floor/Chair Group 2" instance=ExtResource("4_g0mvw")]
 transform = Transform3D(1.5, -5.2318e-16, 0, 5.2318e-16, 1.5, -5.2318e-16, 1.82478e-31, 5.2318e-16, 1.5, -4, 0, 0.999999)
 
-[node name="Chair8" parent="Environment/Stage/Floor/Chair Group 2" instance=ExtResource("5_5cfmn")]
+[node name="Chair8" parent="Environment/Stage/Floor/Chair Group 2" instance=ExtResource("4_g0mvw")]
 transform = Transform3D(1.5, -5.2318e-16, 0, 5.2318e-16, 1.5, -5.2318e-16, 1.82478e-31, 5.2318e-16, 1.5, 0, 0, 0.999999)
 
-[node name="Chair9" parent="Environment/Stage/Floor/Chair Group 2" instance=ExtResource("5_5cfmn")]
+[node name="Chair9" parent="Environment/Stage/Floor/Chair Group 2" instance=ExtResource("4_g0mvw")]
 transform = Transform3D(1.5, -5.2318e-16, 0, 5.2318e-16, 1.5, -5.2318e-16, 1.82478e-31, 5.2318e-16, 1.5, 4, 0, 0.999999)
 
-[node name="Chair10" parent="Environment/Stage/Floor/Chair Group 2" instance=ExtResource("5_5cfmn")]
+[node name="Chair10" parent="Environment/Stage/Floor/Chair Group 2" instance=ExtResource("4_g0mvw")]
 transform = Transform3D(1.5, -5.2318e-16, 0, 5.2318e-16, 1.5, -5.2318e-16, 1.82478e-31, 5.2318e-16, 1.5, 8, 0, 0.999999)
 
 [node name="Left" type="Node3D" parent="Environment/Stage/Floor/Chair Group 2"]
@@ -498,26 +495,26 @@ shape = SubResource("BoxShape3D_5bvv7")
 
 [node name="Door Right" type="Sprite3D" parent="Environment"]
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1, -13, 9.7, 24.1)
-texture = ExtResource("6_nqgv6")
+texture = ExtResource("6_0fjk0")
 
 [node name="Door Left" type="Sprite3D" parent="Environment"]
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1, 12.7, 9.7, 24.1)
-texture = ExtResource("7_ivvyr")
+texture = ExtResource("7_bq8a4")
 
 [node name="AudioManager" type="Node3D" parent="."]
-script = ExtResource("8_r2o3p")
+script = ExtResource("8_84nvy")
 
 [node name="Background" type="Node3D" parent="AudioManager"]
 
 [node name="Refractor" type="AudioStreamPlayer" parent="AudioManager/Background"]
-stream = ExtResource("9_kp04q")
+stream = ExtResource("9_2ybo4")
 
 [node name="Sound Effect" type="Node3D" parent="AudioManager"]
 
 [node name="Arcade" type="AudioStreamPlayer" parent="AudioManager/Sound Effect"]
-stream = ExtResource("10_ofj1t")
+stream = ExtResource("10_ahgnq")
 
-[node name="Audience" parent="." instance=ExtResource("11_c8qvp")]
+[node name="Audience" parent="." instance=ExtResource("11_68fd2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.15, 2.255, -4.675)
 spawn_point_list = Array[NodePath]([NodePath("../Environment/Stage/Floor/Top Floor/Spawn Point"), NodePath("../Environment/Stage/Floor/Top Floor/Spawn Point2")])
 
@@ -529,9 +526,11 @@ spawn_point_list = Array[NodePath]([NodePath("../Environment/Stage/Floor/Top Flo
 wait_time = 4.0
 autostart = true
 
-[node name="ThatsAllFolks" parent="." node_paths=PackedStringArray("player") instance=ExtResource("12_rvjx6")]
+[node name="ThatsAllFolks" parent="." node_paths=PackedStringArray("player") instance=ExtResource("12_k4m0n")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 4.75, 2.147)
 player = NodePath("../Comedian")
 start_x = -15.0
+
+[node name="Area3D" type="Area3D" parent="."]
 
 [connection signal="timeout" from="Audience/Timer" to="Audience" method="_on_timer_timeout"]

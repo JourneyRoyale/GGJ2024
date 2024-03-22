@@ -199,6 +199,8 @@ shape = SubResource("CapsuleShape3D_qdsn5")
 [node name="Target" type="Node3D" parent="."]
 
 [node name="Sprite" type="AnimatedSprite3D" parent="."]
+billboard = 1
+shaded = true
 sprite_frames = ExtResource("2_u6svr")
 animation = &"yoink"
 autoplay = "idle_from_hit"

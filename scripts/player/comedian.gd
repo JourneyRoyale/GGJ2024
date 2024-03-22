@@ -179,7 +179,7 @@ func projectile_collided(projectile : Dictionary) -> void :
 
 func shot() -> void :
 	sprite.play("yoink")
-	egg.visible = false
+	joke.visible = false
 	audio_manager.play_music(int(Shared.E_SOUND_EFFECT.BWACK), Shared.E_AudioType.SOUND_EFFECT)
 	get_tree().paused = true
 	game_manager.shock_timer.start()

@@ -2,45 +2,122 @@ extends Node3D
 class_name Egg
 
 # On Ready
+@onready var audio_manager : AudioManager = get_node("/root/Audio_Manager")
 @onready var game_manager : GameManager = get_node("/root/Game_Manager")
 @onready var emoji : Emoji = get_node("Emoji");
+@onready var animation : AnimationPlayer = get_node("AnimationPlayer");
 
 # Init variable from resources
+var switch_duration : float
 var scale_duration : float
 var target_scale : Vector3
+var scale_ease : float
 
 # Variable
-var time_elapsed = 0.0
+var initial_scale : Vector3
+var scale_time_elapsed : float = 0.0
+var switch_time_elapsed : float = 0.0
+var is_switching : bool = false
+var is_active : bool = true
 
 func _init_resources() -> void :
 	var level_resource : LevelResource = game_manager.level_resource
-
+	
+	switch_duration = level_resource.switch_duration
 	scale_duration = level_resource.scale_duration
 	target_scale = level_resource.target_scale
+	scale_ease = level_resource.scale_ease
 
 func _ready() -> void :
 	_init_resources()
+	initial_scale = scale
 	emoji.set_random_emoji()
+	animation.play("default")
 
 # Check if egg past boundary
 func _process(delta : float) -> void :
-	time_elapsed += delta
-	# Calculate the scaling factor based on the elapsed time and duration
-	var t = min(time_elapsed / scale_duration, 1.0)
-	var scaling_factor = ease(t, 2.0)  # You can use different easing functions here
+	if (is_active):
+		_scale_egg(delta)
+		_switch_egg(delta)
+
+		# Check if the scaling is complete
+		if scale_time_elapsed >= scale_duration:
+			animation.play("late_break")
+		pass
+
+func _scale_egg(delta : float) -> void :
+	scale_time_elapsed += delta
+	# Calculate the scaling factor based on the difference between target scale and initial scale
+	var scaling_factor : float = ease(scale_time_elapsed / scale_duration, scale_ease)  # Apply easing function
 	# Calculate the new scale
-	var new_scale = lerp(scale, target_scale, scaling_factor)
+	var new_scale : Vector3 = initial_scale + (target_scale - initial_scale) * scaling_factor
 	# Set the new scale to the node
 	scale = new_scale
-	# Check if the scaling is complete
-	if time_elapsed >= scale_duration:
+
+func _switch_egg(delta : float) -> void :
+	if (is_switching):
+		switch_time_elapsed += delta
+		
+		if (switch_time_elapsed < (switch_duration / 4)):
+			# Calculate the scaling factor based on the difference between target scale and initial scale
+			var rotation_factor = ease(switch_time_elapsed / (switch_duration / 4), 1.0)  # Apply easing function
+			# Calculate the new scale
+			var new_rotation = 0 + (90 - 0) * rotation_factor
+			
+			if (new_rotation >= 85):
+				emoji.set_random_emoji()
+			else:
+				# Set the new scale to the node
+				emoji.rotation.y = deg_to_rad(new_rotation)
+		
+		elif (switch_time_elapsed > (switch_duration / 4)):
+			# Calculate the scaling factor based on the difference between target scale and initial scale
+			var rotation_factor = ease((switch_time_elapsed - (switch_duration / 4)) / (3 * switch_duration / 4), 1.0)  # Apply easing function
+			# Calculate the new scale
+			var new_rotation = 90 + (360 - 90) * rotation_factor
+			if (new_rotation >= 355):
+				stop_switch()
+			else:
+				# Set the new scale to the node
+				emoji.rotation.y = deg_to_rad(new_rotation)
+
+func _on_animation_player_animation_finished(anim_name : String):
+	if (anim_name == "early_break" or anim_name == "late_break"):
 		reset_egg()
-	pass
+		animation.play("default")
+		emoji.show()
+		is_active = true
 
 func reset_egg() -> void :
-	scale = Vector3(0.1,0.1,0.1)
-	time_elapsed = 0.
+	scale = initial_scale
+	scale_time_elapsed = 0.
 	emoji.set_random_emoji()
+	stop_switch()
+
+func switch_egg() -> void :
+	if (!is_switching):
+		is_switching = true
+
+func stop_switch() -> void :
+	if (is_switching):	
+		switch_time_elapsed = 0
+		is_switching = false
+		emoji.rotation.y = deg_to_rad(0)
 
 func timing() -> float :
 	return abs(scale.x - target_scale.x)
+
+func is_early() -> bool :
+	if (scale > Vector3(.8, .8, .8)):
+		return false
+	else:
+		is_active = false
+		animation.play("early_break")
+		audio_manager.play_music(int(Shared.E_SOUND_EFFECT.HURT), Shared.E_AudioType.SOUND_EFFECT)		
+		game_manager.register_error()
+		return true
+
+
+func _on_animation_player_animation_started(anim_name):
+	if (anim_name == "early_break" or anim_name == "late_break"):
+		emoji.hide()

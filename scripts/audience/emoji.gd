@@ -32,24 +32,30 @@ func _init_resources() -> void :
 func _ready():
 	_init_resources()
 
+# Hide all emoji
 func reset_emojis() -> void :
 	for emoji in get_children():
 		emoji.hide()
 
+# Set to a specific emoji
 func set_emoji(emoji : Shared.E_Emoji) -> void :
 	reset_emojis()
 	emoji_dictionary[emoji].show()
 	current_emoji = emoji
 
+# Set emoji for audience
 func set_random_emoji_variety(chosen_emoji : Array[Shared.E_Emoji]) -> void :
 	reset_emojis()
 	var random_emoji : Shared.E_Emoji = chosen_emoji[game_manager.rng.randi_range(0, chosen_emoji.size() - 1)]
 	emoji_dictionary[random_emoji].show()
 	current_emoji = random_emoji
 
+# Set emoji for comedian
 func set_random_emoji() -> void :
 	reset_emojis()
-	var random_emoji : Shared.E_Emoji = valid_emoji[game_manager.rng.randi_range(0, get_children().size() - 1)]
+	var copy_emoji = valid_emoji.duplicate()
+	copy_emoji.erase(current_emoji)
+	var random_emoji : Shared.E_Emoji = copy_emoji[game_manager.rng.randi_range(0, copy_emoji.size() - 1)]
 	emoji_dictionary[random_emoji].show()
 	current_emoji = random_emoji
 

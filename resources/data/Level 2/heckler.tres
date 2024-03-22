@@ -11,7 +11,4 @@ move_time = {
 "max": 5.0,
 "min": 2.0
 }
-stun_time = {
-"brick": 2.0,
-"tomato": 1.0
-}
+projectile_allowed = Array[int]([0, 1, 2, 3, 4, 5, 6])

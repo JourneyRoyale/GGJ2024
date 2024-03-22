@@ -31,6 +31,7 @@ stream = ExtResource("6_7aqlw")
 bus = &"Sound Effect"
 
 [node name="Bwack" type="AudioStreamPlayer" parent="Sound Effect"]
+process_mode = 3
 stream = ExtResource("8_8m52v")
 
 [node name="Boo" type="AudioStreamPlayer" parent="Sound Effect"]

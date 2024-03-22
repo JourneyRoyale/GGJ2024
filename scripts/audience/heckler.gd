@@ -25,6 +25,7 @@ var health : int = 2
 var boundary : Dictionary
 var current_projectile : Dictionary
 var last_movement : String
+var target_map : TargetMap
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")

@@ -7,8 +7,8 @@
 [ext_resource type="PackedScene" uid="uid://bky7n6468r137" path="res://prefab/audience/chair.tscn" id="5_5cfmn"]
 [ext_resource type="Texture2D" uid="uid://ds4xivuulp5n1" path="res://sprites/stage/Left Door.png" id="6_nqgv6"]
 [ext_resource type="Texture2D" uid="uid://ca1mchkan5mk3" path="res://sprites/stage/Right Door.png" id="7_ivvyr"]
-[ext_resource type="Script" path="res://scripts/game/target_map.gd" id="8_3empa"]
 [ext_resource type="Script" path="res://scripts/singleton/audio_manager.gd" id="8_r2o3p"]
+[ext_resource type="Script" path="res://scenes/Ground.gd" id="8_x0qmp"]
 [ext_resource type="PackedScene" uid="uid://dn72fef3tnnm5" path="res://prefab/audience/projectile.tscn" id="8_yd5f0"]
 [ext_resource type="AudioStream" uid="uid://inflyfrfxqu7" path="res://music/archive/refract.mp3" id="9_kp04q"]
 [ext_resource type="AudioStream" uid="uid://b77xbhcraw287" path="res://music/archive/mixkit-arcade-game-complete-or-approved-mission-205.wav" id="10_ofj1t"]
@@ -74,12 +74,9 @@ size = Vector3(33, 1, 22)
 size = Vector3(33, 1, 20)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_6fh8k"]
-size = Vector3(14, 0, 5.5)
+size = Vector3(15, 0, 8)
 
 [node name="Perspective" type="Node3D"]
-
-[node name="Projectile" parent="." instance=ExtResource("8_yd5f0")]
-transform = Transform3D(-1, 0, -1.50996e-07, 0, 1, 0, 1.50996e-07, 0, -1, 0, 1.8, -4.25)
 
 [node name="Camera3D" type="Camera3D" parent="." groups=["Camera"]]
 transform = Transform3D(1, 0, 0, 0, 0.906308, 0.422618, 0, -0.422618, 0.906308, 0, 7.063, 5)
@@ -542,11 +539,14 @@ texture = ExtResource("6_nqgv6")
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1, 12.7, 9.7, 24.1)
 texture = ExtResource("7_ivvyr")
 
-[node name="Targeting Map" type="Area3D" parent="Environment"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 1.5)
-script = ExtResource("8_3empa")
+[node name="Projectile" parent="Environment" instance=ExtResource("8_yd5f0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.49629, 0.937537, 1.13191e-06)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment/Targeting Map"]
+[node name="Area3D" type="Area3D" parent="Environment"]
+script = ExtResource("8_x0qmp")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment/Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 1)
 shape = SubResource("BoxShape3D_6fh8k")
 disabled = true
 
@@ -566,7 +566,6 @@ stream = ExtResource("10_ofj1t")
 [node name="Audience" parent="." instance=ExtResource("11_c8qvp")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.15, 2.255, -4.675)
 spawn_point_list = Array[NodePath]([NodePath("../Environment/Stage/Floor/Top Floor/Spawn Point"), NodePath("../Environment/Stage/Floor/Top Floor/Spawn Point2")])
-target_map = NodePath("../Environment/Targeting Map")
 
 [node name="Members" type="Node" parent="Audience"]
 

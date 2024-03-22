@@ -43,3 +43,9 @@ enum E_ProjectileType {
 	MONEY,
 	TOMATO,
 }
+
+enum E_ThrowType {
+	OVERHAND,
+	UNDERHAND,
+	SLING,
+}

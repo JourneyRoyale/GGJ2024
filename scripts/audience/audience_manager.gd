@@ -13,6 +13,7 @@ class_name AudienceManager
 # Export
 @export var spawn_point_list : Array[NodePath] = []
 @export var navigation_level_list : Array[NodePath] = []
+@export var target_map : NodePath
 
 # Init variable from resources
 var max_heckler : int
@@ -113,6 +114,7 @@ func spawn_heckler(audience) -> void :
 		
 		var chair : Chair = audience.assigned_chair
 		chair.seat_entity(new_heckler, chair.get_chair_spawn_point())
+		new_heckler.target_map = get_node(target_map)
 		new_heckler.position.z += 1
 		new_heckler.set_move_boundary()
 		

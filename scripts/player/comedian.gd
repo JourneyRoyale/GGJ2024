@@ -13,17 +13,14 @@ class_name Comedian
 @onready var collision : CollisionShape3D = get_node("CollisionShape3D")
 @onready var joke : Joke = get_node("Joke")
 @onready var egg : Egg = get_node("Joke/Egg")
-
-# Export
-const ACCEL = 1
-const SPEED = 7
-const JUMP_VELOCITY = 5.0
-const INERTIA = 0.3
+@onready var target : Node3D = get_node("Target")
 
 # Init variable from resources
-var invulnerable_time
-var stun_time
 var fly_time
+var accel
+var speed
+var jump_velocity
+var inertia
 
 # Local variable
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
@@ -33,57 +30,65 @@ var is_moving = false;
 var is_stunned = false
 var is_dead = false 
 var is_invulnerable = false
+var is_start_flying = false
 var is_flying = false
 var is_falling = false
 
 func _init_resources() -> void :
-	var comedian_resources : ComedianResource = game_manager.level_resource.comedian
-
-	invulnerable_time = comedian_resources.invulnerable_time
-	fly_time = comedian_resources.fly_time
-	stun_time = comedian_resources.stun_time
+	var comedian_resource : ComedianResource = game_manager.level_resource.comedian
+	
+	fly_time = comedian_resource.fly_time
+	accel = comedian_resource.accel
+	speed = comedian_resource.speed
+	jump_velocity = comedian_resource.jump_velocity
+	inertia = comedian_resource.inertia
 
 func _ready() -> void :
 	_init_resources()
+	game_manager.add_player(self)
 	if not is_dead:
 		audio_manager.play_music(int(Shared.E_BACKGROUND_MUSIC.RAGTIME), Shared.E_AudioType.BACKGROUND)
 		animation_player.play("default")
 
 func _input(event : InputEvent) -> void :
 	if event is InputEventKey and event.pressed:
-		if event.keycode == KEY_E and not is_flying:
+		if event.keycode == KEY_E and !is_flying and egg.is_active and !egg.is_early():
 			get_tree().call_group("AudienceManager", "check_for_match", egg, egg.timing())
 			egg.reset_egg()
 		if event.keycode == KEY_F:
-			egg.emoji.set_random_emoji()
+			egg.switch_egg()
 		if event.keycode == KEY_Q and is_on_floor():
-			velocity.y = JUMP_VELOCITY
+			is_start_flying = true
+			velocity.y = jump_velocity
+			sprite.play("fly")
 
 func _physics_process(delta : float) -> void :
-	print("Is Stunned: ", is_stunned)
+	if !is_on_floor() and (!is_start_flying and !is_flying):
+		velocity.y -= gravity * 2 * delta
+	
 	if not is_stunned and not is_dead:
 		var input_dir = Input.get_vector("move_left", "move_right", "move_up", "move_down")
 		var direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 
-		velocity.x += direction.x * ACCEL
-		velocity.z += direction.z * ACCEL
-		velocity.x = clamp(velocity.x, -SPEED, SPEED)
-		velocity.z = clamp(velocity.z, -SPEED, SPEED)
-		velocity.x = move_toward(velocity.x, 0, INERTIA)
-		velocity.z = move_toward(velocity.z, 0, INERTIA)
+		velocity.x += direction.x * accel
+		velocity.z += direction.z * accel
+		velocity.x = clamp(velocity.x, -speed, speed)
+		velocity.z = clamp(velocity.z, -speed, speed)
+		velocity.x = move_toward(velocity.x, 0, inertia)
+		velocity.z = move_toward(velocity.z, 0, inertia)
 		
-		if direction.x > 0:
-			sprite.play("walk_right")
-			last_move = "right"
-		elif direction.x < 0:
-			sprite.play("walk_left")
-			last_move = "left"
-		else:
-			if last_move == "left":
-				sprite.play("idle_from_left")
-			elif last_move == "right":
-				sprite.play("idle_from_right")
-		
+		if (velocity.y != jump_velocity):
+			if direction.x > 0:
+				sprite.play("walk_right")
+				last_move = "right"
+			elif direction.x < 0:
+				sprite.play("walk_left")
+				last_move = "left"
+			else:
+				if last_move == "left":
+					sprite.play("idle_from_left")
+				elif last_move == "right":
+					sprite.play("idle_from_right")
 		
 		if is_flying:
 			position.y = 4
@@ -94,29 +99,23 @@ func _physics_process(delta : float) -> void :
 		elif position.y >= 4:
 			_fly()
 		
-		if (velocity.x == 0 and velocity.z == 0):
+		if (velocity.x == 0 and velocity.z == 0 and velocity.y != jump_velocity):
 			sprite.stop()
 	
-		move_and_slide()
+	move_and_slide()
 
 # On stun timeout
 func _on_stun_timer_timeout() -> void :
 	if not is_dead:
-		animation_player.play("Invuln")
 		is_stunned = false
-		stun_timer.stop()
-		invulnerable_timer.start(invulnerable_time)
 		sprite.play("idle_from_hit")
 
 # On invulnerablility timeout
 func _on_invulnerable_timer_timeout() -> void :
 	if not is_dead:
 		is_invulnerable = false
-		invulnerable_timer.stop()
-		animation_player.stop()
 		animation_player.play("default")
 		get_node("Sprite").visible = true
-		show()
 
 func _on_fly_timer_timeout():
 	_falling()
@@ -127,9 +126,10 @@ func _fly():
 	is_invulnerable = true
 	collision.disabled = true
 	joke.visible = false
-	fly_timer.start(fly_time)
+	fly_timer.start(2)
 
 func _falling():
+	sprite.play("idle_from_hit")
 	is_flying = false
 	is_falling = true
 	is_invulnerable = false
@@ -143,24 +143,44 @@ func thats_all_folks() -> void :
 		is_invulnerable = false
 		audio_manager.stop_music()
 		audio_manager.play_music(int(Shared.E_SOUND_EFFECT.BWACK), Shared.E_AudioType.SOUND_EFFECT)
-		animation_player.stop()
 		animation_player.play("yoink")
 		sprite.play("yoink")
 
 # On Tomato hit player
-func projectile_collided(is_brick) -> void :
-	if not is_dead or is_invulnerable:
-		
-		game_manager.register_hurt()
-		audio_manager.play_music(int(Shared.E_SOUND_EFFECT.HURT), Shared.E_AudioType.SOUND_EFFECT)
-		sprite.play("hit")
+func projectile_collided(projectile : Dictionary) -> void :
+	if not is_dead:
+		for modification : String in projectile.keys():
+			match (modification):
+				"score":
+					var score : int = projectile["score"]
+					if (score > 0):
+						print("Add Money Score")
+					else:
+						game_manager.register_hurt(score)
+						audio_manager.play_music(int(Shared.E_SOUND_EFFECT.HURT), Shared.E_AudioType.SOUND_EFFECT)
+						sprite.play("hit")
+				"stun":
+					var stun_time : float = projectile["stun"]
+					stun_timer.start(stun_time)
+					is_stunned = true
+					sprite.play("stun")
+				"knockback":
+					var knockback : int = projectile["knockback"]
+					position.z += knockback
+				"invulnerabile":
+					var invulnerabile_time : float = projectile["invulnerabile"]
+					animation_player.play("Invuln")
+					invulnerable_timer.start(invulnerabile_time)
+					is_invulnerable = true
+				"muddle":
+					var muddle_type : String = projectile["muddle"]
+					if (muddle_type == "tomato"):
+						ui_screen.createSplat()
 
-		is_invulnerable = true
-		is_stunned = true
-		if is_brick:
-			stun_timer.start(stun_time["brick"])
-		else:
-			ui_screen.createSplat()
-			animation_player.play("Invuln")
-			stun_timer.start(stun_time["tomato"])
-			invulnerable_timer.start()
+func shot() -> void :
+	sprite.play("yoink")
+	egg.visible = false
+	audio_manager.play_music(int(Shared.E_SOUND_EFFECT.BWACK), Shared.E_AudioType.SOUND_EFFECT)
+	get_tree().paused = true
+	game_manager.shock_timer.start()
+	

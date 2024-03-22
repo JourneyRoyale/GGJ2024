@@ -4,5 +4,5 @@
 
 [resource]
 script = ExtResource("1_vs6ae")
-audience_patience = 4
-audience_move_speed = 5.0
+patience = 1
+move_speed = 3.0

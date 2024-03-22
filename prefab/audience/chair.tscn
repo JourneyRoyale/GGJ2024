@@ -9,7 +9,7 @@ skeleton = NodePath("")
 script = ExtResource("2_n2ky4")
 
 [node name="Spawn Point" type="Node3D" parent="."]
-transform = Transform3D(1, -2.64698e-23, -3.55271e-15, 7.94093e-23, 1, -6.41634e-23, 3.55271e-15, -1.12238e-23, 1, 0, 0, 0.2)
+transform = Transform3D(1, -2.64698e-23, -3.55271e-15, 7.94093e-23, 1, -6.41634e-23, 3.55271e-15, -1.12238e-23, 1, 0, 0, 0.5)
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
 transform = Transform3D(0.6, 0, 0, 0, 0.8, 0, 0, 0, 1, 0, 2.3, 0)

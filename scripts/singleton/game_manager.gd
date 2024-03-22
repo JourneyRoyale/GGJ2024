@@ -5,6 +5,7 @@ class_name GameManager
 @onready var audio_manager : AudioManager = get_node("/root/Audio_Manager")
 @onready var ui_screen : Control = get_node("/root/Game/Ui Screen")
 @onready var game_holder : Node3D = get_node("/root/Game/Game Holder")
+@onready var shock_timer : Timer = get_node("Shock Timer")
 
 # Export
 @export var level_resource_dictionary : Dictionary = {}
@@ -13,7 +14,6 @@ class_name GameManager
 var multiplier_increase_frequency : int = 3; #How many jokes in the combo before multiplier goes up
 var error_amount : int = 10
 var match_amount : int = 10
-var hit_amount : int = 20
 var annoyed_amount : int = 1
 
 # Local variable
@@ -24,14 +24,12 @@ var laughter_score = 50.0;
 var player_score = 0;
 var joke_combo: int = 0;
 var additional_multiplier: int = 0;
-var heckler_lane_x_positions = [-6.2, -4.8, -1.8, 1.2, 4.2];
-var filled_lane_x_positions = [false, false, false, false, false]
+var player_list: Array[Comedian]
 
 func _init_resources() -> void :
 	multiplier_increase_frequency = level_resource.multiplier_increase_frequency
 	error_amount = level_resource.error_amount
 	match_amount = level_resource.match_amount
-	hit_amount = level_resource.hit_amount
 	annoyed_amount = level_resource.annoyed_amount
 
 func _reset_on_ready() -> void :
@@ -65,10 +63,10 @@ func register_error() -> void :
 	laughter_score -= error_amount
 	joke_combo = 0
 
-# Decrease score from tomato hit
-func register_hurt() -> void :
-	player_score = max(player_score-50, 0)
-	laughter_score -= hit_amount
+# Decrease score from projectile hit
+func register_hurt(amount : int) -> void :
+	player_score = max(player_score - amount, 0)
+	laughter_score -= amount
 	joke_combo = 0
 	
 func register_annoyed() -> void :
@@ -98,6 +96,14 @@ func load_level(index) -> void :
 	# Add Scene and play music
 	var instance = level_resource.scene.instantiate()
 	game_holder.add_child(instance)
-	audio_manager.play_music(level_resource.background_music, Shared.E_AudioType.BACKGROUND)
+	audio_manager.play_music(int(level_resource.background_music), Shared.E_AudioType.BACKGROUND)
 	
 	is_playing = true
+
+func add_player(comedian : Comedian) -> void :
+	player_list.append(comedian)
+
+func _on_shock_timer_timeout():
+	print("not suppose to happen")
+	is_playing = false
+	get_tree().call_group("Curtains", "end_game")

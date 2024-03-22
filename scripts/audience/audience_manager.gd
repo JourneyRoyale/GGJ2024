@@ -20,6 +20,7 @@ var starting_audience : Dictionary
 var audience_rate : Dictionary
 var emoji_list : Array[Shared.E_Emoji]
 var emoji_variety : Dictionary
+var projectile_list: Array[Dictionary]
 
 # Local variable
 var audience_factory : Audience
@@ -36,6 +37,7 @@ func _init_resources() -> void :
 	audience_rate = level_resource.audience_rate
 	emoji_variety = level_resource.emoji_variety
 	emoji_list = level_resource.emoji_list
+	projectile_list = level_resource.projectile_list
 
 func _ready() -> void :
 	_init_resources()
@@ -104,11 +106,15 @@ func spawn_heckler(audience) -> void :
 
 		var new_heckler : Heckler
 		new_heckler = heckler_factory.duplicate()
+		new_heckler.current_projectile = get_randomize_projectile()
+		
 		heckler.add_child(new_heckler)
 		heckler_list.append(new_heckler)
 		
 		var chair : Chair = audience.assigned_chair
 		chair.seat_entity(new_heckler, chair.get_chair_spawn_point())
+		new_heckler.position.z += 1
+		new_heckler.set_move_boundary()
 		
 		audience_node_list.erase(audience)
 		audience.queue_free()
@@ -141,4 +147,18 @@ func check_for_match(egg : Egg, distance : float) -> void :
 		audio_manager.play_music(int(Shared.E_SOUND_EFFECT.HURT), Shared.E_AudioType.SOUND_EFFECT)		
 		game_manager.register_error()
 
-
+func get_randomize_projectile() -> Dictionary :
+	var projectile_array : Array[Shared.E_ProjectileType]
+	var projectile_dict : Dictionary
+	for projectile in projectile_list:
+		var type = projectile["type"]
+		var limit = projectile["limit"]
+		var matched_projectile = heckler_list.filter(func(x : Heckler): return x.current_projectile == projectile).size()
+		projectile_dict[type] = projectile
+		
+		if (matched_projectile < limit or limit == 0):
+			for i in range(projectile["rate"]):
+				projectile_array.append(projectile["type"])
+	
+	projectile_array.shuffle()
+	return projectile_dict[projectile_array[0]]

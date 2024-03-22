@@ -10,8 +10,8 @@ class_name Audience
 @onready var timer : Timer = get_node("Patience")
 
 # Init variable from resources
-var audience_patience : int
-var audience_move_speed : float
+var patience : int
+var move_speed : float
 
 # Local variable
 var has_emoji : bool = false
@@ -30,8 +30,8 @@ const SPEED : float = 5.0
 func _init_resources() -> void :
 	var audience_resource : AudienceResource = game_manager.level_resource.audience
 	
-	audience_patience = audience_resource.audience_patience
-	audience_move_speed = audience_resource.audience_move_speed
+	patience = audience_resource.patience
+	move_speed = audience_resource.move_speed
 
 func _ready():
 	_init_resources()
@@ -61,7 +61,7 @@ func _move_down(delta : float, spawn_position : Vector3) -> void :
 	
 	if distance_to_target > 1:
 		velocity.z += SPEED * delta
-		velocity.z = min(velocity.z, audience_move_speed)
+		velocity.z = min(velocity.z, move_speed)
 	else:
 		global_transform.origin.z = spawn_position.z
 		velocity.z = 0
@@ -74,10 +74,10 @@ func _move_to_seat(delta : float, spawn_position : Vector3) -> void :
 	if distance_to_target > 1:
 		if (global_transform.origin.x < spawn_position.x):
 			velocity.x += SPEED * delta
-			velocity.x = min(velocity.x, audience_move_speed)
+			velocity.x = min(velocity.x, move_speed)
 		elif (global_transform.origin.x > spawn_position.x):
 			velocity.x -= SPEED * delta
-			velocity.x = min(velocity.x, audience_move_speed)
+			velocity.x = min(velocity.x, move_speed)
 	else:
 		global_transform.origin.x = spawn_position.x
 		velocity.x = 0
@@ -123,7 +123,7 @@ func _show_emoji() -> void :
 	has_emoji = true
 	bubble.play("show")
 	emoji.show()
-	timer.start(audience_patience)
+	timer.start(patience)
 
 func _annoy_audience() -> void :
 	emoji.hide()

@@ -15,7 +15,7 @@ class_name AudioManager
 	Shared.E_BACKGROUND_MUSIC.RAGTIME : get_node("Background/Ragtime"),
 }
 
-var master_volume : float = .5
+var master_volume : float = 0
 var background_volume : float = .5
 var sound_effect_volume : float = .5
 var current_music : AudioStreamPlayer

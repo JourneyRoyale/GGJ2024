@@ -9,8 +9,6 @@ class_name Heckler
 @onready var throw_delay_timer : Timer = get_node("Throw Delay Timer")
 @onready var walk_timer : Timer = get_node("Walk Timer")
 
-# Constants
-
 # Init variable from resources
 var move_speed : float
 var aggressiveness : float
@@ -18,15 +16,15 @@ var throw_delay : float
 var move_time : Dictionary
 
 # Local variable
-var packed_projectile = load("res://prefab/audience/projectile.tscn")
-var is_moving = false
-var current_direction = Vector3(1.0, 0, 0).normalized()  # Starts moving right
+var packed_projectile : PackedScene = load("res://prefab/audience/projectile.tscn")
+var is_moving : bool = false
+var current_direction : Vector3 = Vector3(0, 0, 0).normalized()  # Starts moving right
 var assigned_chair : Chair
-var assigned_floor
-var lanes = [];
-var current_lane = 0
-var health = 2
+var assigned_floor : Node3D
+var health : int = 2
 var boundary : Dictionary
+var current_projectile : Dictionary
+var last_movement : String
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
@@ -43,7 +41,6 @@ func _init_resources() -> void :
 func _ready() -> void :
 	_init_resources()
 	sprite.play("spawn")
-	lanes = game_manager.heckler_lane_x_positions;
 
 func _physics_process(delta : float) -> void :
 	if not is_on_floor():
@@ -55,54 +52,36 @@ func _physics_process(delta : float) -> void :
 		# Check boundaries
 		if position.x <= boundary["left"] and current_direction.x < 0:
 			current_direction.x = -current_direction.x  # Change to moving right
+			sprite.play("walk_right")
 		elif position.x >= boundary["right"] and current_direction.x > 0:
 			current_direction.x = -current_direction.x  # Change to moving left
+			sprite.play("walk_left")
 	
 	move_and_slide()
-
-func _set_move_boundary():
-	var chair_group : Node3D = assigned_chair.get_parent()
-	boundary = {"left" : chair_group.get_node("Left").global_transform.origin.x, "right" : chair_group.get_node("Right").global_transform.origin.x}
 
 # Start Heckler Movement
 func _start_moving():
 	is_moving = true
+	_set_random_direction()
 	animation_player.play("bounce")
-	sprite.play("default")
 	walk_timer.start(game_manager.rng.randi_range(move_time["min"], move_time["max"]))
 
-# Stop Heckler Movement To Throw Tomato
-func _stop_moving():
-	animation_player.stop()
-	is_moving = false
-	_throw_tomato()
+func _spawn_target() -> void :
+	get_viewport().get_camera_3d().spawn_target(current_projectile,self)
+	pass
 
 # Throw Tomato
-func _throw_tomato():
+func _throw_projectile() -> void :
 	is_moving = false
 	animation_player.play("throw")
 	sprite.play("throw")
-	
-	if randi() % 2 == 0:
-		current_direction.x = 1.0  # Move right
-	else:
-		current_direction.x = -1.0  # Move left
 	
 	throw_delay_timer.start(throw_delay)
 
 # Move after throwing finished
 func _on_throw_timer_timeout() -> void :
 	var instance = packed_projectile.instantiate()
-	# Randomly determine if this projectile should be a boomerang
-	if randi() % 100 < 30: # 30% chance for Boomerang
-		instance.type = instance.ProjectileType.Boomerang
-		print("Spawned Boomerang")
-	elif randi() % 100 < 60: # 30% chance for Brick
-		instance.type = instance.ProjectileType.Brick
-		print("Spawned Brick")
-	else:
-		instance.type = instance.ProjectileType.Tomato
-		print("Spawned Tomato")
+	instance.projectile = current_projectile
 	
 	# Configure other properties of the instance as needed
 	# Add the projectile to the scene
@@ -113,7 +92,14 @@ func _on_throw_timer_timeout() -> void :
 	_start_moving()
 
 func _on_walk_timer_timeout() -> void :
-	_stop_moving()
+	animation_player.stop()
+	is_moving = false
+	
+	if(current_projectile["type"] == Shared.E_ProjectileType.GUN):
+		sprite.play("aim")
+		_spawn_target()
+	else:
+		_throw_projectile()
 
 # On Animation Finished
 func _on_animated_sprite_3d_animation_finished() -> void :
@@ -121,14 +107,27 @@ func _on_animated_sprite_3d_animation_finished() -> void :
 	
 	#Spawn animation finish, start moving
 	if(anim_name == "spawn"):
-		_set_move_boundary()
-		sprite.play("default")
 		_start_moving()
 	
 	#On animation death finished, destory heckler
 	if(anim_name == "death"):
 		get_tree().call_group("AudienceManager", "kill_heckler", self)
 
+func _set_random_direction() -> void :
+	if randi() % 2 == 0:
+		current_direction.x = 1.0  # Move right
+		sprite.play("walk_right")
+	else:
+		current_direction.x = -1.0  # Move left
+		sprite.play("walk_left")
+
+func set_move_boundary() -> void :
+	var chair_group : Node3D = assigned_chair.get_parent()
+	boundary = {"left" : chair_group.get_node("Left").global_transform.origin.x, "right" : chair_group.get_node("Right").global_transform.origin.x}
+
 # Play Death Animation
 func play_death() -> void :
 	sprite.play("death")
+
+func fire_gun() -> void :
+	_start_moving()

@@ -33,3 +33,13 @@ enum E_SOUND_EFFECT {
 enum E_BACKGROUND_MUSIC {
 	RAGTIME,
 }
+
+enum E_ProjectileType {
+	BANANNA,
+	BOOMERANG,
+	BOOT,
+	BRICK,
+	GUN,
+	MONEY,
+	TOMATO,
+}

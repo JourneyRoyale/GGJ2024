@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://csw4tv5xbyfi5"]
+[gd_scene load_steps=32 format=3 uid="uid://csw4tv5xbyfi5"]
 
 [ext_resource type="Script" path="res://scripts/player/camera.gd" id="1_71yqj"]
 [ext_resource type="PackedScene" uid="uid://bal0jss3qcmho" path="res://prefab/player/comedian.tscn" id="2_n8686"]
@@ -12,6 +12,9 @@
 [ext_resource type="AudioStream" uid="uid://b77xbhcraw287" path="res://music/archive/mixkit-arcade-game-complete-or-approved-mission-205.wav" id="10_ofj1t"]
 [ext_resource type="PackedScene" uid="uid://b7efb0ou050m6" path="res://prefab/audience/audience_manager.tscn" id="11_c8qvp"]
 [ext_resource type="PackedScene" uid="uid://dylmrkofcgcmw" path="res://prefab/game/thats_all_folks.tscn" id="12_rvjx6"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_0t7yu"]
+size = Vector3(16, 9, 0.01)
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_v7e3w"]
 points = PackedVector3Array(-0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5)
@@ -71,6 +74,15 @@ size = Vector3(33, 1, 20)
 transform = Transform3D(1, 0, 0, 0, 0.906308, 0.422618, 0, -0.422618, 0.906308, 0, 7.063, 5)
 current = true
 script = ExtResource("1_71yqj")
+
+[node name="Camera Panel" type="Area3D" parent="Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Camera3D/Camera Panel"]
+shape = SubResource("BoxShape3D_0t7yu")
+
+[node name="Spawner" type="Node3D" parent="Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4)
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 5.63702, 4.59269)
@@ -479,7 +491,5 @@ autostart = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 4.75, 2.147)
 player = NodePath("../Comedian")
 start_x = -15.0
-
-[node name="Area3D" type="Area3D" parent="."]
 
 [connection signal="timeout" from="Audience/Timer" to="Audience" method="_on_timer_timeout"]

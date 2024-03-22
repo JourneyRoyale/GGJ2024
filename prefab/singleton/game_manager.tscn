@@ -4,9 +4,15 @@
 [ext_resource type="Resource" uid="uid://d4hs7a042pdhw" path="res://resources/data/Level 2/level_2.tres" id="3_5kmd5"]
 [ext_resource type="Resource" uid="uid://cwgkk8aucdit0" path="res://resources/data/Level 1/level_1.tres" id="3_me5q5"]
 
-[node name="GameManager" type="Node3D"]
+[node name="Game_Manager" type="Node3D"]
+process_mode = 3
 script = ExtResource("1_jywg1")
 level_resource_dictionary = {
 1: ExtResource("3_me5q5"),
 2: ExtResource("3_5kmd5")
 }
+
+[node name="Shock Timer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="Shock Timer" to="." method="_on_shock_timer_timeout"]

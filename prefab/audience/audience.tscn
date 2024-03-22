@@ -218,8 +218,10 @@ frame_progress = 1.0
 [node name="Sprite" type="AnimatedSprite3D" parent="."]
 transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 0, 3.6, 0)
 material_overlay = SubResource("ShaderMaterial_jgtyf")
+billboard = 1
+shaded = true
 sprite_frames = SubResource("SpriteFrames_6gm35")
-animation = &"annoyed"
+animation = &"walking"
 
 [node name="Emoji" type="Node3D" parent="."]
 transform = Transform3D(0.066, 0, 0, 0, 0.066, 0, 0, 0, 0.066, -0.945601, 7.58472, 0.360001)

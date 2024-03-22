@@ -81,6 +81,8 @@ transform = Transform3D(6, 0, 0, 0, 6, 0, 0, 0, 6, 0, 0, 0)
 shape = SubResource("CapsuleShape3D_qdsn5")
 
 [node name="Sprite" type="AnimatedSprite3D" parent="."]
+billboard = 1
+shaded = true
 sprite_frames = ExtResource("2_u6svr")
 animation = &"idle_from_hit"
 autoplay = "idle_from_hit"

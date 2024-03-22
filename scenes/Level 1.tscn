@@ -72,14 +72,64 @@ transform = Transform3D(1, 0, 0, 0, 0.906308, 0.422618, 0, -0.422618, 0.906308, 
 current = true
 script = ExtResource("1_71yqj")
 
-[node name="OmniLight3D" type="OmniLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 5.63702, 4.59269)
+[node name="Lighting" type="Node" parent="."]
+
+[node name="StageLight2" type="OmniLight3D" parent="Lighting"]
+transform = Transform3D(1, 0, 0, 0, -1, -8.74228e-08, 0, 8.74228e-08, -1, 0, 10.1203, -15.1506)
+light_energy = 0.732
+light_indirect_energy = 3.909
+light_volumetric_fog_energy = 2.939
 omni_range = 25.0
 omni_attenuation = 0.210224
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(0.00396917, 0.929172, -0.369628, 0.96977, 0.0866099, 0.228134, 0.243989, -0.359359, -0.900739, -0.278868, 0.456484, -0.769173)
+[node name="StageLight" type="OmniLight3D" parent="Lighting"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 5.63702, 4.59269)
+light_energy = 1.646
+light_indirect_energy = 3.909
+light_volumetric_fog_energy = 2.939
+omni_range = 25.0
+omni_attenuation = 0.210224
+
+[node name="TopRightLight" type="OmniLight3D" parent="Lighting"]
+transform = Transform3D(1, 0, 0, 0, -0.256525, -0.966538, 0, 0.966538, -0.256525, 12.7387, 11.6154, -22.9069)
 visible = false
+light_color = Color(0, 0, 0, 1)
+light_energy = 0.121
+light_negative = true
+shadow_enabled = true
+distance_fade_begin = 10.0
+distance_fade_length = 5.0
+omni_range = 25.0
+omni_attenuation = 0.210224
+
+[node name="MiddleLight" type="OmniLight3D" parent="Lighting"]
+transform = Transform3D(1, 0, 0, 0, 0.379391, 0.925236, 0, -0.925236, 0.379391, -0.773044, 15.1613, -20.7178)
+visible = false
+light_energy = 2.103
+distance_fade_begin = 10.0
+distance_fade_length = 5.0
+omni_range = 25.0
+omni_attenuation = 0.210224
+
+[node name="TopLeftLight" type="OmniLight3D" parent="Lighting"]
+transform = Transform3D(1, 0, 0, 0, -0.991599, 0.129349, 0, -0.129349, -0.991599, -13.3641, 9.18644, -23.4254)
+visible = false
+light_color = Color(0, 0, 0, 1)
+light_energy = 0.123
+light_negative = true
+omni_range = 25.0
+omni_attenuation = 0.210224
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Lighting"]
+transform = Transform3D(0.000228574, 0.928831, -0.370505, 0.969778, 0.0901931, 0.226707, 0.243989, -0.359359, -0.900739, -1.74947, 23.8436, -9.11339)
+light_color = Color(0, 0, 0, 1)
+light_energy = 0.0
+light_indirect_energy = 0.0
+shadow_enabled = true
+shadow_normal_bias = 2.202
+directional_shadow_fade_start = 0.35
+directional_shadow_pancake_size = 23.0
+sky_mode = 1
 
 [node name="Comedian" parent="." instance=ExtResource("2_n8686")]
 transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 2, 0)
@@ -436,6 +486,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 15, -9)
 collision_mask = 3
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Environment/Stage/Wall/Top Wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.306429, 0, 0)
 mesh = SubResource("BoxMesh_7f816")
 skeleton = NodePath("../../../../..")
 

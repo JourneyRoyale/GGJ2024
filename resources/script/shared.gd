@@ -12,12 +12,7 @@ enum E_Emoji {
 	SKULL,
 }
 
-enum E_AudienceEmotionalState {
-	ANNOYED,
-	NEUTRAL,
-}
-
-enum E_AudioType {
+enum E_AUDIO_TYPE {
 	BACKGROUND,
 	SOUND_EFFECT,
 }
@@ -34,7 +29,7 @@ enum E_BACKGROUND_MUSIC {
 	RAGTIME,
 }
 
-enum E_ProjectileType {
+enum E_PROJECTILE_TYPE {
 	BANANNA,
 	BOOMERANG,
 	BOOT,
@@ -44,8 +39,17 @@ enum E_ProjectileType {
 	TOMATO,
 }
 
-enum E_ThrowType {
+enum E_THROW_TYPE {
 	OVERHAND,
 	UNDERHAND,
 	SLING,
+}
+
+enum E_AUDIENCE_TYPE {
+	SHEEP_WOLF,
+	SHEEP,
+	WOLF,
+	LOG_CROCODILE,
+	CROCODILE,
+	LOG,
 }

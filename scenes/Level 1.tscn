@@ -1,7 +1,7 @@
-[gd_scene load_steps=36 format=3 uid="uid://csw4tv5xbyfi5"]
+[gd_scene load_steps=35 format=3 uid="uid://csw4tv5xbyfi5"]
 
 [ext_resource type="Script" path="res://scripts/player/camera.gd" id="1_71yqj"]
-[ext_resource type="PackedScene" uid="uid://bal0jss3qcmho" path="res://prefab/player/comedian.tscn" id="2_n8686"]
+[ext_resource type="Script" path="res://scenes/player_spawner.gd" id="1_wmjvo"]
 [ext_resource type="ArrayMesh" uid="uid://b7s1g8w1atyl6" path="res://3d/StageAsset.obj" id="3_n0km2"]
 [ext_resource type="Texture2D" uid="uid://ds7qhftov3n4r" path="res://sprites/stage/Background Stage.png" id="4_kwdiu"]
 [ext_resource type="PackedScene" uid="uid://bky7n6468r137" path="res://prefab/audience/chair.tscn" id="5_5cfmn"]
@@ -9,7 +9,6 @@
 [ext_resource type="Texture2D" uid="uid://ca1mchkan5mk3" path="res://sprites/stage/Right Door.png" id="7_ivvyr"]
 [ext_resource type="Script" path="res://scripts/game/target_map.gd" id="8_3empa"]
 [ext_resource type="Script" path="res://scripts/singleton/audio_manager.gd" id="8_r2o3p"]
-[ext_resource type="PackedScene" uid="uid://dn72fef3tnnm5" path="res://prefab/audience/projectile.tscn" id="8_yd5f0"]
 [ext_resource type="AudioStream" uid="uid://inflyfrfxqu7" path="res://music/archive/refract.mp3" id="9_kp04q"]
 [ext_resource type="AudioStream" uid="uid://b77xbhcraw287" path="res://music/archive/mixkit-arcade-game-complete-or-approved-mission-205.wav" id="10_ofj1t"]
 [ext_resource type="PackedScene" uid="uid://b7efb0ou050m6" path="res://prefab/audience/audience_manager.tscn" id="11_c8qvp"]
@@ -20,6 +19,9 @@ size = Vector3(16, 9, 0.01)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_x4ryl"]
 size = Vector3(16, 19, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_6fh8k"]
+size = Vector3(14, 0, 5.5)
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_v7e3w"]
 points = PackedVector3Array(-0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5)
@@ -73,13 +75,23 @@ size = Vector3(33, 1, 22)
 [sub_resource type="BoxShape3D" id="BoxShape3D_5bvv7"]
 size = Vector3(33, 1, 20)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_6fh8k"]
-size = Vector3(14, 0, 5.5)
-
 [node name="Perspective" type="Node3D"]
 
-[node name="Projectile" parent="." instance=ExtResource("8_yd5f0")]
-transform = Transform3D(-1, 0, -1.50996e-07, 0, 1, 0, 1.50996e-07, 0, -1, 0, 1.8, -4.25)
+[node name="Player Spawn" type="Node3D" parent="."]
+script = ExtResource("1_wmjvo")
+spawn_dictionary = Array[NodePath]([NodePath("Singleplayer/SpawnPoint"), NodePath("Multiplayer/SpawnPoint3"), NodePath("Multiplayer/SpawnPoint4")])
+
+[node name="Singleplayer" type="Node3D" parent="Player Spawn"]
+
+[node name="SpawnPoint" type="Node3D" parent="Player Spawn/Singleplayer"]
+
+[node name="Multiplayer" type="Node3D" parent="Player Spawn"]
+
+[node name="SpawnPoint3" type="Node3D" parent="Player Spawn/Multiplayer"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 0)
+
+[node name="SpawnPoint4" type="Node3D" parent="Player Spawn/Multiplayer"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, 0)
 
 [node name="Camera3D" type="Camera3D" parent="." groups=["Camera"]]
 transform = Transform3D(1, 0, 0, 0, 0.906308, 0.422618, 0, -0.422618, 0.906308, 0, 7.063, 5)
@@ -88,6 +100,7 @@ script = ExtResource("1_71yqj")
 
 [node name="Camera Panel" type="Area3D" parent="Camera3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4)
+collision_mask = 513
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Camera3D/Camera Panel"]
 shape = SubResource("BoxShape3D_0t7yu")
@@ -144,13 +157,10 @@ directional_shadow_fade_start = 0.35
 directional_shadow_pancake_size = 23.0
 sky_mode = 1
 
-[node name="Comedian" parent="." instance=ExtResource("2_n8686")]
-transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 2, 0)
-
 [node name="Environment" type="StaticBody3D" parent="."]
 transform = Transform3D(-1, 0, -1.50996e-07, 0, 1, 0, 1.50996e-07, 0, -1, 0, 0, 0)
 
-[node name="Stage Constraint" type="StaticBody3D" parent="Environment"]
+[node name="Stage Constraint" type="StaticBody3D" parent="Environment" groups=["RayIgnore"]]
 transform = Transform3D(-1, 0, 1.50996e-07, 0, 1, 0, -1.50996e-07, 0, -1, 4.52988e-07, 1.637, -3)
 collision_mask = 3
 
@@ -177,6 +187,14 @@ collision_mask = 3
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Environment/Stage Constraint4"]
 shape = SubResource("BoxShape3D_x4ryl")
+
+[node name="Targeting Map" type="Area3D" parent="Environment"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 1.5)
+script = ExtResource("8_3empa")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment/Targeting Map"]
+shape = SubResource("BoxShape3D_6fh8k")
+disabled = true
 
 [node name="StageMesh" type="MeshInstance3D" parent="Environment"]
 transform = Transform3D(0.669101, 0, -1.42109e-14, 0, 1, 0, 7.10543e-15, 0, 1, 3.26278e-07, 0, -2.29246)
@@ -238,6 +256,35 @@ transform = Transform3D(-6.55668e-08, -5.2318e-16, -1.5, 5.2318e-16, 1.5, -5.231
 
 [node name="Right" type="Node3D" parent="Environment/Stage/Floor/Chair Group 2"]
 transform = Transform3D(-6.55668e-08, -5.2318e-16, -1.5, 5.2318e-16, 1.5, -5.2318e-16, 1.5, -5.2318e-16, -6.55668e-08, 8, 0, 2.653)
+
+[node name="Chair Group 3" type="Node3D" parent="Environment/Stage/Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 3.5, -15)
+
+[node name="Chair" parent="Environment/Stage/Floor/Chair Group 3" instance=ExtResource("5_5cfmn")]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, -8, 0, -0.5)
+can_sit = false
+
+[node name="Chair2" parent="Environment/Stage/Floor/Chair Group 3" instance=ExtResource("5_5cfmn")]
+transform = Transform3D(1.5, -5.2318e-16, 0, 5.2318e-16, 1.5, -5.2318e-16, 1.82478e-31, 5.2318e-16, 1.5, -4, 0, -0.5)
+can_sit = false
+
+[node name="Chair3" parent="Environment/Stage/Floor/Chair Group 3" instance=ExtResource("5_5cfmn")]
+transform = Transform3D(1.5, -5.2318e-16, 0, 5.2318e-16, 1.5, -5.2318e-16, 1.82478e-31, 5.2318e-16, 1.5, 0, 0, -0.5)
+can_sit = false
+
+[node name="Chair4" parent="Environment/Stage/Floor/Chair Group 3" instance=ExtResource("5_5cfmn")]
+transform = Transform3D(1.5, -5.2318e-16, 0, 5.2318e-16, 1.5, -5.2318e-16, 1.82478e-31, 5.2318e-16, 1.5, 4, 0, -0.5)
+can_sit = false
+
+[node name="Chair5" parent="Environment/Stage/Floor/Chair Group 3" instance=ExtResource("5_5cfmn")]
+transform = Transform3D(1.5, -5.2318e-16, 0, 5.2318e-16, 1.5, -5.2318e-16, 1.82478e-31, 5.2318e-16, 1.5, 8, 0, -0.5)
+can_sit = false
+
+[node name="Left" type="Node3D" parent="Environment/Stage/Floor/Chair Group 3"]
+transform = Transform3D(1.5, -3.97047e-23, -5.32907e-15, 1.19114e-22, 1.5, -9.62451e-23, 5.32907e-15, -1.68357e-23, 1.5, -8, 0, 0.25)
+
+[node name="Right" type="Node3D" parent="Environment/Stage/Floor/Chair Group 3"]
+transform = Transform3D(1.5, -5.2318e-16, -5.32907e-15, 5.2318e-16, 1.5, -5.2318e-16, 5.32907e-15, 5.2318e-16, 1.5, 8, 0, 0.25)
 
 [node name="Top Floor" type="StaticBody3D" parent="Environment/Stage/Floor"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 3, -16.471)
@@ -542,14 +589,6 @@ texture = ExtResource("6_nqgv6")
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1, 12.7, 9.7, 24.1)
 texture = ExtResource("7_ivvyr")
 
-[node name="Targeting Map" type="Area3D" parent="Environment"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 1.5)
-script = ExtResource("8_3empa")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment/Targeting Map"]
-shape = SubResource("BoxShape3D_6fh8k")
-disabled = true
-
 [node name="AudioManager" type="Node3D" parent="."]
 script = ExtResource("8_r2o3p")
 
@@ -576,9 +615,8 @@ target_map = NodePath("../Environment/Targeting Map")
 wait_time = 4.0
 autostart = true
 
-[node name="ThatsAllFolks" parent="." node_paths=PackedStringArray("player") instance=ExtResource("12_rvjx6")]
+[node name="ThatsAllFolks" parent="." instance=ExtResource("12_rvjx6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 4.75, 2.147)
-player = NodePath("../Comedian")
 start_x = -15.0
 
 [connection signal="timeout" from="Audience/Timer" to="Audience" method="_on_timer_timeout"]

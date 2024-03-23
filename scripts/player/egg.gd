@@ -107,14 +107,14 @@ func stop_switch() -> void :
 func timing() -> float :
 	return abs(scale.x - target_scale.x)
 
-func is_early() -> bool :
+func is_early(player : Comedian) -> bool :
 	if (scale > Vector3(.8, .8, .8)):
 		return false
 	else:
 		is_active = false
 		animation.play("early_break")
-		audio_manager.play_music(int(Shared.E_SOUND_EFFECT.HURT), Shared.E_AudioType.SOUND_EFFECT)		
-		game_manager.register_error()
+		audio_manager.play_music(int(Shared.E_SOUND_EFFECT.HURT), Shared.E_AUDIO_TYPE.SOUND_EFFECT)		
+		game_manager.register_error(player)
 		return true
 
 

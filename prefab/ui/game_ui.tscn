@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://vxc02h1qnjha"]
+[gd_scene load_steps=17 format=3 uid="uid://vxc02h1qnjha"]
 
 [ext_resource type="Script" path="res://scripts/ui/ui_manager.gd" id="1_7vdu0"]
 [ext_resource type="Theme" uid="uid://4c5xn5lj157e" path="res://theme/default.tres" id="1_8kqac"]
@@ -7,7 +7,14 @@
 [ext_resource type="Texture2D" uid="uid://d1fh5xoe5jk74" path="res://sprites/ui/Tomato_Splat_sprite.png" id="3_a8h4s"]
 [ext_resource type="Texture2D" uid="uid://rma688d35ap1" path="res://sprites/ui/White Rectangle With Gray.png" id="3_mjecg"]
 [ext_resource type="Script" path="res://scripts/ui/tomato_splat.gd" id="4_8xva2"]
+[ext_resource type="Texture2D" uid="uid://cyitysuebkqdn" path="res://sprites/audience/CluckNeutral.png" id="5_ejdtc"]
 [ext_resource type="Texture2D" uid="uid://jb6gm7433n5o" path="res://sprites/ui/titleLogo.png" id="5_so5fd"]
+[ext_resource type="Texture2D" uid="uid://bnietg8hxnc0w" path="res://sprites/texture/cluck_afraid.tres" id="9_dipuq"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_65c1h"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_byqct"]
+bg_color = Color(1, 1, 1, 1)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_vuhmk"]
 texture = ExtResource("3_mjecg")
@@ -58,6 +65,7 @@ mouse_filter = 1
 theme = ExtResource("1_8kqac")
 
 [node name="ComboCounter" type="Label" parent="GameUI"]
+visible = false
 clip_contents = true
 custom_minimum_size = Vector2(10, 0)
 layout_direction = 1
@@ -78,8 +86,6 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -60.0
-offset_bottom = -60.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_8kqac")
@@ -95,10 +101,11 @@ theme = ExtResource("1_8kqac")
 [node name="Top UI Bar" type="HBoxContainer" parent="GameUI/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("1_8kqac")
+theme_override_constants/separation = 0
 alignment = 1
 
 [node name="TextureButton" type="TextureButton" parent="GameUI/MarginContainer/VBoxContainer/Top UI Bar"]
-custom_minimum_size = Vector2(200, 200)
+custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 size_flags_horizontal = 0
 theme = ExtResource("1_8kqac")
@@ -113,26 +120,56 @@ size_flags_horizontal = 3
 theme = ExtResource("1_8kqac")
 
 [node name="Laughter Meter" type="ProgressBar" parent="GameUI/MarginContainer/VBoxContainer/Top UI Bar"]
-modulate = Color(1, 0.0588235, 0.0588235, 1)
 custom_minimum_size = Vector2(800, 42)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
 theme = ExtResource("1_8kqac")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 1
+theme_override_styles/background = SubResource("StyleBoxFlat_65c1h")
+theme_override_styles/fill = SubResource("StyleBoxFlat_byqct")
 max_value = 1.0
-value = 1.0
+value = 0.5
 show_percentage = false
 
-[node name="PlayerScore" type="Label" parent="GameUI/MarginContainer/VBoxContainer/Top UI Bar"]
+[node name="Player 1" type="TextureRect" parent="GameUI/MarginContainer/VBoxContainer/Top UI Bar/Laughter Meter"]
+visible = false
+layout_mode = 0
+offset_left = -63.0
+offset_top = -50.0
+offset_right = 63.0
+offset_bottom = 93.0
+texture = ExtResource("9_dipuq")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Player 2" type="TextureRect" parent="GameUI/MarginContainer/VBoxContainer/Top UI Bar/Laughter Meter"]
+visible = false
+layout_mode = 0
+offset_left = 736.0
+offset_top = -50.0
+offset_right = 862.0
+offset_bottom = 93.0
+pivot_offset = Vector2(20, 20)
+texture = ExtResource("5_ejdtc")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="MarginContainer" type="MarginContainer" parent="GameUI/MarginContainer/VBoxContainer/Top UI Bar"]
+layout_mode = 2
+theme_override_constants/margin_top = 10
+
+[node name="PlayerScore" type="Label" parent="GameUI/MarginContainer/VBoxContainer/Top UI Bar/MarginContainer"]
 clip_contents = true
 custom_minimum_size = Vector2(500, 0)
 layout_mode = 2
 size_flags_horizontal = 8
 theme = ExtResource("1_8kqac")
-theme_override_font_sizes/font_size = 100
+theme_override_font_sizes/font_size = 70
 text = "0"
 horizontal_alignment = 2
+vertical_alignment = 1
 
 [node name="MarginContainer" type="MarginContainer" parent="GameUI/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -671,6 +708,7 @@ libraries = {
 [connection signal="value_changed" from="Pause Screen/MarginContainer/MarginContainer/VBoxContainer/Pause Setting/PanelContainer/GridContainer/Sound Effect Slider" to="." method="_on_sound_effect_slider_value_changed"]
 [connection signal="pressed" from="Pause Screen/MarginContainer/MarginContainer/VBoxContainer/Pause Setting/PanelContainer/GridContainer/Back" to="." method="_on_pause_setting_back_pressed"]
 [connection signal="pressed" from="TitleScreen/MarginContainer/VBoxContainer/Main Menu/GridContainer/Start" to="." method="_on_start_game_pressed"]
+[connection signal="pressed" from="TitleScreen/MarginContainer/VBoxContainer/Main Menu/GridContainer/Versus" to="." method="_on_versus_pressed"]
 [connection signal="pressed" from="TitleScreen/MarginContainer/VBoxContainer/Main Menu/GridContainer/Settings" to="." method="_on_settings_pressed"]
 [connection signal="pressed" from="TitleScreen/MarginContainer/VBoxContainer/Main Menu/GridContainer/Credits" to="." method="_on_credits_pressed"]
 [connection signal="pressed" from="TitleScreen/MarginContainer/VBoxContainer/Main Menu/GridContainer/Exit" to="." method="_on_exit_pressed"]

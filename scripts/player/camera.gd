@@ -4,7 +4,7 @@ class_name Camera
 # On Ready
 @onready var game_manager : GameManager = get_node("/root/Game_Manager")
 @onready var camera_panel : Node3D = get_node("Camera Panel")
-@onready var packed_target : PackedScene = load("res://prefab/audience/target.tscn")
+@onready var packed_target : PackedScene = load("res://prefab/game/gun.tscn")
 @onready var spawner : Node3D = get_node("Spawner")
 # Local Variable
 var screen_constraint : Dictionary

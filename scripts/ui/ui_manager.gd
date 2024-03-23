@@ -26,6 +26,19 @@ class_name UIManager
 @onready var joke_bar : BoxContainer = get_node("GameUI/MarginContainer/VBoxContainer/Joke Bar")
 @onready var combo_counter : Label = get_node("GameUI/ComboCounter")
 
+var cluck_status : Dictionary = {
+	"neutral" : load("res://sprites/audience/CluckNeutral.png"),
+	"nervous" : load("res://sprites/audience/CluckNervous.png"),
+	"afraid" : load("res://sprites/audience/CluckAfraid.png"),
+	"dead" : load("res://sprites/audience/CluckDead.png"),
+}
+
+# Local Variable
+var player_status : Dictionary = {
+	1 : "GameUI/MarginContainer/VBoxContainer/Top UI Bar/Laughter Meter/Player 1",
+	2 : "GameUI/MarginContainer/VBoxContainer/Top UI Bar/Laughter Meter/Player 2",
+}
+
 func _ready() -> void :
 	match OS.get_name():
 		"Web": exit_button.visible = false
@@ -44,10 +57,26 @@ func _input(event : InputEvent) -> void :
 				get_tree().paused = pause_screen.visible 
 
 func _sync_score() -> void :
-	score.text = str(int(game_manager.player_score))
+	#score.text = str(int(game_manager.player_score))
+	pass
 
 func _sync_laughter() -> void :
-	laughter_meter.value = _round_to_dec(game_manager.laughter_score / 100, 2)
+	laughter_meter.value = _round_to_dec(game_manager.laughter_position / 100, 2)
+	
+	for player_num in game_manager.player_list.keys():
+		var player = game_manager.player_list[player_num]
+		var image = get_node(player_status[player_num])
+
+		if (player["laughter"] <= 0):
+			image.texture = cluck_status["dead"]
+		elif (player["laughter"] <= 20):
+			image.texture = cluck_status["afraid"]
+		elif (player["laughter"] <= 40):
+			image.texture = cluck_status["nervous"]
+		elif (player["laughter"] <= 100):
+			image.texture = cluck_status["neutral"]
+			
+		image.visible = true
 
 func _sync_combo_counter() -> void :
 	combo_counter.visible = game_manager.additional_multiplier > 0
@@ -56,13 +85,14 @@ func _sync_combo_counter() -> void :
 func _sync_volume(node : Control) -> void :
 	node.get_node("PanelContainer/GridContainer/Master Slider").value = audio_manager.master_volume
 	node.get_node("PanelContainer/GridContainer/Background Slider").value = audio_manager.background_volume
-	node.get_node("PanelContainer/GridContainer/Sound Effect Slider").value = audio_manager.sound_effect_volume 
+	node.get_node("PanelContainer/GridContainer/Sound Effect Slider").value = audio_manager.sound_effect_volume
 
 func _round_to_dec(num : float, digit : int) -> float :
 	return round(num * pow(10.0, digit)) / pow(10.0, digit)
 
 #Main Menu
 func _on_start_game_pressed() -> void :
+	game_manager.is_singleplayer = true
 	level_selection.visible = true
 	main_menu.visible = false
 
@@ -141,3 +171,9 @@ func _on_level_pressed(index : int) -> void :
 func _on_level_back_pressed():
 	level_selection.visible = false
 	main_menu.visible = true
+
+
+func _on_versus_pressed():
+	game_manager.is_singleplayer = false
+	level_selection.visible = true
+	main_menu.visible = false

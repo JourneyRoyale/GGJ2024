@@ -1,0 +1,59 @@
+[gd_resource type="SpriteFrames" load_steps=6 format=3 uid="uid://ch6rbs30qjg2a"]
+
+[ext_resource type="Texture2D" uid="uid://djbo87sfto4cb" path="res://sprites/audience/crocodilespritesheet.png" id="1_xxhx3"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t3lxx"]
+atlas = ExtResource("1_xxhx3")
+region = Rect2(6400, 2400, 800, 1200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xwbft"]
+atlas = ExtResource("1_xxhx3")
+region = Rect2(0, 3600, 800, 1200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fmp4n"]
+atlas = ExtResource("1_xxhx3")
+region = Rect2(800, 3600, 800, 1200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a126k"]
+atlas = ExtResource("1_xxhx3")
+region = Rect2(5600, 2400, 800, 1200)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t3lxx")
+}],
+"loop": false,
+"name": &"annoyed",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xwbft")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fmp4n")
+}],
+"loop": false,
+"name": &"laughing",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a126k")
+}],
+"loop": true,
+"name": &"neutral",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": false,
+"name": &"sitting",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"walking",
+"speed": 2.0
+}]

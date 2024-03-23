@@ -20,11 +20,10 @@ var annoyed_amount : int = 1
 var rng : RandomNumberGenerator = RandomNumberGenerator.new()
 var level_resource : LevelResource
 var is_playing = false
-var laughter_score = 50.0;
-var player_score = 0;
-var joke_combo: int = 0;
+var laughter_position = 50.0;
 var additional_multiplier: int = 0;
-var player_list: Array[Comedian]
+var player_list: Dictionary
+var is_singleplayer: bool = true
 
 func _init_resources() -> void :
 	multiplier_increase_frequency = level_resource.multiplier_increase_frequency
@@ -40,45 +39,46 @@ func _reset_on_ready() -> void :
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta : float) -> void :
 	if(is_playing):
-		additional_multiplier = int(joke_combo / multiplier_increase_frequency)
-		
-		if laughter_score <= 0:
-			get_tree().call_group("ThatsAllFolks", "start")
+		#additional_multiplier = int(joke_combo / multiplier_increase_frequency)
+		var dead_player = _return_dead_player()
+		if (dead_player):
+			get_tree().call_group("ThatsAllFolks", "start", dead_player)
+	pass
 
 # Reset game manager variable to default
 func reset_local_default():
-	laughter_score = 50.0
-	player_score = 0
-	joke_combo = 0;
+	laughter_position = 50.0
 	is_playing = false
 
 # Increase Score from egg match
-func register_match(distance):
-	player_score += 50 * (1 + additional_multiplier)
-	laughter_score += match_amount - (distance / 10) 
-	joke_combo += 1
+func register_match(distance : float, player : Comedian):
+	player_list[player.player_num]["score"] += 50 * (1 + player_list[player.player_num]["joke_combo"])
+	player_list[player.player_num]["joke_combo"] += 1
+	_set_laugh_score(match_amount - (distance / 10) , player)
 
 # Decrease score from wrong egg match
-func register_error() -> void :
-	laughter_score -= error_amount
-	joke_combo = 0
+func register_error(player : Comedian) -> void :
+	_set_laugh_score(-error_amount, player)
+	player_list[player.player_num]["joke_combo"] = 0
 
 # Decrease score from projectile hit
-func register_hurt(amount : int) -> void :
-	player_score = max(player_score - amount, 0)
-	laughter_score -= amount
-	joke_combo = 0
+func register_hurt(amount : int, player : Comedian) -> void :
+	player_list[player.player_num]["score"] = max(player_list[player.player_num]["score"] - amount, 0)
+	_set_laugh_score(-amount, player)
+	player_list[player.player_num]["joke_combo"] = 0
 	
 func register_annoyed() -> void :
-	laughter_score -= annoyed_amount
+	pass
 
 func back_to_menu() -> void :
+	player_list.clear()
 	reset_local_default()
 	audio_manager.stop_music();
 	get_tree().paused = false
 	get_tree().reload_current_scene()
 
 func restart_level() -> void :
+	player_list.clear()
 	load_level(level_resource.level)
 
 func load_level(index) -> void :
@@ -96,14 +96,35 @@ func load_level(index) -> void :
 	# Add Scene and play music
 	var instance = level_resource.scene.instantiate()
 	game_holder.add_child(instance)
-	audio_manager.play_music(int(level_resource.background_music), Shared.E_AudioType.BACKGROUND)
+	audio_manager.play_music(int(level_resource.background_music), Shared.E_AUDIO_TYPE.BACKGROUND)
 	
 	is_playing = true
 
 func add_player(comedian : Comedian) -> void :
-	player_list.append(comedian)
+	player_list[comedian.player_num] = {
+		"player_ref" : comedian,
+		"laughter" : laughter_position,
+		"score" : 0,
+		"joke_combo" : 0
+	} 
 
-func _on_shock_timer_timeout():
-	print("not suppose to happen")
+func _return_dead_player() -> Comedian:
+	for player_num in player_list.keys():
+		var player = player_list[player_num]
+		if (player["laughter"] == 0):
+			return player["player_ref"]
+	return null
+
+func _on_shock_timer_timeout() -> void:
 	is_playing = false
 	get_tree().call_group("Curtains", "end_game")
+
+func _set_laugh_score(score : float, player : Comedian) -> void :
+	if (player.player_num == 1):
+		laughter_position = min(100,laughter_position + score)
+		player_list[player.player_num]["laughter"] = laughter_position
+		player_list[2]["laughter"] = 100.0 -laughter_position
+	else:
+		laughter_position -= score
+		player_list[1]["laughter"] = laughter_position
+		player_list[player.player_num]["laughter"] = 100.0 - laughter_position

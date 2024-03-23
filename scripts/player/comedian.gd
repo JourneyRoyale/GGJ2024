@@ -15,6 +15,9 @@ class_name Comedian
 @onready var egg : Egg = get_node("Joke/Egg")
 @onready var target : Node3D = get_node("Target")
 
+# Export
+@export var player_num : int = 1
+
 # Init variable from resources
 var fly_time
 var accel
@@ -47,27 +50,44 @@ func _ready() -> void :
 	_init_resources()
 	game_manager.add_player(self)
 	if not is_dead:
-		audio_manager.play_music(int(Shared.E_BACKGROUND_MUSIC.RAGTIME), Shared.E_AudioType.BACKGROUND)
+		audio_manager.play_music(int(Shared.E_BACKGROUND_MUSIC.RAGTIME), Shared.E_AUDIO_TYPE.BACKGROUND)
 		animation_player.play("default")
 
 func _input(event : InputEvent) -> void :
-	if event is InputEventKey and event.pressed:
-		if event.keycode == KEY_E and !is_flying and egg.is_active and !egg.is_early():
-			get_tree().call_group("AudienceManager", "check_for_match", egg, egg.timing())
-			egg.reset_egg()
-		if event.keycode == KEY_F:
-			egg.switch_egg()
-		if event.keycode == KEY_Q and is_on_floor():
-			is_start_flying = true
-			velocity.y = jump_velocity
-			sprite.play("fly")
+	if(player_num == 1):
+		if event is InputEventKey and event.pressed:
+			if event.is_action_pressed("p1_match") and !is_flying and egg.is_active and !egg.is_early(self):
+				get_tree().call_group("AudienceManager", "check_for_match", egg, egg.timing(), self)
+				egg.reset_egg()
+			if event.is_action_pressed("p1_switch") :
+				egg.switch_egg()
+			if event.is_action_pressed("p1_fly")  and is_on_floor():
+				is_start_flying = true
+				velocity.y = jump_velocity
+				sprite.play("fly")
+	elif(player_num == 2):
+		if event is InputEventKey and event.pressed:
+			if event.is_action_pressed("p2_match") and !is_flying and egg.is_active and !egg.is_early(self):
+				get_tree().call_group("AudienceManager", "check_for_match", egg, egg.timing(), self)
+				egg.reset_egg()
+			if event.is_action_pressed("p2_switch") :
+				egg.switch_egg()
+			if event.is_action_pressed("p2_fly")  and is_on_floor():
+				is_start_flying = true
+				velocity.y = jump_velocity
+				sprite.play("fly")
 
 func _physics_process(delta : float) -> void :
 	if !is_on_floor() and (!is_start_flying and !is_flying):
 		velocity.y -= gravity * 2 * delta
 	
 	if not is_stunned and not is_dead:
-		var input_dir = Input.get_vector("move_left", "move_right", "move_up", "move_down")
+		var input_dir
+		if (player_num == 2):
+			input_dir = Input.get_vector("p2_move_left", "p2_move_right", "p2_move_up", "p2_move_down")
+		else:
+			input_dir = Input.get_vector("p1_move_left", "p1_move_right", "p1_move_up", "p1_move_down")
+		
 		var direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 
 		velocity.x += direction.x * accel
@@ -142,7 +162,7 @@ func thats_all_folks() -> void :
 		is_dead = true
 		is_invulnerable = false
 		audio_manager.stop_music()
-		audio_manager.play_music(int(Shared.E_SOUND_EFFECT.BWACK), Shared.E_AudioType.SOUND_EFFECT)
+		audio_manager.play_music(int(Shared.E_SOUND_EFFECT.BWACK), Shared.E_AUDIO_TYPE.SOUND_EFFECT)
 		animation_player.play("yoink")
 		sprite.play("yoink")
 
@@ -156,8 +176,8 @@ func projectile_collided(projectile : Dictionary) -> void :
 					if (score > 0):
 						print("Add Money Score")
 					else:
-						game_manager.register_hurt(score)
-						audio_manager.play_music(int(Shared.E_SOUND_EFFECT.HURT), Shared.E_AudioType.SOUND_EFFECT)
+						game_manager.register_hurt(score, self)
+						audio_manager.play_music(int(Shared.E_SOUND_EFFECT.HURT), Shared.E_AUDIO_TYPE.SOUND_EFFECT)
 						sprite.play("hit")
 				"stun":
 					var stun_time : float = projectile["stun"]
@@ -180,7 +200,7 @@ func projectile_collided(projectile : Dictionary) -> void :
 func shot() -> void :
 	sprite.play("yoink")
 	joke.visible = false
-	audio_manager.play_music(int(Shared.E_SOUND_EFFECT.BWACK), Shared.E_AudioType.SOUND_EFFECT)
+	audio_manager.play_music(int(Shared.E_SOUND_EFFECT.BWACK), Shared.E_AUDIO_TYPE.SOUND_EFFECT)
 	get_tree().paused = true
 	game_manager.shock_timer.start()
 	

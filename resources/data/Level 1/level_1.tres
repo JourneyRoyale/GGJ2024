@@ -1,6 +1,10 @@
-[gd_resource type="Resource" script_class="LevelResource" load_steps=3 format=3 uid="uid://cwgkk8aucdit0"]
+[gd_resource type="Resource" script_class="LevelResource" load_steps=7 format=3 uid="uid://cwgkk8aucdit0"]
 
 [ext_resource type="PackedScene" uid="uid://csw4tv5xbyfi5" path="res://scenes/Level 1.tscn" id="1_7yin8"]
+[ext_resource type="SpriteFrames" uid="uid://drjanm0olmxmw" path="res://sprites/sprite_frame/sheep.tres" id="1_ed8jv"]
+[ext_resource type="SpriteFrames" uid="uid://bmjxefay1b4ew" path="res://sprites/sprite_frame/wolf.tres" id="2_qgwsi"]
+[ext_resource type="SpriteFrames" uid="uid://ch6rbs30qjg2a" path="res://sprites/sprite_frame/log.tres" id="3_seyfp"]
+[ext_resource type="SpriteFrames" uid="uid://dxoqu8wypvg8c" path="res://sprites/sprite_frame/crocodile.tres" id="4_gdhha"]
 [ext_resource type="Script" path="res://resources/script/level_resource.gd" id="4_trvdi"]
 
 [resource]
@@ -14,16 +18,72 @@ emoji_variety = {
 "min": 3
 }
 emoji_list = Array[int]([0, 1, 2, 3, 4, 5, 6, 7])
-max_heckler = 1
+max_heckler = 5
 max_heckler_per_floor = 5
-starting_audience = {
+starting_listener = {
 "max": 10,
-"min": 5
-}
-audience_rate = {
-"max": 2,
 "min": 1
 }
+listener_rate = {
+"max": 7,
+"min": 4
+}
+audience_list = Array[Dictionary]([{
+"heckler": {
+"aggressive_max": 0.99,
+"aggressive_min": 0.01,
+"aggressiveness": 2,
+"description": "wolf",
+"health": 2,
+"move_speed": 0.5,
+"move_time": {
+"max": 5.0,
+"min": 2.0
+},
+"sprite_frame": ExtResource("2_qgwsi"),
+"throw_delay": 1,
+"throw_speed": 10,
+"type": 2
+},
+"listener": {
+"can_sit": true,
+"description": "sheep",
+"limit": 0,
+"move_speed": 3,
+"patience": 5,
+"spawn_rate": 80,
+"sprite_frame": ExtResource("1_ed8jv"),
+"type": 1
+}
+}, {
+"heckler": {
+"aggressive_max": 0.99,
+"aggressive_min": 0.5,
+"aggressiveness": 2,
+"description": "crocodile",
+"health": 10,
+"move_speed": 0.5,
+"move_time": {
+"max": 5.0,
+"min": 2.0
+},
+"sprite_frame": ExtResource("4_gdhha"),
+"throw_delay": 1,
+"throw_speed": 20,
+"type": 4
+},
+"listener": {
+"can_sit": false,
+"description": "sheep",
+"limit": 0,
+"move_speed": 0,
+"patience": 7,
+"rate": 20,
+"spawn_rate": 80,
+"sprite_frame": ExtResource("3_seyfp"),
+"type": 5
+}
+}])
 multiplier_increase_frequency = 3
 error_amount = 10
 match_amount = 10
@@ -72,7 +132,7 @@ projectile_list = Array[Dictionary]([{
 "description": "gun",
 "game_ender": true,
 "limit": 1,
-"rate": 20,
+"rate": 10000,
 "score": -50,
 "speed": 10.0,
 "stun": 0.25,

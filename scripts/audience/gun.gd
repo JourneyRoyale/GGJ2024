@@ -13,7 +13,6 @@ var is_aiming : bool = true
 
 func _ready():
 	camera = get_viewport().get_camera_3d()
-	print(game_manager.player_list)
 
 func _process(delta):
 	
@@ -32,9 +31,15 @@ func _process(delta):
 			delay_timer.start(modification["delay"])
 
 func _get_player_position(object : Node3D) -> Vector3:
+	var ignore : Array[RID] = []
+	for collision : StaticBody3D in get_tree().get_nodes_in_group("RayIgnore"):
+		ignore.append(collision.get_rid())
+	
 	var query = PhysicsRayQueryParameters3D.create(camera.global_transform.origin, object.global_transform.origin)
 	query.collide_with_areas = true
+	query.exclude = ignore
 	var result = get_world_3d().direct_space_state.intersect_ray(query)
+	
 	if result and result.collider != null and result.collider.name == camera.camera_panel.name:
 		var player_position : Vector3 = result.position - camera.camera_panel.global_transform.origin
 		player_position.z = 0
@@ -45,8 +50,8 @@ func _get_player_position(object : Node3D) -> Vector3:
 
 func _find_closet_player() -> Vector3 :
 	var player_position : Array[Vector3]
-	for player in game_manager.player_list:
-		player_position.append(_get_player_position(player))
+	for key in game_manager.player_list.keys():
+		player_position.append(_get_player_position(game_manager.player_list[key]["player_ref"]))
 	return _closest_player(player_position)
 
 func _closest_player(player_position: Array[Vector3]) -> Vector3:

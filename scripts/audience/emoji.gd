@@ -43,7 +43,7 @@ func set_emoji(emoji : Shared.E_Emoji) -> void :
 	emoji_dictionary[emoji].show()
 	current_emoji = emoji
 
-# Set emoji for audience
+# Set emoji for listener
 func set_random_emoji_variety(chosen_emoji : Array[Shared.E_Emoji]) -> void :
 	reset_emojis()
 	var random_emoji : Shared.E_Emoji = chosen_emoji[game_manager.rng.randi_range(0, chosen_emoji.size() - 1)]

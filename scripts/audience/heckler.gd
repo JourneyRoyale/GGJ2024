@@ -9,18 +9,18 @@ class_name Heckler
 @onready var throw_delay_timer : Timer = get_node("Throw Delay Timer")
 @onready var walk_timer : Timer = get_node("Walk Timer")
 
-# Init variable from resources
+# Modification
+var modification : Dictionary
 var move_speed : float
 var aggressiveness : float
 var throw_delay : float
 var move_time : Dictionary
 
 # Local variable
-var packed_projectile : PackedScene = load("res://prefab/audience/projectile.tscn")
+var packed_projectile : PackedScene = load("res://prefab/game/projectile.tscn")
 var is_moving : bool = false
 var current_direction : Vector3 = Vector3(0, 0, 0).normalized()  # Starts moving right
 var assigned_chair : Chair
-var assigned_floor : Node3D
 var health : int = 2
 var boundary : Dictionary
 var current_projectile : Dictionary
@@ -30,17 +30,16 @@ var target_map : TargetMap
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
-func _init_resources() -> void :
-	var heckler_resource : HecklerResource = game_manager.level_resource.heckler
-
-	move_time = heckler_resource.move_time
-	move_speed = heckler_resource.move_speed
-	aggressiveness = heckler_resource.aggressiveness
-	throw_delay = heckler_resource.throw_delay
+func _init_modification() -> void :
+	move_speed = modification["heckler"]["move_speed"]
+	aggressiveness = modification["heckler"]["aggressiveness"]
+	throw_delay = modification["heckler"]["throw_delay"]
+	move_time = modification["heckler"]["move_time"]
+	sprite.sprite_frames = modification["heckler"]["sprite_frame"]
 
 # Play Spawn Animation When Spawned
 func _ready() -> void :
-	_init_resources()
+	_init_modification()
 	sprite.play("spawn")
 
 func _physics_process(delta : float) -> void :
@@ -96,7 +95,7 @@ func _on_walk_timer_timeout() -> void :
 	animation_player.stop()
 	is_moving = false
 	
-	if(current_projectile["type"] == Shared.E_ProjectileType.GUN):
+	if(current_projectile["type"] == Shared.E_PROJECTILE_TYPE.GUN):
 		sprite.play("aim")
 		_spawn_target()
 	else:

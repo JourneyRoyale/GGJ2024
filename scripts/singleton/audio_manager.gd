@@ -21,27 +21,27 @@ var sound_effect_volume : float = .5
 var current_music : AudioStreamPlayer
 
 # Find audiostream player node
-func _find_music(music_name : int, audio_type : Shared.E_AudioType) -> AudioStreamPlayer :
+func _find_music(music_name : int, audio_type : Shared.E_AUDIO_TYPE) -> AudioStreamPlayer :
 	var audio_stream : AudioStreamPlayer
 	match audio_type:
-		Shared.E_AudioType.BACKGROUND:
+		Shared.E_AUDIO_TYPE.BACKGROUND:
 			audio_stream = background_dictionary[music_name]
-		Shared.E_AudioType.SOUND_EFFECT:
+		Shared.E_AUDIO_TYPE.SOUND_EFFECT:
 			audio_stream = sound_effect_dictionary[music_name]
 	return audio_stream
 
 # Play Music
-func play_music(music_name : int, audio_type : Shared.E_AudioType) -> void :
+func play_music(music_name : int, audio_type : Shared.E_AUDIO_TYPE) -> void :
 	var new_music : AudioStreamPlayer = _find_music(music_name, audio_type)
 	if new_music != null:
 		match audio_type:
-			Shared.E_AudioType.BACKGROUND:
+			Shared.E_AUDIO_TYPE.BACKGROUND:
 				if current_music != null:
 					current_music._set_playing(false)
 				
 				current_music = new_music
 				new_music.play(0)
-			Shared.E_AudioType.SOUND_EFFECT:
+			Shared.E_AUDIO_TYPE.SOUND_EFFECT:
 				new_music.play(0)
 	else:
 		print(audio_type, ', ', music_name, ' not found')

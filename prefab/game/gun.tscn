@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://hlhgrtjlpwvo"]
+
+[ext_resource type="Texture2D" uid="uid://dsn44ovffk2mr" path="res://sprites/target.svg" id="1_pqf3x"]
+[ext_resource type="Script" path="res://scripts/audience/gun.gd" id="2_ivbo7"]
+
+[node name="Gun" type="Sprite3D"]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+texture = ExtResource("1_pqf3x")
+script = ExtResource("2_ivbo7")
+
+[node name="Delay Timer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="Delay Timer" to="." method="_on_delay_timer_timeout"]

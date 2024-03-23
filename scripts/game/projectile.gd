@@ -27,7 +27,7 @@ var smooth_turn_timer = 0.0 # Timer to track the interpolation progress
 ## Calculate position using speed and adjust y position if needed
 #func _process(delta : float) -> void :
 	## Check and initiate return trip
-	#if position.z > 0 and not returnTrip and projectile["type"] == Shared.E_ProjectileType.BOOMERANG:
+	#if position.z > 0 and not returnTrip and projectile["type"] == Shared.E_PROJECTILE_TYPE.BOOMERANG:
 		#returnTrip = true
 		#target_speed = -speed # Set the target speed for the return trip
 		#smooth_turn_timer = smooth_turn_duration # Reset the timer for smooth turn

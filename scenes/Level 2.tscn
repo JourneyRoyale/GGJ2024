@@ -389,10 +389,9 @@ spawn_point_list = Array[NodePath]([NodePath("../Environment/Stage/Floor/Top Flo
 wait_time = 4.0
 autostart = true
 
-[node name="ThatsAllFolks" parent="." node_paths=PackedStringArray("player") instance=ExtResource("12_5dhwb")]
+[node name="ThatsAllFolks" parent="." instance=ExtResource("12_5dhwb")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 4.75, 2.147)
 visible = false
-player = NodePath("../Comedian")
 start_x = -15.0
 
 [connection signal="timeout" from="Audience/Timer" to="Audience" method="_on_timer_timeout"]

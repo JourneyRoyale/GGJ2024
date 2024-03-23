@@ -20,7 +20,7 @@ var annoyed_amount : int = 1
 var rng : RandomNumberGenerator = RandomNumberGenerator.new()
 var level_resource : LevelResource
 var is_playing = false
-var laughter_score = 50.0;
+var laughter_score = 10000.0;
 var player_score = 0;
 var joke_combo: int = 0;
 var additional_multiplier: int = 0;
@@ -47,7 +47,7 @@ func _process(delta : float) -> void :
 
 # Reset game manager variable to default
 func reset_local_default():
-	laughter_score = 50.0
+	laughter_score = 100000.0
 	player_score = 0
 	joke_combo = 0;
 	is_playing = false

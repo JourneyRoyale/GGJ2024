@@ -45,8 +45,9 @@ class_name LevelResource
 		"limit" : 0,
 		"invulnerability" : .25,
 		"score" : -20,
-		"speed" : 5,
+		"speed" : 10,
 		"stun" : .25,
+		"throw": Shared.E_ThrowType.UNDERHAND
 	},
 	{
 		"type" : Shared.E_ProjectileType.BOOT,
@@ -55,8 +56,9 @@ class_name LevelResource
 		"limit" : 0,
 		"knockback" : 4,
 		"score" : -20,
-		"speed" : 5,
+		"speed" : 10,
 		"stun" : .5,
+		"throw": Shared.E_ThrowType.SLING
 	},
 	{
 		"type" : Shared.E_ProjectileType.BOOMERANG,
@@ -65,8 +67,9 @@ class_name LevelResource
 		"limit" : 0,
 		"invulnerability" : .25,
 		"score" : -20,
-		"speed" : 5,
+		"speed" : 10,
 		"stun" : .25,
+		"throw": Shared.E_ThrowType.SLING
 	},
 	{
 		"type" : Shared.E_ProjectileType.BRICK,
@@ -74,8 +77,9 @@ class_name LevelResource
 		"rate" : 20,
 		"limit" : 0,
 		"score": -20,
-		"speed" : 10.0,
+		"speed" : 15.0,
 		"stun" : 2.0,
+		"throw": Shared.E_ThrowType.SLING
 	},
 	{
 		"type" : Shared.E_ProjectileType.GUN,
@@ -84,8 +88,9 @@ class_name LevelResource
 		"limit" : 1,
 		"game_ender" : true,
 		"score" : -50,
-		"speed" : 10.0,
+		"speed" : 20.0,
 		"delay" : 1.0,
+		"throw": Shared.E_ThrowType.SLING
 	},
 	{
 		"type" : Shared.E_ProjectileType.MONEY,
@@ -94,6 +99,7 @@ class_name LevelResource
 		"limit" : 0,
 		"score" : 10,
 		"speed" : 10.0,
+		"throw": Shared.E_ThrowType.UNDERHAND
 	},
 	{
 		"type" : Shared.E_ProjectileType.TOMATO,
@@ -103,8 +109,9 @@ class_name LevelResource
 		"invulnerability" : .25,
 		"muddle": "tomato",
 		"score" : -10,
-		"speed" : 10.0,
+		"speed" : 15.0,
 		"stun" : .25,
+		"throw": Shared.E_ThrowType.SLING
 	},
 ]
 

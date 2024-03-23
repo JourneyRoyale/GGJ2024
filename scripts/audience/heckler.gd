@@ -8,6 +8,7 @@ class_name Heckler
 @onready var sprite : AnimatedSprite3D = get_node("AnimatedSprite3D")
 @onready var throw_delay_timer : Timer = get_node("Throw Delay Timer")
 @onready var walk_timer : Timer = get_node("Walk Timer")
+@onready var audience_manager: AudienceManager = get_node("/root/Game/Game Holder/Perspective/Audience")
 
 # Init variable from resources
 var move_speed : float
@@ -83,6 +84,8 @@ func _throw_projectile() -> void :
 func _on_throw_timer_timeout() -> void :
 	var instance = packed_projectile.instantiate()
 	instance.projectile = current_projectile
+	instance.setProjectile(current_projectile)
+
 	
 	# Configure other properties of the instance as needed
 	# Add the projectile to the scene

@@ -109,7 +109,7 @@ class_name LevelResource
 		"invulnerability" : .25,
 		"muddle": "tomato",
 		"score" : -10,
-		"speed" : 15.0,
+		"speed" : 10.0,
 		"stun" : .25,
 		"throw": Shared.E_ThrowType.SLING
 	},

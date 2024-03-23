@@ -35,10 +35,9 @@ var done_hovering: bool = false
 
 func setProjectile(projectileInstance) -> void :
 	projectile = projectileInstance
-	print("Projectile: ", projectile)
 	speed = projectile["speed"]
 	target_speed = projectile["speed"]
-	throw_type = Shared.E_ThrowType.OVERHAND
+	throw_type = projectile["throw"]
 	
 	if throw_type == Shared.E_ThrowType.UNDERHAND:
 		vertical_speed = initial_vertical_speed		
@@ -111,7 +110,7 @@ func _sling_behavior(delta : float, is_boomerang: bool):
 				is_at_clamped_height = true
 				
 func _underhand_behavior(delta : float):
-	var gravity : float = -9.6
+	var gravity : float = -9.8
 	# Gravity strength for underhhand
 	 # Apply gravity to vertical speed
 	vertical_speed += gravity * delta

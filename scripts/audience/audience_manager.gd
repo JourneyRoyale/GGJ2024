@@ -153,6 +153,7 @@ func get_randomize_projectile() -> Dictionary :
 	var projectile_array : Array[Shared.E_ProjectileType]
 	var projectile_dict : Dictionary
 	for projectile in projectile_list:
+		print("Projectile: ", projectile)
 		var type = projectile["type"]
 		var limit = projectile["limit"]
 		var matched_projectile = heckler_list.filter(func(x : Heckler): return x.current_projectile == projectile).size()

@@ -80,6 +80,7 @@ size = Vector3(14, 0, 5.5)
 
 [node name="Projectile" parent="." instance=ExtResource("8_yd5f0")]
 transform = Transform3D(-1, 0, -1.50996e-07, 0, 1, 0, 1.50996e-07, 0, -1, 0, 1.8, -4.25)
+visible = false
 
 [node name="Camera3D" type="Camera3D" parent="." groups=["Camera"]]
 transform = Transform3D(1, 0, 0, 0, 0.906308, 0.422618, 0, -0.422618, 0.906308, 0, 7.063, 5)

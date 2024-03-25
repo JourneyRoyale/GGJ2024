@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://dn72fef3tnnm5"]
+[gd_scene load_steps=9 format=3 uid="uid://ldxi6tf3ra00"]
 
 [ext_resource type="Script" path="res://scripts/game/projectile.gd" id="1_mhubv"]
 [ext_resource type="ArrayMesh" uid="uid://bfq3vd2k67gsv" path="res://3d/Tomato.obj" id="2_fkbdy"]

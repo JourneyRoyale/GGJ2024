@@ -84,9 +84,10 @@ func _is_player_in_crosshair() -> Comedian :
 
 
 func _on_delay_timer_timeout():
-	var player : Comedian = _is_player_in_crosshair()
-	visible = false
-	heckler_owner.fire_gun()
-	if (player != null):
-		player.shot()
-	queue_free()
+	if(heckler_owner != null):
+		var player : Comedian = _is_player_in_crosshair()
+		visible = false
+		heckler_owner.fire_gun()
+		if (player != null):
+			player.shot()
+		queue_free()

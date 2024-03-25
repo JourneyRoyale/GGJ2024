@@ -6,6 +6,7 @@ class_name GameManager
 @onready var ui_screen : Control = get_node("/root/Game/Ui Screen")
 @onready var game_holder : Node3D = get_node("/root/Game/Game Holder")
 @onready var shock_timer : Timer = get_node("Shock Timer")
+@onready var game_timer : Timer = get_node("Game Timer")
 
 # Export
 @export var level_resource_dictionary : Dictionary = {}
@@ -15,6 +16,7 @@ var multiplier_increase_frequency : int = 3; #How many jokes in the combo before
 var error_amount : int = 10
 var match_amount : int = 10
 var annoyed_amount : int = 1
+var time
 
 # Local variable
 var rng : RandomNumberGenerator = RandomNumberGenerator.new()
@@ -30,6 +32,7 @@ func _init_resources() -> void :
 	error_amount = level_resource.error_amount
 	match_amount = level_resource.match_amount
 	annoyed_amount = level_resource.annoyed_amount
+	time = level_resource.time
 	print(match_amount)
 
 func _reset_on_ready() -> void :
@@ -105,7 +108,7 @@ func load_level(index) -> void :
 	var instance = level_resource.scene.instantiate()
 	game_holder.add_child(instance)
 	audio_manager.play_music(int(level_resource.background_music), Shared.E_AUDIO_TYPE.BACKGROUND)
-	
+	game_timer.start(time)
 	is_playing = true
 
 func add_player(comedian : Comedian) -> void :
@@ -140,3 +143,8 @@ func _set_laugh_score(score : int, player : Comedian) -> void :
 		laughter_position -= score
 		player_list[1]["laughter"] = laughter_position
 		player_list[player.player_num]["laughter"] = 100.0 - laughter_position
+
+
+func _on_game_timer_timeout():
+	shock_timer.start()
+	player_list[1]["player_ref"].win()

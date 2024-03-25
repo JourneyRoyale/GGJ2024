@@ -202,7 +202,7 @@ shape = SubResource("CapsuleShape3D_qdsn5")
 [node name="Sprite" type="AnimatedSprite3D" parent="."]
 shaded = true
 sprite_frames = ExtResource("2_u6svr")
-animation = &"yoink"
+animation = &"win"
 autoplay = "idle_from_hit"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

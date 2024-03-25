@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scripts/game/projectile.gd" id="1_7pt40"]
 [ext_resource type="ArrayMesh" uid="uid://bfq3vd2k67gsv" path="res://3d/Tomato.obj" id="2_0hllg"]
 [ext_resource type="ArrayMesh" uid="uid://55tucu6unsew" path="res://3d/Bananna.obj" id="3_cryi0"]
-[ext_resource type="ArrayMesh" uid="uid://cslejtf6mtxm1" path="res://3d/Shoe.obj" id="4_dltr2"]
+[ext_resource type="ArrayMesh" uid="uid://dp85fseal6cl8" path="res://3d/Shoe.obj" id="4_dltr2"]
 [ext_resource type="ArrayMesh" uid="uid://dle8dl4j8wuab" path="res://3d/Boomerang.obj" id="5_gab4f"]
 [ext_resource type="ArrayMesh" uid="uid://bt807qkx5x4fq" path="res://3d/Rock.obj" id="6_a3vgl"]
 
@@ -51,7 +51,7 @@ material_overlay = SubResource("StandardMaterial3D_4b5ps")
 mesh = ExtResource("3_cryi0")
 
 [node name="Boot" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0, 0)
+transform = Transform3D(0.1, 0, 0, 0, -0.0173648, 0.0984808, 0, -0.0984808, -0.0173648, 0, -0.235, 0)
 visible = false
 material_overlay = SubResource("StandardMaterial3D_x8qy2")
 mesh = ExtResource("4_dltr2")

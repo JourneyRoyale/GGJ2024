@@ -1,4 +1,4 @@
-[gd_resource type="SpriteFrames" load_steps=25 format=3 uid="uid://cr383cnklcbny"]
+[gd_resource type="SpriteFrames" load_steps=26 format=3 uid="uid://cr383cnklcbny"]
 
 [ext_resource type="Texture2D" uid="uid://dt0j8448q4gdm" path="res://sprites/comedian/player_spritesheet.png" id="2_if5e8"]
 [ext_resource type="Texture2D" uid="uid://bu26vwl136im4" path="res://sprites/comedian/Player_Fly.png" id="2_qkh18"]
@@ -80,6 +80,10 @@ region = Rect2(1604, 1206, 802, 1206)
 [sub_resource type="AtlasTexture" id="AtlasTexture_o64dl"]
 atlas = ExtResource("2_if5e8")
 region = Rect2(0, 2412, 802, 1206)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8qxdi"]
+atlas = ExtResource("2_if5e8")
+region = Rect2(1604, 2412, 802, 1206)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_twp5v"]
 atlas = ExtResource("2_if5e8")
@@ -188,6 +192,14 @@ animations = [{
 }],
 "loop": true,
 "name": &"walk_right",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8qxdi")
+}],
+"loop": false,
+"name": &"win",
 "speed": 5.0
 }, {
 "frames": [{

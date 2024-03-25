@@ -1,18 +1,188 @@
-[gd_scene load_steps=4 format=3 uid="uid://c7k74o0tq45d2"]
+[gd_scene load_steps=10 format=3 uid="uid://c7k74o0tq45d2"]
 
 [ext_resource type="Script" path="res://scripts/singleton/game_manager.gd" id="1_jywg1"]
-[ext_resource type="Resource" uid="uid://d4hs7a042pdhw" path="res://resources/data/Level 2/level_2.tres" id="3_5kmd5"]
 [ext_resource type="Resource" uid="uid://cwgkk8aucdit0" path="res://resources/data/Level 1/level_1.tres" id="3_me5q5"]
+[ext_resource type="SpriteFrames" uid="uid://drjanm0olmxmw" path="res://sprites/sprite_frame/sheep.tres" id="3_r1gyl"]
+[ext_resource type="SpriteFrames" uid="uid://bmjxefay1b4ew" path="res://sprites/sprite_frame/wolf.tres" id="4_5g7tv"]
+[ext_resource type="SpriteFrames" uid="uid://ch6rbs30qjg2a" path="res://sprites/sprite_frame/log.tres" id="5_ux8bv"]
+[ext_resource type="SpriteFrames" uid="uid://dxoqu8wypvg8c" path="res://sprites/sprite_frame/crocodile.tres" id="6_nks4d"]
+[ext_resource type="PackedScene" uid="uid://ccw2wtei1viya" path="res://scenes/Level 2.tscn" id="7_1m1er"]
+[ext_resource type="Script" path="res://resources/script/level_resource.gd" id="8_fdur5"]
+
+[sub_resource type="Resource" id="Resource_eqon7"]
+script = ExtResource("8_fdur5")
+scene = ExtResource("7_1m1er")
+level = 2
+time = 60
+background_music = 0
+emoji_variety = {
+"max": 7,
+"min": 3
+}
+emoji_list = Array[int]([0, 1, 2, 3, 4, 5, 6, 7])
+max_heckler = 7
+starting_listener = {
+"max": 7,
+"min": 4
+}
+listener_rate = {
+"max": 7,
+"min": 4
+}
+audience_list = Array[Dictionary]([{
+"heckler": {
+"aggressive_max": 0.99,
+"aggressive_min": 0.01,
+"aggressiveness": 2,
+"description": "wolf",
+"health": 2,
+"move_speed": 0.5,
+"move_time": {
+"max": 5.0,
+"min": 2.0
+},
+"sprite_frame": ExtResource("4_5g7tv"),
+"throw_delay": 1,
+"throw_speed": 10,
+"type": 2
+},
+"listener": {
+"can_sit": true,
+"description": "sheep",
+"limit": 0,
+"move_speed": 3,
+"patience": 5,
+"spawn_rate": 70,
+"sprite_frame": ExtResource("3_r1gyl"),
+"type": 1
+}
+}, {
+"heckler": {
+"aggressive_max": 0.99,
+"aggressive_min": 0.5,
+"aggressiveness": 2,
+"description": "crocodile",
+"health": 10,
+"move_speed": 0.5,
+"move_time": {
+"max": 5.0,
+"min": 2.0
+},
+"sprite_frame": ExtResource("6_nks4d"),
+"throw_delay": 1,
+"throw_speed": 20,
+"type": 4
+},
+"listener": {
+"can_sit": false,
+"description": "log",
+"limit": 0,
+"move_speed": 0,
+"patience": 10,
+"rate": 0,
+"spawn_rate": 0,
+"sprite_frame": ExtResource("5_ux8bv"),
+"type": 5
+}
+}])
+multiplier_increase_frequency = 3
+error_amount = 10
+match_amount = 10
+annoyed_amount = 1
+switch_duration = 1.0
+scale_duration = 2.0
+scale_ease = 0.5
+target_scale = Vector3(1.2, 1.2, 1.2)
+projectile_list = Array[Dictionary]([{
+"description": "bananna",
+"despawn_time": 5,
+"hover_time": 1,
+"limit": 0,
+"rate": 20,
+"score": -20,
+"speed": 10,
+"stun": 2,
+"throw_type": [1, 2],
+"type": 0
+}, {
+"description": "boot",
+"knockback": 4,
+"limit": 0,
+"rate": 0,
+"score": -20,
+"speed": 10,
+"stun": 1,
+"throw_type": [0],
+"type": 2
+}, {
+"description": "boomerang",
+"invulnerability": 0.25,
+"limit": 0,
+"rate": 0,
+"score": -20,
+"speed": 10,
+"stun": 0.25,
+"throw_type": [0],
+"type": 1
+}, {
+"description": "brick",
+"despawn_time": 0,
+"hover_time": 1,
+"limit": 0,
+"rate": 0,
+"score": -20,
+"speed": 15.0,
+"stun": 3.0,
+"throw_type": [0, 2],
+"type": 3
+}, {
+"delay": 1.0,
+"description": "gun",
+"game_ender": true,
+"limit": 1,
+"rate": 20,
+"score": -50,
+"speed": 20.0,
+"throw_type": [3],
+"type": 4
+}, {
+"description": "money",
+"despawn_time": 5,
+"hover_time": 1,
+"limit": 0,
+"rate": 0,
+"score": 10,
+"speed": 10.0,
+"throw_type": [0, 1, 2],
+"type": 5
+}, {
+"description": "tomato",
+"despawn_time": 0,
+"hover_time": 1,
+"invulnerability": 0.25,
+"limit": 0,
+"muddle": "tomato",
+"rate": 70,
+"score": -10,
+"speed": 10.0,
+"stun": 1,
+"throw_type": [0, 1, 2],
+"type": 6
+}])
 
 [node name="Game_Manager" type="Node3D"]
 process_mode = 3
 script = ExtResource("1_jywg1")
 level_resource_dictionary = {
 1: ExtResource("3_me5q5"),
-2: ExtResource("3_5kmd5")
+2: SubResource("Resource_eqon7")
 }
 
 [node name="Shock Timer" type="Timer" parent="."]
 one_shot = true
 
+[node name="Game Timer" type="Timer" parent="."]
+one_shot = true
+
 [connection signal="timeout" from="Shock Timer" to="." method="_on_shock_timer_timeout"]
+[connection signal="timeout" from="Game Timer" to="." method="_on_game_timer_timeout"]

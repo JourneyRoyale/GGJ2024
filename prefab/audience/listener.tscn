@@ -11,7 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://difqtkw2ehmv0" path="res://sprites/bubble/Bubble Animation3.png" id="9_ogsll"]
 [ext_resource type="Texture2D" uid="uid://dd5aynaecit0i" path="res://sprites/bubble/Bubble Animation4.png" id="10_5xv0j"]
 [ext_resource type="Texture2D" uid="uid://bx7wik1iayf7x" path="res://sprites/bubble/Bubble Animation5.png" id="11_rpmrj"]
-[ext_resource type="SpriteFrames" uid="uid://drjanm0olmxmw" path="res://sprites/sprite_frame/sheep.tres" id="12_egr87"]
+[ext_resource type="SpriteFrames" uid="uid://b88hkk8vpbh8d" path="res://sprites/sprite_frame/sheep2.tres" id="12_47ci0"]
 [ext_resource type="Script" path="res://scripts/audience/emoji.gd" id="13_eq85k"]
 [ext_resource type="Texture2D" uid="uid://ce583o7s2tbuj" path="res://sprites/jokes/chicken_drumstick.png" id="14_lnaj2"]
 [ext_resource type="Texture2D" uid="uid://dw2m80rhg0f7d" path="res://sprites/jokes/chicken.png" id="15_2nkaq"]
@@ -121,7 +121,7 @@ frame_progress = 1.0
 transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 0, 3.6, 0)
 material_overlay = SubResource("ShaderMaterial_jgtyf")
 shaded = true
-sprite_frames = ExtResource("12_egr87")
+sprite_frames = ExtResource("12_47ci0")
 animation = &"neutral"
 
 [node name="Emoji" type="Node3D" parent="."]

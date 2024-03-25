@@ -55,9 +55,9 @@ class_name LevelResource
 			"sprite_frame": preload("res://sprites/sprite_frame/log.tres"),
 			"patience" : 10,
 			"move_speed" : 0,
-			"rate" : 30,
+			"rate" : 0,
 			"limit" : 0,
-			"spawn_rate" : 80,
+			"spawn_rate" : 0,
 			"can_sit" : false,
 		},
 		"heckler" : {
@@ -95,12 +95,11 @@ class_name LevelResource
 		"description" : "bananna",
 		"rate" : 20,
 		"limit" : 0,
-		"invulnerability" : .25,
 		"score" : -20,
 		"speed" : 10,
 		"stun" : 2,
 		"hover_time": 1,
-		"despawn_time" : -1,
+		"despawn_time" : 5,
 		"throw_type" : [
 			Shared.E_THROW_TYPE.UNDERHAND,
 			Shared.E_THROW_TYPE.OVERHAND,
@@ -109,7 +108,7 @@ class_name LevelResource
 	{
 		"type" : Shared.E_PROJECTILE_TYPE.BOOT,
 		"description" : "boot",
-		"rate" : 20,
+		"rate" : 0,
 		"limit" : 0,
 		"knockback" : 4,
 		"score" : -20,
@@ -122,7 +121,7 @@ class_name LevelResource
 	{
 		"type" : Shared.E_PROJECTILE_TYPE.BOOMERANG,
 		"description" : "boomerang",
-		"rate" : 20,
+		"rate" : 0,
 		"limit" : 0,
 		"invulnerability" : .25,
 		"score" : -20,
@@ -135,7 +134,7 @@ class_name LevelResource
 	{
 		"type" : Shared.E_PROJECTILE_TYPE.BRICK,
 		"description" : "brick",
-		"rate" : 20,
+		"rate" : 0,
 		"limit" : 0,
 		"score": -20,
 		"speed" : 15.0,
@@ -150,7 +149,7 @@ class_name LevelResource
 	{
 		"type" : Shared.E_PROJECTILE_TYPE.GUN,
 		"description" : "gun",
-		"rate" : 5,
+		"rate" : 20,
 		"limit" : 1,
 		"game_ender" : true,
 		"score" : -50,
@@ -178,15 +177,19 @@ class_name LevelResource
 	{
 		"type" : Shared.E_PROJECTILE_TYPE.TOMATO,
 		"description" : "tomato",
-		"rate" : 40,
+		"rate" : 70,
 		"limit" : 0,
 		"invulnerability" : .25,
 		"muddle": "tomato",
 		"score" : -10,
 		"speed" : 10.0,
 		"stun" : 1,
+		"despawn_time" : 0,
+		"hover_time" : 1,
 		"throw_type" : [
 			Shared.E_THROW_TYPE.SLING,
+			Shared.E_THROW_TYPE.UNDERHAND,
+			Shared.E_THROW_TYPE.OVERHAND,
 		],
 	},
 ]

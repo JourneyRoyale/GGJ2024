@@ -206,4 +206,10 @@ func shot() -> void :
 	audio_manager.play_music(int(Shared.E_SOUND_EFFECT.BWACK), Shared.E_AUDIO_TYPE.SOUND_EFFECT)
 	get_tree().paused = true
 	game_manager.shock_timer.start()
-	
+
+func win() -> void :
+	sprite.play("win")
+	joke.visible = false
+	audio_manager.play_music(int(Shared.E_SOUND_EFFECT.BWACK), Shared.E_AUDIO_TYPE.SOUND_EFFECT)
+	get_tree().paused = true
+	game_manager.shock_timer.start()

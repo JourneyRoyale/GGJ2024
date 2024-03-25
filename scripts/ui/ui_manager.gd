@@ -21,7 +21,8 @@ class_name UIManager
 
 #Game UI
 @onready var game_ui : Control = get_node("GameUI")
-@onready var score : Label = get_node("GameUI/MarginContainer/VBoxContainer/Top UI Bar/MarginContainer/PlayerScore 3")
+@onready var score : Label = get_node("GameUI/MarginContainer/VBoxContainer/Top UI Bar/VBoxContainer/PlayerScore 3")
+@onready var time : Label = get_node("GameUI/MarginContainer/VBoxContainer/Top UI Bar/VBoxContainer/Time Left")
 @onready var laughter_meter : ProgressBar = get_node("GameUI/MarginContainer/VBoxContainer/VBoxContainer/Laughter Meter")
 @onready var joke_bar : BoxContainer = get_node("GameUI/MarginContainer/VBoxContainer/Joke Bar")
 @onready var combo_counter : Label = get_node("GameUI/ComboCounter")
@@ -43,7 +44,7 @@ var player_status : Dictionary = {
 var player_score : Dictionary = {
 	1 : "GameUI/MarginContainer/VBoxContainer/VBoxContainer/Laughter Meter/PlayerScore 1",
 	2 : "GameUI/MarginContainer/VBoxContainer/VBoxContainer/Laughter Meter/PlayerScore 2",
-	3 : "GameUI/MarginContainer/VBoxContainer/Top UI Bar/MarginContainer/PlayerScore 3",
+	3 : "GameUI/MarginContainer/VBoxContainer/Top UI Bar/VBoxContainer/PlayerScore 3",
 }
 
 func _ready() -> void :
@@ -55,6 +56,7 @@ func _process(delta : float) -> void:
 		_sync_score()
 		_sync_laughter()
 		_sync_combo_counter()
+		_sync_time()
 
 func _input(event : InputEvent) -> void :
 	if event is InputEventKey and event.pressed:
@@ -100,6 +102,9 @@ func _sync_volume(node : Control) -> void :
 	node.get_node("PanelContainer/GridContainer/Master Slider").value = audio_manager.master_volume
 	node.get_node("PanelContainer/GridContainer/Background Slider").value = audio_manager.background_volume
 	node.get_node("PanelContainer/GridContainer/Sound Effect Slider").value = audio_manager.sound_effect_volume
+
+func _sync_time() -> void :
+	time.text = str(int(game_manager.game_timer.time_left))
 
 func _round_to_dec(num : float, digit : int) -> float :
 	return round(num * pow(10.0, digit)) / pow(10.0, digit)

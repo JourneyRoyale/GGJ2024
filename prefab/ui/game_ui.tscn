@@ -204,6 +204,7 @@ vertical_alignment = 1
 
 [node name="PlayerScore 2" type="Label" parent="GameUI/MarginContainer/VBoxContainer/VBoxContainer/Laughter Meter"]
 visible = false
+layout_mode = 0
 offset_left = 1213.0
 offset_top = -116.0
 offset_right = 1413.0
@@ -487,6 +488,7 @@ text = "Start
 "
 
 [node name="Versus" type="Button" parent="TitleScreen/MarginContainer/VBoxContainer/Main Menu/GridContainer"]
+visible = false
 custom_minimum_size = Vector2(170, 70)
 layout_mode = 2
 size_flags_horizontal = 6
@@ -546,6 +548,7 @@ text = "Level 1
 "
 
 [node name="Level 2" type="Button" parent="TitleScreen/MarginContainer/VBoxContainer/Level Selection/GridContainer"]
+visible = false
 custom_minimum_size = Vector2(250, 70)
 layout_mode = 2
 size_flags_horizontal = 6
@@ -555,6 +558,7 @@ text = "Level 2
 "
 
 [node name="Level 3" type="Button" parent="TitleScreen/MarginContainer/VBoxContainer/Level Selection/GridContainer"]
+visible = false
 custom_minimum_size = Vector2(250, 70)
 layout_mode = 2
 size_flags_horizontal = 6

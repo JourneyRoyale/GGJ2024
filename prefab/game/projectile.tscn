@@ -1,24 +1,28 @@
-[gd_scene load_steps=11 format=3 uid="uid://dn72fef3tnnm5"]
+[gd_scene load_steps=13 format=3 uid="uid://dn72fef3tnnm5"]
 
 [ext_resource type="Script" path="res://scripts/game/projectile.gd" id="1_7pt40"]
-[ext_resource type="ArrayMesh" uid="uid://bfq3vd2k67gsv" path="res://object/TomatoAsset1.obj" id="2_0hllg"]
-[ext_resource type="ArrayMesh" uid="uid://55tucu6unsew" path="res://3d/10164_Banana_v01_it2.obj" id="3_cryi0"]
-[ext_resource type="ArrayMesh" uid="uid://cslejtf6mtxm1" path="res://3d/21464_Shoe_v1_NEW.obj" id="4_dltr2"]
-[ext_resource type="ArrayMesh" uid="uid://dle8dl4j8wuab" path="res://3d/11670_boomerang_v1_l3.obj" id="5_gab4f"]
-[ext_resource type="ArrayMesh" uid="uid://bt807qkx5x4fq" path="res://3d/Rock1.obj" id="6_a3vgl"]
+[ext_resource type="ArrayMesh" uid="uid://bfq3vd2k67gsv" path="res://3d/Tomato.obj" id="2_0hllg"]
+[ext_resource type="ArrayMesh" uid="uid://55tucu6unsew" path="res://3d/Bananna.obj" id="3_cryi0"]
+[ext_resource type="ArrayMesh" uid="uid://cslejtf6mtxm1" path="res://3d/Shoe.obj" id="4_dltr2"]
+[ext_resource type="ArrayMesh" uid="uid://dle8dl4j8wuab" path="res://3d/Boomerang.obj" id="5_gab4f"]
+[ext_resource type="ArrayMesh" uid="uid://bt807qkx5x4fq" path="res://3d/Rock.obj" id="6_a3vgl"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_20eg4"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wawp0"]
-shading_mode = 2
-diffuse_mode = 3
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_68880"]
 albedo_color = Color(1, 0, 0, 1)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_q4r5r"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4b5ps"]
 albedo_color = Color(1, 1, 0, 1)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dh0vu"]
-albedo_color = Color(0.427451, 0.305882, 0, 0)
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_x8qy2"]
+albedo_color = Color(0.588235, 0.294118, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_43mnp"]
+albedo_color = Color(0, 0, 1, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pj4rg"]
+albedo_color = Color(0, 0, 0, 1)
 
 [node name="Projectile" type="Area3D" groups=["projectiles"]]
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)
@@ -30,8 +34,8 @@ shape = SubResource("SphereShape3D_20eg4")
 [node name="Tomato" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0.0772439, -0.896747, 1.82797)
 visible = false
+material_override = SubResource("StandardMaterial3D_68880")
 mesh = ExtResource("2_0hllg")
-surface_material_override/0 = SubResource("StandardMaterial3D_wawp0")
 
 [node name="Despawn Timer" type="Timer" parent="."]
 one_shot = true
@@ -43,26 +47,26 @@ one_shot = true
 [node name="Bananna" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.01, 0, 0, 0, 0.01, 0, 0, 0, 0.01, 0, 0.292718, -0.739678)
 visible = false
+material_overlay = SubResource("StandardMaterial3D_4b5ps")
 mesh = ExtResource("3_cryi0")
-surface_material_override/0 = SubResource("StandardMaterial3D_q4r5r")
 
 [node name="Boot" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0, 0)
 visible = false
+material_overlay = SubResource("StandardMaterial3D_x8qy2")
 mesh = ExtResource("4_dltr2")
-surface_material_override/0 = SubResource("StandardMaterial3D_dh0vu")
 
 [node name="Boomerang" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.05, 0, 0, 0, -2.18557e-09, -0.05, 0, 0.05, -2.18557e-09, 0.262048, -0.191617, 0.109802)
 visible = false
+material_overlay = SubResource("StandardMaterial3D_43mnp")
 mesh = ExtResource("5_gab4f")
-surface_material_override/0 = SubResource("StandardMaterial3D_dh0vu")
 
 [node name="Rock" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.3, 0, 0, 0, -1.31134e-08, 0.3, 0, -0.3, -1.31134e-08, 0, 0, 0)
 visible = false
+material_overlay = SubResource("StandardMaterial3D_pj4rg")
 mesh = ExtResource("6_a3vgl")
-surface_material_override/0 = SubResource("StandardMaterial3D_dh0vu")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="timeout" from="Despawn Timer" to="." method="_on_despawn_timer_timeout"]

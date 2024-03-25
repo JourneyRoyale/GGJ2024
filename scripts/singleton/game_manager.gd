@@ -30,6 +30,7 @@ func _init_resources() -> void :
 	error_amount = level_resource.error_amount
 	match_amount = level_resource.match_amount
 	annoyed_amount = level_resource.annoyed_amount
+	print(match_amount)
 
 func _reset_on_ready() -> void :
 	audio_manager = get_node("/root/Audio_Manager")
@@ -52,23 +53,30 @@ func reset_local_default():
 
 # Increase Score from egg match
 func register_match(distance : float, player : Comedian):
-	player_list[player.player_num]["score"] += 50 * (1 + player_list[player.player_num]["joke_combo"])
+	print(match_amount)
+	player_list[player.player_num]["score"] += match_amount + (1 + player_list[player.player_num]["joke_combo"])
 	player_list[player.player_num]["joke_combo"] += 1
 	_set_laugh_score(match_amount - (distance / 10) , player)
 
 # Decrease score from wrong egg match
 func register_error(player : Comedian) -> void :
+	print("error = ", -error_amount)
 	_set_laugh_score(-error_amount, player)
 	player_list[player.player_num]["joke_combo"] = 0
 
 # Decrease score from projectile hit
 func register_hurt(amount : int, player : Comedian) -> void :
+	print("hurt amount = ", amount, " , before = ", player_list[player.player_num]["score"])
 	player_list[player.player_num]["score"] = max(player_list[player.player_num]["score"] + amount, 0)
+	print(max(player_list[player.player_num]["score"] + amount, 0))
 	_set_laugh_score(amount, player)
 	player_list[player.player_num]["joke_combo"] = 0
 	
 func register_annoyed() -> void :
-	pass
+	for player_num in player_list.keys():
+		var player = player_list[player_num]
+		player["score"] += annoyed_amount
+		_set_laugh_score(annoyed_amount , player["player_ref"])
 
 func back_to_menu() -> void :
 	player_list.clear()
@@ -121,7 +129,9 @@ func _on_shock_timer_timeout() -> void:
 
 func _set_laugh_score(score : int, player : Comedian) -> void :
 	if (player.player_num == 1):
-		laughter_position = min(100,laughter_position + score)
+		print("before = ", laughter_position)
+		laughter_position = min(100.0,laughter_position + score)
+		print("after = ", laughter_position)
 		player_list[player.player_num]["laughter"] = laughter_position
 
 		if (player_list.size() > 1):

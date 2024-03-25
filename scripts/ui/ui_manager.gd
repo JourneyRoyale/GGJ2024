@@ -65,7 +65,6 @@ func _input(event : InputEvent) -> void :
 
 func _sync_score() -> void :
 	if (game_manager.is_singleplayer and game_manager.player_list.size() > 0):
-		print(game_manager.player_list[1]["score"])
 		score.text = str(int(game_manager.player_list[1]["score"]))
 	elif (!game_manager.is_singleplayer):
 		score.visible = false
@@ -77,8 +76,7 @@ func _sync_score() -> void :
 			score.visible = true
 
 func _sync_laughter() -> void :
-	laughter_meter.value = _round_to_dec(game_manager.laughter_position / 100, 2)
-	
+	laughter_meter.value = _round_to_dec(float(game_manager.laughter_position) / 100, 2)
 	for player_num in game_manager.player_list.keys():
 		var player = game_manager.player_list[player_num]
 		var image = get_node(player_status[player_num])

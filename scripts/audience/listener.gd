@@ -163,6 +163,7 @@ func show_emoji(emoji_variety : Array[Shared.E_Emoji]) -> void :
 
 # Check if emoji provided match with current
 func check_for_match(egg_emoji : Shared.E_Emoji) -> bool :
+	print("current = ", egg_emoji, " = ", emoji.current_emoji)
 	if (has_emoji):
 		var match : bool = egg_emoji == emoji.current_emoji
 		if match:

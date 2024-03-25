@@ -33,7 +33,7 @@ audience_list = Array[Dictionary]([{
 "aggressive_min": 0.01,
 "aggressiveness": 2,
 "description": "wolf",
-"health": 2,
+"health": 4,
 "move_speed": 0.5,
 "move_time": {
 "max": 5.0,
@@ -85,8 +85,8 @@ audience_list = Array[Dictionary]([{
 }])
 multiplier_increase_frequency = 3
 error_amount = 10
-match_amount = 30
-annoyed_amount = 1
+match_amount = 5
+annoyed_amount = -2
 switch_duration = 0.25
 scale_duration = 3.0
 scale_ease = 0.2

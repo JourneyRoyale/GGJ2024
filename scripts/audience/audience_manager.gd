@@ -217,12 +217,14 @@ func hurt_all_hecklers() -> void :
 
 # Check egg match with listener
 func check_for_match(egg : Egg, distance : float, player : Comedian) -> void :
+	print("start")
 	var emoji : Shared.E_Emoji = egg.emoji.current_emoji
 	var matched = false
 	for listener_node in listener_node_list:
 		if listener_node.check_for_match(emoji):
 			matched = true;
-	if (matched and distance < .01):
+	print("end, is matched = ", matched)
+	if (matched):
 		audio_manager.play_music(int(Shared.E_SOUND_EFFECT.SUCCESS), Shared.E_AUDIO_TYPE.SOUND_EFFECT)
 		game_manager.register_match(distance, player)
 		hurt_all_hecklers()

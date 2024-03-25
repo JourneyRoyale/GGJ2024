@@ -1,6 +1,6 @@
 [gd_resource type="Theme" load_steps=9 format=3 uid="uid://4c5xn5lj157e"]
 
-[ext_resource type="FontFile" uid="uid://bhiadmy4vtke4" path="res://font/Josefin_Sans/static/JosefinSans-Medium.ttf" id="1_3607l"]
+[ext_resource type="FontFile" uid="uid://bhiadmy4vtke4" path="res://font/JosefinSans-Medium.ttf" id="1_3607l"]
 [ext_resource type="Texture2D" uid="uid://cyg7jp20r5pen" path="res://sprites/ui/Button Selected.png" id="2_wurln"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wxlsv"]

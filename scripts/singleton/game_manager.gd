@@ -63,8 +63,8 @@ func register_error(player : Comedian) -> void :
 
 # Decrease score from projectile hit
 func register_hurt(amount : int, player : Comedian) -> void :
-	player_list[player.player_num]["score"] = max(player_list[player.player_num]["score"] - amount, 0)
-	_set_laugh_score(-amount, player)
+	player_list[player.player_num]["score"] = max(player_list[player.player_num]["score"] + amount, 0)
+	_set_laugh_score(amount, player)
 	player_list[player.player_num]["joke_combo"] = 0
 	
 func register_annoyed() -> void :
@@ -111,7 +111,7 @@ func add_player(comedian : Comedian) -> void :
 func _return_dead_player() -> Comedian:
 	for player_num in player_list.keys():
 		var player = player_list[player_num]
-		if (player["laughter"] == 0):
+		if (player["laughter"] <= 0):
 			return player["player_ref"]
 	return null
 
@@ -119,11 +119,13 @@ func _on_shock_timer_timeout() -> void:
 	is_playing = false
 	get_tree().call_group("Curtains", "end_game")
 
-func _set_laugh_score(score : float, player : Comedian) -> void :
+func _set_laugh_score(score : int, player : Comedian) -> void :
 	if (player.player_num == 1):
 		laughter_position = min(100,laughter_position + score)
 		player_list[player.player_num]["laughter"] = laughter_position
-		player_list[2]["laughter"] = 100.0 -laughter_position
+
+		if (player_list.size() > 1):
+			player_list[2]["laughter"] = 100.0 -laughter_position
 	else:
 		laughter_position -= score
 		player_list[1]["laughter"] = laughter_position

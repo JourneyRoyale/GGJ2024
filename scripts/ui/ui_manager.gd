@@ -21,8 +21,8 @@ class_name UIManager
 
 #Game UI
 @onready var game_ui : Control = get_node("GameUI")
-@onready var score : Label = get_node("GameUI/MarginContainer/VBoxContainer/Top UI Bar/PlayerScore")
-@onready var laughter_meter : ProgressBar = get_node("GameUI/MarginContainer/VBoxContainer/Top UI Bar/Laughter Meter")
+@onready var score : Label = get_node("GameUI/MarginContainer/VBoxContainer/Top UI Bar/MarginContainer/PlayerScore 3")
+@onready var laughter_meter : ProgressBar = get_node("GameUI/MarginContainer/VBoxContainer/VBoxContainer/Laughter Meter")
 @onready var joke_bar : BoxContainer = get_node("GameUI/MarginContainer/VBoxContainer/Joke Bar")
 @onready var combo_counter : Label = get_node("GameUI/ComboCounter")
 
@@ -35,8 +35,15 @@ var cluck_status : Dictionary = {
 
 # Local Variable
 var player_status : Dictionary = {
-	1 : "GameUI/MarginContainer/VBoxContainer/Top UI Bar/Laughter Meter/Player 1",
-	2 : "GameUI/MarginContainer/VBoxContainer/Top UI Bar/Laughter Meter/Player 2",
+	1 : "GameUI/MarginContainer/VBoxContainer/VBoxContainer/Laughter Meter/Player 1",
+	2 : "GameUI/MarginContainer/VBoxContainer/VBoxContainer/Laughter Meter/Player 2",
+}
+
+# Local Variable
+var player_score : Dictionary = {
+	1 : "GameUI/MarginContainer/VBoxContainer/VBoxContainer/Laughter Meter/PlayerScore 1",
+	2 : "GameUI/MarginContainer/VBoxContainer/VBoxContainer/Laughter Meter/PlayerScore 2",
+	3 : "GameUI/MarginContainer/VBoxContainer/Top UI Bar/MarginContainer/PlayerScore 3",
 }
 
 func _ready() -> void :
@@ -57,8 +64,17 @@ func _input(event : InputEvent) -> void :
 				get_tree().paused = pause_screen.visible 
 
 func _sync_score() -> void :
-	#score.text = str(int(game_manager.player_score))
-	pass
+	if (game_manager.is_singleplayer and game_manager.player_list.size() > 0):
+		print(game_manager.player_list[1]["score"])
+		score.text = str(int(game_manager.player_list[1]["score"]))
+	elif (!game_manager.is_singleplayer):
+		score.visible = false
+		for player_num in game_manager.player_list.keys():
+			var player = game_manager.player_list[player_num]
+			var score = get_node(player_score[player_num])
+
+			score.text = str(int(player["score"]))
+			score.visible = true
 
 func _sync_laughter() -> void :
 	laughter_meter.value = _round_to_dec(game_manager.laughter_position / 100, 2)

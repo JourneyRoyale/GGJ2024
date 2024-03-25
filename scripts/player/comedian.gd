@@ -36,6 +36,7 @@ var is_invulnerable = false
 var is_start_flying = false
 var is_flying = false
 var is_falling = false
+var fly_count = 3
 
 func _init_resources() -> void :
 	var comedian_resource : ComedianResource = game_manager.level_resource.comedian
@@ -61,7 +62,8 @@ func _input(event : InputEvent) -> void :
 				egg.reset_egg()
 			if event.is_action_pressed("p1_switch") :
 				egg.switch_egg()
-			if event.is_action_pressed("p1_fly")  and is_on_floor():
+			if event.is_action_pressed("p1_fly")  and is_on_floor() and fly_count > 0:
+				fly_count -= 1
 				is_start_flying = true
 				velocity.y = jump_velocity
 				sprite.play("fly")
@@ -72,7 +74,8 @@ func _input(event : InputEvent) -> void :
 				egg.reset_egg()
 			if event.is_action_pressed("p2_switch") :
 				egg.switch_egg()
-			if event.is_action_pressed("p2_fly")  and is_on_floor():
+			if event.is_action_pressed("p2_fly")  and is_on_floor() and fly_count > 0:
+				fly_count -= 1
 				is_start_flying = true
 				velocity.y = jump_velocity
 				sprite.play("fly")

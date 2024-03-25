@@ -7,7 +7,6 @@ extends Node3D
 
 func _ready():
 	var is_singleplayer = game_manager.is_singleplayer
-	print(is_singleplayer)
 	if is_singleplayer:
 		var instance = comedian.instantiate()
 		instance.player_num = 1

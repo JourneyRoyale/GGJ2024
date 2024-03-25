@@ -97,6 +97,7 @@ theme_override_constants/margin_bottom = 50
 [node name="VBoxContainer" type="VBoxContainer" parent="GameUI/MarginContainer"]
 layout_mode = 2
 theme = ExtResource("1_8kqac")
+theme_override_constants/separation = -142
 
 [node name="Top UI Bar" type="HBoxContainer" parent="GameUI/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -119,48 +120,11 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("1_8kqac")
 
-[node name="Laughter Meter" type="ProgressBar" parent="GameUI/MarginContainer/VBoxContainer/Top UI Bar"]
-custom_minimum_size = Vector2(800, 42)
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 4
-theme = ExtResource("1_8kqac")
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 1
-theme_override_styles/background = SubResource("StyleBoxFlat_65c1h")
-theme_override_styles/fill = SubResource("StyleBoxFlat_byqct")
-max_value = 1.0
-value = 0.5
-show_percentage = false
-
-[node name="Player 1" type="TextureRect" parent="GameUI/MarginContainer/VBoxContainer/Top UI Bar/Laughter Meter"]
-visible = false
-layout_mode = 0
-offset_left = -63.0
-offset_top = -50.0
-offset_right = 63.0
-offset_bottom = 93.0
-texture = ExtResource("9_dipuq")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="Player 2" type="TextureRect" parent="GameUI/MarginContainer/VBoxContainer/Top UI Bar/Laughter Meter"]
-visible = false
-layout_mode = 0
-offset_left = 736.0
-offset_top = -50.0
-offset_right = 862.0
-offset_bottom = 93.0
-pivot_offset = Vector2(20, 20)
-texture = ExtResource("5_ejdtc")
-expand_mode = 1
-stretch_mode = 5
-
 [node name="MarginContainer" type="MarginContainer" parent="GameUI/MarginContainer/VBoxContainer/Top UI Bar"]
 layout_mode = 2
 theme_override_constants/margin_top = 10
 
-[node name="PlayerScore" type="Label" parent="GameUI/MarginContainer/VBoxContainer/Top UI Bar/MarginContainer"]
+[node name="PlayerScore 3" type="Label" parent="GameUI/MarginContainer/VBoxContainer/Top UI Bar/MarginContainer"]
 clip_contents = true
 custom_minimum_size = Vector2(500, 0)
 layout_mode = 2
@@ -175,8 +139,88 @@ vertical_alignment = 1
 layout_mode = 2
 size_flags_vertical = 3
 theme = ExtResource("1_8kqac")
+theme_override_constants/margin_top = 179
+
+[node name="VBoxContainer" type="HBoxContainer" parent="GameUI/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 250
+
+[node name="HSeparator" type="HSeparator" parent="GameUI/MarginContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Laughter Meter" type="ProgressBar" parent="GameUI/MarginContainer/VBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(768, 42)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme = ExtResource("1_8kqac")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 1
+theme_override_styles/background = SubResource("StyleBoxFlat_65c1h")
+theme_override_styles/fill = SubResource("StyleBoxFlat_byqct")
+max_value = 1.0
+value = 0.5
+show_percentage = false
+
+[node name="Player 1" type="TextureRect" parent="GameUI/MarginContainer/VBoxContainer/VBoxContainer/Laughter Meter"]
+visible = false
+layout_mode = 0
+offset_left = -63.0
+offset_top = -50.0
+offset_right = 63.0
+offset_bottom = 93.0
+texture = ExtResource("9_dipuq")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Player 2" type="TextureRect" parent="GameUI/MarginContainer/VBoxContainer/VBoxContainer/Laughter Meter"]
+visible = false
+layout_mode = 0
+offset_left = 1251.0
+offset_top = -50.0
+offset_right = 1377.0
+offset_bottom = 93.0
+pivot_offset = Vector2(20, 20)
+texture = ExtResource("5_ejdtc")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="PlayerScore 1" type="Label" parent="GameUI/MarginContainer/VBoxContainer/VBoxContainer/Laughter Meter"]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+offset_left = -104.0
+offset_top = -109.0
+offset_right = 96.0
+offset_bottom = -38.0
+size_flags_horizontal = 8
+theme = ExtResource("1_8kqac")
+theme_override_font_sizes/font_size = 70
+text = "0
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PlayerScore 2" type="Label" parent="GameUI/MarginContainer/VBoxContainer/VBoxContainer/Laughter Meter"]
+visible = false
+offset_left = 1213.0
+offset_top = -116.0
+offset_right = 1413.0
+offset_bottom = -45.0
+size_flags_horizontal = 8
+theme = ExtResource("1_8kqac")
+theme_override_font_sizes/font_size = 70
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HSeparator2" type="HSeparator" parent="GameUI/MarginContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
 
 [node name="Joke Bar" type="HBoxContainer" parent="GameUI/MarginContainer/VBoxContainer"]
+visible = false
 custom_minimum_size = Vector2(0, 150)
 layout_direction = 3
 layout_mode = 2
@@ -230,7 +274,9 @@ theme_override_constants/margin_bottom = 50
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Pause Screen/MarginContainer/MarginContainer"]
 layout_mode = 2
+size_flags_vertical = 4
 theme = ExtResource("1_8kqac")
+theme_override_constants/separation = 0
 
 [node name="Label" type="Label" parent="Pause Screen/MarginContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -247,6 +293,7 @@ size_flags_vertical = 3
 layout_mode = 2
 size_flags_vertical = 3
 theme = ExtResource("1_8kqac")
+theme_override_constants/margin_top = 160
 
 [node name="GridContainer" type="GridContainer" parent="Pause Screen/MarginContainer/MarginContainer/VBoxContainer/Pause Menu"]
 layout_mode = 2

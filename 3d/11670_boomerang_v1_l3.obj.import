@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://dle8dl4j8wuab"
+path="res://.godot/imported/11670_boomerang_v1_l3.obj-c07c4f15cdcba5e8c5b7efe290711539.mesh"
+
+[deps]
+
+files=["res://.godot/imported/11670_boomerang_v1_l3.obj-c07c4f15cdcba5e8c5b7efe290711539.mesh"]
+
+source_file="res://3d/11670_boomerang_v1_l3.obj"
+dest_files=["res://.godot/imported/11670_boomerang_v1_l3.obj-c07c4f15cdcba5e8c5b7efe290711539.mesh", "res://.godot/imported/11670_boomerang_v1_l3.obj-c07c4f15cdcba5e8c5b7efe290711539.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

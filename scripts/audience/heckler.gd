@@ -8,9 +8,17 @@ class_name Heckler
 @onready var sprite : AnimatedSprite3D = get_node("AnimatedSprite3D")
 @onready var throw_delay_timer : Timer = get_node("Throw Delay Timer")
 @onready var walk_timer : Timer = get_node("Walk Timer")
+@onready var spawn_point : Node3D = get_node("Spawn Point")
+@onready var retrieve_point : Node3D = get_node("Retrieve Point")
+
+# Init Variable
+var modification : Dictionary
+var current_projectile : Dictionary
+var throw_type : Shared.E_THROW_TYPE
+var target_map : TargetMap
+var projectile_hold : Node
 
 # Modification
-var modification : Dictionary
 var move_speed : float
 var aggressiveness : float
 var throw_delay : float
@@ -23,23 +31,26 @@ var current_direction : Vector3 = Vector3(0, 0, 0).normalized()  # Starts moving
 var assigned_chair : Chair
 var health : int = 2
 var boundary : Dictionary
-var current_projectile : Dictionary
 var last_movement : String
-var target_map : TargetMap
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
-func _init_modification() -> void :
+func init_variable(modification : Dictionary, current_projectile : Dictionary, throw_type : Shared.E_THROW_TYPE, target_map : TargetMap, projectile_hold : Node) -> void :
+	self.modification = modification
+	self.current_projectile = current_projectile
+	self.throw_type = throw_type
+	self.target_map = target_map
+	self.projectile_hold = projectile_hold
+	
 	move_speed = modification["heckler"]["move_speed"]
 	aggressiveness = modification["heckler"]["aggressiveness"]
 	throw_delay = modification["heckler"]["throw_delay"]
 	move_time = modification["heckler"]["move_time"]
-	sprite.sprite_frames = modification["heckler"]["sprite_frame"]
 
 # Play Spawn Animation When Spawned
 func _ready() -> void :
-	_init_modification()
+	sprite.sprite_frames = modification["heckler"]["sprite_frame"]
 	sprite.play("spawn")
 
 func _physics_process(delta : float) -> void :
@@ -70,24 +81,14 @@ func _spawn_target() -> void :
 	get_viewport().get_camera_3d().spawn_target(current_projectile,self)
 	pass
 
-# Throw Tomato
-func _throw_projectile() -> void :
-	is_moving = false
-	animation_player.play("throw")
-	sprite.play("throw")
-	
-	throw_delay_timer.start(throw_delay)
+func _throw_protectile() -> void :
+	var target_position = target_map.get_random_target_position(throw_type,aggressiveness)
 
-# Move after throwing finished
-func _on_throw_timer_timeout() -> void :
-	var instance = packed_projectile.instantiate()
-	instance.projectile = current_projectile
+	var instance : Projectile = packed_projectile.instantiate()
+	instance.init_variable(current_projectile, throw_type, target_position, retrieve_point.global_transform.origin)
 	
-	# Configure other properties of the instance as needed
-	# Add the projectile to the scene
-	if get_parent():
-		get_parent().add_child(instance)
-		instance.global_transform = global_transform
+	instance.global_transform.origin = spawn_point.global_transform.origin
+	projectile_hold.add_child(instance)
 	
 	_start_moving()
 
@@ -99,7 +100,9 @@ func _on_walk_timer_timeout() -> void :
 		sprite.play("aim")
 		_spawn_target()
 	else:
-		_throw_projectile()
+		is_moving = false
+		animation_player.play("throw")
+		sprite.play("throw")
 
 # On Animation Finished
 func _on_animated_sprite_3d_animation_finished() -> void :
@@ -112,6 +115,9 @@ func _on_animated_sprite_3d_animation_finished() -> void :
 	#On animation death finished, destory heckler
 	if(anim_name == "death"):
 		get_tree().call_group("AudienceManager", "kill_heckler", self)
+	
+	if(anim_name == "throw"):
+		_throw_protectile()
 
 func _set_random_direction() -> void :
 	if randi() % 2 == 0:

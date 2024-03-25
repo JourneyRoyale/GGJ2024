@@ -19,9 +19,8 @@ class_name LevelResource
 ]
 
 @export_group("Audience Management")
-@export var max_heckler : int = 5
-@export var max_heckler_per_floor : int = 5
-@export var starting_listener : Dictionary = {"min": 1, "max": 10}
+@export var max_heckler : int = 7
+@export var starting_listener : Dictionary = {"min": 4, "max": 7}
 @export var listener_rate : Dictionary = {"min": 4, "max": 7}
 @export var audience_list : Array[Dictionary] = [
 	{
@@ -32,7 +31,7 @@ class_name LevelResource
 			"patience" : 5,
 			"move_speed" : 3,
 			"limit" : 0,
-			"spawn_rate" : 80,
+			"spawn_rate" : 70,
 			"can_sit" : true,
 		},
 		"heckler" : {
@@ -52,11 +51,11 @@ class_name LevelResource
 	{
 		"listener" : {
 			"type": Shared.E_AUDIENCE_TYPE.LOG,
-			"description" : "sheep",
+			"description" : "log",
 			"sprite_frame": preload("res://sprites/sprite_frame/log.tres"),
-			"patience" : 7,
+			"patience" : 10,
 			"move_speed" : 0,
-			"rate" : 20,
+			"rate" : 30,
 			"limit" : 0,
 			"spawn_rate" : 80,
 			"can_sit" : false,
@@ -98,8 +97,14 @@ class_name LevelResource
 		"limit" : 0,
 		"invulnerability" : .25,
 		"score" : -20,
-		"speed" : 5,
-		"stun" : .25,
+		"speed" : 10,
+		"stun" : 2,
+		"hover_time": 1,
+		"despawn_time" : -1,
+		"throw_type" : [
+			Shared.E_THROW_TYPE.UNDERHAND,
+			Shared.E_THROW_TYPE.OVERHAND,
+		],
 	},
 	{
 		"type" : Shared.E_PROJECTILE_TYPE.BOOT,
@@ -108,8 +113,11 @@ class_name LevelResource
 		"limit" : 0,
 		"knockback" : 4,
 		"score" : -20,
-		"speed" : 5,
-		"stun" : .5,
+		"speed" : 10,
+		"stun" : 1,
+		"throw_type" : [
+			Shared.E_THROW_TYPE.SLING,
+		],
 	},
 	{
 		"type" : Shared.E_PROJECTILE_TYPE.BOOMERANG,
@@ -118,8 +126,11 @@ class_name LevelResource
 		"limit" : 0,
 		"invulnerability" : .25,
 		"score" : -20,
-		"speed" : 5,
+		"speed" : 10,
 		"stun" : .25,
+		"throw_type" : [
+			Shared.E_THROW_TYPE.SLING,
+		],
 	},
 	{
 		"type" : Shared.E_PROJECTILE_TYPE.BRICK,
@@ -127,8 +138,14 @@ class_name LevelResource
 		"rate" : 20,
 		"limit" : 0,
 		"score": -20,
-		"speed" : 10.0,
-		"stun" : 2.0,
+		"speed" : 15.0,
+		"stun" : 3.0,
+		"despawn_time" : 0,
+		"hover_time" : 1,
+		"throw_type" : [
+			Shared.E_THROW_TYPE.SLING,
+			Shared.E_THROW_TYPE.OVERHAND,
+		],
 	},
 	{
 		"type" : Shared.E_PROJECTILE_TYPE.GUN,
@@ -137,16 +154,26 @@ class_name LevelResource
 		"limit" : 1,
 		"game_ender" : true,
 		"score" : -50,
-		"speed" : 10.0,
+		"speed" : 20.0,
 		"delay" : 1.0,
+		"throw_type" : [
+			Shared.E_THROW_TYPE.NONE,
+		],
 	},
 	{
 		"type" : Shared.E_PROJECTILE_TYPE.MONEY,
 		"description" : "money",
-		"rate" : 30,
+		"rate" : 0,
 		"limit" : 0,
 		"score" : 10,
 		"speed" : 10.0,
+		"despawn_time" : 5,
+		"hover_time" : 1,
+		"throw_type" : [
+			Shared.E_THROW_TYPE.SLING,
+			Shared.E_THROW_TYPE.UNDERHAND,
+			Shared.E_THROW_TYPE.OVERHAND,
+		],
 	},
 	{
 		"type" : Shared.E_PROJECTILE_TYPE.TOMATO,
@@ -157,7 +184,10 @@ class_name LevelResource
 		"muddle": "tomato",
 		"score" : -10,
 		"speed" : 10.0,
-		"stun" : .25,
+		"stun" : 1,
+		"throw_type" : [
+			Shared.E_THROW_TYPE.SLING,
+		],
 	},
 ]
 

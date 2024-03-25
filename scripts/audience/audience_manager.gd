@@ -6,14 +6,14 @@ class_name AudienceManager
 @onready var audio_manager : AudioManager = get_node("/root/Audio_Manager")
 @onready var pre_listener_factory : PackedScene = preload("res://prefab/audience/listener.tscn")
 @onready var pre_heckler_factory : PackedScene = preload("res://prefab/audience/heckler.tscn")
-@onready var member : Node = get_node('Members')
-@onready var heckler : Node = get_node('Heckler')
+@onready var member_hold : Node = get_node('Members')
+@onready var heckler_hold : Node = get_node('Heckler')
+@onready var projectile_hold : Node = get_node('Projectile')
 @onready var timer : Timer = get_node("Timer")
 
 # Export
 @export var spawn_point_list : Array[NodePath] = []
 @export var navigation_level_list : Array[NodePath] = []
-@export var target_map : NodePath
 
 # Init variable from resources
 var max_heckler : int
@@ -30,6 +30,7 @@ var heckler_factory : Heckler
 var heckler_list : Array[Heckler] = [] 
 var listener_node_list : Array[Listener] = []
 var chair_list : Array[Chair] = []
+var target_map : TargetMap
 
 func _init_resources() -> void :
 	var level_resource : LevelResource = game_manager.level_resource
@@ -66,7 +67,7 @@ func _spawn_listener(chair : Chair, spawn_point: Node3D, is_starting : bool) -> 
 	new_listener.modification = _get_random_listener(chair)
 	new_listener.is_seated = is_starting
 
-	member.add_child(new_listener)
+	member_hold.add_child(new_listener)
 	listener_node_list.append(new_listener)
 	chair.seat_entity(new_listener, spawn_point)
 
@@ -110,24 +111,58 @@ func _get_emoji_variety() -> Array[Shared.E_Emoji] :
 	chosen_emoji_list = chosen_emoji_list.slice(0,game_manager.rng.randi_range(emoji_variety["min"], emoji_variety["max"]))
 	return chosen_emoji_list
 
-func _get_randomize_projectile() -> Dictionary :
+func _get_randomize_projectile(chair : Chair) -> Dictionary :
 	var projectile_array : Array[Shared.E_PROJECTILE_TYPE]
 	var projectile_dict : Dictionary
-	for projectile in projectile_list:
+	
+	# Filter projectile by what chair can throw
+	var throwable_projectile = projectile_list.filter(
+		func(projectile_info : Dictionary):
+			
+			
+			var has_matching = projectile_info["throw_type"].filter(
+				func (throw_type : Shared.E_THROW_TYPE):
+					
+					return chair.get_allowed_throw_type().keys().has(throw_type)
+			)
+
+			# Check if chair any matching throwing type
+			return has_matching.size() > 0
+	)
+
+	# Check if any projectile exceed limit, if not add to pot
+	for projectile in throwable_projectile:
 		var type = projectile["type"]
 		var limit = projectile["limit"]
+		
+		# Get all current heckler projectile that match
 		var matched_projectile = heckler_list.filter(
 			func(x : Heckler): 
 				return x.current_projectile == projectile
 		).size()
-		projectile_dict[type] = projectile
 		
+		# Check if limit exceeded and add rate to pot
 		if (matched_projectile < limit or limit == 0):
 			for i in range(projectile["rate"]):
 				projectile_array.append(projectile["type"])
+		
+		# Copy projectile_list as a dictionary to allow easier selection
+		projectile_dict[type] = projectile
 	
 	projectile_array.shuffle()
 	return projectile_dict[projectile_array[0]]
+
+func _get_random_throw_type(projectile : Dictionary, chair : Chair) -> Shared.E_THROW_TYPE :
+	var rng_throw_type_pile : Array[Shared.E_THROW_TYPE] = []
+	
+	# Loop through projectile throw type
+	for throw_type in projectile["throw_type"]:
+		# Get the percentage of that type is allowed
+		if(chair.get_allowed_throw_type().has(throw_type)):
+			for i in range(chair.get_allowed_throw_type()[throw_type]):
+				rng_throw_type_pile.append(throw_type)
+	rng_throw_type_pile.shuffle()
+	return rng_throw_type_pile[0]
 
 func _get_random_listener(chair : Chair) -> Dictionary :
 	var viable_listener_list = audience_list.filter(
@@ -140,6 +175,9 @@ func _get_random_listener(chair : Chair) -> Dictionary :
 func track_chair(chair : Chair) -> void :
 	chair_list.append(chair)
 
+func track_target_map(target_map : TargetMap) -> void :
+	self.target_map = target_map
+
 # Spawn a heckler
 func spawn_heckler(listener : Listener) -> void :
 	if (heckler_list.size() < max_heckler):
@@ -147,18 +185,17 @@ func spawn_heckler(listener : Listener) -> void :
 		
 		if heckler_factory == null:
 			heckler_factory = pre_heckler_factory.instantiate()
-
-		var new_heckler : Heckler
-		new_heckler = heckler_factory.duplicate()
-		new_heckler.modification = listener.modification
-		new_heckler.current_projectile = _get_randomize_projectile()
 		
-		heckler.add_child(new_heckler)
+		var projectile = _get_randomize_projectile(listener.assigned_chair)
+		var throw_type = _get_random_throw_type(projectile, listener.assigned_chair)
+		
+		var new_heckler : Heckler = heckler_factory.duplicate()
+		new_heckler.init_variable(listener.modification, projectile, throw_type, target_map, projectile_hold)
+		heckler_hold.add_child(new_heckler)
 		heckler_list.append(new_heckler)
 		
 		var chair : Chair = listener.assigned_chair
 		chair.seat_entity(new_heckler, chair.get_chair_spawn_point())
-		new_heckler.target_map = get_node(target_map)
 		new_heckler.position.z += 1
 		new_heckler.set_move_boundary()
 		

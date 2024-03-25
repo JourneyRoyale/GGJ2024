@@ -14,15 +14,14 @@ level = 1
 time = 60
 background_music = 0
 emoji_variety = {
-"max": 7,
+"max": 6,
 "min": 3
 }
-emoji_list = Array[int]([0, 1, 2, 3, 4, 5, 6, 7])
-max_heckler = 5
-max_heckler_per_floor = 5
+emoji_list = Array[int]([0, 1, 2, 3, 4, 5])
+max_heckler = 7
 starting_listener = {
-"max": 10,
-"min": 1
+"max": 7,
+"min": 4
 }
 listener_rate = {
 "max": 7,
@@ -51,7 +50,7 @@ audience_list = Array[Dictionary]([{
 "limit": 0,
 "move_speed": 3,
 "patience": 5,
-"spawn_rate": 80,
+"spawn_rate": 70,
 "sprite_frame": ExtResource("1_ed8jv"),
 "type": 1
 }
@@ -74,11 +73,11 @@ audience_list = Array[Dictionary]([{
 },
 "listener": {
 "can_sit": false,
-"description": "sheep",
+"description": "log",
 "limit": 0,
 "move_speed": 0,
-"patience": 7,
-"rate": 20,
+"patience": 10,
+"rate": 30,
 "spawn_rate": 80,
 "sprite_frame": ExtResource("3_seyfp"),
 "type": 5
@@ -86,7 +85,7 @@ audience_list = Array[Dictionary]([{
 }])
 multiplier_increase_frequency = 3
 error_amount = 10
-match_amount = 10
+match_amount = 30
 annoyed_amount = 1
 switch_duration = 0.25
 scale_duration = 3.0
@@ -94,12 +93,15 @@ scale_ease = 0.2
 target_scale = Vector3(1.2, 1.2, 1.2)
 projectile_list = Array[Dictionary]([{
 "description": "bananna",
+"despawn_time": -1,
+"hover_time": 1,
 "invulnerability": 0.25,
 "limit": 0,
 "rate": 20,
 "score": -20,
-"speed": 5,
-"stun": 0.25,
+"speed": 10,
+"stun": 2,
+"throw_type": [1, 2],
 "type": 0
 }, {
 "description": "boot",
@@ -107,8 +109,9 @@ projectile_list = Array[Dictionary]([{
 "limit": 0,
 "rate": 20,
 "score": -20,
-"speed": 5,
-"stun": 0.5,
+"speed": 10,
+"stun": 1,
+"throw_type": [0],
 "type": 2
 }, {
 "description": "boomerang",
@@ -116,33 +119,40 @@ projectile_list = Array[Dictionary]([{
 "limit": 0,
 "rate": 20,
 "score": -20,
-"speed": 5,
+"speed": 10,
 "stun": 0.25,
+"throw_type": [0],
 "type": 1
 }, {
 "description": "brick",
+"despawn_time": 0,
+"hover_time": 1,
 "limit": 0,
 "rate": 20,
 "score": -20,
-"speed": 5.0,
-"stun": 20.0,
+"speed": 15.0,
+"stun": 3.0,
+"throw_type": [0, 2],
 "type": 3
 }, {
 "delay": 1.0,
 "description": "gun",
 "game_ender": true,
 "limit": 1,
-"rate": 10000,
+"rate": 5,
 "score": -50,
-"speed": 10.0,
-"stun": 0.25,
+"speed": 20.0,
+"throw_type": [3],
 "type": 4
 }, {
 "description": "money",
+"despawn_time": 5,
+"hover_time": 1,
 "limit": 0,
 "rate": 0,
 "score": 10,
 "speed": 10.0,
+"throw_type": [0, 1, 2],
 "type": 5
 }, {
 "description": "tomato",
@@ -151,7 +161,8 @@ projectile_list = Array[Dictionary]([{
 "muddle": "tomato",
 "rate": 40,
 "score": -10,
-"speed": 50.0,
-"stun": 0.25,
+"speed": 10.0,
+"stun": 1,
+"throw_type": [0],
 "type": 6
 }])

@@ -1,7 +1,24 @@
-[gd_scene load_steps=2 format=3 uid="uid://b7efb0ou050m6"]
+[gd_scene load_steps=2 format=3 uid="uid://c8hcfbf67vok0"]
 
 [ext_resource type="Script" path="res://scripts/audience/audience_manager.gd" id="1_akc2f"]
 
 [node name="Audience" type="Node3D" groups=["AudienceManager"]]
-transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 1.15, 2.255, -4.675)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.15, 2.255, -4.675)
 script = ExtResource("1_akc2f")
+spawn_point_list = Array[NodePath]([NodePath("../Environment/Stage/Floor/Top Floor/Spawn Point"), NodePath("../Environment/Stage/Floor/Top Floor/Spawn Point2")])
+
+[node name="Emoji Timer" type="Timer" parent="."]
+wait_time = 4.0
+autostart = true
+
+[node name="Spawn Timer" type="Timer" parent="."]
+autostart = true
+
+[node name="Members" type="Node" parent="."]
+
+[node name="Heckler" type="Node" parent="."]
+
+[node name="Projectile" type="Node" parent="."]
+
+[connection signal="timeout" from="Emoji Timer" to="." method="_on_emoji_timer_timeout"]
+[connection signal="timeout" from="Spawn Timer" to="." method="_on_spawn_timer_timeout"]

@@ -10,6 +10,8 @@ class_name AudioManager
 	Shared.E_SOUND_EFFECT.HURT : get_node("Sound Effect/Hurt"),
 	Shared.E_SOUND_EFFECT.SUCCESS : get_node("Sound Effect/Success"),
 	Shared.E_SOUND_EFFECT.POWER_UP : get_node("Sound Effect/Power Up"),
+	Shared.E_SOUND_EFFECT.GUN_SHOT : get_node("Sound Effect/Gun Shot"),
+	Shared.E_SOUND_EFFECT.GUN_COCK : get_node("Sound Effect/Gun Cock"),
 }
 @onready var background_dictionary : Dictionary = {
 	Shared.E_BACKGROUND_MUSIC.RAGTIME : get_node("Background/Ragtime"),

@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://c12ak321i01q2"]
+
+[ext_resource type="Script" path="res://scripts/player/camera.gd" id="1_6a583"]
+
+[sub_resource type="Environment" id="Environment_3bqqq"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_0t7yu"]
+size = Vector3(16, 9, 0.01)
+
+[node name="Camera3D" type="Camera3D" groups=["Camera"]]
+transform = Transform3D(1, 0, 0, 0, 0.939693, 0.34202, 0, -0.34202, 0.939693, 0, 7.063, 5)
+environment = SubResource("Environment_3bqqq")
+current = true
+script = ExtResource("1_6a583")
+
+[node name="Camera Panel" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4)
+collision_mask = 513
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Camera Panel"]
+shape = SubResource("BoxShape3D_0t7yu")
+
+[node name="Spawner" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4)

@@ -27,6 +27,12 @@ class_name UIManager
 @onready var joke_bar : BoxContainer = get_node("GameUI/MarginContainer/VBoxContainer/Joke Bar")
 @onready var combo_counter : Label = get_node("GameUI/ComboCounter")
 
+@onready var curtain : Curtain = get_node("Curtain Container")
+@onready var game_over : Control = get_node("Game Over")
+@onready var black_screen : TextureRect = get_node("Black Screen")
+@onready var transition : AnimationPlayer = get_node("Transition")
+
+# Local Variable
 var cluck_status : Dictionary = {
 	"neutral" : load("res://sprites/audience/CluckNeutral.png"),
 	"nervous" : load("res://sprites/audience/CluckNervous.png"),
@@ -34,13 +40,11 @@ var cluck_status : Dictionary = {
 	"dead" : load("res://sprites/audience/CluckDead.png"),
 }
 
-# Local Variable
 var player_status : Dictionary = {
 	1 : "GameUI/MarginContainer/VBoxContainer/VBoxContainer/Laughter Meter/Player 1",
 	2 : "GameUI/MarginContainer/VBoxContainer/VBoxContainer/Laughter Meter/Player 2",
 }
 
-# Local Variable
 var player_score : Dictionary = {
 	1 : "GameUI/MarginContainer/VBoxContainer/VBoxContainer/Laughter Meter/PlayerScore 1",
 	2 : "GameUI/MarginContainer/VBoxContainer/VBoxContainer/Laughter Meter/PlayerScore 2",
@@ -178,21 +182,46 @@ func _on_ui_gear_button_pressed() -> void :
 	pause_screen.visible = !pause_screen.visible
 	get_tree().paused = pause_screen.visible 
 
-func createSplat() -> void :
-	get_node("GameUI/TomatoSplat").createSplat()
-
-func _on_level_pressed(index : int) -> void :
+func _on_level_pressed(index : int, difficulty : Shared.E_DIFFICULTY_TYPE) -> void :
 	get_tree().call_group("Curtains", "start_game")
 	title_screen.visible = false
 	game_ui.visible = true
-	game_manager.load_level(index)
+	game_manager.load_level(index, difficulty)
 
 func _on_level_back_pressed():
 	level_selection.visible = false
 	main_menu.visible = true
 
-
 func _on_versus_pressed():
 	game_manager.is_singleplayer = false
 	level_selection.visible = true
 	main_menu.visible = false
+
+func createSplat(fade_speed : float) -> void :
+	var tomato_splat_ui : TomatoSplat = get_node("GameUI/TomatoSplat")
+	tomato_splat_ui.createSplat(fade_speed)
+
+
+func _on_try_again_pressed():
+	get_tree().paused = false
+	game_over.visible = false
+	curtain.visible = true
+	game_ui.visible = true
+	curtain.try_again()
+	game_manager.restart_level()
+
+func _on_gameover_quit_pressed():
+	game_over.visible = false
+	curtain.visible = true
+	game_manager.back_to_menu()
+	
+func show_game_over():
+	black_screen.visible = true
+	game_ui.visible = false
+	transition.play("fade_to_black")
+
+func _on_transition_animation_finished(anim_name):
+	if (anim_name == "fade_to_black"):
+		game_over.visible = true
+		curtain.visible = false
+		black_screen.visible = false

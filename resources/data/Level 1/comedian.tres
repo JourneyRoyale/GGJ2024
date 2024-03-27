@@ -1,8 +1,0 @@
-[gd_resource type="Resource" script_class="ComedianResource" load_steps=2 format=3 uid="uid://c278sbdo4t3v8"]
-
-[ext_resource type="Script" path="res://resources/script/comedian_resources.gd" id="1_yql15"]
-
-[resource]
-script = ExtResource("1_yql15")
-invulnerable_time = 1
-stun_time = 0.25

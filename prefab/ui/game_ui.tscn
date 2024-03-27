@@ -1,15 +1,83 @@
-[gd_scene load_steps=17 format=3 uid="uid://vxc02h1qnjha"]
+[gd_scene load_steps=23 format=3 uid="uid://vxc02h1qnjha"]
 
 [ext_resource type="Script" path="res://scripts/ui/ui_manager.gd" id="1_7vdu0"]
 [ext_resource type="Theme" uid="uid://4c5xn5lj157e" path="res://theme/default.tres" id="1_8kqac"]
+[ext_resource type="Texture2D" uid="uid://c7tn07j5ogfw4" path="res://sprites/background/LevelCompletionConcept1Final2.jpg" id="2_cxv56"]
 [ext_resource type="PackedScene" uid="uid://c2hstesjai7p1" path="res://prefab/ui/curtain.tscn" id="2_paf8e"]
 [ext_resource type="Texture2D" uid="uid://ct1bgt227dwru" path="res://sprites/ui/GearIcon.png" id="2_wab3x"]
 [ext_resource type="Texture2D" uid="uid://d1fh5xoe5jk74" path="res://sprites/ui/Tomato_Splat_sprite.png" id="3_a8h4s"]
 [ext_resource type="Texture2D" uid="uid://rma688d35ap1" path="res://sprites/ui/White Rectangle With Gray.png" id="3_mjecg"]
 [ext_resource type="Script" path="res://scripts/ui/tomato_splat.gd" id="4_8xva2"]
+[ext_resource type="Texture2D" uid="uid://bxr3rq71bjitu" path="res://sprites/background/GameOverConceptFinal.jpg" id="4_la6rb"]
 [ext_resource type="Texture2D" uid="uid://cyitysuebkqdn" path="res://sprites/audience/CluckNeutral.png" id="5_ejdtc"]
 [ext_resource type="Texture2D" uid="uid://jb6gm7433n5o" path="res://sprites/ui/titleLogo.png" id="5_so5fd"]
 [ext_resource type="Texture2D" uid="uid://bnietg8hxnc0w" path="res://sprites/texture/cluck_afraid.tres" id="9_dipuq"]
+
+[sub_resource type="Animation" id="Animation_8xcl2"]
+resource_name = "fade_to_black"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Black Screen:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Game Over:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(-0.1, 0, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, false, true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Game Over:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(1, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Black Screen:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_npit8"]
+_data = {
+"fade_to_black": SubResource("Animation_8xcl2")
+}
+
+[sub_resource type="Gradient" id="Gradient_8imft"]
+offsets = PackedFloat32Array(0, 0.995177, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0.0691318, 0.0691318, 0.0691318, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_380y5"]
+gradient = SubResource("Gradient_8imft")
+width = 1920
+height = 1080
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_65c1h"]
 
@@ -51,7 +119,93 @@ grow_vertical = 2
 mouse_filter = 1
 script = ExtResource("1_7vdu0")
 
+[node name="TextureRect" type="TextureRect" parent="."]
+visible = false
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+texture = ExtResource("2_cxv56")
+expand_mode = 2
+
+[node name="Transition" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_npit8")
+}
+
 [node name="Curtain Container" parent="." instance=ExtResource("2_paf8e")]
+
+[node name="Game Over" type="Control" parent="."]
+visible = false
+modulate = Color(1, 1, 1, 0)
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TextureRect2" type="TextureRect" parent="Game Over"]
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+texture = ExtResource("4_la6rb")
+
+[node name="Control" type="Control" parent="Game Over"]
+anchors_preset = 0
+offset_left = 646.0
+offset_top = 18.0
+offset_right = 1146.0
+offset_bottom = 518.0
+
+[node name="MarginContainer" type="MarginContainer" parent="Game Over/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 100
+theme_override_constants/margin_top = 100
+theme_override_constants/margin_right = 100
+theme_override_constants/margin_bottom = 100
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Game Over/Control/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Label" type="Label" parent="Game Over/Control/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_8kqac")
+theme_override_font_sizes/font_size = 121
+text = "Game Over"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Game Over/Control/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 50
+alignment = 1
+
+[node name="Button" type="Button" parent="Game Over/Control/MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(230, 50)
+layout_mode = 2
+theme = ExtResource("1_8kqac")
+text = "Try Again"
+
+[node name="Control" type="Control" parent="Game Over/Control/MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(90, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Button2" type="Button" parent="Game Over/Control/MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(110, 50)
+layout_mode = 2
+theme = ExtResource("1_8kqac")
+text = "Quit"
+
+[node name="Black Screen" type="TextureRect" parent="."]
+modulate = Color(1, 1, 1, 0)
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+texture = SubResource("GradientTexture2D_380y5")
 
 [node name="GameUI" type="Control" parent="."]
 visible = false
@@ -499,7 +653,6 @@ text = "Start
 "
 
 [node name="Versus" type="Button" parent="TitleScreen/MarginContainer/VBoxContainer/Main Menu/GridContainer"]
-visible = false
 custom_minimum_size = Vector2(170, 70)
 layout_mode = 2
 size_flags_horizontal = 6
@@ -549,34 +702,79 @@ theme_override_constants/h_separation = 240
 theme_override_constants/v_separation = 0
 columns = 4
 
-[node name="Level 1" type="Button" parent="TitleScreen/MarginContainer/VBoxContainer/Level Selection/GridContainer"]
+[node name="Level 1" type="VBoxContainer" parent="TitleScreen/MarginContainer/VBoxContainer/Level Selection/GridContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="TitleScreen/MarginContainer/VBoxContainer/Level Selection/GridContainer/Level 1"]
+layout_mode = 2
+text = "Level 1"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="TitleScreen/MarginContainer/VBoxContainer/Level Selection/GridContainer/Level 1"]
+layout_mode = 2
+
+[node name="Easy" type="Button" parent="TitleScreen/MarginContainer/VBoxContainer/Level Selection/GridContainer/Level 1"]
 custom_minimum_size = Vector2(250, 70)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme = ExtResource("1_8kqac")
-text = "Level 1
+text = "Easy
 "
 
-[node name="Level 2" type="Button" parent="TitleScreen/MarginContainer/VBoxContainer/Level Selection/GridContainer"]
-visible = false
+[node name="Normal" type="Button" parent="TitleScreen/MarginContainer/VBoxContainer/Level Selection/GridContainer/Level 1"]
 custom_minimum_size = Vector2(250, 70)
 layout_mode = 2
-size_flags_horizontal = 6
+size_flags_horizontal = 4
 size_flags_vertical = 4
 theme = ExtResource("1_8kqac")
-text = "Level 2
+text = "Normal
 "
 
-[node name="Level 3" type="Button" parent="TitleScreen/MarginContainer/VBoxContainer/Level Selection/GridContainer"]
-visible = false
+[node name="Hard" type="Button" parent="TitleScreen/MarginContainer/VBoxContainer/Level Selection/GridContainer/Level 1"]
 custom_minimum_size = Vector2(250, 70)
 layout_mode = 2
-size_flags_horizontal = 6
+size_flags_horizontal = 4
 size_flags_vertical = 4
 theme = ExtResource("1_8kqac")
-text = "Level 3
+text = "Hard"
+
+[node name="Level 2" type="VBoxContainer" parent="TitleScreen/MarginContainer/VBoxContainer/Level Selection/GridContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="TitleScreen/MarginContainer/VBoxContainer/Level Selection/GridContainer/Level 2"]
+layout_mode = 2
+text = "Level 2"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="TitleScreen/MarginContainer/VBoxContainer/Level Selection/GridContainer/Level 2"]
+layout_mode = 2
+
+[node name="Easy" type="Button" parent="TitleScreen/MarginContainer/VBoxContainer/Level Selection/GridContainer/Level 2"]
+custom_minimum_size = Vector2(250, 70)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("1_8kqac")
+text = "Easy
 "
+
+[node name="Normal" type="Button" parent="TitleScreen/MarginContainer/VBoxContainer/Level Selection/GridContainer/Level 2"]
+custom_minimum_size = Vector2(250, 70)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("1_8kqac")
+text = "Normal
+"
+
+[node name="Hard" type="Button" parent="TitleScreen/MarginContainer/VBoxContainer/Level Selection/GridContainer/Level 2"]
+custom_minimum_size = Vector2(250, 70)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("1_8kqac")
+text = "Hard"
 
 [node name="Back" type="Button" parent="TitleScreen/MarginContainer/VBoxContainer/Level Selection/GridContainer"]
 custom_minimum_size = Vector2(250, 70)
@@ -760,6 +958,9 @@ libraries = {
 "": SubResource("AnimationLibrary_0rtmh")
 }
 
+[connection signal="animation_finished" from="Transition" to="." method="_on_transition_animation_finished"]
+[connection signal="pressed" from="Game Over/Control/MarginContainer/VBoxContainer/HBoxContainer/Button" to="." method="_on_try_again_pressed"]
+[connection signal="pressed" from="Game Over/Control/MarginContainer/VBoxContainer/HBoxContainer/Button2" to="." method="_on_gameover_quit_pressed"]
 [connection signal="pressed" from="GameUI/MarginContainer/VBoxContainer/Top UI Bar/TextureButton" to="." method="_on_ui_gear_button_pressed"]
 [connection signal="pressed" from="Pause Screen/MarginContainer/MarginContainer/VBoxContainer/Pause Menu/GridContainer/Resume" to="." method="_on_pause_resume_pressed"]
 [connection signal="pressed" from="Pause Screen/MarginContainer/MarginContainer/VBoxContainer/Pause Menu/GridContainer/Restart" to="." method="_on_pause_restart_pressed"]
@@ -774,9 +975,12 @@ libraries = {
 [connection signal="pressed" from="TitleScreen/MarginContainer/VBoxContainer/Main Menu/GridContainer/Settings" to="." method="_on_settings_pressed"]
 [connection signal="pressed" from="TitleScreen/MarginContainer/VBoxContainer/Main Menu/GridContainer/Credits" to="." method="_on_credits_pressed"]
 [connection signal="pressed" from="TitleScreen/MarginContainer/VBoxContainer/Main Menu/GridContainer/Exit" to="." method="_on_exit_pressed"]
-[connection signal="pressed" from="TitleScreen/MarginContainer/VBoxContainer/Level Selection/GridContainer/Level 1" to="." method="_on_level_pressed" binds= [1]]
-[connection signal="pressed" from="TitleScreen/MarginContainer/VBoxContainer/Level Selection/GridContainer/Level 2" to="." method="_on_level_pressed" binds= [2]]
-[connection signal="pressed" from="TitleScreen/MarginContainer/VBoxContainer/Level Selection/GridContainer/Level 3" to="." method="_on_level_pressed" binds= [3]]
+[connection signal="pressed" from="TitleScreen/MarginContainer/VBoxContainer/Level Selection/GridContainer/Level 1/Easy" to="." method="_on_level_pressed" binds= [1, 0]]
+[connection signal="pressed" from="TitleScreen/MarginContainer/VBoxContainer/Level Selection/GridContainer/Level 1/Normal" to="." method="_on_level_pressed" binds= [1, 1]]
+[connection signal="pressed" from="TitleScreen/MarginContainer/VBoxContainer/Level Selection/GridContainer/Level 1/Hard" to="." method="_on_level_pressed" binds= [1, 2]]
+[connection signal="pressed" from="TitleScreen/MarginContainer/VBoxContainer/Level Selection/GridContainer/Level 2/Easy" to="." method="_on_level_pressed" binds= [2, 0]]
+[connection signal="pressed" from="TitleScreen/MarginContainer/VBoxContainer/Level Selection/GridContainer/Level 2/Normal" to="." method="_on_level_pressed" binds= [2, 1]]
+[connection signal="pressed" from="TitleScreen/MarginContainer/VBoxContainer/Level Selection/GridContainer/Level 2/Hard" to="." method="_on_level_pressed" binds= [2, 2]]
 [connection signal="pressed" from="TitleScreen/MarginContainer/VBoxContainer/Level Selection/GridContainer/Back" to="." method="_on_level_back_pressed"]
 [connection signal="value_changed" from="TitleScreen/MarginContainer/VBoxContainer/Setting/PanelContainer/GridContainer/Master Slider" to="." method="_on_master_slider_value_changed"]
 [connection signal="value_changed" from="TitleScreen/MarginContainer/VBoxContainer/Setting/PanelContainer/GridContainer/Background Slider" to="." method="_on_background_slider_value_changed"]

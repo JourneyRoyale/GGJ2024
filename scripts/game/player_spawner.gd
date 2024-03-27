@@ -20,7 +20,4 @@ func _ready():
 		add_child(instance)
 		add_child(instance2)
 		instance.global_transform.origin = get_node(spawn_dictionary[1]).global_transform.origin
-		instance.global_transform.origin = get_node(spawn_dictionary[2]).global_transform.origin
-	
-
-
+		instance2.global_transform.origin = get_node(spawn_dictionary[2]).global_transform.origin

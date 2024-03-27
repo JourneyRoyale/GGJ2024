@@ -9,7 +9,7 @@ class_name Comedian
 @onready var stun_timer : Timer = get_node("StunTimer")
 @onready var fly_timer : Timer = get_node("FlyTimer")
 @onready var animation_player : AnimationPlayer = get_node("AnimationPlayer")
-@onready var ui_screen = get_node("/root/Game/Ui Screen")
+@onready var ui_screen : UIManager = get_node("/root/Game/Ui Screen")
 @onready var collision : CollisionShape3D = get_node("CollisionShape3D")
 @onready var joke : Joke = get_node("Joke")
 @onready var egg : Egg = get_node("Joke/Egg")
@@ -18,34 +18,39 @@ class_name Comedian
 # Export
 @export var player_num : int = 1
 
-# Init variable from resources
+# Resource Variable
 var fly_time
 var accel
 var speed
 var jump_velocity
 var inertia
 
+# Init variable
+var target_map : TargetMap
+
 # Local variable
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
-var idle = "front";
-var last_move = "left";
-var is_moving = false;
-var is_stunned = false
-var is_dead = false 
-var is_invulnerable = false
-var is_start_flying = false
-var is_flying = false
-var is_falling = false
-var fly_count = 3
+var idle : String = "front";
+var last_move : String = "left";
+var is_moving : bool = false;
+var is_stunned : bool = false
+var is_dead : bool = false 
+var is_invulnerable : bool = false
+var is_start_flying : bool = false
+var is_flying : bool = false
+var is_falling : bool = false
+var fly_count : int = 3
 
 func _init_resources() -> void :
-	var comedian_resource : ComedianResource = game_manager.level_resource.comedian
+	var level_resource : LevelResource = game_manager.level_resource
 	
-	fly_time = comedian_resource.fly_time
-	accel = comedian_resource.accel
-	speed = comedian_resource.speed
-	jump_velocity = comedian_resource.jump_velocity
-	inertia = comedian_resource.inertia
+	fly_time = level_resource.fly_time
+	accel = level_resource.accel
+	speed = level_resource.speed
+	jump_velocity = level_resource.jump_velocity
+	inertia = level_resource.inertia
+	
+	target_map = get_tree().get_nodes_in_group("TargetMap")[0] as TargetMap
 
 func _ready() -> void :
 	_init_resources()
@@ -125,6 +130,10 @@ func _physics_process(delta : float) -> void :
 		if (velocity.x == 0 and velocity.z == 0 and velocity.y != jump_velocity):
 			sprite.stop()
 	
+	if(target_map != null):
+		position.x = clamp(position.x, target_map.target_constraint["min_x"], target_map.target_constraint["max_x"])
+		position.z = clamp(position.z, target_map.target_constraint["min_z"], target_map.target_constraint["max_z"])
+	
 	move_and_slide()
 
 # On stun timeout
@@ -198,14 +207,15 @@ func projectile_collided(projectile : Dictionary) -> void :
 				"muddle":
 					var muddle_type : String = projectile["muddle"]
 					if (muddle_type == "tomato"):
-						ui_screen.createSplat()
+						ui_screen.createSplat(projectile["fade_speed"])
 
-func shot() -> void :
-	sprite.play("yoink")
-	joke.visible = false
-	audio_manager.play_music(int(Shared.E_SOUND_EFFECT.BWACK), Shared.E_AUDIO_TYPE.SOUND_EFFECT)
-	get_tree().paused = true
-	game_manager.shock_timer.start()
+func shot(is_dead : bool) -> void :
+	if (is_dead):
+		sprite.play("yoink")
+		joke.visible = false
+		audio_manager.play_music(int(Shared.E_SOUND_EFFECT.BWACK), Shared.E_AUDIO_TYPE.SOUND_EFFECT)
+		get_tree().paused = true
+		game_manager.shock_timer.start()
 
 func win() -> void :
 	sprite.play("win")

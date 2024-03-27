@@ -4,6 +4,7 @@ class_name LevelResource
 @export_group("Level Setup")
 @export var scene : PackedScene
 @export var level : int = 1
+@export var difficulty : Shared.E_DIFFICULTY_TYPE
 @export var time : int = 60
 @export var background_music : Shared.E_BACKGROUND_MUSIC
 @export var emoji_variety : Dictionary = {"min": 3, "max": 5}
@@ -18,10 +19,18 @@ class_name LevelResource
 	Shared.E_Emoji.SKULL,
 ]
 
+@export_group("Comedian")
+@export var fly_time : int = 1
+@export var accel = 1
+@export var speed = 7
+@export var jump_velocity = 5.0
+@export var inertia = 0.3
+
 @export_group("Audience Management")
 @export var max_heckler : int = 7
 @export var starting_listener : Dictionary = {"min": 4, "max": 7}
-@export var listener_rate : Dictionary = {"min": 4, "max": 7}
+@export var emoji_rate : Dictionary = {"min": 4, "max": 7}
+@export var spawn_rate : Dictionary = {"min": 4, "max": 7}
 @export var audience_list : Array[Dictionary] = [
 	{
 		"listener" : {
@@ -40,11 +49,8 @@ class_name LevelResource
 			"sprite_frame": preload("res://sprites/sprite_frame/wolf.tres"),
 			"health" : 2,
 			"throw_speed": 10,
-			"aggressive_min" : .01,
-			"aggressive_max" : .99,
 			"move_speed" : 0.5,
-			"aggressiveness" : 2,
-			"throw_delay" : 1,
+			"aggressiveness" : { "min": .01, "max": .99 },
 			"move_time" : { "min": 2.0, "max": 5.0 },
 		},
 	},
@@ -66,11 +72,8 @@ class_name LevelResource
 			"sprite_frame": preload("res://sprites/sprite_frame/crocodile.tres"),
 			"health" : 10,
 			"throw_speed": 20,
-			"aggressive_min" : .50,
-			"aggressive_max" : .99,
 			"move_speed" : 0.5,
-			"aggressiveness" : 2,
-			"throw_delay" : 1,
+			"aggressiveness" : { "min": .01, "max": .99 },
 			"move_time" : { "min": 2.0, "max": 5.0 },
 		},
 	},
@@ -97,7 +100,7 @@ class_name LevelResource
 		"limit" : 0,
 		"score" : -20,
 		"speed" : 10,
-		"stun" : 2,
+		"stun" : 2.0,
 		"hover_time": 1,
 		"despawn_time" : 5,
 		"throw_type" : [
@@ -113,7 +116,7 @@ class_name LevelResource
 		"knockback" : 4,
 		"score" : -20,
 		"speed" : 10,
-		"stun" : 1,
+		"stun" : 1.0,
 		"throw_type" : [
 			Shared.E_THROW_TYPE.SLING,
 		],
@@ -183,7 +186,8 @@ class_name LevelResource
 		"muddle": "tomato",
 		"score" : -10,
 		"speed" : 10.0,
-		"stun" : 1,
+		"stun" : 1.0,
+		"fade_speed": .7,
 		"despawn_time" : 0,
 		"hover_time" : 1,
 		"throw_type" : [
@@ -193,10 +197,3 @@ class_name LevelResource
 		],
 	},
 ]
-
-var comedian : Resource = load("res://resources/data/Level " + str(level) + "/comedian.tres")
-var heckler : Resource = load("res://resources/data/Level " + str(level) + "/heckler.tres")
-
-
-
-

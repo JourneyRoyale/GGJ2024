@@ -3,4 +3,4 @@ class_name Joke
 
 # Egg look at camera
 func _process(delta : float) -> void :
-	get_tree().call_group("Camera", "look_at_camera", self)
+	look_at(get_viewport().get_camera_3d().global_transform.origin, Vector3.UP)

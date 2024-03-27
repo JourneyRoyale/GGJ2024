@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scripts/audience/chair.gd" id="2_n2ky4"]
 [ext_resource type="Texture2D" uid="uid://d2d0e02f64eh3" path="res://sprites/stage/Chair.png" id="3_x0tad"]
 
-[node name="Chair" type="MeshInstance3D"]
+[node name="Chair" type="MeshInstance3D" groups=["Chair"]]
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)
 skeleton = NodePath("")
 script = ExtResource("2_n2ky4")

@@ -1,7 +1,8 @@
 extends TextureRect
+class_name TomatoSplat
 
-# Constant
-var fade_speed = 0.7
+# Local Variable
+var fade_speed : float
 
 # Fade Over Time
 func _process(delta):
@@ -10,5 +11,6 @@ func _process(delta):
 		self.modulate.a = max(self.modulate.a, 0)  
 
 # Set splat visible
-func createSplat():
+func createSplat(fade_speed : float):
 	self.modulate.a = 1 
+	self.fade_speed = fade_speed

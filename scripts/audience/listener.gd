@@ -9,8 +9,11 @@ class_name Listener
 @onready var bubble : AnimatedSprite3D = get_node("Bubble")
 @onready var timer : Timer = get_node("Patience")
 
-# Modification
+# Init Variable
 var modification : Dictionary
+var is_seated : bool = false
+
+# Resource Variable
 var patience : int
 var move_speed : float
 var can_sit : bool
@@ -18,7 +21,6 @@ var can_sit : bool
 # Local variable
 var has_emoji : bool = false
 var is_busy : bool = false
-var is_seated : bool = false
 var assigned_chair : Chair
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
@@ -27,14 +29,16 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 # Constant
 const SPEED : float = 5.0
 
-func _init_modification() -> void :
+func init_variable(modificaiton : Dictionary, is_seated : bool) -> void :
+	self.modification = modificaiton
+	self.is_seated = is_seated
+	
 	patience = modification["listener"]["patience"]
 	move_speed = modification["listener"]["move_speed"]
 	can_sit = modification["listener"]["can_sit"]
-	sprite.sprite_frames = modification["listener"]["sprite_frame"]
 
 func _ready():
-	_init_modification()
+	sprite.sprite_frames = modification["listener"]["sprite_frame"]
 	_seat_listener()
 
 func _physics_process(delta : float) -> void :
@@ -56,6 +60,7 @@ func _physics_process(delta : float) -> void :
 		
 	move_and_slide()
 
+# If seated then neutral, else walk to chair
 func _seat_listener():
 	if (is_seated):
 		sprite.play("neutral")
@@ -88,6 +93,7 @@ func _move_to_seat(delta : float, spawn_position : Vector3) -> void :
 		global_transform.origin.x = spawn_position.x
 		velocity.x = 0
 
+# Set listener to seated
 func _seat_on_chair() -> void :
 	is_seated = true
 	sprite.play("sitting")
@@ -131,6 +137,7 @@ func _show_emoji() -> void :
 	emoji.show()
 	timer.start(patience)
 
+# Annoy the listener
 func _annoy_listener() -> void :
 	emoji.hide()
 	bubble.play("bad")
@@ -144,6 +151,7 @@ func _clear_emoji() -> void :
 	emoji.hide()
 	emoji.reset_emojis()
 
+# Return listener back to neutral
 func _reset_listener() -> void :
 	sprite.play("neutral")
 	is_busy = false
@@ -163,7 +171,6 @@ func show_emoji(emoji_variety : Array[Shared.E_Emoji]) -> void :
 
 # Check if emoji provided match with current
 func check_for_match(egg_emoji : Shared.E_Emoji) -> bool :
-	print("current = ", egg_emoji, " = ", emoji.current_emoji)
 	if (has_emoji):
 		var match : bool = egg_emoji == emoji.current_emoji
 		if match:

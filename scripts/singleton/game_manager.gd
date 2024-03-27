@@ -9,14 +9,15 @@ class_name GameManager
 @onready var game_timer : Timer = get_node("Game Timer")
 
 # Export
-@export var level_resource_dictionary : Dictionary = {}
+@export var level_resource_dictionary : Dictionary
 
-# Init variable from resources
-var multiplier_increase_frequency : int = 3; #How many jokes in the combo before multiplier goes up
-var error_amount : int = 10
-var match_amount : int = 10
-var annoyed_amount : int = 1
-var time
+# Resource Variable
+var multiplier_increase_frequency : int
+var error_amount : int
+var match_amount : int
+var annoyed_amount : int
+var time : int
+var difficulty : Shared.E_DIFFICULTY_TYPE
 
 # Local variable
 var rng : RandomNumberGenerator = RandomNumberGenerator.new()
@@ -33,7 +34,7 @@ func _init_resources() -> void :
 	match_amount = level_resource.match_amount
 	annoyed_amount = level_resource.annoyed_amount
 	time = level_resource.time
-	print(match_amount)
+	difficulty = level_resource.difficulty
 
 func _reset_on_ready() -> void :
 	audio_manager = get_node("/root/Audio_Manager")
@@ -47,7 +48,36 @@ func _process(delta : float) -> void :
 		var dead_player = _return_dead_player()
 		if (dead_player):
 			get_tree().call_group("ThatsAllFolks", "start", dead_player)
-	pass
+	else:
+		if(!game_timer.is_stopped()):
+			game_timer.stop()
+
+func _return_dead_player() -> Comedian:
+	for player_num in player_list.keys():
+		var player = player_list[player_num]
+		if (player["laughter"] <= 0):
+			return player["player_ref"]
+	return null
+
+func _set_laugh_score(score : int, player : Comedian) -> void :
+	if (player.player_num == 1):
+		laughter_position = min(100.0,laughter_position + score)
+		player_list[player.player_num]["laughter"] = laughter_position
+		
+		if (player_list.size() > 1):
+			player_list[2]["laughter"] = 100.0 -laughter_position
+	else:
+		laughter_position -= score
+		player_list[1]["laughter"] = laughter_position
+		player_list[player.player_num]["laughter"] = 100.0 - laughter_position
+		
+func _on_shock_timer_timeout() -> void:
+	is_playing = false
+	get_tree().call_group("Curtains", "end_game")
+
+func _on_game_timer_timeout():
+	shock_timer.start()
+	player_list[1]["player_ref"].win()
 
 # Reset game manager variable to default
 func reset_local_default():
@@ -56,25 +86,22 @@ func reset_local_default():
 
 # Increase Score from egg match
 func register_match(distance : float, player : Comedian):
-	print(match_amount)
 	player_list[player.player_num]["score"] += match_amount + (1 + player_list[player.player_num]["joke_combo"])
 	player_list[player.player_num]["joke_combo"] += 1
 	_set_laugh_score(match_amount - (distance / 10) , player)
 
 # Decrease score from wrong egg match
 func register_error(player : Comedian) -> void :
-	print("error = ", -error_amount)
 	_set_laugh_score(-error_amount, player)
 	player_list[player.player_num]["joke_combo"] = 0
 
 # Decrease score from projectile hit
 func register_hurt(amount : int, player : Comedian) -> void :
-	print("hurt amount = ", amount, " , before = ", player_list[player.player_num]["score"])
 	player_list[player.player_num]["score"] = max(player_list[player.player_num]["score"] + amount, 0)
-	print(max(player_list[player.player_num]["score"] + amount, 0))
 	_set_laugh_score(amount, player)
 	player_list[player.player_num]["joke_combo"] = 0
-	
+
+# Deduct score from annoyed listener
 func register_annoyed() -> void :
 	for player_num in player_list.keys():
 		var player = player_list[player_num]
@@ -90,17 +117,21 @@ func back_to_menu() -> void :
 
 func restart_level() -> void :
 	player_list.clear()
-	load_level(level_resource.level)
+	load_level(level_resource.level, level_resource.difficulty)
 
-func load_level(index) -> void :
+func load_level(level : int, difficulty : Shared.E_DIFFICULTY_TYPE) -> void :
 	_reset_on_ready()
 	# Clear out current level
 	if game_holder.get_child_count() > 0:
+		printt("test", game_holder.get_children())
 		for holder_scene in game_holder.get_children():
+			print(holder_scene)
 			holder_scene.queue_free()
 	
+	printt(game_holder.get_children(), game_holder.get_child_count())
+	
 	# Set level data
-	level_resource = level_resource_dictionary[index]
+	level_resource = level_resource_dictionary[level][difficulty]
 	_init_resources()
 	reset_local_default()
 	
@@ -119,32 +150,3 @@ func add_player(comedian : Comedian) -> void :
 		"joke_combo" : 0
 	} 
 
-func _return_dead_player() -> Comedian:
-	for player_num in player_list.keys():
-		var player = player_list[player_num]
-		if (player["laughter"] <= 0):
-			return player["player_ref"]
-	return null
-
-func _on_shock_timer_timeout() -> void:
-	is_playing = false
-	get_tree().call_group("Curtains", "end_game")
-
-func _set_laugh_score(score : int, player : Comedian) -> void :
-	if (player.player_num == 1):
-		print("before = ", laughter_position)
-		laughter_position = min(100.0,laughter_position + score)
-		print("after = ", laughter_position)
-		player_list[player.player_num]["laughter"] = laughter_position
-
-		if (player_list.size() > 1):
-			player_list[2]["laughter"] = 100.0 -laughter_position
-	else:
-		laughter_position -= score
-		player_list[1]["laughter"] = laughter_position
-		player_list[player.player_num]["laughter"] = 100.0 - laughter_position
-
-
-func _on_game_timer_timeout():
-	shock_timer.start()
-	player_list[1]["player_ref"].win()

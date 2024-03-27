@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://dp85fseal6cl8"
+path="res://.godot/imported/Shoe.obj-3c8d81eaf6bf05a252c2c2de1c90d6db.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Shoe.obj-3c8d81eaf6bf05a252c2c2de1c90d6db.mesh"]
+
+source_file="res://3d/test/Shoe.obj"
+dest_files=["res://.godot/imported/Shoe.obj-3c8d81eaf6bf05a252c2c2de1c90d6db.mesh", "res://.godot/imported/Shoe.obj-3c8d81eaf6bf05a252c2c2de1c90d6db.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

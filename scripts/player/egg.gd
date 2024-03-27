@@ -7,13 +7,13 @@ class_name Egg
 @onready var emoji : Emoji = get_node("Emoji");
 @onready var animation : AnimationPlayer = get_node("AnimationPlayer");
 
-# Init variable from resources
+# Resource Variable
 var switch_duration : float
 var scale_duration : float
 var target_scale : Vector3
 var scale_ease : float
 
-# Variable
+# Local Variable
 var initial_scale : Vector3
 var scale_time_elapsed : float = 0.0
 var switch_time_elapsed : float = 0.0
@@ -38,13 +38,14 @@ func _ready() -> void :
 func _process(delta : float) -> void :
 	if (is_active):
 		_scale_egg(delta)
-		_switch_egg(delta)
+		_switch_emoji(delta)
 
 		# Check if the scaling is complete
 		if scale_time_elapsed >= scale_duration:
 			animation.play("late_break")
 		pass
 
+# Scale egg to target scale with easing
 func _scale_egg(delta : float) -> void :
 	scale_time_elapsed += delta
 	# Calculate the scaling factor based on the difference between target scale and initial scale
@@ -54,7 +55,8 @@ func _scale_egg(delta : float) -> void :
 	# Set the new scale to the node
 	scale = new_scale
 
-func _switch_egg(delta : float) -> void :
+# Switch to another emoji for egg
+func _switch_emoji(delta : float) -> void :
 	if (is_switching):
 		switch_time_elapsed += delta
 		
@@ -76,10 +78,16 @@ func _switch_egg(delta : float) -> void :
 			# Calculate the new scale
 			var new_rotation = 90 + (360 - 90) * rotation_factor
 			if (new_rotation >= 355):
-				stop_switch()
+				_stop_switch()
 			else:
 				# Set the new scale to the node
 				emoji.rotation.y = deg_to_rad(new_rotation)
+
+func _stop_switch() -> void :
+	if (is_switching):	
+		switch_time_elapsed = 0
+		is_switching = false
+		emoji.rotation.y = deg_to_rad(0)
 
 func _on_animation_player_animation_finished(anim_name : String):
 	if (anim_name == "early_break" or anim_name == "late_break"):
@@ -88,25 +96,27 @@ func _on_animation_player_animation_finished(anim_name : String):
 		emoji.show()
 		is_active = true
 
+func _on_animation_player_animation_started(anim_name):
+	if (anim_name == "early_break" or anim_name == "late_break"):
+		emoji.hide()
+
+# Reset Egg
 func reset_egg() -> void :
 	scale = initial_scale
 	scale_time_elapsed = 0.
 	emoji.set_random_emoji()
-	stop_switch()
+	_stop_switch()
 
+# Start switch of egg
 func switch_egg() -> void :
 	if (!is_switching):
 		is_switching = true
 
-func stop_switch() -> void :
-	if (is_switching):	
-		switch_time_elapsed = 0
-		is_switching = false
-		emoji.rotation.y = deg_to_rad(0)
-
+# Check if timing of egg match
 func timing() -> float :
 	return abs(scale.x - target_scale.x)
 
+# Check if egg is matched too early
 func is_early(player : Comedian) -> bool :
 	if (scale > Vector3(.8, .8, .8)):
 		return false
@@ -118,6 +128,3 @@ func is_early(player : Comedian) -> bool :
 		return true
 
 
-func _on_animation_player_animation_started(anim_name):
-	if (anim_name == "early_break" or anim_name == "late_break"):
-		emoji.hide()

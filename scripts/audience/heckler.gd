@@ -6,7 +6,6 @@ class_name Heckler
 @onready var audio_manager : AudioManager = get_node("/root/Audio_Manager")
 @onready var animation_player : AnimationPlayer = get_node("AnimationPlayer")
 @onready var sprite : AnimatedSprite3D = get_node("AnimatedSprite3D")
-@onready var throw_delay_timer : Timer = get_node("Throw Delay Timer")
 @onready var walk_timer : Timer = get_node("Walk Timer")
 @onready var spawn_point : Node3D = get_node("Spawn Point")
 @onready var retrieve_point : Node3D = get_node("Retrieve Point")
@@ -18,10 +17,9 @@ var throw_type : Shared.E_THROW_TYPE
 var target_map : TargetMap
 var projectile_hold : Node
 
-# Modification
+# Resource Variable
 var move_speed : float
-var aggressiveness : float
-var throw_delay : float
+var aggressiveness : Dictionary
 var move_time : Dictionary
 
 # Local variable
@@ -45,7 +43,6 @@ func init_variable(modification : Dictionary, current_projectile : Dictionary, t
 	
 	move_speed = modification["heckler"]["move_speed"]
 	aggressiveness = modification["heckler"]["aggressiveness"]
-	throw_delay = modification["heckler"]["throw_delay"]
 	move_time = modification["heckler"]["move_time"]
 
 # Play Spawn Animation When Spawned
@@ -60,7 +57,7 @@ func _physics_process(delta : float) -> void :
 	if is_moving:
 		position += current_direction * move_speed * delta * 5
 		
-		# Check boundaries
+		# Change direction once boundary is hit
 		if position.x <= boundary["left"] and current_direction.x < 0:
 			current_direction.x = -current_direction.x  # Change to moving right
 			sprite.play("walk_right")
@@ -77,12 +74,14 @@ func _start_moving():
 	animation_player.play("bounce")
 	walk_timer.start(game_manager.rng.randi_range(move_time["min"], move_time["max"]))
 
+# Spawn Gun Target
 func _spawn_target() -> void :
 	get_viewport().get_camera_3d().spawn_target(current_projectile,self)
-	pass
 
+# Throw projectile at target
 func _throw_protectile() -> void :
-	var target_position = target_map.get_random_target_position(throw_type,aggressiveness)
+	var rng_aggressive = game_manager.rng.randi_range(aggressiveness["min"], aggressiveness["max"])
+	var target_position : Vector3 = target_map.get_random_target_position(throw_type,rng_aggressive)
 
 	var instance : Projectile = packed_projectile.instantiate()
 	instance.init_variable(current_projectile, throw_type, target_position, retrieve_point.global_transform.origin)
@@ -92,6 +91,7 @@ func _throw_protectile() -> void :
 	
 	_start_moving()
 
+# After finish walking, execute projectile action 
 func _on_walk_timer_timeout() -> void :
 	animation_player.stop()
 	is_moving = false
@@ -106,7 +106,7 @@ func _on_walk_timer_timeout() -> void :
 
 # On Animation Finished
 func _on_animated_sprite_3d_animation_finished() -> void :
-	var anim_name = sprite.animation.get_basename()
+	var anim_name : String = sprite.animation.get_basename()
 	
 	#Spawn animation finish, start moving
 	if(anim_name == "spawn"):
@@ -119,6 +119,7 @@ func _on_animated_sprite_3d_animation_finished() -> void :
 	if(anim_name == "throw"):
 		_throw_protectile()
 
+# Set random direction when start moving
 func _set_random_direction() -> void :
 	if randi() % 2 == 0:
 		current_direction.x = 1.0  # Move right
@@ -135,5 +136,7 @@ func set_move_boundary() -> void :
 func play_death() -> void :
 	sprite.play("death")
 
+# Heckler fire gun and move again
 func fire_gun() -> void :
+	audio_manager.play_music(int(Shared.E_SOUND_EFFECT.GUN_SHOT), Shared.E_AUDIO_TYPE.SOUND_EFFECT)
 	_start_moving()

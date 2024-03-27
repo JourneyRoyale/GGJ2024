@@ -8,9 +8,11 @@ class_name Projectile
 @onready var hover_timer : Timer = get_node("Hover Timer")
 @onready var time_step_timer : Timer = get_node("Time Step Timer")
 
-# Init Variable
+# Resource Variable
 var projectile : Dictionary
 var speed : int
+
+# Init Variable
 var throw_type : Shared.E_THROW_TYPE
 var reterive_position : Vector3
 var target_position : Vector3
@@ -55,6 +57,40 @@ func init_variable( projectile : Dictionary, throw_type : Shared.E_THROW_TYPE, t
 			speed = randi_range(4, 7)
 
 func _ready():
+	_set_mesh_projectile()
+	_set_clamped_height_point()
+	_set_direction_to_target
+	#_caculate_sling_trajectory()
+	#print(trajectory_points)
+	#time_step_timer.start(time_step)
+
+func _process(delta : float) -> void :
+	if throw_type == Shared.E_THROW_TYPE.SLING:
+		_sling_behavior(delta)
+	if throw_type == Shared.E_THROW_TYPE.UNDERHAND:
+		_underhand_behavior(delta)
+	if throw_type == Shared.E_THROW_TYPE.OVERHAND:
+		_overhand_behavior(delta)
+
+# From starting position determine at what position projectile should clamped to height
+func _set_clamped_height_point() -> void :
+	var point1 : Vector3 = global_transform.origin
+	var point2 : Vector3 = target_position
+	var target_y : float = target_position.y
+	var target_z : float = -4.0
+	
+	# Calculate the interpolation factor based on the Z-coordinate of the point you're looking for
+	var t : float = (target_z - point1.z) / (point2.z - point1.z)
+	# Interpolate between the X coordinates of the two points
+	var x : Variant = lerp(point1.x, point2.x, t)
+
+	middle_clamped_point = Vector3(x, target_y, target_z)
+
+# Set direction to target
+func _set_direction_to_target() -> void :
+	direction = (target_position - global_transform.origin).normalized()
+
+func _set_mesh_projectile() -> void :
 	match projectile["type"]:
 		Shared.E_PROJECTILE_TYPE.TOMATO:
 			get_node("Tomato").visible = true
@@ -66,22 +102,10 @@ func _ready():
 			get_node("Boomerang").visible = true
 		Shared.E_PROJECTILE_TYPE.BRICK:
 			get_node("Rock").visible = true
-	
-	_set_direction_and_clamped_height_point()
+		Shared.E_PROJECTILE_TYPE.MONEY:
+			get_node("Money").visible = true
 
-	#_caculate_sling_trajectory()
-	#print(trajectory_points)
-	#time_step_timer.start(time_step)
-
-func _process(delta : float) -> void :
-	if throw_type == Shared.E_THROW_TYPE.SLING:
-		_sling_behavior(delta)
-		pass
-	if throw_type == Shared.E_THROW_TYPE.UNDERHAND:
-		_underhand_behavior(delta)
-	if throw_type == Shared.E_THROW_TYPE.OVERHAND:
-		_overhand_behavior(delta)
-
+# Logic for throw in a line
 func _sling_behavior(delta : float) -> void :
 	## Check and initiate return trip
 	if position.z > 0 and not returnTrip and projectile["type"] == Shared.E_PROJECTILE_TYPE.BOOMERANG:
@@ -105,6 +129,7 @@ func _sling_behavior(delta : float) -> void :
 			position.y = clamped_y_position
 			is_at_clamped_height = true
 
+# Logic for throwing at an angle
 func _underhand_behavior(delta : float) -> void :
 	var firing_angle = 45.0
 	var gravity = 9.8
@@ -127,6 +152,7 @@ func _underhand_behavior(delta : float) -> void :
 	else:
 		translate(Vector3(0, (Vy - (gravity)) * delta, Vx * delta))
 
+# Logic for throwing at an extreme angle
 func _overhand_behavior(delta : float) -> void :
 	var firing_angle = 70.0
 	var gravity = 9.8
@@ -140,10 +166,10 @@ func _overhand_behavior(delta : float) -> void :
 
 	# Calculate flight time.
 	var flight_duration = target_distance / Vx
-	if(position.y >= 11 and !is_hovering):
+	if(position.y >= 13 and !is_hovering):
 		is_hovering = true
 		var new_position = target_position
-		new_position.y = 10.5
+		new_position.y = 12.5
 		global_transform.origin = new_position
 
 		if hover_timer.is_stopped():
@@ -163,13 +189,16 @@ func _on_body_entered(body) -> void :
 		body.projectile_collided(projectile)
 		queue_free()
 
+# Despawn the projectile
 func _on_despawn_timer_timeout() -> void :
-	queue_free() # Destroy the projectile
+	queue_free()
 
+# Once hover finish start falling
 func _on_hover_timer_timeout() -> void :
 	is_hovering = false
 	done_hovering = true
 
+# Caculate parabolic arc to target position
 func _caculate_sling_trajectory() -> void :
 	var position : Vector3 = global_transform.origin
 	var direction : Vector3 = (target_position - global_transform.origin).normalized()
@@ -182,20 +211,6 @@ func _caculate_sling_trajectory() -> void :
 		trajectory_points.append(position)
 		position += direction * speed * time_step
 		position.y = new_height
-
-func _set_direction_and_clamped_height_point() -> void :
-	# Assuming you have these variables defined:
-	var point1 = global_transform.origin
-	var point2 = target_position
-	var target_y = target_position.y
-	var target_z = -4
-	# Calculate the interpolation factor based on the Z-coordinate of the point you're looking for
-	var t = (target_z - point1.z) / (point2.z - point1.z)
-	# Interpolate between the X coordinates of the two points
-	var x = lerp(point1.x, point2.x, t)
-	# The point you're looking for
-	middle_clamped_point = Vector3(x, target_y, target_z)
-	direction = (target_position - global_transform.origin).normalized()
 
 func _on_time_step_timer_timeout():
 	if current_point_index < trajectory_points.size():

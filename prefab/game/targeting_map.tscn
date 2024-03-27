@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://k8dj3dyhkner"]
+
+[ext_resource type="Script" path="res://scripts/game/target_map.gd" id="1_mb5u3"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_6fh8k"]
+size = Vector3(14, 0, 5.5)
+
+[node name="Targeting Map" type="Area3D" groups=["TargetMap"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 1.5)
+script = ExtResource("1_mb5u3")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_6fh8k")
+disabled = true

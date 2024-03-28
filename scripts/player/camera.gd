@@ -56,3 +56,5 @@ func spawn_target(modification : Dictionary, heckler : Heckler) -> void :
 	instance.heckler_owner = heckler
 	instance.modification = modification
 	instance.position = _get_random_position()
+	
+	heckler.gun = instance

@@ -179,7 +179,7 @@ func thats_all_folks() -> void :
 		sprite.play("yoink")
 
 # On Tomato hit player
-func projectile_collided(projectile : Dictionary) -> void :
+func projectile_collided(projectile : Dictionary, direction : Vector3) -> void :
 	if not is_dead:
 		for modification : String in projectile.keys():
 			match (modification):
@@ -198,7 +198,8 @@ func projectile_collided(projectile : Dictionary) -> void :
 					sprite.play("stun")
 				"knockback":
 					var knockback : int = projectile["knockback"]
-					position.z += knockback
+					velocity = knockback * direction
+					velocity.y = 0
 				"invulnerabile":
 					var invulnerabile_time : float = projectile["invulnerabile"]
 					animation_player.play("Invuln")

@@ -27,9 +27,10 @@ var packed_projectile : PackedScene = load("res://prefab/game/projectile.tscn")
 var is_moving : bool = false
 var current_direction : Vector3 = Vector3(0, 0, 0).normalized()  # Starts moving right
 var assigned_chair : Chair
-var health : int = 2
+var health : int
 var boundary : Dictionary
 var last_movement : String
+var gun : Gun
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
@@ -44,6 +45,7 @@ func init_variable(modification : Dictionary, current_projectile : Dictionary, t
 	move_speed = modification["heckler"]["move_speed"]
 	aggressiveness = modification["heckler"]["aggressiveness"]
 	move_time = modification["heckler"]["move_time"]
+	health = modification["heckler"]["health"]
 
 # Play Spawn Animation When Spawned
 func _ready() -> void :
@@ -134,6 +136,8 @@ func set_move_boundary() -> void :
 
 # Play Death Animation
 func play_death() -> void :
+	if gun != null:
+		gun.free()
 	sprite.play("death")
 
 # Heckler fire gun and move again

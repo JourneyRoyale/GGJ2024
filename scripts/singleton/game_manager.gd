@@ -85,8 +85,8 @@ func reset_local_default():
 	is_playing = false
 
 # Increase Score from egg match
-func register_match(distance : float, player : Comedian):
-	player_list[player.player_num]["score"] += match_amount + (1 + player_list[player.player_num]["joke_combo"])
+func register_match(distance : float, player : Comedian, amount_matched : int):
+	player_list[player.player_num]["score"] += (match_amount + (1 + player_list[player.player_num]["joke_combo"])) * amount_matched
 	player_list[player.player_num]["joke_combo"] += 1
 	_set_laugh_score(match_amount - (distance / 10) , player)
 
@@ -126,7 +126,7 @@ func load_level(level : int, difficulty : Shared.E_DIFFICULTY_TYPE) -> void :
 		printt("test", game_holder.get_children())
 		for holder_scene in game_holder.get_children():
 			print(holder_scene)
-			holder_scene.queue_free()
+			holder_scene.free()
 	
 	printt(game_holder.get_children(), game_holder.get_child_count())
 	

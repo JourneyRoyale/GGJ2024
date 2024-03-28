@@ -7,7 +7,7 @@ class_name Listener
 @onready var sprite : AnimatedSprite3D = get_node("AnimatedSprite3D");
 @onready var emoji : Emoji = get_node("Emoji");
 @onready var bubble : AnimatedSprite3D = get_node("Bubble")
-@onready var timer : Timer = get_node("Patience")
+@onready var patience_timer : Timer = get_node("Patience")
 
 # Init Variable
 var modification : Dictionary
@@ -135,7 +135,7 @@ func _show_emoji() -> void :
 	has_emoji = true
 	bubble.play("show")
 	emoji.show()
-	timer.start(patience)
+	patience_timer.start(patience)
 
 # Annoy the listener
 func _annoy_listener() -> void :
@@ -176,7 +176,7 @@ func check_for_match(egg_emoji : Shared.E_Emoji) -> bool :
 		if match:
 			_clear_emoji()
 			sprite.play("laughing")
+			patience_timer.stop()
 		return match
-	
 	return false
 

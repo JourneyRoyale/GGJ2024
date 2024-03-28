@@ -1,7 +1,7 @@
 [gd_scene load_steps=20 format=3 uid="uid://dn72fef3tnnm5"]
 
 [ext_resource type="Script" path="res://scripts/game/projectile.gd" id="1_7pt40"]
-[ext_resource type="ArrayMesh" uid="uid://bfq3vd2k67gsv" path="res://3d/Tomato.obj" id="2_0hllg"]
+[ext_resource type="ArrayMesh" uid="uid://bfq3vd2k67gsv" path="res://object/TomatoAsset1.obj" id="2_0hllg"]
 [ext_resource type="ArrayMesh" uid="uid://clbcfocyk2srt" path="res://3d/Bananna.obj" id="3_cryi0"]
 [ext_resource type="Texture2D" uid="uid://h213mdq14u68" path="res://3d/texture/BanannaTexture.png" id="3_f0w0a"]
 [ext_resource type="ArrayMesh" uid="uid://divmxjktyv5b6" path="res://3d/Boot.obj" id="4_lyalk"]
@@ -55,7 +55,7 @@ material_overlay = SubResource("StandardMaterial3D_4b5ps")
 mesh = ExtResource("3_cryi0")
 
 [node name="Boot" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0.0619056, -0.425411, -0.474173)
+transform = Transform3D(0.3, 0, 0, 0, -1.31134e-08, 0.3, 0, -0.3, -1.31134e-08, 0.062, -0.5, 0.168)
 visible = false
 material_overlay = SubResource("StandardMaterial3D_x8qy2")
 mesh = ExtResource("4_lyalk")
@@ -67,7 +67,7 @@ material_override = SubResource("StandardMaterial3D_jk1q2")
 mesh = ExtResource("5_gab4f")
 
 [node name="Brick" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -0.07, -0.300513, 1.8)
+transform = Transform3D(-0.2, 0, 1.74846e-08, 0, 0.2, 0, -1.74846e-08, 0, -0.2, -0.07, -0.300513, -1.96689)
 visible = false
 material_override = SubResource("StandardMaterial3D_8jl6g")
 mesh = ExtResource("10_8xoop")

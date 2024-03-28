@@ -101,7 +101,7 @@ func _set_mesh_projectile() -> void :
 		Shared.E_PROJECTILE_TYPE.BOOMERANG:
 			get_node("Boomerang").visible = true
 		Shared.E_PROJECTILE_TYPE.BRICK:
-			get_node("Rock").visible = true
+			get_node("Brick").visible = true
 		Shared.E_PROJECTILE_TYPE.MONEY:
 			get_node("Money").visible = true
 
@@ -184,9 +184,11 @@ func _overhand_behavior(delta : float) -> void :
 		translate(Vector3(0, (Vy - (gravity)) * delta, Vx * delta))
 
 # Check for player collision
-func _on_body_entered(body) -> void :
+func _on_body_entered(body : Node) -> void :
 	if body.is_in_group("Player"):
-		body.projectile_collided(projectile)
+		var hit_direction : Vector3 = body.global_transform.origin - global_transform.origin
+		var final_direction = direction.normalized() + hit_direction.normalized()
+		body.projectile_collided(projectile , direction)
 		queue_free()
 
 # Despawn the projectile

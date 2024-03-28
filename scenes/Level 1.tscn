@@ -88,7 +88,6 @@ shape = SubResource("ConvexPolygonShape3D_v7e3w")
 transform = Transform3D(-1, 0, 1.50996e-07, 0, 1, 0, -1.50996e-07, 0, -1, -1.15, 2.255, 5.175)
 
 [node name="Spawn Point" parent="Environment/Spawn Point" instance=ExtResource("4_yok1q")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 3.5, -15.222)
 
 [node name="Spawn Point2" parent="Environment/Spawn Point" instance=ExtResource("4_yok1q")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 3.5, -15.061)
@@ -158,52 +157,111 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, -0.5, -11.5)
 [node name="Chair6" parent="Environment/Stage/Floor/Chair Group 2" instance=ExtResource("5_5cfmn")]
 transform = Transform3D(1.5, -5.2318e-16, 0, 5.2318e-16, 1.5, -5.2318e-16, 1.82478e-31, 5.2318e-16, 1.5, -8, 0, 0.999999)
 throw_type_allowed = {
-0: 25,
-1: 0,
-2: 0,
-3: 1000
+0: 10,
+1: 25,
+2: 25,
+3: 20
 }
 
 [node name="Chair7" parent="Environment/Stage/Floor/Chair Group 2" instance=ExtResource("5_5cfmn")]
 transform = Transform3D(1.5, -5.2318e-16, 0, 5.2318e-16, 1.5, -5.2318e-16, 1.82478e-31, 5.2318e-16, 1.5, -4, 0, 0.999999)
 throw_type_allowed = {
-0: 25,
-1: 0,
-2: 0,
-3: 1000
+0: 10,
+1: 25,
+2: 25,
+3: 20
 }
 
 [node name="Chair8" parent="Environment/Stage/Floor/Chair Group 2" instance=ExtResource("5_5cfmn")]
 transform = Transform3D(1.5, -5.2318e-16, 0, 5.2318e-16, 1.5, -5.2318e-16, 1.82478e-31, 5.2318e-16, 1.5, 0, 0, 0.999999)
 throw_type_allowed = {
-0: 25,
-1: 0,
-2: 0,
-3: 1000
+0: 10,
+1: 25,
+2: 25,
+3: 20
 }
 
 [node name="Chair9" parent="Environment/Stage/Floor/Chair Group 2" instance=ExtResource("5_5cfmn")]
 transform = Transform3D(1.5, -5.2318e-16, 0, 5.2318e-16, 1.5, -5.2318e-16, 1.82478e-31, 5.2318e-16, 1.5, 4, 0, 0.999999)
 throw_type_allowed = {
-0: 25,
-1: 0,
-2: 0,
-3: 1000
+0: 10,
+1: 25,
+2: 25,
+3: 20
 }
 
 [node name="Chair10" parent="Environment/Stage/Floor/Chair Group 2" instance=ExtResource("5_5cfmn")]
 transform = Transform3D(1.5, -5.2318e-16, 0, 5.2318e-16, 1.5, -5.2318e-16, 1.82478e-31, 5.2318e-16, 1.5, 8, 0, 0.999999)
 throw_type_allowed = {
-0: 25,
-1: 0,
-2: 0,
-3: 1000
+0: 10,
+1: 25,
+2: 25,
+3: 20
 }
 
 [node name="Left" type="Node3D" parent="Environment/Stage/Floor/Chair Group 2"]
 transform = Transform3D(-6.55668e-08, -5.2318e-16, -1.5, 5.2318e-16, 1.5, -5.2318e-16, 1.5, -5.2318e-16, -6.55668e-08, -8, 0, 2.653)
 
 [node name="Right" type="Node3D" parent="Environment/Stage/Floor/Chair Group 2"]
+transform = Transform3D(-6.55668e-08, -5.2318e-16, -1.5, 5.2318e-16, 1.5, -5.2318e-16, 1.5, -5.2318e-16, -6.55668e-08, 8, 0, 2.653)
+
+[node name="Chair Group 3" type="Node3D" parent="Environment/Stage/Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 4, -17)
+
+[node name="Chair6" parent="Environment/Stage/Floor/Chair Group 3" instance=ExtResource("5_5cfmn")]
+transform = Transform3D(1.5, -5.2318e-16, 0, 5.2318e-16, 1.5, -5.2318e-16, 1.82478e-31, 5.2318e-16, 1.5, -8, 0, 0.999999)
+can_sit = false
+throw_type_allowed = {
+0: 10,
+1: 25,
+2: 25,
+3: 25
+}
+
+[node name="Chair7" parent="Environment/Stage/Floor/Chair Group 3" instance=ExtResource("5_5cfmn")]
+transform = Transform3D(1.5, -5.2318e-16, 0, 5.2318e-16, 1.5, -5.2318e-16, 1.82478e-31, 5.2318e-16, 1.5, -4, 0, 0.999999)
+can_sit = false
+throw_type_allowed = {
+0: 10,
+1: 25,
+2: 25,
+3: 25
+}
+
+[node name="Chair8" parent="Environment/Stage/Floor/Chair Group 3" instance=ExtResource("5_5cfmn")]
+transform = Transform3D(1.5, -5.2318e-16, 0, 5.2318e-16, 1.5, -5.2318e-16, 1.82478e-31, 5.2318e-16, 1.5, 0, 0, 0.999999)
+can_sit = false
+throw_type_allowed = {
+0: 10,
+1: 25,
+2: 25,
+3: 25
+}
+
+[node name="Chair9" parent="Environment/Stage/Floor/Chair Group 3" instance=ExtResource("5_5cfmn")]
+transform = Transform3D(1.5, -5.2318e-16, 0, 5.2318e-16, 1.5, -5.2318e-16, 1.82478e-31, 5.2318e-16, 1.5, 4, 0, 0.999999)
+can_sit = false
+throw_type_allowed = {
+0: 10,
+1: 25,
+2: 25,
+3: 25
+}
+
+[node name="Chair10" parent="Environment/Stage/Floor/Chair Group 3" instance=ExtResource("5_5cfmn")]
+transform = Transform3D(1.5, -5.2318e-16, 0, 5.2318e-16, 1.5, -5.2318e-16, 1.82478e-31, 5.2318e-16, 1.5, 8, 0, 0.999999)
+can_sit = false
+throw_type_allowed = {
+0: 10,
+1: 25,
+2: 25,
+3: 25
+}
+
+[node name="Left" type="Node3D" parent="Environment/Stage/Floor/Chair Group 3"]
+transform = Transform3D(-6.55668e-08, -5.2318e-16, -1.5, 5.2318e-16, 1.5, -5.2318e-16, 1.5, -5.2318e-16, -6.55668e-08, -8, 0, 2.653)
+
+[node name="Right" type="Node3D" parent="Environment/Stage/Floor/Chair Group 3"]
 transform = Transform3D(-6.55668e-08, -5.2318e-16, -1.5, 5.2318e-16, 1.5, -5.2318e-16, 1.5, -5.2318e-16, -6.55668e-08, 8, 0, 2.653)
 
 [node name="Top Floor" type="StaticBody3D" parent="Environment/Stage/Floor"]

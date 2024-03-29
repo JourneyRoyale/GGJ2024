@@ -130,7 +130,7 @@ func _physics_process(delta : float) -> void :
 		if (velocity.x == 0 and velocity.z == 0 and velocity.y != jump_velocity):
 			sprite.stop()
 	
-	if(target_map != null):
+	if(target_map != null and game_manager.game_state != Shared.E_GAME_STATE.GAME_OVER):
 		position.x = clamp(position.x, target_map.target_constraint["min_x"], target_map.target_constraint["max_x"])
 		position.z = clamp(position.z, target_map.target_constraint["min_z"], target_map.target_constraint["max_z"])
 	
@@ -216,6 +216,8 @@ func shot(is_dead : bool) -> void :
 		joke.visible = false
 		audio_manager.play_music(int(Shared.E_SOUND_EFFECT.BWACK), Shared.E_AUDIO_TYPE.SOUND_EFFECT)
 		get_tree().paused = true
+		game_manager.ui_screen.game_ui.visible = false
+		game_manager.game_state = Shared.E_GAME_STATE.GAME_OVER
 		game_manager.shock_timer.start()
 
 func win() -> void :
@@ -223,4 +225,6 @@ func win() -> void :
 	joke.visible = false
 	audio_manager.play_music(int(Shared.E_SOUND_EFFECT.BWACK), Shared.E_AUDIO_TYPE.SOUND_EFFECT)
 	get_tree().paused = true
+	game_manager.ui_screen.game_ui.visible = false
+	game_manager.game_state = Shared.E_GAME_STATE.VICTORY
 	game_manager.shock_timer.start()

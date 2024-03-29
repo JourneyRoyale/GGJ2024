@@ -4,33 +4,33 @@ class_name UIManager
 #Other
 @onready var game_manager : GameManager = get_node("/root/Game_Manager")
 @onready var audio_manager : AudioManager = get_node("/root/Audio_Manager")
-@onready var animation : AnimationPlayer = get_node("TitleScreen/AnimationPlayer")
+@onready var animation : AnimationPlayer = get_node("Title Screen UI/AnimationPlayer")
 
 #Title Screen
-@onready var title_screen : Control = get_node("TitleScreen")
-@onready var main_menu : Control = get_node("TitleScreen/MarginContainer/VBoxContainer/Main Menu")
-@onready var level_selection : Control = get_node("TitleScreen/MarginContainer/VBoxContainer/Level Selection")
-@onready var setting : Control = get_node("TitleScreen/MarginContainer/VBoxContainer/Setting")
-@onready var credits : Control = get_node("TitleScreen/MarginContainer/VBoxContainer/Credits")
-@onready var exit_button : Button = get_node("TitleScreen/MarginContainer/VBoxContainer/Main Menu/GridContainer/Exit")
+@onready var title_screen : Control = get_node("Title Screen UI")
+@onready var main_menu : Control = get_node("Title Screen UI/MarginContainer/VBoxContainer/Main Menu")
+@onready var level_selection : Control = get_node("Title Screen UI/MarginContainer/VBoxContainer/Level Selection")
+@onready var setting : Control = get_node("Title Screen UI/MarginContainer/VBoxContainer/Setting")
+@onready var credits : Control = get_node("Title Screen UI/MarginContainer/VBoxContainer/Credits")
+@onready var exit_button : Button = get_node("Title Screen UI/MarginContainer/VBoxContainer/Main Menu/GridContainer/Exit")
 
-#Pause Screen
-@onready var pause_screen : Control = get_node("Pause Screen")
-@onready var pause_menu : Control = get_node("Pause Screen/MarginContainer/MarginContainer/VBoxContainer/Pause Menu")
-@onready var pause_setting : Control = get_node("Pause Screen/MarginContainer/MarginContainer/VBoxContainer/Pause Setting")
+#Pause Screen UI
+@onready var pause_screen : Control = get_node("Pause Screen UI")
+@onready var pause_menu : Control = get_node("Pause Screen UI/MarginContainer/MarginContainer/VBoxContainer/Pause Menu")
+@onready var pause_setting : Control = get_node("Pause Screen UI/MarginContainer/MarginContainer/VBoxContainer/Pause Setting")
 
 #Game UI
-@onready var game_ui : Control = get_node("GameUI")
-@onready var score : Label = get_node("GameUI/MarginContainer/VBoxContainer/Top UI Bar/VBoxContainer/PlayerScore 3")
-@onready var time : Label = get_node("GameUI/MarginContainer/VBoxContainer/Top UI Bar/VBoxContainer/Time Left")
-@onready var laughter_meter : ProgressBar = get_node("GameUI/MarginContainer/VBoxContainer/VBoxContainer/Laughter Meter")
-@onready var joke_bar : BoxContainer = get_node("GameUI/MarginContainer/VBoxContainer/Joke Bar")
-@onready var combo_counter : Label = get_node("GameUI/ComboCounter")
+@onready var game_ui : Control = get_node("Game Screen UI")
+@onready var score : Label = get_node("Game Screen UI/MarginContainer/VBoxContainer/Top UI Bar/VBoxContainer/PlayerScore 3")
+@onready var time : Label = get_node("Game Screen UI/MarginContainer/VBoxContainer/Top UI Bar/VBoxContainer/Time Left")
+@onready var laughter_meter : ProgressBar = get_node("Game Screen UI/MarginContainer/VBoxContainer/VBoxContainer/Laughter Meter")
+@onready var joke_bar : BoxContainer = get_node("Game Screen UI/MarginContainer/VBoxContainer/Joke Bar")
+@onready var combo_counter : Label = get_node("Game Screen UI/ComboCounter")
 
 @onready var curtain : Curtain = get_node("Curtain Container")
-@onready var game_over : Control = get_node("Game Over")
-@onready var black_screen : TextureRect = get_node("Black Screen")
-@onready var transition : AnimationPlayer = get_node("Transition")
+@onready var game_over : Control = get_node("Transition UI/Game Over")
+@onready var black_screen : TextureRect = get_node("Transition UI/Black Screen")
+@onready var transition : AnimationPlayer = get_node("Transition Animation")
 
 # Local Variable
 var cluck_status : Dictionary = {
@@ -41,14 +41,14 @@ var cluck_status : Dictionary = {
 }
 
 var player_status : Dictionary = {
-	1 : "GameUI/MarginContainer/VBoxContainer/VBoxContainer/Laughter Meter/Player 1",
-	2 : "GameUI/MarginContainer/VBoxContainer/VBoxContainer/Laughter Meter/Player 2",
+	1 : "Game Screen UI/MarginContainer/VBoxContainer/VBoxContainer/Laughter Meter/Player 1",
+	2 : "Game Screen UI/MarginContainer/VBoxContainer/VBoxContainer/Laughter Meter/Player 2",
 }
 
 var player_score : Dictionary = {
-	1 : "GameUI/MarginContainer/VBoxContainer/VBoxContainer/Laughter Meter/PlayerScore 1",
-	2 : "GameUI/MarginContainer/VBoxContainer/VBoxContainer/Laughter Meter/PlayerScore 2",
-	3 : "GameUI/MarginContainer/VBoxContainer/Top UI Bar/VBoxContainer/PlayerScore 3",
+	1 : "Game Screen UI/MarginContainer/VBoxContainer/VBoxContainer/Laughter Meter/PlayerScore 1",
+	2 : "Game Screen UI/MarginContainer/VBoxContainer/VBoxContainer/Laughter Meter/PlayerScore 2",
+	3 : "Game Screen UI/MarginContainer/VBoxContainer/Top UI Bar/VBoxContainer/PlayerScore 3",
 }
 
 func _ready() -> void :
@@ -183,9 +183,8 @@ func _on_ui_gear_button_pressed() -> void :
 	get_tree().paused = pause_screen.visible 
 
 func _on_level_pressed(index : int, difficulty : Shared.E_DIFFICULTY_TYPE) -> void :
-	get_tree().call_group("Curtains", "start_game")
+	get_tree().call_group("Curtains", "opening_curtain")
 	title_screen.visible = false
-	game_ui.visible = true
 	game_manager.load_level(index, difficulty)
 
 func _on_level_back_pressed():
@@ -198,16 +197,18 @@ func _on_versus_pressed():
 	main_menu.visible = false
 
 func createSplat(fade_speed : float) -> void :
-	var tomato_splat_ui : TomatoSplat = get_node("GameUI/TomatoSplat")
+	var tomato_splat_ui : TomatoSplat = get_node("Game Screen UI/TomatoSplat")
 	tomato_splat_ui.createSplat(fade_speed)
 
-
 func _on_try_again_pressed():
+	get_tree().call_group("Curtains", "closing_curtain")
+	game_manager.game_state = Shared.E_GAME_STATE.START
+
+func try_level_again():
+	get_tree().call_group("Curtains", "opening_curtain")
+	game_manager.game_state = Shared.E_GAME_STATE.PLAYING
 	get_tree().paused = false
 	game_over.visible = false
-	curtain.visible = true
-	game_ui.visible = true
-	curtain.try_again()
 	game_manager.restart_level()
 
 func _on_gameover_quit_pressed():
@@ -216,12 +217,12 @@ func _on_gameover_quit_pressed():
 	game_manager.back_to_menu()
 	
 func show_game_over():
-	black_screen.visible = true
-	game_ui.visible = false
-	transition.play("fade_to_black")
+	get_tree().paused = true
+	game_over.visible = true
+	get_tree().call_group("Curtains", "opening_curtain")
 
-func _on_transition_animation_finished(anim_name):
-	if (anim_name == "fade_to_black"):
-		game_over.visible = true
-		curtain.visible = false
-		black_screen.visible = false
+#func _on_transition_animation_finished(anim_name):
+	#if (anim_name == "fade_to_black"):
+		#game_over.visible = true
+		#curtain.visible = false
+		#black_screen.visible = false

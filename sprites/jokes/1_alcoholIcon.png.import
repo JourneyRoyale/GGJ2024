@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://wqqosgek8bjo"
-path.s3tc="res://.godot/imported/cigar.png-e1201891363115aab50ddbf2cba32da4.s3tc.ctex"
+uid="uid://4ewv7qmeo13c"
+path.s3tc="res://.godot/imported/1_alcoholIcon.png-780d8701f11b4118936ee9fb292b3d9e.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://sprites/jokes/cigar.png"
-dest_files=["res://.godot/imported/cigar.png-e1201891363115aab50ddbf2cba32da4.s3tc.ctex"]
+source_file="res://sprites/jokes/1_alcoholIcon.png"
+dest_files=["res://.godot/imported/1_alcoholIcon.png-780d8701f11b4118936ee9fb292b3d9e.s3tc.ctex"]
 
 [params]
 

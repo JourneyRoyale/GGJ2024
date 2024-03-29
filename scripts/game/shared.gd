@@ -10,6 +10,7 @@ enum E_Emoji {
 	CIGAR,
 	MONEY_BAG,
 	SKULL,
+	HANDCUFF,
 }
 
 enum E_AUDIO_TYPE {
@@ -62,4 +63,12 @@ enum E_DIFFICULTY_TYPE {
 	NORMAL,
 	HARD,
 	LUNATIC,
+}
+
+enum E_GAME_STATE {
+	MAIN_MENU,
+	START,
+	PLAYING,
+	GAME_OVER,
+	VICTORY,
 }

@@ -12,6 +12,7 @@ class_name Emoji
 	Shared.E_Emoji.KNIFE : get_node("Knife"),
 	Shared.E_Emoji.MONEY_BAG : get_node("Money Bag"),
 	Shared.E_Emoji.SKULL : get_node("Skull"),
+	Shared.E_Emoji.HANDCUFF : get_node("Handcuff"),
 }
 
 # Init variable
@@ -53,11 +54,11 @@ func set_random_emoji_variety(chosen_emoji : Array[Shared.E_Emoji]) -> void :
 # Set emoji for comedian
 func set_random_emoji() -> void :
 	reset_emojis()
-	var copy_emoji = valid_emoji.duplicate()
-	copy_emoji.erase(current_emoji)
-	var random_emoji : Shared.E_Emoji = copy_emoji[game_manager.rng.randi_range(0, copy_emoji.size() - 1)]
-	emoji_dictionary[random_emoji].show()
-	current_emoji = random_emoji
+	var current_index = valid_emoji.find(current_emoji)
+	var next_index = (current_index + 1) % valid_emoji.size()
+	var next_emoji = valid_emoji[next_index]
+	emoji_dictionary[next_emoji].show()
+	current_emoji = next_emoji
 
 func check_match(emoji : Shared.E_Emoji) -> bool :
 	return current_emoji == emoji

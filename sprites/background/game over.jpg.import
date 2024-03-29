@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c7tn07j5ogfw4"
-path="res://.godot/imported/LevelCompletionConcept1Final2.jpg-4e58574b4d4e218e4689ba59ca1bb525.ctex"
+uid="uid://bxr3rq71bjitu"
+path="res://.godot/imported/game over.jpg-c83be5372937f5c511d98693768418b5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/background/LevelCompletionConcept1Final2.jpg"
-dest_files=["res://.godot/imported/LevelCompletionConcept1Final2.jpg-4e58574b4d4e218e4689ba59ca1bb525.ctex"]
+source_file="res://sprites/background/game over.jpg"
+dest_files=["res://.godot/imported/game over.jpg-c83be5372937f5c511d98693768418b5.ctex"]
 
 [params]
 

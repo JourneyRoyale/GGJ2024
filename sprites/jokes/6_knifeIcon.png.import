@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bmechf7hfuy7s"
-path.s3tc="res://.godot/imported/skull.png-e53461ab85138e532eb54b62c17ac27c.s3tc.ctex"
+uid="uid://b3oewx8miwv1d"
+path.s3tc="res://.godot/imported/6_knifeIcon.png-ece3ebad94b0b8bba12a0c86d7a82fce.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://sprites/jokes/skull.png"
-dest_files=["res://.godot/imported/skull.png-e53461ab85138e532eb54b62c17ac27c.s3tc.ctex"]
+source_file="res://sprites/jokes/6_knifeIcon.png"
+dest_files=["res://.godot/imported/6_knifeIcon.png-ece3ebad94b0b8bba12a0c86d7a82fce.s3tc.ctex"]
 
 [params]
 

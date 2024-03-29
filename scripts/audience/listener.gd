@@ -41,6 +41,9 @@ func _ready():
 	sprite.sprite_frames = modification["listener"]["sprite_frame"]
 	_seat_listener()
 
+func _process(delta):
+	bubble.look_at(get_viewport().get_camera_3d().global_transform.origin, Vector3.UP)
+
 func _physics_process(delta : float) -> void :
 	# Fall if not on floor
 	if not is_on_floor():

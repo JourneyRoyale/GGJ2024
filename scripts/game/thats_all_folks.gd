@@ -40,7 +40,7 @@ func _process(delta : float) -> void :
 				current_time = 0
 				current_state = CANE_STATE.OFF
 				game_manager.is_playing = false
-				get_tree().call_group("Curtains", "end_game")
+				get_tree().call_group("Curtains", "closing_curtain")
 			if target_player != null:
 				target_player.position.x = position.x
 			position.y = target_player.position.y

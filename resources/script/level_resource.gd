@@ -17,12 +17,13 @@ class_name LevelResource
 	Shared.E_Emoji.CIGAR,
 	Shared.E_Emoji.MONEY_BAG,
 	Shared.E_Emoji.SKULL,
+	Shared.E_Emoji.HANDCUFF,
 ]
 
 @export_group("Comedian")
 @export var fly_time : int = 1
 @export var accel = 1
-@export var speed = 7
+@export var speed = 5
 @export var jump_velocity = 5.0
 @export var inertia = 0.3
 
@@ -38,6 +39,7 @@ class_name LevelResource
 			"description" : "sheep",
 			"sprite_frame": preload("res://sprites/sprite_frame/sheep.tres"),
 			"patience" : 5,
+			"adjusted_patience" : 7,
 			"move_speed" : 3,
 			"limit" : 0,
 			"spawn_rate" : 70,
@@ -103,6 +105,7 @@ class_name LevelResource
 		"stun" : 2.0,
 		"hover_time": 1,
 		"despawn_time" : 5,
+		"knockback": 1,
 		"throw_type" : [
 			Shared.E_THROW_TYPE.UNDERHAND,
 			Shared.E_THROW_TYPE.OVERHAND,
@@ -113,10 +116,10 @@ class_name LevelResource
 		"description" : "boot",
 		"rate" : 0,
 		"limit" : 0,
-		"knockback" : 4,
 		"score" : -20,
 		"speed" : 10,
 		"stun" : 1.0,
+		"knockback" : 4,
 		"throw_type" : [
 			Shared.E_THROW_TYPE.SLING,
 		],
@@ -130,6 +133,7 @@ class_name LevelResource
 		"score" : -20,
 		"speed" : 10,
 		"stun" : .25,
+		"knockback": 1,
 		"throw_type" : [
 			Shared.E_THROW_TYPE.SLING,
 		],
@@ -142,6 +146,7 @@ class_name LevelResource
 		"score": -20,
 		"speed" : 15.0,
 		"stun" : 3.0,
+		"knockback": 1,
 		"despawn_time" : 0,
 		"hover_time" : 1,
 		"throw_type" : [
@@ -182,11 +187,12 @@ class_name LevelResource
 		"description" : "tomato",
 		"rate" : 70,
 		"limit" : 0,
-		"invulnerability" : .25,
 		"muddle": "tomato",
 		"score" : -10,
 		"speed" : 10.0,
 		"stun" : 1.0,
+		"invulnerability" : .25,
+		"knockback": 1,
 		"fade_speed": .7,
 		"despawn_time" : 0,
 		"hover_time" : 1,

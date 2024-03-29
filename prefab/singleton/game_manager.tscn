@@ -1,9 +1,9 @@
 [gd_scene load_steps=8 format=3 uid="uid://c7k74o0tq45d2"]
 
 [ext_resource type="Script" path="res://scripts/singleton/game_manager.gd" id="1_jywg1"]
-[ext_resource type="Resource" uid="uid://cwgkk8aucdit0" path="res://resources/data/Level 1/0_easy.tres" id="2_hdrok"]
-[ext_resource type="Resource" uid="uid://bowg24ix6h7fy" path="res://resources/data/Level 1/1_normal.tres" id="3_lmpw6"]
-[ext_resource type="Resource" uid="uid://we1ti3b1vbej" path="res://resources/data/Level 1/2_hard.tres" id="4_72n6j"]
+[ext_resource type="Resource" uid="uid://cjduqskyn8hni" path="res://resources/data/Level 1/0_easy.tres" id="2_hdrok"]
+[ext_resource type="Resource" uid="uid://we1ti3b1vbej" path="res://resources/data/Level 1/1_normal.tres" id="4_72n6j"]
+[ext_resource type="Resource" uid="uid://lavpx5kdh3g4" path="res://resources/data/Level 1/2_hard.tres" id="4_asf8v"]
 [ext_resource type="Resource" uid="uid://bbka50amf17yk" path="res://resources/data/Level 2/0_easy.tres" id="5_vcnrq"]
 [ext_resource type="Resource" uid="uid://c3hbpi8myou7x" path="res://resources/data/Level 2/1_normal.tres" id="6_ddmiv"]
 [ext_resource type="Resource" uid="uid://c3khfqudayui2" path="res://resources/data/Level 2/2_hard.tres" id="7_y0dor"]
@@ -12,7 +12,7 @@
 process_mode = 3
 script = ExtResource("1_jywg1")
 level_resource_dictionary = {
-1: [ExtResource("2_hdrok"), ExtResource("3_lmpw6"), ExtResource("4_72n6j")],
+1: [ExtResource("2_hdrok"), ExtResource("4_72n6j"), ExtResource("4_asf8v")],
 2: [ExtResource("5_vcnrq"), ExtResource("6_ddmiv"), ExtResource("7_y0dor")]
 }
 

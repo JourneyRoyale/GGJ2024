@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://bal0jss3qcmho"]
+[gd_scene load_steps=33 format=3 uid="uid://bal0jss3qcmho"]
 
 [ext_resource type="Script" path="res://scripts/player/comedian.gd" id="1_joff3"]
 [ext_resource type="SpriteFrames" uid="uid://cr383cnklcbny" path="res://sprites/audience/comedian_animation.tres" id="2_u6svr"]
@@ -6,14 +6,15 @@
 [ext_resource type="Script" path="res://scripts/audience/joke.gd" id="3_q8x81"]
 [ext_resource type="Texture2D" uid="uid://dhqbu5fgns7xw" path="res://sprites/EggOutline.png" id="3_ugrcy"]
 [ext_resource type="Script" path="res://scripts/audience/emoji.gd" id="4_aixek"]
-[ext_resource type="Texture2D" uid="uid://ce583o7s2tbuj" path="res://sprites/jokes/chicken_drumstick.png" id="6_0j30y"]
+[ext_resource type="Texture2D" uid="uid://4ewv7qmeo13c" path="res://sprites/jokes/1_alcoholIcon.png" id="6_8insa"]
 [ext_resource type="Texture2D" uid="uid://dw2m80rhg0f7d" path="res://sprites/jokes/chicken.png" id="7_aokrd"]
-[ext_resource type="Texture2D" uid="uid://886it5vm2ecu" path="res://sprites/jokes/alcohol.png" id="8_dvkee"]
-[ext_resource type="Texture2D" uid="uid://cmtnh448v0n0w" path="res://sprites/jokes/knife.png" id="9_7wng8"]
-[ext_resource type="Texture2D" uid="uid://dwugcfv3jrt3f" path="res://sprites/jokes/heart.png" id="10_c12b5"]
-[ext_resource type="Texture2D" uid="uid://wqqosgek8bjo" path="res://sprites/jokes/cigar.png" id="11_uj6vv"]
-[ext_resource type="Texture2D" uid="uid://bx4txy78e8ma3" path="res://sprites/jokes/money_bag.png" id="12_q03k2"]
-[ext_resource type="Texture2D" uid="uid://bmechf7hfuy7s" path="res://sprites/jokes/skull.png" id="13_n5ob3"]
+[ext_resource type="Texture2D" uid="uid://qae13eq6w7dn" path="res://sprites/jokes/2_chickenDrumstickIcon.png" id="8_v2y12"]
+[ext_resource type="Texture2D" uid="uid://ce16514d8gxi" path="res://sprites/jokes/3_cigaretteIcon.png" id="9_pwqp3"]
+[ext_resource type="Texture2D" uid="uid://bp2h3tnyvs2hw" path="res://sprites/jokes/5_heartsIcon.png" id="10_n0qmx"]
+[ext_resource type="Texture2D" uid="uid://b3oewx8miwv1d" path="res://sprites/jokes/6_knifeIcon.png" id="11_5y67o"]
+[ext_resource type="Texture2D" uid="uid://lf4r8amy4s52" path="res://sprites/jokes/8_moneybagsIcon.png" id="12_gbi5f"]
+[ext_resource type="Texture2D" uid="uid://b04j2bwmi1a58" path="res://sprites/jokes/7_skullIcon.png" id="13_1htmb"]
+[ext_resource type="Texture2D" uid="uid://bc2hoemokcn4s" path="res://sprites/jokes/4_hancuffsIcon.png" id="14_eim17"]
 [ext_resource type="Texture2D" uid="uid://3m3ctni2p4xv" path="res://sprites/comedian/EggSplitting5.png" id="14_pueuq"]
 [ext_resource type="Texture2D" uid="uid://c2yeiao4m5uvj" path="res://sprites/comedian/Eggcracking1.png" id="14_xxp1q"]
 [ext_resource type="Texture2D" uid="uid://ceah6tdrxoo4g" path="res://sprites/comedian/Eggcracking2.png" id="16_qwmy8"]
@@ -235,7 +236,7 @@ script = ExtResource("4_aixek")
 [node name="Alcohol" type="Sprite3D" parent="Joke/Egg/Emoji"]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 visible = false
-texture = ExtResource("8_dvkee")
+texture = ExtResource("6_8insa")
 
 [node name="Chicken" type="Sprite3D" parent="Joke/Egg/Emoji"]
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0)
@@ -243,34 +244,39 @@ visible = false
 texture = ExtResource("7_aokrd")
 
 [node name="Chicken Drumstick" type="Sprite3D" parent="Joke/Egg/Emoji"]
-transform = Transform3D(0.35, 0, 0, 0, 0.35, 0, 0, 0, 0.35, 0, -0.5, 0)
+transform = Transform3D(0.35, 0, 0, 0, 0.35, 0, 0, 0, 0.35, 0, -0.059124, 0)
 visible = false
-texture = ExtResource("6_0j30y")
+texture = ExtResource("8_v2y12")
 
 [node name="Cigar" type="Sprite3D" parent="Joke/Egg/Emoji"]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 visible = false
-texture = ExtResource("11_uj6vv")
+texture = ExtResource("9_pwqp3")
 
 [node name="Heart" type="Sprite3D" parent="Joke/Egg/Emoji"]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0, 0)
 visible = false
-texture = ExtResource("10_c12b5")
+texture = ExtResource("10_n0qmx")
 
 [node name="Knife" type="Sprite3D" parent="Joke/Egg/Emoji"]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0.231256, -0.430492, 0)
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0.231256, 0.130619, 0)
 visible = false
-texture = ExtResource("9_7wng8")
+texture = ExtResource("11_5y67o")
 
 [node name="Money Bag" type="Sprite3D" parent="Joke/Egg/Emoji"]
-transform = Transform3D(0.45, 0, 0, 0, 0.45, 0, 0, 0, 0.45, 0, 0, 0)
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0, 0)
 visible = false
-texture = ExtResource("12_q03k2")
+texture = ExtResource("12_gbi5f")
 
 [node name="Skull" type="Sprite3D" parent="Joke/Egg/Emoji"]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0, 0)
 visible = false
-texture = ExtResource("13_n5ob3")
+texture = ExtResource("13_1htmb")
+
+[node name="Handcuff" type="Sprite3D" parent="Joke/Egg/Emoji"]
+transform = Transform3D(0.35, 0, 0, 0, 0.35, 0, 0, 0, 0.35, 0, 0, 0)
+visible = false
+texture = ExtResource("14_eim17")
 
 [node name="Egg Background" type="Sprite3D" parent="Joke/Egg"]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)

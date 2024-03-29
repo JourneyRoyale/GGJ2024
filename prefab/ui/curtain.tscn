@@ -1,6 +1,6 @@
 [gd_scene load_steps=22 format=3 uid="uid://c2hstesjai7p1"]
 
-[ext_resource type="Script" path="res://scripts/ui/curtain_container.gd" id="1_5h47u"]
+[ext_resource type="Script" path="res://scripts/ui/curtain.gd" id="1_i4hl4"]
 [ext_resource type="Texture2D" uid="uid://dck4vj44e6gg2" path="res://sprites/ui/CCCurtainSpriteSheet.png" id="2_yrs5d"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2w86n"]
@@ -154,20 +154,20 @@ animations = [{
 
 [node name="Curtain" type="Node2D" groups=["Curtains"]]
 position = Vector2(577, -2)
-script = ExtResource("1_5h47u")
+script = ExtResource("1_i4hl4")
 
 [node name="Left Curtain" type="AnimatedSprite2D" parent="."]
 position = Vector2(-100, 543)
 rotation = 3.14159
 scale = Vector2(-0.775, -0.775)
 sprite_frames = SubResource("SpriteFrames_5diy7")
-animation = &"closed"
+animation = &"closing"
 
 [node name="Right Curtain" type="AnimatedSprite2D" parent="."]
 position = Vector2(870, 543)
 scale = Vector2(-0.775, 0.775)
 sprite_frames = SubResource("SpriteFrames_5diy7")
-animation = &"closed"
+animation = &"closing"
 
-[connection signal="animation_finished" from="Left Curtain" to="." method="_on_left_curtain_animation_finished"]
-[connection signal="animation_finished" from="Right Curtain" to="." method="_on_right_curtain_animation_finished"]
+[connection signal="animation_finished" from="Left Curtain" to="." method="_on_curtain_animation_finished"]
+[connection signal="animation_finished" from="Right Curtain" to="." method="_on_curtain_animation_finished"]

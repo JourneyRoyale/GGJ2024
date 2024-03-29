@@ -27,6 +27,7 @@ var laughter_position = 50.0;
 var additional_multiplier: int = 0;
 var player_list: Dictionary
 var is_singleplayer: bool = true
+var game_state : Shared.E_GAME_STATE = Shared.E_GAME_STATE.MAIN_MENU
 
 func _init_resources() -> void :
 	multiplier_increase_frequency = level_resource.multiplier_increase_frequency
@@ -47,6 +48,8 @@ func _process(delta : float) -> void :
 		#additional_multiplier = int(joke_combo / multiplier_increase_frequency)
 		var dead_player = _return_dead_player()
 		if (dead_player):
+			game_state = Shared.E_GAME_STATE.GAME_OVER
+			ui_screen.game_ui.visible = false
 			get_tree().call_group("ThatsAllFolks", "start", dead_player)
 	else:
 		if(!game_timer.is_stopped()):
@@ -73,7 +76,7 @@ func _set_laugh_score(score : int, player : Comedian) -> void :
 		
 func _on_shock_timer_timeout() -> void:
 	is_playing = false
-	get_tree().call_group("Curtains", "end_game")
+	get_tree().call_group("Curtains", "closing_curtain")
 
 func _on_game_timer_timeout():
 	shock_timer.start()
@@ -123,7 +126,6 @@ func load_level(level : int, difficulty : Shared.E_DIFFICULTY_TYPE) -> void :
 	_reset_on_ready()
 	# Clear out current level
 	if game_holder.get_child_count() > 0:
-		printt("test", game_holder.get_children())
 		for holder_scene in game_holder.get_children():
 			print(holder_scene)
 			holder_scene.free()
@@ -141,6 +143,7 @@ func load_level(level : int, difficulty : Shared.E_DIFFICULTY_TYPE) -> void :
 	audio_manager.play_music(int(level_resource.background_music), Shared.E_AUDIO_TYPE.BACKGROUND)
 	game_timer.start(time)
 	is_playing = true
+	game_state = Shared.E_GAME_STATE.PLAYING
 
 func add_player(comedian : Comedian) -> void :
 	player_list[comedian.player_num] = {

@@ -100,10 +100,10 @@ func _on_walk_timer_timeout() -> void :
 	
 	if(current_projectile["type"] == Shared.E_PROJECTILE_TYPE.GUN):
 		sprite.play("aim")
-		_spawn_target()
+		#_spawn_target()
 	else:
 		is_moving = false
-		animation_player.play("throw")
+		animation_player.play("throsw")
 		sprite.play("throw")
 
 # On Animation Finished

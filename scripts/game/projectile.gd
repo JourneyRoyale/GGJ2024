@@ -41,6 +41,8 @@ var initial_vertical_speed : float = 10.0
 var is_hovering: bool = false
 var done_hovering: bool = false
 
+var firing_row = "Back"
+
 func init_variable( projectile : Dictionary, throw_type : Shared.E_THROW_TYPE, target_position : Vector3, reterive_position : Vector3) :
 	self.projectile = projectile
 	self.throw_type = throw_type
@@ -65,12 +67,13 @@ func _ready():
 	#time_step_timer.start(time_step)
 
 func _process(delta : float) -> void :
-	if throw_type == Shared.E_THROW_TYPE.SLING:
-		_sling_behavior(delta)
-	if throw_type == Shared.E_THROW_TYPE.UNDERHAND:
-		_underhand_behavior(delta)
-	if throw_type == Shared.E_THROW_TYPE.OVERHAND:
-		_overhand_behavior(delta)
+	_underhand_behavior(delta)
+	#if throw_type == Shared.E_THROW_TYPE.SLING:
+	#	_sling_behavior(delta)
+	#if throw_type == Shared.E_THROW_TYPE.UNDERHAND:
+	#	_underhand_behavior(delta)
+	#if throw_type == Shared.E_THROW_TYPE.OVERHAND:
+	#	_overhand_behavior(delta)
 
 # From starting position determine at what position projectile should clamped to height
 func _set_clamped_height_point() -> void :
@@ -131,12 +134,35 @@ func _sling_behavior(delta : float) -> void :
 
 # Logic for throwing at an angle
 func _underhand_behavior(delta : float) -> void :
-	var firing_angle = 45.0
-	var gravity = 9.8
+	#Back row - Firing Angle - 44, Grav Multiplier - 3.5
+	#Middle Row - Firing Angle 70, Gravity 27.0
+	
+	var firing_angle = 0.0
+	var velocity_multiplier = 0.0
+	var grav_multiplier = 0.0
+	firing_row = "back"
+	
+	if(firing_row == "back"):
+		firing_angle = 44
+		velocity_multiplier = 2.4
+		grav_multiplier = 3.4
+	elif(firing_row == "middle"):
+		firing_angle = 45
+		velocity_multiplier = 2.7
+		grav_multiplier = 2.8
+	elif(firing_row == "front"):
+		firing_angle = 48
+		velocity_multiplier = 4.2
+		grav_multiplier = 1.9
+	
+	var gravity = 10*grav_multiplier
 	# Calculate distance to target
 	var target_distance : float = global_transform.origin.distance_to(target_position)
 
-	var projectile_velocity = target_distance / (sin(2 * deg_to_rad(firing_angle)) / gravity)
+	#Back Row - Multiplier 2.3
+	#Middle Row - Multiplier 1.5
+
+	var projectile_velocity = target_distance / (sin(2 * deg_to_rad(firing_angle)) / gravity) * velocity_multiplier
 	
 	# Extract the X  Y componenent of the velocity
 	var Vx = sqrt(projectile_velocity) * cos(deg_to_rad(firing_angle))
@@ -148,7 +174,7 @@ func _underhand_behavior(delta : float) -> void :
 	if(position.y <= 1):
 		position.y = 1
 		if despawn_timer.is_stopped():
-			despawn_timer.start(projectile["despawn_time"])
+			despawn_timer.start(3)
 	else:
 		translate(Vector3(0, (Vy - (gravity)) * delta, Vx * delta))
 

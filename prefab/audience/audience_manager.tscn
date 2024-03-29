@@ -5,7 +5,6 @@
 [node name="Audience" type="Node3D" groups=["AudienceManager"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.15, 2.255, -4.675)
 script = ExtResource("1_akc2f")
-spawn_point_list = Array[NodePath]([NodePath("../Environment/Stage/Floor/Top Floor/Spawn Point"), NodePath("../Environment/Stage/Floor/Top Floor/Spawn Point2")])
 
 [node name="Emoji Timer" type="Timer" parent="."]
 wait_time = 4.0

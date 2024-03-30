@@ -526,7 +526,7 @@ omni_attenuation = 0.378929
 [node name="Middle Row Lighting2" type="Node" parent="."]
 
 [node name="MiddleRowLight3" type="OmniLight3D" parent="Middle Row Lighting2"]
-transform = Transform3D(0.999994, -0.00349065, 0, 0.00307055, 0.879643, -0.475624, 0.00166024, 0.475621, 0.879649, 8.24664, 11.0875, -11.6769)
+transform = Transform3D(0.999994, -0.00349066, -3.19524e-10, 0.00307055, 0.879643, -0.475624, 0.00166024, 0.475621, 0.879649, 6.42465, 10.0447, -11.6769)
 light_energy = 3.785
 light_indirect_energy = 2.422
 light_volumetric_fog_energy = 2.251
@@ -540,7 +540,7 @@ omni_range = 7.294
 omni_attenuation = 0.286963
 
 [node name="MiddleRowLight2" type="OmniLight3D" parent="Middle Row Lighting2"]
-transform = Transform3D(0.999999, -0.00124915, -0.00121198, 0.000522374, 0.879649, -0.475623, 0.00166024, 0.475621, 0.879649, 0.800455, 11.5533, -11.5659)
+transform = Transform3D(0.999999, -0.00124915, -0.00121198, 0.000522374, 0.879649, -0.475623, 0.00166024, 0.475621, 0.879649, 0.800455, 10.5726, -11.5659)
 light_energy = 3.785
 light_indirect_energy = 2.422
 light_volumetric_fog_energy = 2.251
@@ -554,7 +554,7 @@ omni_range = 7.294
 omni_attenuation = 0.286963
 
 [node name="MiddleRowLight1" type="OmniLight3D" parent="Middle Row Lighting2"]
-transform = Transform3D(0.999998, -0.00174533, -5.82076e-11, 0.00153528, 0.879647, -0.475624, 0.00083012, 0.475623, 0.879649, -6.42542, 11.2643, -11.6771)
+transform = Transform3D(0.999998, -0.00174533, 1.90846e-09, 0.00153528, 0.879647, -0.475624, 0.00083012, 0.475623, 0.879649, -6.42542, 10.3778, -11.6771)
 light_energy = 3.785
 light_indirect_energy = 2.422
 light_volumetric_fog_energy = 2.251
@@ -570,7 +570,7 @@ omni_attenuation = 0.286963
 [node name="Front Row Lighting" type="Node" parent="."]
 
 [node name="FrontRowLight4" type="OmniLight3D" parent="Front Row Lighting"]
-transform = Transform3D(-0.991894, 0, -0.127065, 0, 1, 0, 0.127065, 0, -0.991894, 7.53572, 6.44473, -8.25758)
+transform = Transform3D(-0.991894, 0, -0.127065, 0, 1, 0, 0.127065, 0, -0.991894, 7.53572, 6.69432, -8.25758)
 light_energy = 1.745
 light_indirect_energy = 8.098
 light_volumetric_fog_energy = 12.965
@@ -585,7 +585,7 @@ omni_range = 5.903
 omni_attenuation = 1.51572e-05
 
 [node name="FrontRowLight3" type="OmniLight3D" parent="Front Row Lighting"]
-transform = Transform3D(0.99493, 0, -0.100573, 0, 1, 0, 0.100573, 0, 0.99493, 3.85051, 5.7442, -8.63975)
+transform = Transform3D(0.99493, 0, -0.100573, 0, 1, 0, 0.100573, 0, 0.99493, 3.85051, 5.99379, -8.63975)
 light_energy = 1.745
 light_indirect_energy = 8.098
 light_volumetric_fog_energy = 12.965
@@ -600,7 +600,7 @@ omni_range = 5.903
 omni_attenuation = 1.51572e-05
 
 [node name="FrontRowLight2" type="OmniLight3D" parent="Front Row Lighting"]
-transform = Transform3D(0.999264, 0, -0.038352, 0, 1, 0, 0.038352, 0, 0.999264, -0.779565, 6.43712, -7.59944)
+transform = Transform3D(0.999264, 0, -0.038352, 0, 1, 0, 0.038352, 0, 0.999264, -1.74445, 6.68671, -7.59944)
 light_energy = 1.745
 light_indirect_energy = 8.098
 light_volumetric_fog_energy = 12.965
@@ -615,7 +615,7 @@ omni_range = 5.903
 omni_attenuation = 1.51572e-05
 
 [node name="FrontRowLight1" type="OmniLight3D" parent="Front Row Lighting"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.93106, 5.90587, -7.19773)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.93106, 6.15546, -7.19773)
 light_energy = 1.745
 light_indirect_energy = 8.098
 light_volumetric_fog_energy = 12.965

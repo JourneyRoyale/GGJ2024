@@ -196,9 +196,9 @@ func _on_versus_pressed():
 	level_selection.visible = true
 	main_menu.visible = false
 
-func createSplat(fade_speed : float) -> void :
+func createSplat(fade_modification : Dictionary) -> void :
 	var tomato_splat_ui : TomatoSplat = get_node("Game Screen UI/TomatoSplat")
-	tomato_splat_ui.createSplat(fade_speed)
+	tomato_splat_ui.createSplat(fade_modification)
 
 func _on_try_again_pressed():
 	get_tree().call_group("Curtains", "closing_curtain")

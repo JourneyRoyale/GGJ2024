@@ -34,12 +34,12 @@ emoji_rate = {
 "min": 4
 }
 spawn_rate = {
-"max": 7,
-"min": 4
+"max": 6,
+"min": 3
 }
 force_rate = {
-"max": 3,
-"min": 2,
+"max": 4,
+"min": 3,
 "time": 15
 }
 audience_list = Array[Dictionary]([{
@@ -108,7 +108,7 @@ scale_ease = 0.2
 target_scale = Vector3(1.2, 1.2, 1.2)
 projectile_list = Array[Dictionary]([{
 "description": "bananna",
-"despawn_time": 5,
+"despawn_time": 15,
 "hover_time": 1,
 "knockback": 1,
 "limit": 0,
@@ -131,7 +131,10 @@ projectile_list = Array[Dictionary]([{
 }, {
 "description": "tomato",
 "despawn_time": 0,
-"fade_speed": 1.5,
+"fade_modification": {
+"fade_duration": 5.0,
+"fade_ease": 2.0
+},
 "hover_time": 1,
 "invulnerability": 0.25,
 "knockback": 1,

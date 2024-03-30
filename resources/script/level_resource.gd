@@ -31,8 +31,8 @@ class_name LevelResource
 @export var max_heckler : int = 7
 @export var starting_listener : Dictionary = {"min": 4, "max": 7}
 @export var emoji_rate : Dictionary = {"min": 4, "max": 7}
-@export var spawn_rate : Dictionary = {"min": 4, "max": 7}
-@export var force_rate : Dictionary = {"min" : 2, "max" : 3, "time": 15 }
+@export var spawn_rate : Dictionary = {"min": 3, "max": 6}
+@export var force_rate : Dictionary = {"min" : 3, "max" : 4, "time": 15 }
 @export var audience_list : Array[Dictionary] = [
 	{
 		"listener" : {
@@ -104,7 +104,7 @@ class_name LevelResource
 		"speed" : 10,
 		"stun" : 2.0,
 		"hover_time": 1,
-		"despawn_time" : 5,
+		"despawn_time" : 15,
 		"knockback": 1,
 		"throw_type" : [
 			Shared.E_THROW_TYPE.UNDERHAND,
@@ -193,7 +193,10 @@ class_name LevelResource
 		"stun" : 1.0,
 		"invulnerability" : .25,
 		"knockback": 1,
-		"fade_speed": .4,
+		"fade_modification": {
+			"fade_duration" : 5.0,
+			"fade_ease" : 2.0,
+		},
 		"despawn_time" : 0,
 		"hover_time" : 1,
 		"throw_type" : [

@@ -208,7 +208,7 @@ func projectile_collided(projectile : Dictionary, direction : Vector3) -> void :
 				"muddle":
 					var muddle_type : String = projectile["muddle"]
 					if (muddle_type == "tomato"):
-						ui_screen.createSplat(projectile["fade_speed"])
+						ui_screen.createSplat(projectile["fade_modification"])
 
 func shot(is_dead : bool) -> void :
 	if (is_dead):

@@ -22,7 +22,7 @@ accel = 1
 speed = 5
 jump_velocity = 5.0
 inertia = 0.3
-max_heckler = 7
+max_heckler = 1
 starting_listener = {
 "max": 4,
 "min": 2
@@ -57,7 +57,7 @@ audience_list = Array[Dictionary]([{
 "description": "sheep",
 "limit": 0,
 "move_speed": 3,
-"patience": 5,
+"patience": 1,
 "spawn_rate": 70,
 "sprite_frame": ExtResource("1_d8g15"),
 "type": 1

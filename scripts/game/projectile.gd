@@ -18,6 +18,8 @@ var reterive_position : Vector3
 var target_position : Vector3
 var middle_clamped_point : Vector3
 var direction : Vector3
+var initial_position : Vector3
+var initial_velocity : Vector3
 
 # Local Variable
 var time_step : float = .001
@@ -57,9 +59,12 @@ func init_variable( projectile : Dictionary, throw_type : Shared.E_THROW_TYPE, t
 			speed = randi_range(4, 7)
 
 func _ready():
+	initial_position = global_transform.origin
 	_set_mesh_projectile()
 	_set_clamped_height_point()
-	_set_direction_to_target
+	_set_direction_to_target()
+	initial_velocity = calculate_initial_velocity(initial_position, target_position)
+	printt('targetposition: ',target_position)
 	#_caculate_sling_trajectory()
 	#print(trajectory_points)
 	#time_step_timer.start(time_step)
@@ -68,6 +73,7 @@ func _process(delta : float) -> void :
 	if throw_type == Shared.E_THROW_TYPE.SLING:
 		_sling_behavior(delta)
 	if throw_type == Shared.E_THROW_TYPE.UNDERHAND:
+		print("I'm underhanding")
 		_underhand_behavior(delta)
 	if throw_type == Shared.E_THROW_TYPE.OVERHAND:
 		_overhand_behavior(delta)
@@ -130,27 +136,27 @@ func _sling_behavior(delta : float) -> void :
 			is_at_clamped_height = true
 
 # Logic for throwing at an angle
-func _underhand_behavior(delta : float) -> void :
-	var firing_angle = 45.0
-	var gravity = 9.8
-	# Calculate distance to target
-	var target_distance : float = global_transform.origin.distance_to(target_position)
-
-	var projectile_velocity = target_distance / (sin(2 * deg_to_rad(firing_angle)) / gravity)
-	
-	# Extract the X  Y componenent of the velocity
-	var Vx = sqrt(projectile_velocity) * cos(deg_to_rad(firing_angle))
-	var Vy = sqrt(projectile_velocity) * sin(deg_to_rad(firing_angle))
-
-	# Calculate flight time.
-	var flight_duration = target_distance / Vx
-
-	if(position.y <= 1):
-		position.y = 1
-		if despawn_timer.is_stopped():
-			despawn_timer.start(projectile["despawn_time"])
-	else:
-		translate(Vector3(0, (Vy - (gravity)) * delta, Vx * delta))
+#func _underhand_behavior(delta : float) -> void :
+	#var firing_angle = 45.0
+	#var gravity = 9.8
+	## Calculate distance to target
+	#var target_distance : float = global_transform.origin.distance_to(target_position)
+#
+	#var projectile_velocity = target_distance / (sin(2 * deg_to_rad(firing_angle)) / gravity)
+	#
+	## Extract the X  Y componenent of the velocity
+	#var Vx = sqrt(projectile_velocity) * cos(deg_to_rad(firing_angle))
+	#var Vy = sqrt(projectile_velocity) * sin(deg_to_rad(firing_angle))
+#
+	## Calculate flight time.
+	#var flight_duration = target_distance / Vx
+#
+	#if(position.y <= 1):
+		#position.y = 1
+		#if despawn_timer.is_stopped():
+			#despawn_timer.start(projectile["despawn_time"])
+	#else:
+		#translate(Vector3(0, (Vy - (gravity)) * delta, Vx * delta))
 
 # Logic for throwing at an extreme angle
 func _overhand_behavior(delta : float) -> void :
@@ -223,88 +229,40 @@ func _on_time_step_timer_timeout():
 	else:
 		time_step_timer.stop()
 
+#var target_position : Vector3
+#var initial_position : Vector3
+#var initial_velocity : Vector3
+#(-2.555785, 0.5, -3.17172)
+#(-6.568647, 0.5, -4.13655)
+#(6.358995, 0.5, 1.140525)
+func _underhand_behavior(delta : float) -> void :
+	var gravity = 9.8
+	initial_velocity.y -= gravity * delta
+	print("velocity y: ", initial_velocity.y)
+	# Update object's position based on the velocity
+	global_position += initial_velocity * delta
+	
+	printt('current psotion:',global_position)
+	# Check if the object reached the target
+	if global_position.distance_to(target_position) <= initial_velocity.length() * delta:
+		global_position = target_position
 
-# Archive
+func calculate_initial_velocity(initial_pos, target_pos):
+	# Direction toward target position
+	var direction = (target_pos - initial_pos).normalized()
+	# Distance to target position
+	var distance = (target_pos - initial_pos).length()
+	# Time to reach target
+	var flight_time = sqrt(2 * distance / 9.8)
+	var velocity_magnitude = distance / flight_time
+	
+	# Calculate horizontal and vertical components of velocity
+	var horizontal_velocity = direction * velocity_magnitude
+	var firing_angle_radians = deg_to_rad(45)
+	var vertical_velocity = velocity_magnitude * sin(firing_angle_radians)
 
-#func _underhand_behavior(delta : float) -> void :
-	#var gravity : float = -9.8
-	## Gravity strength for underhhand
-	## Apply gravity to vertical speed
-	#vertical_speed += gravity * delta
-	#
-	## Update position
-	#position.y += vertical_speed * delta
-	#print(position.y)
-	## Check if reached or passed the target height, then clamp
-	#if position.y <= clamped_y_position:
-		#position.y = clamped_y_position
-		#vertical_speed = 0 # Optionally stop vertical movement
-		#if not despawn_timer.is_stopped():
-			#despawn_timer.start(projectile["despawn_time"])
-	#else:
-		#position.z += speed * delta  # Assuming forward movement is along the z-axis
-
-#
-#func _overhand_behavior(delta : float) -> void :
-	#var gravity : float = -20.0 # Assuming a stronger gravity for faster descent
-#
-	#if not is_hovering and position.y < clamped_hover_position and position.y > clamped_y_position:
-		## Initial ascent or descent phase
-		#if not done_hovering:
-			## Ascent phase: Reverse gravity's effect to 'push' upwards
-			#vertical_speed += (-gravity * delta) # Invert gravity's direction for the ascent
-		#else:
-			## Descent phase: Apply gravity normally
-			#vertical_speed += gravity * delta
-#
-		#position.y += vertical_speed * delta
-		## Continue moving forward while rising or falling
-		#if not done_hovering:
-			#position.z += speed * delta
-#
-	#elif not is_hovering and position.y >= clamped_hover_position and not done_hovering:
-		## Reached hover position, initiate hovering
-		#is_hovering = true
-		#vertical_speed = 0  # Neutralize vertical speed to simulate hovering
-		#position.y = clamped_hover_position  # Clamp to hover position
-		#hover_timer.start(projectile["hover_time"])  # Begin hover period
-#
-	#if position.y <= clamped_y_position and done_hovering:
-		## After hovering, ensure it doesn't go below the clamped position
-		#position.y = clamped_y_position
-		#vertical_speed = 0  # Stop any vertical movement
-		#if not despawn_timer.is_stopped():
-			#despawn_timer.start(projectile["despawn_time"])
-
-
-
-	#
-	#if position.z > 0 and not returnTrip and projectile["type"] == Shared.E_PROJECTILE_TYPE.BOOMERANG:
-		#returnTrip = true
-		#target_speed = -speed
-		#smooth_turn_timer = smooth_turn_duration # Reset the timer for smooth turn
-	#elif returnTrip:
-		#if smooth_turn_timer > 0:
-			#print("turning back")
-			#smooth_turn_timer -= delta # Decrement the timer
-			#var t = 1 - smooth_turn_timer / smooth_turn_duration # Calculate interpolation factor
-			#var current_speed = lerp(speed, target_speed, t) # Interpolate speed
-			#var new_position = global_position + direction * current_speed * delta
-			#new_position.y = middle_clamped_point.y
-			#position = new_position
-		#elif global_transform.origin.distance_to(middle_clamped_point) < .05:
-			#var new_position = global_position + -direction * speed * delta
-			#position = new_position
-		#else:
-			#var new_position = global_position + -direction * speed * delta
-			#new_position.y = middle_clamped_point.y
-			#position = new_position
-	#else:
-		#var distance_to_middle : float = global_transform.origin.distance_to(middle_clamped_point)
-		#distance_to_middle = min(distance_to_middle, 0.01)
-		#var t : float = distance_to_middle / 0.01
-		#var new_height : float = lerp(position.y, middle_clamped_point.y, t)
-		#var new_postion = global_position + direction * speed * delta
-		#new_postion.y = new_height
-		#position = new_postion
-
+	# Combine horizontal and vertical components into a vector
+	var velocity = Vector3(horizontal_velocity.x, vertical_velocity, horizontal_velocity.z)
+	
+	
+	return velocity

@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="LevelResource" load_steps=5 format=3 uid="uid://cjduqskyn8hni"]
+[gd_resource type="Resource" script_class="LevelResource" load_steps=5 format=3 uid="uid://cwgkk8aucdit0"]
 
 [ext_resource type="SpriteFrames" uid="uid://drjanm0olmxmw" path="res://sprites/sprite_frame/sheep.tres" id="1_7dau6"]
 [ext_resource type="SpriteFrames" uid="uid://bmjxefay1b4ew" path="res://sprites/sprite_frame/wolf.tres" id="2_b5hxp"]
@@ -22,7 +22,7 @@ accel = 1
 speed = 5
 jump_velocity = 5.0
 inertia = 0.3
-max_heckler = 7
+max_heckler = 6
 starting_listener = {
 "max": 4,
 "min": 2
@@ -34,6 +34,11 @@ emoji_rate = {
 spawn_rate = {
 "max": 4,
 "min": 2
+}
+force_rate = {
+"max": 1,
+"min": 1,
+"time": 22
 }
 audience_list = Array[Dictionary]([{
 "heckler": {

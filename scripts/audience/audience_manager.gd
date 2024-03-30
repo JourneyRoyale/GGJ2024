@@ -11,6 +11,7 @@ class_name AudienceManager
 @onready var projectile_hold : Node = get_node('Projectile')
 @onready var emoji_timer : Timer = get_node("Emoji Timer")
 @onready var spawn_timer : Timer = get_node("Spawn Timer")
+@onready var force_timer : Timer = get_node("Force Timer")
 
 # Resource Variable
 var max_heckler : int
@@ -21,6 +22,7 @@ var projectile_list: Array[Dictionary]
 var audience_list : Array[Dictionary]
 var spawn_rate : Dictionary
 var emoji_rate : Dictionary
+var force_rate : Dictionary
 
 # Local variable
 var listener_factory : Listener
@@ -42,6 +44,7 @@ func _init_resources() -> void :
 	emoji_list = level_resource.emoji_list
 	projectile_list = level_resource.projectile_list
 	audience_list = level_resource.audience_list
+	force_rate = level_resource.force_rate
 	
 	target_map = get_tree().get_nodes_in_group("TargetMap")[0] as TargetMap
 	spawn_point_list = get_tree().get_nodes_in_group("SpawnPoint")
@@ -246,3 +249,15 @@ func check_for_match(egg : Egg, distance : float, player : Comedian) -> void :
 	else:
 		audio_manager.play_music(int(Shared.E_SOUND_EFFECT.HURT), Shared.E_AUDIO_TYPE.SOUND_EFFECT)		
 		game_manager.register_error(player)
+
+
+func _on_force_timer_timeout():
+	var group_force = game_manager.rng.randi_range(force_rate["min"], force_rate["max"])
+	group_force = min(group_force, listener_node_list.size())
+	listener_node_list.shuffle()
+	
+	var selected_listener = listener_node_list.slice(0, group_force)
+	for listener in selected_listener:
+		spawn_heckler(listener)
+	
+	force_timer.start(force_rate["time"])

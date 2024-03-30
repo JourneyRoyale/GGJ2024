@@ -763,7 +763,6 @@ theme = ExtResource("1_8kqac")
 text = "Hard"
 
 [node name="Level 2" type="VBoxContainer" parent="Title Screen UI/MarginContainer/VBoxContainer/Level Selection/GridContainer"]
-visible = false
 layout_mode = 2
 
 [node name="Label" type="Label" parent="Title Screen UI/MarginContainer/VBoxContainer/Level Selection/GridContainer/Level 2"]

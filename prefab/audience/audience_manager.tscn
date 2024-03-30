@@ -13,11 +13,18 @@ autostart = true
 [node name="Spawn Timer" type="Timer" parent="."]
 autostart = true
 
+[node name="Force Timer" type="Timer" parent="."]
+wait_time = 10.0
+autostart = true
+
 [node name="Members" type="Node" parent="."]
 
 [node name="Heckler" type="Node" parent="."]
 
 [node name="Projectile" type="Node" parent="."]
 
+[node name="Trajectory" type="Node" parent="."]
+
 [connection signal="timeout" from="Emoji Timer" to="." method="_on_emoji_timer_timeout"]
 [connection signal="timeout" from="Spawn Timer" to="." method="_on_spawn_timer_timeout"]
+[connection signal="timeout" from="Force Timer" to="." method="_on_force_timer_timeout"]

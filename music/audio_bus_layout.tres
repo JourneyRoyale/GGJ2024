@@ -1,7 +1,7 @@
 [gd_resource type="AudioBusLayout" format=3 uid="uid://dvmu6ugifovwj"]
 
 [resource]
-bus/0/volume_db = 0.265018
+bus/0/volume_db = -80.0
 bus/1/name = &"Background 2"
 bus/1/solo = false
 bus/1/mute = false

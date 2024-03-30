@@ -38,7 +38,7 @@ func get_random_target_position(throw_type : Shared.E_THROW_TYPE, aggressive : f
 	if(throw_type == Shared.E_THROW_TYPE.SLING):
 		closer_position.y = 1
 	else:
-		closer_position.y = 0.5
+		closer_position.y = 1
 	
 	return closer_position
 

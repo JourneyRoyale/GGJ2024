@@ -1,7 +1,7 @@
 [gd_scene load_steps=20 format=3 uid="uid://dn72fef3tnnm5"]
 
 [ext_resource type="Script" path="res://scripts/game/projectile.gd" id="1_7pt40"]
-[ext_resource type="ArrayMesh" uid="uid://bfq3vd2k67gsv" path="res://object/TomatoAsset1.obj" id="2_0hllg"]
+[ext_resource type="ArrayMesh" uid="uid://bfq3vd2k67gsv" path="res://3d/Tomato.obj" id="2_0hllg"]
 [ext_resource type="ArrayMesh" uid="uid://clbcfocyk2srt" path="res://3d/Bananna.obj" id="3_cryi0"]
 [ext_resource type="Texture2D" uid="uid://h213mdq14u68" path="res://3d/texture/BanannaTexture.png" id="3_f0w0a"]
 [ext_resource type="ArrayMesh" uid="uid://divmxjktyv5b6" path="res://3d/Boot.obj" id="4_lyalk"]
@@ -82,10 +82,10 @@ mesh = ExtResource("12_dyu00")
 one_shot = true
 
 [node name="Hover Timer" type="Timer" parent="."]
+one_shot = true
 
 [node name="Time Step Timer" type="Timer" parent="."]
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="timeout" from="Despawn Timer" to="." method="_on_despawn_timer_timeout"]
 [connection signal="timeout" from="Hover Timer" to="." method="_on_hover_timer_timeout"]
-[connection signal="timeout" from="Time Step Timer" to="." method="_on_time_step_timer_timeout"]

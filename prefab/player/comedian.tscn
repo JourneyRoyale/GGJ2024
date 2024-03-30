@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://dhqbu5fgns7xw" path="res://sprites/EggOutline.png" id="3_ugrcy"]
 [ext_resource type="Script" path="res://scripts/audience/emoji.gd" id="4_aixek"]
 [ext_resource type="Texture2D" uid="uid://4ewv7qmeo13c" path="res://sprites/jokes/1_alcoholIcon.png" id="6_8insa"]
-[ext_resource type="Texture2D" uid="uid://dw2m80rhg0f7d" path="res://sprites/jokes/chicken.png" id="7_aokrd"]
+[ext_resource type="Texture2D" uid="uid://dfp4u468fpvbd" path="res://sprites/jokes/9_chickenIcon.png" id="7_ykoi2"]
 [ext_resource type="Texture2D" uid="uid://qae13eq6w7dn" path="res://sprites/jokes/2_chickenDrumstickIcon.png" id="8_v2y12"]
 [ext_resource type="Texture2D" uid="uid://ce16514d8gxi" path="res://sprites/jokes/3_cigaretteIcon.png" id="9_pwqp3"]
 [ext_resource type="Texture2D" uid="uid://bp2h3tnyvs2hw" path="res://sprites/jokes/5_heartsIcon.png" id="10_n0qmx"]
@@ -241,7 +241,7 @@ texture = ExtResource("6_8insa")
 [node name="Chicken" type="Sprite3D" parent="Joke/Egg/Emoji"]
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0)
 visible = false
-texture = ExtResource("7_aokrd")
+texture = ExtResource("7_ykoi2")
 
 [node name="Chicken Drumstick" type="Sprite3D" parent="Joke/Egg/Emoji"]
 transform = Transform3D(0.35, 0, 0, 0, 0.35, 0, 0, 0, 0.35, 0, -0.059124, 0)

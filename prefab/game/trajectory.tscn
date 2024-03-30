@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=3 uid="uid://bhquas7rge3pb"]
+
+[ext_resource type="Script" path="res://prefab/game/trajectory.gd" id="1_huewm"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qqhx5"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_uq3ok"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_q2b8s"]
+
+[node name="Trajectory" type="StaticBody3D" groups=["Trajectory"]]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
+script = ExtResource("1_huewm")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+material_override = SubResource("StandardMaterial3D_qqhx5")
+mesh = SubResource("BoxMesh_uq3ok")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_q2b8s")

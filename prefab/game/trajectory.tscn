@@ -3,13 +3,14 @@
 [ext_resource type="Script" path="res://prefab/game/trajectory.gd" id="1_huewm"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qqhx5"]
+albedo_color = Color(0.878431, 0.0901961, 0, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_uq3ok"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_q2b8s"]
 
 [node name="Trajectory" type="StaticBody3D" groups=["Trajectory"]]
-transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
+transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 0, 0, 0)
 script = ExtResource("1_huewm")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]

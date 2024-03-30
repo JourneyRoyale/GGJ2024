@@ -15,7 +15,7 @@ var speed : int
 
 # Init Variable
 var throw_type : Shared.E_THROW_TYPE
-var reterive_position : Vector3
+var retreive_position : Vector3
 var middle_clamped_point : Vector3
 var direction : Vector3
 
@@ -50,12 +50,13 @@ var total_flight_time : float
 var total_time_step : int = 100
 var trajectory_spawn : int = 7
 var trajectory_factory : Node3D
+var trajectory_instance : Array[Trajectory]
 
 func init_variable( projectile : Dictionary, throw_type : Shared.E_THROW_TYPE, target_position : Vector3, reterive_position : Vector3) :
 	self.projectile = projectile
 	self.throw_type = throw_type
 	self.target_position = target_position
-	self.reterive_position = reterive_position
+	self.retreive_position = retreive_position
 	speed = projectile["speed"]
 	target_speed = projectile["speed"]
 
@@ -68,10 +69,12 @@ func _ready():
 	if throw_type == Shared.E_THROW_TYPE.SLING:
 		pass
 	if throw_type == Shared.E_THROW_TYPE.UNDERHAND:
-		_set_velocity_and_time(initial_position, target_position)
-		_calculate_future_trajectory(total_time_step)
+		_set_velocity_and_time(initial_position, target_position, 45, 1)
+		_calculate_future_trajectory(total_time_step, true)
 		_spawn_trajectory_point()
 	if throw_type == Shared.E_THROW_TYPE.OVERHAND:
+		target_position.y = 11
+		_set_velocity_and_time(initial_position, target_position, 70, 2)
 		pass
 
 func _process(delta : float) -> void :
@@ -112,39 +115,58 @@ func _underhand_behavior(delta : float) -> void :
 	
 	if start_flight_time >= total_flight_time:
 		global_transform.origin = target_position
+		if despawn_timer.is_stopped():
+			despawn_timer.start(projectile["despawn_time"])
 		return
 	else:
 		global_transform.origin = _get_adjusted_trajectory(start_flight_time)
 
 # Logic for throwing at an extreme angle
 func _overhand_behavior(delta : float) -> void :
-	var firing_angle = 70.0
-	# Calculate distance to target
-	var target_distance : float = global_transform.origin.distance_to(target_position)
-	var projectile_velocity = target_distance / (sin(2 * deg_to_rad(firing_angle)) / gravity)
+	#var firing_angle = 70.0
+	## Calculate distance to target
+	#var target_distance : float = global_transform.origin.distance_to(target_position)
+	#var projectile_velocity = target_distance / (sin(2 * deg_to_rad(firing_angle)) / gravity)
+	#
+	## Extract the X  Y componenent of the velocity
+	#var Vx = sqrt(projectile_velocity) * cos(deg_to_rad(firing_angle))
+	#var Vy = sqrt(projectile_velocity) * sin(deg_to_rad(firing_angle))
+#
+	## Calculate flight time.
+	#var flight_duration = target_distance / Vx
+	#if(position.y >= 13 and !is_hovering):
+		#is_hovering = true
+		#var new_position = target_position
+		#new_position.y = 12.5
+		#global_transform.origin = new_position
+#
+		#if hover_timer.is_stopped():
+			#hover_timer.start(projectile["hover_time"])
+	#elif(position.y <= 1):
+		#position.y = 1
+		#if despawn_timer.is_stopped():
+			#despawn_timer.start(projectile["despawn_time"])
+	#elif(done_hovering):
+		#position.y -= gravity * delta
+	#elif(!is_hovering and !done_hovering):
+		#translate(Vector3(0, (Vy - (gravity)) * delta, Vx * delta))
 	
-	# Extract the X  Y componenent of the velocity
-	var Vx = sqrt(projectile_velocity) * cos(deg_to_rad(firing_angle))
-	var Vy = sqrt(projectile_velocity) * sin(deg_to_rad(firing_angle))
-
-	# Calculate flight time.
-	var flight_duration = target_distance / Vx
-	if(position.y >= 13 and !is_hovering):
-		is_hovering = true
-		var new_position = target_position
-		new_position.y = 12.5
-		global_transform.origin = new_position
-
-		if hover_timer.is_stopped():
-			hover_timer.start(projectile["hover_time"])
-	elif(position.y <= 1):
+	start_flight_time += delta
+	
+	
+	if (position.y <= 1 and done_hovering):
 		position.y = 1
 		if despawn_timer.is_stopped():
 			despawn_timer.start(projectile["despawn_time"])
-	elif(done_hovering):
-		position.y -= gravity * delta
-	elif(!is_hovering and !done_hovering):
-		translate(Vector3(0, (Vy - (gravity)) * delta, Vx * delta))
+	elif (done_hovering):
+		position.y -= (gravity / 2) * delta
+	elif (start_flight_time >= total_flight_time and !done_hovering):
+		global_transform.origin = target_position
+		if hover_timer.is_stopped():
+			hover_timer.start(projectile["hover_time"])
+		return
+	elif !done_hovering:
+		global_transform.origin = _calculate_position(initial_position, initial_velocity, start_flight_time)
 
 # From starting position determine at what position projectile should clamped to height
 func _set_clamped_height_point() -> void :
@@ -179,7 +201,7 @@ func _set_mesh_projectile() -> void :
 		Shared.E_PROJECTILE_TYPE.MONEY:
 			get_node("Money").visible = true
 
-func _set_velocity_and_time(initial_pos, target_pos):
+func _set_velocity_and_time(initial_pos, target_pos, angle, force):
 	# Direction toward target position
 	var direction = (target_pos - initial_pos).normalized()
 	# Distance to target position
@@ -189,12 +211,12 @@ func _set_velocity_and_time(initial_pos, target_pos):
 	var velocity_magnitude = distance / flight_time
 	
 	# Calculate horizontal and vertical components of velocity
-	var firing_angle_radians = deg_to_rad(45)
+	var firing_angle_radians = deg_to_rad(angle)
 	var horizontal_velocity = direction * velocity_magnitude
 	var vertical_velocity = velocity_magnitude * sin(firing_angle_radians)
 
 	# Combine horizontal and vertical components into a vector
-	initial_velocity = Vector3(horizontal_velocity.x, vertical_velocity, horizontal_velocity.z)
+	initial_velocity = Vector3(horizontal_velocity.x, vertical_velocity * force, horizontal_velocity.z)
 	start_flight_time = 0.0
 	total_flight_time = flight_time
 
@@ -213,33 +235,33 @@ func _calculate_position(initial_pos, initial_velocity, time):
 	)
 	return current_position
 
-func _calculate_future_trajectory(total_time_step : int):
+func _calculate_future_trajectory(total_time_step : int, has_drop_off : bool):
 	var trajectory_point_array : Array[Vector3] = []
 	var trajectory_time_array : Array[float] = []
 	var time_step : float = total_flight_time / total_time_step
-	
 	for index in total_time_step:
 		trajectory_time_array.append(time_step * index)
 		trajectory_point_array.append(_calculate_position(initial_position, initial_velocity, time_step * index))
 	
-	# Find drop off point
-	var drop_off_index = 0
-	for index in trajectory_point_array.size():
-		if trajectory_point_array[index].y > trajectory_point_array[index + 1].y:
-			drop_off_index = index
-			break
-	
-	# Find distance step between dropoff and target point
-	var initial_drop_off_y = trajectory_point_array[drop_off_index].y
-	var distance_step = (trajectory_point_array[drop_off_index].y - target_position.y) / (trajectory_point_array.size() - drop_off_index)
+	if (has_drop_off):
+		# Find drop off point
+		var drop_off_index = 0
+		for index in trajectory_point_array.size():
+			if trajectory_point_array[index].y > trajectory_point_array[index + 1].y:
+				drop_off_index = index
+				break
 
-	# Adjust trajectory position to match target position y after drop off
-	for index in trajectory_point_array.size():
-		var currentIndex = drop_off_index + index
-		if currentIndex < trajectory_point_array.size():
-			trajectory_point_array[currentIndex].y = initial_drop_off_y - (distance_step * index)
-		else:
-			break
+		# Find distance step between dropoff and target point
+		var initial_drop_off_y = trajectory_point_array[drop_off_index].y
+		var distance_step = (trajectory_point_array[drop_off_index].y - target_position.y) / (trajectory_point_array.size() - drop_off_index)
+
+		# Adjust trajectory position to match target position y after drop off
+		for index in trajectory_point_array.size():
+			var currentIndex = drop_off_index + index
+			if currentIndex < trajectory_point_array.size():
+				trajectory_point_array[currentIndex].y = initial_drop_off_y - (distance_step * index)
+			else:
+				break
 	
 	for x in trajectory_time_array.size():
 		var point = trajectory_point_array[x]
@@ -263,30 +285,39 @@ func _spawn_trajectory_point():
 	if trajectory_factory == null:
 		trajectory_factory = pre_trajectory_factory.instantiate()
 	
-	var append_node = get_parent().get_parent()
+	var append_node = get_parent().get_parent().get_node("Trajectory")
 	var step_size = (trajectory_point.size() - 1) / trajectory_spawn
 	
 	for x in trajectory_spawn:
 		var new_trajectory : Trajectory = trajectory_factory.duplicate()
 		new_trajectory.origin_projectile = self
 		append_node.add_child(new_trajectory)
+		trajectory_instance.append(new_trajectory)
 		new_trajectory.global_transform.origin = trajectory_point[trajectory_point.keys()[x * step_size]]
 	
 	var new_trajectory : Trajectory = trajectory_factory.duplicate()
 	new_trajectory.origin_projectile = self
 	append_node.add_child(new_trajectory)
+	trajectory_instance.append(new_trajectory)
 	new_trajectory.global_transform.origin = target_position
+
+func _clear_trajectory_point():
+	for trajectory in trajectory_instance:
+		if trajectory != null:
+			trajectory.free()
+
+func _update_flight_time(initial_y, target_y):
+	total_flight_time = sqrt(2 * (initial_y - target_y) / gravity)
 
 # Check for player collision
 func _on_body_entered(body : Node) -> void :
-	print(body)
 	if body.is_in_group("Player"):
 		var hit_direction : Vector3 = body.global_transform.origin - global_transform.origin
 		var final_direction = direction.normalized() + hit_direction.normalized()
 		body.projectile_collided(projectile , direction)
+		_clear_trajectory_point()
 		queue_free()
 	if body.is_in_group("Trajectory"):
-		print("hit")
 		if body.origin_projectile == self:
 			body.queue_free()
 
@@ -297,6 +328,13 @@ func _on_despawn_timer_timeout() -> void :
 
 # Once hover finish start falling
 func _on_hover_timer_timeout() -> void :
+	start_flight_time = 0
+	initial_position = target_position
+	target_position = Vector3(target_position.x, 1, target_position.z)
+	initial_velocity = Vector3(0,0,0)
+	_update_flight_time(initial_position.y, 1)
+	_calculate_future_trajectory(total_time_step,false)
+	_spawn_trajectory_point()
 	is_hovering = false
 	done_hovering = true
 

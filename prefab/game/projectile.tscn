@@ -82,6 +82,7 @@ mesh = ExtResource("12_dyu00")
 one_shot = true
 
 [node name="Hover Timer" type="Timer" parent="."]
+one_shot = true
 
 [node name="Time Step Timer" type="Timer" parent="."]
 

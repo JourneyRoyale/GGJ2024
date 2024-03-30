@@ -103,46 +103,46 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, -4.5, -4.5)
 [node name="Chair" parent="Environment/Stage/Floor/Chair Group 1" instance=ExtResource("5_5cfmn")]
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, -8, 0, -0.5)
 throw_type_allowed = {
-0: 30,
-1: 1000,
+0: 50,
+1: 25,
 2: 0,
-3: 30
+3: 25
 }
 
 [node name="Chair2" parent="Environment/Stage/Floor/Chair Group 1" instance=ExtResource("5_5cfmn")]
 transform = Transform3D(1.5, -5.2318e-16, 0, 5.2318e-16, 1.5, -5.2318e-16, 1.82478e-31, 5.2318e-16, 1.5, -4, 0, -0.5)
 throw_type_allowed = {
-0: 30,
-1: 1000,
+0: 50,
+1: 25,
 2: 0,
-3: 30
+3: 25
 }
 
 [node name="Chair3" parent="Environment/Stage/Floor/Chair Group 1" instance=ExtResource("5_5cfmn")]
 transform = Transform3D(1.5, -5.2318e-16, 0, 5.2318e-16, 1.5, -5.2318e-16, 1.82478e-31, 5.2318e-16, 1.5, 0, 0, -0.5)
 throw_type_allowed = {
-0: 30,
-1: 1000,
+0: 50,
+1: 25,
 2: 0,
-3: 30
+3: 25
 }
 
 [node name="Chair4" parent="Environment/Stage/Floor/Chair Group 1" instance=ExtResource("5_5cfmn")]
 transform = Transform3D(1.5, -5.2318e-16, 0, 5.2318e-16, 1.5, -5.2318e-16, 1.82478e-31, 5.2318e-16, 1.5, 4, 0, -0.5)
 throw_type_allowed = {
-0: 30,
-1: 1000,
+0: 50,
+1: 25,
 2: 0,
-3: 30
+3: 25
 }
 
 [node name="Chair5" parent="Environment/Stage/Floor/Chair Group 1" instance=ExtResource("5_5cfmn")]
 transform = Transform3D(1.5, -5.2318e-16, 0, 5.2318e-16, 1.5, -5.2318e-16, 1.82478e-31, 5.2318e-16, 1.5, 8, 0, -0.5)
 throw_type_allowed = {
-0: 30,
-1: 1000,
+0: 50,
+1: 25,
 2: 0,
-3: 30
+3: 25
 }
 
 [node name="Left" type="Node3D" parent="Environment/Stage/Floor/Chair Group 1"]
@@ -156,48 +156,18 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, -0.5, -11.5)
 
 [node name="Chair6" parent="Environment/Stage/Floor/Chair Group 2" instance=ExtResource("5_5cfmn")]
 transform = Transform3D(1.5, -5.2318e-16, 0, 5.2318e-16, 1.5, -5.2318e-16, 1.82478e-31, 5.2318e-16, 1.5, -8, 0, 0.999999)
-throw_type_allowed = {
-0: 10,
-1: 10000,
-2: 30,
-3: 30
-}
 
 [node name="Chair7" parent="Environment/Stage/Floor/Chair Group 2" instance=ExtResource("5_5cfmn")]
 transform = Transform3D(1.5, -5.2318e-16, 0, 5.2318e-16, 1.5, -5.2318e-16, 1.82478e-31, 5.2318e-16, 1.5, -4, 0, 0.999999)
-throw_type_allowed = {
-0: 10,
-1: 10000,
-2: 30,
-3: 30
-}
 
 [node name="Chair8" parent="Environment/Stage/Floor/Chair Group 2" instance=ExtResource("5_5cfmn")]
 transform = Transform3D(1.5, -5.2318e-16, 0, 5.2318e-16, 1.5, -5.2318e-16, 1.82478e-31, 5.2318e-16, 1.5, 0, 0, 0.999999)
-throw_type_allowed = {
-0: 10,
-1: 10000,
-2: 30,
-3: 30
-}
 
 [node name="Chair9" parent="Environment/Stage/Floor/Chair Group 2" instance=ExtResource("5_5cfmn")]
 transform = Transform3D(1.5, -5.2318e-16, 0, 5.2318e-16, 1.5, -5.2318e-16, 1.82478e-31, 5.2318e-16, 1.5, 4, 0, 0.999999)
-throw_type_allowed = {
-0: 10,
-1: 10000,
-2: 30,
-3: 30
-}
 
 [node name="Chair10" parent="Environment/Stage/Floor/Chair Group 2" instance=ExtResource("5_5cfmn")]
 transform = Transform3D(1.5, -5.2318e-16, 0, 5.2318e-16, 1.5, -5.2318e-16, 1.82478e-31, 5.2318e-16, 1.5, 8, 0, 0.999999)
-throw_type_allowed = {
-0: 10,
-1: 10000,
-2: 30,
-3: 30
-}
 
 [node name="Left" type="Node3D" parent="Environment/Stage/Floor/Chair Group 2"]
 transform = Transform3D(-6.55668e-08, -5.2318e-16, -1.5, 5.2318e-16, 1.5, -5.2318e-16, 1.5, -5.2318e-16, -6.55668e-08, -8, 0, 2.653)
@@ -521,9 +491,3 @@ light_indirect_energy = 3.909
 light_volumetric_fog_energy = 2.939
 omni_range = 25.0
 omni_attenuation = 0.210224
-
-[node name="Node3D" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5205, 6.09851, -25.6712)
-
-[node name="Node3D2" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.48362, 0, 0)

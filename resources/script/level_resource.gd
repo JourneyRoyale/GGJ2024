@@ -5,7 +5,7 @@ class_name LevelResource
 @export var scene : PackedScene
 @export var level : int = 1
 @export var difficulty : Shared.E_DIFFICULTY_TYPE
-@export var time : int = 60
+@export var time : int = 180
 @export var background_music : Shared.E_BACKGROUND_MUSIC
 @export var emoji_variety : Dictionary = {"min": 3, "max": 5}
 @export var emoji_list : Array[Shared.E_Emoji] = [
@@ -32,6 +32,7 @@ class_name LevelResource
 @export var starting_listener : Dictionary = {"min": 4, "max": 7}
 @export var emoji_rate : Dictionary = {"min": 4, "max": 7}
 @export var spawn_rate : Dictionary = {"min": 4, "max": 7}
+@export var force_rate : Dictionary = {"min" : 2, "max" : 3, "time": 15 }
 @export var audience_list : Array[Dictionary] = [
 	{
 		"listener" : {
@@ -39,7 +40,6 @@ class_name LevelResource
 			"description" : "sheep",
 			"sprite_frame": preload("res://sprites/sprite_frame/sheep.tres"),
 			"patience" : 5,
-			"adjusted_patience" : 7,
 			"move_speed" : 3,
 			"limit" : 0,
 			"spawn_rate" : 70,
@@ -49,11 +49,11 @@ class_name LevelResource
 			"type": Shared.E_AUDIENCE_TYPE.WOLF,
 			"description" : "wolf",
 			"sprite_frame": preload("res://sprites/sprite_frame/wolf.tres"),
-			"health" : 2,
+			"health" : 5,
 			"throw_speed": 10,
 			"move_speed" : 0.5,
 			"aggressiveness" : { "min": .01, "max": .99 },
-			"move_time" : { "min": 2.0, "max": 5.0 },
+			"move_time" : { "min": 2.0, "max": 4.0 },
 		},
 	},
 	{
@@ -85,12 +85,12 @@ class_name LevelResource
 @export var multiplier_increase_frequency : int = 3; #How many jokes in the combo before multiplier goes up
 @export var error_amount : int = 10
 @export var match_amount : int = 10
-@export var annoyed_amount : int = 1
+@export var annoyed_amount : int = 5
 
 @export_group("Egg Scaling")
-@export var switch_duration = 1.0
-@export var scale_duration = 2.0  # Adjust this value to control the speed of scaling
-@export var scale_ease = 0.5
+@export var switch_duration = .25
+@export var scale_duration = 4  # Adjust this value to control the speed of scaling
+@export var scale_ease = 0.2
 @export var target_scale = Vector3(1.2, 1.2, 1.2)
 
 @export_group("Projectile")
@@ -100,7 +100,7 @@ class_name LevelResource
 		"description" : "bananna",
 		"rate" : 20,
 		"limit" : 0,
-		"score" : -20,
+		"score" : -40,
 		"speed" : 10,
 		"stun" : 2.0,
 		"hover_time": 1,
@@ -188,12 +188,12 @@ class_name LevelResource
 		"rate" : 70,
 		"limit" : 0,
 		"muddle": "tomato",
-		"score" : -10,
+		"score" : -40,
 		"speed" : 10.0,
 		"stun" : 1.0,
 		"invulnerability" : .25,
 		"knockback": 1,
-		"fade_speed": .7,
+		"fade_speed": .4,
 		"despawn_time" : 0,
 		"hover_time" : 1,
 		"throw_type" : [

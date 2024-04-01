@@ -86,6 +86,12 @@ class_name LevelResource
 @export var error_amount : int = 10
 @export var match_amount : int = 10
 @export var annoyed_amount : int = 5
+@export var star_criteria : Dictionary = {
+	"score" : 0,
+	"laughter" : 0,
+	"time_hit": 0,
+	"joke_combo" : 0,
+}
 
 @export_group("Egg Scaling")
 @export var switch_duration = .25
@@ -104,7 +110,7 @@ class_name LevelResource
 		"speed" : 10,
 		"stun" : 2.0,
 		"hover_time": 1,
-		"despawn_time" : 15,
+		"despawn_time" : 8,
 		"knockback": 1,
 		"throw_type" : [
 			Shared.E_THROW_TYPE.UNDERHAND,

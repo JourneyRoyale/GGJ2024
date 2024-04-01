@@ -37,6 +37,11 @@ spawn_rate = {
 "max": 7,
 "min": 4
 }
+force_rate = {
+"max": 4,
+"min": 3,
+"time": 15
+}
 audience_list = Array[Dictionary]([{
 "heckler": {
 "aggressiveness": {

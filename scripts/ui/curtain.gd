@@ -33,11 +33,11 @@ func _on_curtain_animation_finished() -> void :
 	if left_anim_name == "closing" or right_anim_name == "closing":
 		left.play("closed")
 		right.play("closed")
-		
+
 		if (game_manager.game_state == Shared.E_GAME_STATE.GAME_OVER):
 			ui_manager.show_game_over()
 		elif(game_manager.game_state == Shared.E_GAME_STATE.VICTORY):
-			game_manager.back_to_menu()
+			ui_manager.show_score_screen()
 		elif (game_manager.game_state == Shared.E_GAME_STATE.START):
 			ui_manager.try_level_again()
 	if left_anim_name == "opening" or right_anim_name == "opening":

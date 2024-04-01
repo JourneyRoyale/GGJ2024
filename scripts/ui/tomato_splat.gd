@@ -24,3 +24,6 @@ func createSplat(fade_modification : Dictionary):
 	self.fade_duration = fade_modification["fade_duration"]
 	self.fade_ease = fade_modification["fade_ease"]
 	fade_time_elapsed = 0
+
+func stopSplat():
+	self.modulate.a = 0

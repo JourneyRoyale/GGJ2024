@@ -19,6 +19,7 @@ var scale_time_elapsed : float = 0.0
 var switch_time_elapsed : float = 0.0
 var is_switching : bool = false
 var is_active : bool = true
+var has_switch : bool = false
 
 func _init_resources() -> void :
 	var level_resource : LevelResource = game_manager.level_resource
@@ -66,18 +67,17 @@ func _switch_emoji(delta : float) -> void :
 			# Calculate the new scale
 			var new_rotation = 0 + (90 - 0) * rotation_factor
 			
-			if (new_rotation >= 85):
-				emoji.set_random_emoji()
-			else:
-				# Set the new scale to the node
-				emoji.rotation.y = deg_to_rad(new_rotation)
+			# Set the new scale to the node
+			emoji.rotation.y = deg_to_rad(new_rotation)
 		
 		elif (switch_time_elapsed > (switch_duration / 4)):
+			switch_emoji()
+			
 			# Calculate the scaling factor based on the difference between target scale and initial scale
 			var rotation_factor = ease((switch_time_elapsed - (switch_duration / 4)) / (3 * switch_duration / 4), 1.0)  # Apply easing function
 			# Calculate the new scale
 			var new_rotation = 90 + (360 - 90) * rotation_factor
-			if (new_rotation >= 355):
+			if (new_rotation >= 340):
 				_stop_switch()
 			else:
 				# Set the new scale to the node
@@ -85,6 +85,7 @@ func _switch_emoji(delta : float) -> void :
 
 func _stop_switch() -> void :
 	if (is_switching):	
+		switch_emoji()
 		switch_time_elapsed = 0
 		is_switching = false
 		emoji.rotation.y = deg_to_rad(0)
@@ -110,11 +111,17 @@ func reset_egg() -> void :
 # Start switch of egg
 func switch_egg() -> void :
 	if (!is_switching):
+		has_switch = false
 		is_switching = true
 
 # Check if timing of egg match
 func timing() -> float :
 	return abs(scale.x - target_scale.x)
+
+func switch_emoji() -> void :
+	if (has_switch == false):
+		has_switch = true
+		emoji.set_random_emoji()
 
 # Check if egg is matched too early
 func is_early(player : Comedian) -> bool :

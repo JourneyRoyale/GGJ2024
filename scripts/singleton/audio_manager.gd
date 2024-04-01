@@ -15,12 +15,17 @@ class_name AudioManager
 }
 @onready var background_dictionary : Dictionary = {
 	Shared.E_BACKGROUND_MUSIC.RAGTIME : get_node("Background/Ragtime"),
+	Shared.E_BACKGROUND_MUSIC.MAIN_MENU : get_node("Background/Main Menu"),
+	Shared.E_BACKGROUND_MUSIC.GAME_OVER : get_node("Background/Game Over"),
 }
 
-var master_volume : float = 0
+var master_volume : float = .5
 var background_volume : float = .5
 var sound_effect_volume : float = .5
 var current_music : AudioStreamPlayer
+
+func _ready():
+	play_music(Shared.E_BACKGROUND_MUSIC.MAIN_MENU, Shared.E_AUDIO_TYPE.BACKGROUND)
 
 # Find audiostream player node
 func _find_music(music_name : int, audio_type : Shared.E_AUDIO_TYPE) -> AudioStreamPlayer :

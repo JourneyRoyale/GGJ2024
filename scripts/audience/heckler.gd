@@ -120,6 +120,9 @@ func _on_animated_sprite_3d_animation_finished() -> void :
 	
 	if(anim_name == "throw"):
 		_throw_protectile()
+	
+	if(anim_name == "fire"):
+		_start_moving()
 
 # Set random direction when start moving
 func _set_random_direction() -> void :
@@ -143,4 +146,4 @@ func play_death() -> void :
 # Heckler fire gun and move again
 func fire_gun() -> void :
 	audio_manager.play_music(int(Shared.E_SOUND_EFFECT.GUN_SHOT), Shared.E_AUDIO_TYPE.SOUND_EFFECT)
-	_start_moving()
+	sprite.play("fire")

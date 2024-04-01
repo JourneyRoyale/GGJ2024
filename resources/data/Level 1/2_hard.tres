@@ -24,7 +24,7 @@ accel = 1
 speed = 5
 jump_velocity = 5.0
 inertia = 0.3
-max_heckler = 7
+max_heckler = 8
 starting_listener = {
 "max": 7,
 "min": 4

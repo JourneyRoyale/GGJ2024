@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://csw4tv5xbyfi5"]
+[gd_scene load_steps=33 format=3 uid="uid://csw4tv5xbyfi5"]
 
 [ext_resource type="PackedScene" uid="uid://k8dj3dyhkner" path="res://prefab/game/targeting_map.tscn" id="1_5r6fo"]
 [ext_resource type="PackedScene" uid="uid://c12ak321i01q2" path="res://prefab/game/camera_3d.tscn" id="1_wwfym"]
@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://c8hcfbf67vok0" path="res://prefab/audience/audience_manager.tscn" id="11_c8qvp"]
 [ext_resource type="PackedScene" uid="uid://bvbnovenkyygs" path="res://prefab/game/player_spawn.tscn" id="11_i70ah"]
 [ext_resource type="PackedScene" uid="uid://dylmrkofcgcmw" path="res://prefab/game/thats_all_folks.tscn" id="12_rvjx6"]
+[ext_resource type="Texture2D" uid="uid://d4nl4l6qxdskq" path="res://sprites/light_mask.png" id="13_ja26p"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hfpfe"]
 albedo_texture = ExtResource("4_5eur5")
@@ -485,9 +486,115 @@ start_x = -15.0
 [node name="Player Spawn" parent="." instance=ExtResource("11_i70ah")]
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 5.63702, 4.59269)
-light_energy = 1.646
-light_indirect_energy = 3.909
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 6.89627, 9.5211)
+light_energy = 2.887
+light_indirect_energy = 1.939
 light_volumetric_fog_energy = 2.939
-omni_range = 25.0
-omni_attenuation = 0.210224
+omni_range = 17.797
+omni_attenuation = 0.378929
+
+[node name="Middle Row Lighting2" type="Node" parent="."]
+
+[node name="MiddleRowLight3" type="OmniLight3D" parent="Middle Row Lighting2"]
+transform = Transform3D(0.999994, -0.00349066, -3.19524e-10, 0.00307055, 0.879643, -0.475624, 0.00166024, 0.475621, 0.879649, 6.42465, 10.0447, -11.6769)
+light_energy = 3.785
+light_indirect_energy = 2.422
+light_volumetric_fog_energy = 2.251
+light_projector = ExtResource("13_ja26p")
+light_size = 0.166
+light_specular = 0.899
+shadow_enabled = true
+shadow_bias = 0.0
+shadow_normal_bias = 0.782
+omni_range = 7.294
+omni_attenuation = 0.286963
+
+[node name="MiddleRowLight2" type="OmniLight3D" parent="Middle Row Lighting2"]
+transform = Transform3D(0.999999, -0.00124915, -0.00121198, 0.000522374, 0.879649, -0.475623, 0.00166024, 0.475621, 0.879649, 0.800455, 10.5726, -11.5659)
+light_energy = 3.785
+light_indirect_energy = 2.422
+light_volumetric_fog_energy = 2.251
+light_projector = ExtResource("13_ja26p")
+light_size = 0.166
+light_specular = 0.899
+shadow_enabled = true
+shadow_bias = 0.0
+shadow_normal_bias = 0.782
+omni_range = 7.294
+omni_attenuation = 0.286963
+
+[node name="MiddleRowLight1" type="OmniLight3D" parent="Middle Row Lighting2"]
+transform = Transform3D(0.999998, -0.00174533, 1.90846e-09, 0.00153528, 0.879647, -0.475624, 0.00083012, 0.475623, 0.879649, -6.42542, 10.3778, -11.6771)
+light_energy = 3.785
+light_indirect_energy = 2.422
+light_volumetric_fog_energy = 2.251
+light_projector = ExtResource("13_ja26p")
+light_size = 0.166
+light_specular = 0.899
+shadow_enabled = true
+shadow_bias = 0.0
+shadow_normal_bias = 0.782
+omni_range = 7.294
+omni_attenuation = 0.286963
+
+[node name="Front Row Lighting" type="Node" parent="."]
+
+[node name="FrontRowLight4" type="OmniLight3D" parent="Front Row Lighting"]
+transform = Transform3D(-0.991894, 0, -0.127065, 0, 1, 0, 0.127065, 0, -0.991894, 7.53572, 6.69432, -8.25758)
+light_energy = 1.745
+light_indirect_energy = 8.098
+light_volumetric_fog_energy = 12.965
+light_projector = ExtResource("13_ja26p")
+light_size = 0.166
+light_specular = 0.899
+shadow_enabled = true
+shadow_bias = 0.0
+shadow_normal_bias = 0.782
+distance_fade_enabled = true
+omni_range = 5.903
+omni_attenuation = 1.51572e-05
+
+[node name="FrontRowLight3" type="OmniLight3D" parent="Front Row Lighting"]
+transform = Transform3D(0.99493, 0, -0.100573, 0, 1, 0, 0.100573, 0, 0.99493, 3.85051, 5.99379, -8.63975)
+light_energy = 1.745
+light_indirect_energy = 8.098
+light_volumetric_fog_energy = 12.965
+light_projector = ExtResource("13_ja26p")
+light_size = 0.166
+light_specular = 0.899
+shadow_enabled = true
+shadow_bias = 0.0
+shadow_normal_bias = 0.782
+distance_fade_enabled = true
+omni_range = 5.903
+omni_attenuation = 1.51572e-05
+
+[node name="FrontRowLight2" type="OmniLight3D" parent="Front Row Lighting"]
+transform = Transform3D(0.999264, 0, -0.038352, 0, 1, 0, 0.038352, 0, 0.999264, -1.74445, 6.68671, -7.59944)
+light_energy = 1.745
+light_indirect_energy = 8.098
+light_volumetric_fog_energy = 12.965
+light_projector = ExtResource("13_ja26p")
+light_size = 0.166
+light_specular = 0.899
+shadow_enabled = true
+shadow_bias = 0.0
+shadow_normal_bias = 0.782
+distance_fade_enabled = true
+omni_range = 5.903
+omni_attenuation = 1.51572e-05
+
+[node name="FrontRowLight1" type="OmniLight3D" parent="Front Row Lighting"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.93106, 6.15546, -7.19773)
+light_energy = 1.745
+light_indirect_energy = 8.098
+light_volumetric_fog_energy = 12.965
+light_projector = ExtResource("13_ja26p")
+light_size = 0.166
+light_specular = 0.899
+shadow_enabled = true
+shadow_bias = 0.0
+shadow_normal_bias = 0.782
+distance_fade_enabled = true
+omni_range = 5.903
+omni_attenuation = 1.51572e-05

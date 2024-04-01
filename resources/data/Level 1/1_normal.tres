@@ -42,6 +42,11 @@ force_rate = {
 "min": 2,
 "time": 15
 }
+force_rate = {
+"max": 3,
+"min": 1,
+"time": 22
+}
 audience_list = Array[Dictionary]([{
 "heckler": {
 "aggressiveness": {

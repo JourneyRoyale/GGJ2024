@@ -287,16 +287,19 @@ func _spawn_trajectory_point():
 	
 	var append_node = get_parent().get_parent().get_node("Trajectory")
 	var step_size = (trajectory_point.size() - 1) / trajectory_spawn
+	var color = Color(game_manager.rng.randf(), game_manager.rng.randf(), game_manager.rng.randf())
 	
 	for x in trajectory_spawn:
 		var new_trajectory : Trajectory = trajectory_factory.duplicate()
 		new_trajectory.origin_projectile = self
+		new_trajectory.set_color(color)
 		append_node.add_child(new_trajectory)
 		trajectory_instance.append(new_trajectory)
 		new_trajectory.global_transform.origin = trajectory_point[trajectory_point.keys()[x * step_size]]
 	
 	var new_trajectory : Trajectory = trajectory_factory.duplicate()
 	new_trajectory.origin_projectile = self
+	new_trajectory.set_color(color)
 	append_node.add_child(new_trajectory)
 	trajectory_instance.append(new_trajectory)
 	new_trajectory.global_transform.origin = target_position

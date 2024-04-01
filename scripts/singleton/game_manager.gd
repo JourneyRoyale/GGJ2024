@@ -81,6 +81,7 @@ func _on_shock_timer_timeout() -> void:
 func _on_game_timer_timeout():
 	shock_timer.start()
 	player_list[1]["player_ref"].win()
+	ui_screen.score_screen_value(player_list[1])
 
 # Reset game manager variable to default
 func reset_local_default():
@@ -89,20 +90,23 @@ func reset_local_default():
 
 # Increase Score from egg match
 func register_match(distance : float, player : Comedian, amount_matched : int):
-	player_list[player.player_num]["score"] += (match_amount + (1 + player_list[player.player_num]["joke_combo"])) * amount_matched
-	player_list[player.player_num]["joke_combo"] += 1
+	player_list[player.player_num]["score"] += (match_amount + (1 + player_list[player.player_num]["current_joke_combo"])) * amount_matched
+	player_list[player.player_num]["current_joke_combo"] += 1
 	_set_laugh_score(match_amount - (distance / 10) , player)
 
 # Decrease score from wrong egg match
 func register_error(player : Comedian) -> void :
 	_set_laugh_score(-error_amount, player)
-	player_list[player.player_num]["joke_combo"] = 0
+	player_list[player.player_num]["current_joke_combo"] = 0
 
 # Decrease score from projectile hit
 func register_hurt(amount : int, player : Comedian) -> void :
 	player_list[player.player_num]["score"] = max(player_list[player.player_num]["score"] + amount, 0)
 	_set_laugh_score(amount, player)
-	player_list[player.player_num]["joke_combo"] = 0
+	if (player_list[player.player_num]["highest_joke_combo"] < player_list[player.player_num]["current_joke_combo"]):
+		player_list[player.player_num]["highest_joke_combo"] = player_list[player.player_num]["current_joke_combo"]
+	player_list[player.player_num]["current_joke_combo"] = 0
+	player_list[player.player_num]["time_hit"] += 1
 
 # Deduct score from annoyed listener
 func register_annoyed() -> void :
@@ -117,6 +121,7 @@ func back_to_menu() -> void :
 	audio_manager.stop_music();
 	get_tree().paused = false
 	get_tree().reload_current_scene()
+	audio_manager.play_music(Shared.E_BACKGROUND_MUSIC.MAIN_MENU, Shared.E_AUDIO_TYPE.BACKGROUND)
 
 func restart_level() -> void :
 	player_list.clear()
@@ -127,10 +132,7 @@ func load_level(level : int, difficulty : Shared.E_DIFFICULTY_TYPE) -> void :
 	# Clear out current level
 	if game_holder.get_child_count() > 0:
 		for holder_scene in game_holder.get_children():
-			print(holder_scene)
 			holder_scene.free()
-	
-	printt(game_holder.get_children(), game_holder.get_child_count())
 	
 	# Set level data
 	level_resource = level_resource_dictionary[level][difficulty]
@@ -150,6 +152,8 @@ func add_player(comedian : Comedian) -> void :
 		"player_ref" : comedian,
 		"laughter" : laughter_position,
 		"score" : 0,
-		"joke_combo" : 0
+		"current_joke_combo" : 0,
+		"highest_joke_combo" : 0,
+		"time_hit" : 0,
 	} 
 

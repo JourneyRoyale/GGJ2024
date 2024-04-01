@@ -12,7 +12,7 @@ script = ExtResource("6_fws5n")
 scene = ExtResource("5_u74qs")
 level = 1
 difficulty = 1
-time = 90
+time = 30
 background_music = 0
 emoji_variety = {
 "max": 5,
@@ -36,6 +36,11 @@ emoji_rate = {
 spawn_rate = {
 "max": 7,
 "min": 4
+}
+force_rate = {
+"max": 4,
+"min": 3,
+"time": 15
 }
 audience_list = Array[Dictionary]([{
 "heckler": {
@@ -98,7 +103,7 @@ error_amount = 10
 match_amount = 5
 annoyed_amount = -2
 switch_duration = 0.25
-scale_duration = 4.0
+scale_duration = 4
 scale_ease = 0.2
 target_scale = Vector3(1.2, 1.2, 1.2)
 projectile_list = Array[Dictionary]([{

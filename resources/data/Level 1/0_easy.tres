@@ -1,7 +1,9 @@
-[gd_resource type="Resource" script_class="LevelResource" load_steps=5 format=3 uid="uid://cwgkk8aucdit0"]
+[gd_resource type="Resource" script_class="LevelResource" load_steps=7 format=3 uid="uid://cjduqskyn8hni"]
 
 [ext_resource type="SpriteFrames" uid="uid://drjanm0olmxmw" path="res://sprites/sprite_frame/sheep.tres" id="1_7dau6"]
 [ext_resource type="SpriteFrames" uid="uid://bmjxefay1b4ew" path="res://sprites/sprite_frame/wolf.tres" id="2_b5hxp"]
+[ext_resource type="SpriteFrames" uid="uid://ch6rbs30qjg2a" path="res://sprites/sprite_frame/log.tres" id="3_dffst"]
+[ext_resource type="SpriteFrames" uid="uid://dxoqu8wypvg8c" path="res://sprites/sprite_frame/crocodile.tres" id="4_ee4d3"]
 [ext_resource type="PackedScene" uid="uid://csw4tv5xbyfi5" path="res://scenes/Level 1.tscn" id="5_pwbtf"]
 [ext_resource type="Script" path="res://resources/script/level_resource.gd" id="6_1lksp"]
 
@@ -10,35 +12,35 @@ script = ExtResource("6_1lksp")
 scene = ExtResource("5_pwbtf")
 level = 1
 difficulty = 0
-time = 60
+time = 30
 background_music = 0
 emoji_variety = {
-"max": 3,
+"max": 4,
 "min": 2
 }
-emoji_list = Array[int]([0, 1, 2, 3, 4, 5, 6])
+emoji_list = Array[int]([0, 1, 2])
 fly_time = 1
 accel = 1
 speed = 5
 jump_velocity = 5.0
 inertia = 0.3
-max_heckler = 6
+max_heckler = 3
 starting_listener = {
-"max": 4,
-"min": 2
+"max": 7,
+"min": 4
 }
 emoji_rate = {
-"max": 8,
-"min": 6
+"max": 7,
+"min": 4
 }
 spawn_rate = {
 "max": 4,
 "min": 2
 }
 force_rate = {
-"max": 1,
+"max": 2,
 "min": 1,
-"time": 22
+"time": 15
 }
 audience_list = Array[Dictionary]([{
 "heckler": {
@@ -47,10 +49,10 @@ audience_list = Array[Dictionary]([{
 "min": 0.01
 },
 "description": "wolf",
-"health": 4,
+"health": 5,
 "move_speed": 0.5,
 "move_time": {
-"max": 5.0,
+"max": 4.0,
 "min": 2.0
 },
 "sprite_frame": ExtResource("2_b5hxp"),
@@ -62,28 +64,62 @@ audience_list = Array[Dictionary]([{
 "description": "sheep",
 "limit": 0,
 "move_speed": 3,
-"patience": 5,
+"patience": 10,
 "spawn_rate": 70,
 "sprite_frame": ExtResource("1_7dau6"),
 "type": 1
 }
+}, {
+"heckler": {
+"aggressiveness": {
+"max": 0.99,
+"min": 0.01
+},
+"description": "crocodile",
+"health": 10,
+"move_speed": 0.5,
+"move_time": {
+"max": 5.0,
+"min": 2.0
+},
+"sprite_frame": ExtResource("4_ee4d3"),
+"throw_speed": 20,
+"type": 4
+},
+"listener": {
+"can_sit": false,
+"description": "log",
+"limit": 0,
+"move_speed": 0,
+"patience": 10,
+"rate": 0,
+"spawn_rate": 0,
+"sprite_frame": ExtResource("3_dffst"),
+"type": 5
+}
 }])
 multiplier_increase_frequency = 3
 error_amount = 10
-match_amount = 5
-annoyed_amount = -1
+match_amount = 10
+annoyed_amount = -5
+star_criteria = {
+"joke_combo": 10,
+"laughter": 70,
+"score": 500,
+"time_hit": 1
+}
 switch_duration = 0.25
-scale_duration = 5.0
+scale_duration = 9
 scale_ease = 0.2
 target_scale = Vector3(1.2, 1.2, 1.2)
 projectile_list = Array[Dictionary]([{
 "description": "bananna",
-"despawn_time": 5,
+"despawn_time": 15,
 "hover_time": 1,
 "knockback": 1,
 "limit": 0,
-"rate": 40,
-"score": -20,
+"rate": 20,
+"score": -40,
 "speed": 10,
 "stun": 2.0,
 "throw_type": [1, 2],
@@ -101,14 +137,17 @@ projectile_list = Array[Dictionary]([{
 }, {
 "description": "tomato",
 "despawn_time": 0,
-"fade_speed": 0.7,
+"fade_modification": {
+"fade_duration": 5.0,
+"fade_ease": 2.0
+},
 "hover_time": 1,
 "invulnerability": 0.25,
 "knockback": 1,
 "limit": 0,
 "muddle": "tomato",
-"rate": 40,
-"score": -10,
+"rate": 70,
+"score": -40,
 "speed": 10.0,
 "stun": 1.0,
 "throw_type": [0, 1, 2],

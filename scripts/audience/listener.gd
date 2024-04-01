@@ -87,9 +87,13 @@ func _move_to_seat(delta : float, spawn_position : Vector3) -> void :
 	
 	if distance_to_target > 1:
 		if (global_transform.origin.x < spawn_position.x):
+			if(sprite.animation != "walk_right"):
+				sprite.play("walk_right")
 			velocity.x += SPEED * delta
 			velocity.x = min(velocity.x, move_speed)
 		elif (global_transform.origin.x > spawn_position.x):
+			if(sprite.animation != "walk_left"):
+				sprite.play("walk_left")
 			velocity.x -= SPEED * delta
 			velocity.x = min(velocity.x, move_speed)
 	else:

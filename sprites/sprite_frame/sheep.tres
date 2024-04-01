@@ -1,4 +1,4 @@
-[gd_resource type="SpriteFrames" load_steps=14 format=3 uid="uid://drjanm0olmxmw"]
+[gd_resource type="SpriteFrames" load_steps=20 format=3 uid="uid://drjanm0olmxmw"]
 
 [ext_resource type="Texture2D" uid="uid://dk088f2typ8xv" path="res://sprites/audience/wolfspritesheet.png" id="1_jipk1"]
 
@@ -41,6 +41,30 @@ region = Rect2(800, 0, 400, 600)
 [sub_resource type="AtlasTexture" id="AtlasTexture_ogrov"]
 atlas = ExtResource("1_jipk1")
 region = Rect2(1200, 0, 400, 600)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_02h8u"]
+atlas = ExtResource("1_jipk1")
+region = Rect2(1200, 3600, 400, 600)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qpqy3"]
+atlas = ExtResource("1_jipk1")
+region = Rect2(1600, 3600, 400, 600)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i04ke"]
+atlas = ExtResource("1_jipk1")
+region = Rect2(2000, 3600, 400, 600)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_po5ym"]
+atlas = ExtResource("1_jipk1")
+region = Rect2(0, 4200, 400, 600)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mtlh4"]
+atlas = ExtResource("1_jipk1")
+region = Rect2(400, 4200, 400, 600)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yckxr"]
+atlas = ExtResource("1_jipk1")
+region = Rect2(800, 4200, 400, 600)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_nq5at"]
 atlas = ExtResource("1_jipk1")
@@ -100,6 +124,40 @@ animations = [{
 }],
 "loop": false,
 "name": &"sitting",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_02h8u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qpqy3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i04ke")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qpqy3")
+}],
+"loop": true,
+"name": &"walk_left",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_po5ym")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mtlh4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yckxr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mtlh4")
+}],
+"loop": true,
+"name": &"walk_right",
 "speed": 5.0
 }, {
 "frames": [{

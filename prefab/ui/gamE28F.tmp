@@ -1,0 +1,1381 @@
+[gd_scene load_steps=34 format=3 uid="uid://vxc02h1qnjha"]
+
+[ext_resource type="Script" path="res://scripts/ui/ui_manager.gd" id="1_7vdu0"]
+[ext_resource type="Theme" uid="uid://4c5xn5lj157e" path="res://theme/default.tres" id="1_8kqac"]
+[ext_resource type="Texture2D" uid="uid://c7tn07j5ogfw4" path="res://sprites/background/level complete.jpg" id="2_cxv56"]
+[ext_resource type="Texture2D" uid="uid://d27qjvjcid521" path="res://test.jpg" id="2_gbuny"]
+[ext_resource type="PackedScene" uid="uid://c2hstesjai7p1" path="res://prefab/ui/curtain.tscn" id="2_paf8e"]
+[ext_resource type="Texture2D" uid="uid://ct1bgt227dwru" path="res://sprites/ui/GearIcon.png" id="2_wab3x"]
+[ext_resource type="Texture2D" uid="uid://d1fh5xoe5jk74" path="res://sprites/ui/Tomato_Splat_sprite.png" id="3_a8h4s"]
+[ext_resource type="Texture2D" uid="uid://rma688d35ap1" path="res://sprites/ui/White Rectangle With Gray.png" id="3_mjecg"]
+[ext_resource type="Texture2D" uid="uid://dmw352ym0tprb" path="res://sprites/ui/Gold_Star-01.png" id="4_0osb6"]
+[ext_resource type="Script" path="res://scripts/ui/tomato_splat.gd" id="4_8xva2"]
+[ext_resource type="Texture2D" uid="uid://bxr3rq71bjitu" path="res://sprites/background/game over.jpg" id="4_la6rb"]
+[ext_resource type="FontFile" uid="uid://b04r4xi7lid80" path="res://font/Standingroomonly-0K5o.ttf" id="5_470ob"]
+[ext_resource type="Texture2D" uid="uid://cyitysuebkqdn" path="res://sprites/audience/CluckNeutral.png" id="5_ejdtc"]
+[ext_resource type="FontFile" uid="uid://q2nv3fqgqrew" path="res://font/StandingRoomOnlyNf-4R56.ttf" id="6_cudew"]
+[ext_resource type="Texture2D" uid="uid://bnietg8hxnc0w" path="res://sprites/texture/cluck_afraid.tres" id="9_dipuq"]
+[ext_resource type="Texture2D" uid="uid://da8o3jeuy6hcu" path="res://sprites/ui/Title.png" id="16_wn2x6"]
+[ext_resource type="FontFile" uid="uid://13uqdtywa5dm" path="res://font/JosefinSans-Light.ttf" id="17_mg733"]
+[ext_resource type="Shader" path="res://prefab/ui/circular_fade_out.gdshader" id="18_kcr7b"]
+[ext_resource type="Texture2D" uid="uid://hb6nfiatoy1j" path="res://noise.png" id="19_ohmd1"]
+[ext_resource type="Script" path="res://prefab/ui/circular_fade_out.gd" id="20_hd84k"]
+
+[sub_resource type="Animation" id="Animation_8xcl2"]
+resource_name = "fade_to_black"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Black Screen:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Black Screen:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(0, 0, 0, 1), Color(1, 1, 1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Transition UI/Score Screen:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Curtain Container:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_npit8"]
+_data = {
+"fade_to_black": SubResource("Animation_8xcl2")
+}
+
+[sub_resource type="Gradient" id="Gradient_8imft"]
+offsets = PackedFloat32Array(0, 0.995177, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0.0691318, 0.0691318, 0.0691318, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_380y5"]
+gradient = SubResource("Gradient_8imft")
+width = 1920
+height = 1080
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_65c1h"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_byqct"]
+bg_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_b0wbc"]
+texture = ExtResource("3_mjecg")
+texture_margin_left = 30.0
+texture_margin_top = 30.0
+texture_margin_right = 30.0
+texture_margin_bottom = 30.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4gtdx"]
+bg_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c0ds5"]
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_vuhmk"]
+texture = ExtResource("3_mjecg")
+texture_margin_left = 40.0
+texture_margin_top = 30.0
+texture_margin_right = 38.0
+texture_margin_bottom = 40.0
+region_rect = Rect2(0, 0, 431, 249)
+
+[sub_resource type="Animation" id="Animation_cx5om"]
+resource_name = "curtains_open"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0rtmh"]
+_data = {
+"curtains_open": SubResource("Animation_cx5om")
+}
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_q21yp"]
+shader = ExtResource("18_kcr7b")
+shader_parameter/offsetStrength = 0.05
+shader_parameter/fadeAmount = 0.354
+shader_parameter/fadeSmoothing = 0.05
+shader_parameter/fadeColor = null
+shader_parameter/offset = Vector2(0.5, 0.5)
+shader_parameter/tiling = Vector2(1, 1)
+shader_parameter/hypotenuse = 0.707
+
+[node name="Ui Screen" type="Control"]
+process_mode = 3
+z_index = 1
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+script = ExtResource("1_7vdu0")
+
+[node name="Transition Animation" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_npit8")
+}
+
+[node name="TextureRect2" type="TextureRect" parent="."]
+visible = false
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+texture = ExtResource("2_gbuny")
+
+[node name="Transition UI" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Score Screen" type="Control" parent="Transition UI"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="Transition UI/Score Screen"]
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+texture = ExtResource("2_cxv56")
+expand_mode = 2
+
+[node name="Star" type="Control" parent="Transition UI/Score Screen"]
+anchors_preset = 0
+offset_left = 967.0
+offset_top = 167.0
+offset_right = 1467.0
+offset_bottom = 267.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Transition UI/Score Screen/Star"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -33.0
+offset_right = -17.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="1" type="TextureRect" parent="Transition UI/Score Screen/Star/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("4_0osb6")
+expand_mode = 2
+stretch_mode = 4
+
+[node name="2" type="TextureRect" parent="Transition UI/Score Screen/Star/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("4_0osb6")
+expand_mode = 2
+stretch_mode = 4
+
+[node name="3" type="TextureRect" parent="Transition UI/Score Screen/Star/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("4_0osb6")
+expand_mode = 2
+stretch_mode = 4
+
+[node name="4" type="TextureRect" parent="Transition UI/Score Screen/Star/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("4_0osb6")
+expand_mode = 2
+stretch_mode = 4
+
+[node name="5" type="TextureRect" parent="Transition UI/Score Screen/Star/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("4_0osb6")
+expand_mode = 2
+stretch_mode = 4
+
+[node name="Score Text" type="Control" parent="Transition UI/Score Screen"]
+anchors_preset = 0
+offset_left = 878.0
+offset_top = 301.0
+offset_right = 1378.0
+offset_bottom = 601.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Transition UI/Score Screen/Score Text"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_constants/separation = 25
+
+[node name="Left Label" type="VBoxContainer" parent="Transition UI/Score Screen/Score Text/HBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Transition UI/Score Screen/Score Text/HBoxContainer/Left Label"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("5_470ob")
+theme_override_font_sizes/font_size = 46
+text = "Level Difficulty......."
+
+[node name="Label2" type="Label" parent="Transition UI/Score Screen/Score Text/HBoxContainer/Left Label"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("5_470ob")
+theme_override_font_sizes/font_size = 46
+text = "Score........................."
+
+[node name="Label3" type="Label" parent="Transition UI/Score Screen/Score Text/HBoxContainer/Left Label"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("5_470ob")
+theme_override_font_sizes/font_size = 46
+text = "Times Hit.................."
+
+[node name="Label4" type="Label" parent="Transition UI/Score Screen/Score Text/HBoxContainer/Left Label"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("5_470ob")
+theme_override_font_sizes/font_size = 46
+text = "Laugh Meter............"
+
+[node name="Label5" type="Label" parent="Transition UI/Score Screen/Score Text/HBoxContainer/Left Label"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("5_470ob")
+theme_override_font_sizes/font_size = 46
+text = "Joke Combo.............."
+
+[node name="Right Label" type="VBoxContainer" parent="Transition UI/Score Screen/Score Text/HBoxContainer"]
+layout_mode = 2
+
+[node name="Difficulty" type="Label" parent="Transition UI/Score Screen/Score Text/HBoxContainer/Right Label"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("5_470ob")
+theme_override_font_sizes/font_size = 46
+text = "Hard"
+
+[node name="Score" type="Label" parent="Transition UI/Score Screen/Score Text/HBoxContainer/Right Label"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("5_470ob")
+theme_override_font_sizes/font_size = 46
+text = "2000"
+
+[node name="Times Hit" type="Label" parent="Transition UI/Score Screen/Score Text/HBoxContainer/Right Label"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("5_470ob")
+theme_override_font_sizes/font_size = 46
+text = "0"
+
+[node name="Laugh Meter" type="Label" parent="Transition UI/Score Screen/Score Text/HBoxContainer/Right Label"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("5_470ob")
+theme_override_font_sizes/font_size = 46
+text = "100%"
+
+[node name="Joke Combo" type="Label" parent="Transition UI/Score Screen/Score Text/HBoxContainer/Right Label"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("5_470ob")
+theme_override_font_sizes/font_size = 46
+text = "x20"
+
+[node name="Continue" type="Button" parent="Transition UI/Score Screen"]
+layout_mode = 0
+offset_left = 1022.0
+offset_top = 648.0
+offset_right = 1380.0
+offset_bottom = 743.0
+theme_override_fonts/font = ExtResource("6_cudew")
+theme_override_font_sizes/font_size = 70
+text = "Continue"
+
+[node name="Game Over" type="Control" parent="Transition UI"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="Transition UI/Game Over"]
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+texture = ExtResource("4_la6rb")
+
+[node name="Control" type="Control" parent="Transition UI/Game Over"]
+anchors_preset = 0
+offset_left = 646.0
+offset_top = 18.0
+offset_right = 1146.0
+offset_bottom = 518.0
+
+[node name="MarginContainer" type="MarginContainer" parent="Transition UI/Game Over/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 100
+theme_override_constants/margin_top = 100
+theme_override_constants/margin_right = 100
+theme_override_constants/margin_bottom = 100
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Transition UI/Game Over/Control/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Label" type="Label" parent="Transition UI/Game Over/Control/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_8kqac")
+theme_override_font_sizes/font_size = 121
+text = "Game Over"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Transition UI/Game Over/Control/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 50
+alignment = 1
+
+[node name="Try Again" type="Button" parent="Transition UI/Game Over/Control/MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(230, 50)
+layout_mode = 2
+theme = ExtResource("1_8kqac")
+text = "Try Again"
+
+[node name="Seperator" type="Control" parent="Transition UI/Game Over/Control/MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(90, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Quit" type="Button" parent="Transition UI/Game Over/Control/MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(110, 50)
+layout_mode = 2
+theme = ExtResource("1_8kqac")
+text = "Quit"
+
+[node name="Curtain Container" parent="." instance=ExtResource("2_paf8e")]
+
+[node name="Black Screen" type="TextureRect" parent="."]
+visible = false
+modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+texture = SubResource("GradientTexture2D_380y5")
+
+[node name="Game Screen UI" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+theme = ExtResource("1_8kqac")
+
+[node name="ComboCounter" type="Label" parent="Game Screen UI"]
+visible = false
+clip_contents = true
+custom_minimum_size = Vector2(10, 0)
+layout_direction = 1
+layout_mode = 0
+offset_left = 1412.0
+offset_top = 126.0
+offset_right = 1865.0
+offset_bottom = 233.0
+size_flags_horizontal = 8
+theme = ExtResource("1_8kqac")
+theme_override_font_sizes/font_size = 100
+text = "x
+"
+horizontal_alignment = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Game Screen UI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_8kqac")
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 50
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Game Screen UI/MarginContainer"]
+layout_mode = 2
+theme = ExtResource("1_8kqac")
+theme_override_constants/separation = -142
+
+[node name="Top UI Bar" type="HBoxContainer" parent="Game Screen UI/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_8kqac")
+theme_override_constants/separation = 0
+alignment = 1
+
+[node name="TextureButton" type="TextureButton" parent="Game Screen UI/MarginContainer/VBoxContainer/Top UI Bar"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("1_8kqac")
+action_mode = 0
+texture_normal = ExtResource("2_wab3x")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="Seperator" type="Control" parent="Game Screen UI/MarginContainer/VBoxContainer/Top UI Bar"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("1_8kqac")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Game Screen UI/MarginContainer/VBoxContainer/Top UI Bar"]
+layout_mode = 2
+
+[node name="Time Left" type="Label" parent="Game Screen UI/MarginContainer/VBoxContainer/Top UI Bar/VBoxContainer"]
+clip_contents = true
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+theme = ExtResource("1_8kqac")
+theme_override_font_sizes/font_size = 70
+text = "0"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="PlayerScore 3" type="Label" parent="Game Screen UI/MarginContainer/VBoxContainer/Top UI Bar/VBoxContainer"]
+clip_contents = true
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+theme = ExtResource("1_8kqac")
+theme_override_font_sizes/font_size = 50
+text = "0"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="Game Screen UI/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("1_8kqac")
+theme_override_constants/margin_top = 179
+
+[node name="VBoxContainer" type="HBoxContainer" parent="Game Screen UI/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 250
+
+[node name="HSeparator" type="HSeparator" parent="Game Screen UI/MarginContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Laughter Meter" type="ProgressBar" parent="Game Screen UI/MarginContainer/VBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(768, 42)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme = ExtResource("1_8kqac")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 1
+theme_override_styles/background = SubResource("StyleBoxFlat_65c1h")
+theme_override_styles/fill = SubResource("StyleBoxFlat_byqct")
+max_value = 1.0
+value = 0.5
+show_percentage = false
+
+[node name="Player 1" type="TextureRect" parent="Game Screen UI/MarginContainer/VBoxContainer/VBoxContainer/Laughter Meter"]
+visible = false
+layout_mode = 0
+offset_left = -63.0
+offset_top = -50.0
+offset_right = 63.0
+offset_bottom = 93.0
+texture = ExtResource("9_dipuq")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Player 2" type="TextureRect" parent="Game Screen UI/MarginContainer/VBoxContainer/VBoxContainer/Laughter Meter"]
+visible = false
+layout_mode = 0
+offset_left = 1251.0
+offset_top = -50.0
+offset_right = 1377.0
+offset_bottom = 93.0
+pivot_offset = Vector2(20, 20)
+texture = ExtResource("5_ejdtc")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="PlayerScore 1" type="Label" parent="Game Screen UI/MarginContainer/VBoxContainer/VBoxContainer/Laughter Meter"]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+offset_left = -104.0
+offset_top = -109.0
+offset_right = 96.0
+offset_bottom = -38.0
+size_flags_horizontal = 8
+theme = ExtResource("1_8kqac")
+theme_override_font_sizes/font_size = 70
+text = "0
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PlayerScore 2" type="Label" parent="Game Screen UI/MarginContainer/VBoxContainer/VBoxContainer/Laughter Meter"]
+visible = false
+layout_mode = 0
+offset_left = 1213.0
+offset_top = -116.0
+offset_right = 1413.0
+offset_bottom = -45.0
+size_flags_horizontal = 8
+theme = ExtResource("1_8kqac")
+theme_override_font_sizes/font_size = 70
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HSeparator2" type="HSeparator" parent="Game Screen UI/MarginContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Joke Bar" type="HBoxContainer" parent="Game Screen UI/MarginContainer/VBoxContainer"]
+visible = false
+custom_minimum_size = Vector2(0, 150)
+layout_direction = 3
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 8
+theme = ExtResource("1_8kqac")
+
+[node name="TomatoSplat" type="TextureRect" parent="Game Screen UI"]
+process_mode = 1
+modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = 122.0
+offset_top = 103.0
+offset_right = 1750.0
+offset_bottom = 991.0
+texture = ExtResource("3_a8h4s")
+expand_mode = 1
+script = ExtResource("4_8xva2")
+
+[node name="Pause Screen UI" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_8kqac")
+
+[node name="ColorRect" type="ColorRect" parent="Pause Screen UI"]
+layout_mode = 2
+offset_right = 1920.0
+offset_bottom = 1080.0
+theme = ExtResource("1_8kqac")
+color = Color(0.0980392, 0.0980392, 0.0980392, 0.615686)
+
+[node name="Pause Menu" type="PanelContainer" parent="Pause Screen UI"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -185.0
+offset_top = -215.0
+offset_right = 185.0
+offset_bottom = 215.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxTexture_b0wbc")
+
+[node name="MarginContainer" type="MarginContainer" parent="Pause Screen UI/Pause Menu"]
+layout_mode = 2
+
+[node name="Pause Menu" type="Control" parent="Pause Screen UI/Pause Menu/MarginContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Pause Screen UI/Pause Menu/MarginContainer/Pause Menu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 20
+
+[node name="Label" type="Label" parent="Pause Screen UI/Pause Menu/MarginContainer/Pause Menu/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_8kqac")
+theme_override_font_sizes/font_size = 40
+text = "Pause"
+horizontal_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="Pause Screen UI/Pause Menu/MarginContainer/Pause Menu/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_right = 30
+
+[node name="Panel" type="Panel" parent="Pause Screen UI/Pause Menu/MarginContainer/Pause Menu/VBoxContainer/MarginContainer"]
+custom_minimum_size = Vector2(0, 5)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_4gtdx")
+
+[node name="Resume" type="Button" parent="Pause Screen UI/Pause Menu/MarginContainer/Pause Menu/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("1_8kqac")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(0.376471, 0.376471, 0.376471, 1)
+text = "Resume"
+
+[node name="Restart" type="Button" parent="Pause Screen UI/Pause Menu/MarginContainer/Pause Menu/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("1_8kqac")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(0.376471, 0.376471, 0.376471, 1)
+text = "Restart"
+
+[node name="How To Play" type="Button" parent="Pause Screen UI/Pause Menu/MarginContainer/Pause Menu/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("1_8kqac")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(0.376471, 0.376471, 0.376471, 1)
+text = "How To Play
+"
+
+[node name="Setting" type="Button" parent="Pause Screen UI/Pause Menu/MarginContainer/Pause Menu/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("1_8kqac")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(0.376471, 0.376471, 0.376471, 1)
+text = "Setting
+"
+
+[node name="Exit" type="Button" parent="Pause Screen UI/Pause Menu/MarginContainer/Pause Menu/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("1_8kqac")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(0.376471, 0.376471, 0.376471, 1)
+text = "Exit
+"
+
+[node name="Setting" type="Control" parent="Pause Screen UI/Pause Menu/MarginContainer"]
+visible = false
+layout_mode = 2
+
+[node name="PanelContainer" type="VBoxContainer" parent="Pause Screen UI/Pause Menu/MarginContainer/Setting"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+theme = ExtResource("1_8kqac")
+alignment = 1
+
+[node name="GridContainer" type="GridContainer" parent="Pause Screen UI/Pause Menu/MarginContainer/Setting/PanelContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_vertical = 4
+theme = ExtResource("1_8kqac")
+theme_override_constants/h_separation = 16
+theme_override_constants/v_separation = 16
+
+[node name="MarginContainer" type="MarginContainer" parent="Pause Screen UI/Pause Menu/MarginContainer/Setting/PanelContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Pause Screen UI/Pause Menu/MarginContainer/Setting/PanelContainer/GridContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="Volume Control" type="Label" parent="Pause Screen UI/Pause Menu/MarginContainer/Setting/PanelContainer/GridContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_8kqac")
+theme_override_font_sizes/font_size = 40
+text = "Volume Control"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="Pause Screen UI/Pause Menu/MarginContainer/Setting/PanelContainer/GridContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 5
+theme_override_styles/separator = SubResource("StyleBoxFlat_c0ds5")
+
+[node name="Master Label" type="Label" parent="Pause Screen UI/Pause Menu/MarginContainer/Setting/PanelContainer/GridContainer"]
+layout_mode = 2
+theme = ExtResource("1_8kqac")
+theme_override_font_sizes/font_size = 40
+text = "Master"
+horizontal_alignment = 1
+
+[node name="Master Slider" type="HSlider" parent="Pause Screen UI/Pause Menu/MarginContainer/Setting/PanelContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme = ExtResource("1_8kqac")
+max_value = 1.0
+step = 0.05
+value = 1.0
+
+[node name="Background Label" type="Label" parent="Pause Screen UI/Pause Menu/MarginContainer/Setting/PanelContainer/GridContainer"]
+layout_mode = 2
+theme = ExtResource("1_8kqac")
+text = "Background"
+horizontal_alignment = 1
+
+[node name="Background Slider" type="HSlider" parent="Pause Screen UI/Pause Menu/MarginContainer/Setting/PanelContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme = ExtResource("1_8kqac")
+max_value = 1.0
+step = 0.05
+value = 1.0
+
+[node name="Sound Effect Label" type="Label" parent="Pause Screen UI/Pause Menu/MarginContainer/Setting/PanelContainer/GridContainer"]
+layout_mode = 2
+theme = ExtResource("1_8kqac")
+text = "Sound Effect"
+horizontal_alignment = 1
+
+[node name="Sound Effect Slider" type="HSlider" parent="Pause Screen UI/Pause Menu/MarginContainer/Setting/PanelContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme = ExtResource("1_8kqac")
+max_value = 1.0
+step = 0.05
+value = 1.0
+
+[node name="Back" type="Button" parent="Pause Screen UI/Pause Menu/MarginContainer/Setting/PanelContainer/GridContainer"]
+layout_mode = 2
+theme = ExtResource("1_8kqac")
+text = "Back"
+
+[node name="Title Screen UI" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Background" type="TextureRect" parent="Title Screen UI"]
+layout_mode = 2
+offset_right = 1920.0
+offset_bottom = 1080.0
+texture = ExtResource("16_wn2x6")
+
+[node name="Menu" type="PanelContainer" parent="Title Screen UI"]
+layout_mode = 2
+offset_left = 132.0
+offset_top = 538.0
+offset_right = 502.0
+offset_bottom = 968.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxTexture_b0wbc")
+
+[node name="MarginContainer" type="MarginContainer" parent="Title Screen UI/Menu"]
+layout_mode = 2
+
+[node name="Main Menu" type="Control" parent="Title Screen UI/Menu/MarginContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Title Screen UI/Menu/MarginContainer/Main Menu"]
+layout_mode = 2
+offset_right = 309.0
+offset_bottom = 366.0
+theme_override_constants/separation = 17
+
+[node name="Label" type="Label" parent="Title Screen UI/Menu/MarginContainer/Main Menu/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "Menu"
+horizontal_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="Title Screen UI/Menu/MarginContainer/Main Menu/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_right = 30
+
+[node name="Panel" type="Panel" parent="Title Screen UI/Menu/MarginContainer/Main Menu/VBoxContainer/MarginContainer"]
+custom_minimum_size = Vector2(0, 5)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_4gtdx")
+
+[node name="Start" type="Button" parent="Title Screen UI/Menu/MarginContainer/Main Menu/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("1_8kqac")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(0.376471, 0.376471, 0.376471, 1)
+theme_override_font_sizes/font_size = 40
+text = "Start
+"
+
+[node name="Settings" type="Button" parent="Title Screen UI/Menu/MarginContainer/Main Menu/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+theme = ExtResource("1_8kqac")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(0.376471, 0.376471, 0.376471, 1)
+theme_override_font_sizes/font_size = 40
+text = "Settings"
+
+[node name="How To Play" type="Button" parent="Title Screen UI/Menu/MarginContainer/Main Menu/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+theme = ExtResource("1_8kqac")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(0.376471, 0.376471, 0.376471, 1)
+theme_override_font_sizes/font_size = 40
+text = "How To Play"
+
+[node name="Credits" type="Button" parent="Title Screen UI/Menu/MarginContainer/Main Menu/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+theme = ExtResource("1_8kqac")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(0.376471, 0.376471, 0.376471, 1)
+theme_override_font_sizes/font_size = 40
+text = "Credits
+"
+
+[node name="Exit" type="Button" parent="Title Screen UI/Menu/MarginContainer/Main Menu/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+theme = ExtResource("1_8kqac")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(0.376471, 0.376471, 0.376471, 1)
+theme_override_font_sizes/font_size = 40
+text = "Exit"
+
+[node name="Level Selection" type="Control" parent="Title Screen UI/Menu/MarginContainer"]
+visible = false
+layout_mode = 2
+
+[node name="Level 1" type="VBoxContainer" parent="Title Screen UI/Menu/MarginContainer/Level Selection"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Title Screen UI/Menu/MarginContainer/Level Selection/Level 1"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "Level 1"
+horizontal_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="Title Screen UI/Menu/MarginContainer/Level Selection/Level 1"]
+layout_mode = 2
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_right = 30
+
+[node name="Panel" type="Panel" parent="Title Screen UI/Menu/MarginContainer/Level Selection/Level 1/MarginContainer"]
+custom_minimum_size = Vector2(0, 5)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_4gtdx")
+
+[node name="Easy" type="Button" parent="Title Screen UI/Menu/MarginContainer/Level Selection/Level 1"]
+custom_minimum_size = Vector2(250, 70)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("1_8kqac")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(0.376471, 0.376471, 0.376471, 1)
+text = "Easy
+"
+
+[node name="Normal" type="Button" parent="Title Screen UI/Menu/MarginContainer/Level Selection/Level 1"]
+custom_minimum_size = Vector2(250, 70)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("1_8kqac")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(0.376471, 0.376471, 0.376471, 1)
+text = "Normal
+"
+
+[node name="Hard" type="Button" parent="Title Screen UI/Menu/MarginContainer/Level Selection/Level 1"]
+custom_minimum_size = Vector2(250, 70)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("1_8kqac")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(0.376471, 0.376471, 0.376471, 1)
+text = "Hard"
+
+[node name="Back" type="Button" parent="Title Screen UI/Menu/MarginContainer/Level Selection/Level 1"]
+custom_minimum_size = Vector2(250, 70)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+theme = ExtResource("1_8kqac")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(0.376471, 0.376471, 0.376471, 1)
+text = "Back
+"
+
+[node name="Level 2" type="VBoxContainer" parent="Title Screen UI/Menu/MarginContainer/Level Selection"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Title Screen UI/Menu/MarginContainer/Level Selection/Level 2"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "Level 1"
+horizontal_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="Title Screen UI/Menu/MarginContainer/Level Selection/Level 2"]
+layout_mode = 2
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_right = 30
+
+[node name="Panel" type="Panel" parent="Title Screen UI/Menu/MarginContainer/Level Selection/Level 2/MarginContainer"]
+custom_minimum_size = Vector2(0, 5)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_4gtdx")
+
+[node name="Easy" type="Button" parent="Title Screen UI/Menu/MarginContainer/Level Selection/Level 2"]
+custom_minimum_size = Vector2(250, 70)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("1_8kqac")
+text = "Easy
+"
+
+[node name="Normal" type="Button" parent="Title Screen UI/Menu/MarginContainer/Level Selection/Level 2"]
+custom_minimum_size = Vector2(250, 70)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("1_8kqac")
+text = "Normal
+"
+
+[node name="Hard" type="Button" parent="Title Screen UI/Menu/MarginContainer/Level Selection/Level 2"]
+custom_minimum_size = Vector2(250, 70)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("1_8kqac")
+text = "Hard"
+
+[node name="Setting" type="Control" parent="Title Screen UI/Menu/MarginContainer"]
+visible = false
+layout_mode = 2
+
+[node name="PanelContainer" type="VBoxContainer" parent="Title Screen UI/Menu/MarginContainer/Setting"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+theme = ExtResource("1_8kqac")
+alignment = 1
+
+[node name="GridContainer" type="GridContainer" parent="Title Screen UI/Menu/MarginContainer/Setting/PanelContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_vertical = 4
+theme = ExtResource("1_8kqac")
+theme_override_constants/h_separation = 16
+theme_override_constants/v_separation = 16
+
+[node name="Label" type="Label" parent="Title Screen UI/Menu/MarginContainer/Setting/PanelContainer/GridContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 39
+text = "Volume Control"
+horizontal_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="Title Screen UI/Menu/MarginContainer/Setting/PanelContainer/GridContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_right = 30
+
+[node name="Panel" type="Panel" parent="Title Screen UI/Menu/MarginContainer/Setting/PanelContainer/GridContainer/MarginContainer"]
+custom_minimum_size = Vector2(0, 5)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_4gtdx")
+
+[node name="Master Label" type="Label" parent="Title Screen UI/Menu/MarginContainer/Setting/PanelContainer/GridContainer"]
+layout_mode = 2
+theme = ExtResource("1_8kqac")
+theme_override_font_sizes/font_size = 30
+text = "Master"
+horizontal_alignment = 1
+
+[node name="Master Slider" type="HSlider" parent="Title Screen UI/Menu/MarginContainer/Setting/PanelContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme = ExtResource("1_8kqac")
+max_value = 1.0
+step = 0.05
+value = 1.0
+
+[node name="Background Label" type="Label" parent="Title Screen UI/Menu/MarginContainer/Setting/PanelContainer/GridContainer"]
+layout_mode = 2
+theme = ExtResource("1_8kqac")
+theme_override_font_sizes/font_size = 30
+text = "Background"
+horizontal_alignment = 1
+
+[node name="Background Slider" type="HSlider" parent="Title Screen UI/Menu/MarginContainer/Setting/PanelContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme = ExtResource("1_8kqac")
+max_value = 1.0
+step = 0.05
+value = 1.0
+
+[node name="Sound Effect Label" type="Label" parent="Title Screen UI/Menu/MarginContainer/Setting/PanelContainer/GridContainer"]
+layout_mode = 2
+theme = ExtResource("1_8kqac")
+theme_override_font_sizes/font_size = 30
+text = "Sound Effect"
+horizontal_alignment = 1
+
+[node name="Sound Effect Slider" type="HSlider" parent="Title Screen UI/Menu/MarginContainer/Setting/PanelContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme = ExtResource("1_8kqac")
+max_value = 1.0
+step = 0.05
+value = 1.0
+
+[node name="Back" type="Button" parent="Title Screen UI/Menu/MarginContainer/Setting/PanelContainer/GridContainer"]
+layout_mode = 2
+theme = ExtResource("1_8kqac")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "Back"
+
+[node name="Credits" type="PanelContainer" parent="Title Screen UI"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -625.5
+offset_top = -332.5
+offset_right = 625.5
+offset_bottom = 332.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+theme_override_styles/panel = SubResource("StyleBoxTexture_vuhmk")
+
+[node name="MarginContainer" type="MarginContainer" parent="Title Screen UI/Credits"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Title Screen UI/Credits/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Credits" type="Label" parent="Title Screen UI/Credits/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_8kqac")
+theme_override_font_sizes/font_size = 40
+text = "Credits"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="Title Screen UI/Credits/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 5
+theme_override_styles/separator = SubResource("StyleBoxFlat_c0ds5")
+
+[node name="Names" type="HBoxContainer" parent="Title Screen UI/Credits/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 30
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Title Screen UI/Credits/MarginContainer/VBoxContainer/Names"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Label" type="Label" parent="Title Screen UI/Credits/MarginContainer/VBoxContainer/Names/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 35
+text = "Maile Sakamoto"
+uppercase = true
+
+[node name="Label2" type="Label" parent="Title Screen UI/Credits/MarginContainer/VBoxContainer/Names/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("17_mg733")
+theme_override_font_sizes/font_size = 35
+text = "Director / Designer"
+
+[node name="Label3" type="Label" parent="Title Screen UI/Credits/MarginContainer/VBoxContainer/Names/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 35
+text = "Quill"
+uppercase = true
+
+[node name="Label4" type="Label" parent="Title Screen UI/Credits/MarginContainer/VBoxContainer/Names/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("17_mg733")
+theme_override_font_sizes/font_size = 35
+text = "Art Lead"
+
+[node name="Label5" type="Label" parent="Title Screen UI/Credits/MarginContainer/VBoxContainer/Names/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 35
+text = "Taniyah Powell
+"
+uppercase = true
+
+[node name="Label6" type="Label" parent="Title Screen UI/Credits/MarginContainer/VBoxContainer/Names/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("17_mg733")
+theme_override_font_sizes/font_size = 35
+text = "2D Artist"
+
+[node name="Label7" type="Label" parent="Title Screen UI/Credits/MarginContainer/VBoxContainer/Names/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 35
+text = "Zackary Freeman"
+uppercase = true
+
+[node name="Label8" type="Label" parent="Title Screen UI/Credits/MarginContainer/VBoxContainer/Names/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("17_mg733")
+theme_override_font_sizes/font_size = 35
+text = "Music Producer"
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="Title Screen UI/Credits/MarginContainer/VBoxContainer/Names"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Label" type="Label" parent="Title Screen UI/Credits/MarginContainer/VBoxContainer/Names/VBoxContainer2"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 35
+text = "Hieu Dinh"
+uppercase = true
+
+[node name="Label2" type="Label" parent="Title Screen UI/Credits/MarginContainer/VBoxContainer/Names/VBoxContainer2"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("17_mg733")
+theme_override_font_sizes/font_size = 35
+text = "Project / Technical Lead"
+
+[node name="Label3" type="Label" parent="Title Screen UI/Credits/MarginContainer/VBoxContainer/Names/VBoxContainer2"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 35
+text = "Parker Cameron"
+uppercase = true
+
+[node name="Label4" type="Label" parent="Title Screen UI/Credits/MarginContainer/VBoxContainer/Names/VBoxContainer2"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("17_mg733")
+theme_override_font_sizes/font_size = 35
+text = "2D Artist/ Graphic Designer"
+
+[node name="Label5" type="Label" parent="Title Screen UI/Credits/MarginContainer/VBoxContainer/Names/VBoxContainer2"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 35
+text = "Jalen Roberts"
+uppercase = true
+
+[node name="Label6" type="Label" parent="Title Screen UI/Credits/MarginContainer/VBoxContainer/Names/VBoxContainer2"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("17_mg733")
+theme_override_font_sizes/font_size = 35
+text = "2D Artist"
+
+[node name="Label7" type="Label" parent="Title Screen UI/Credits/MarginContainer/VBoxContainer/Names/VBoxContainer2"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 35
+text = "Anikay"
+uppercase = true
+
+[node name="Label8" type="Label" parent="Title Screen UI/Credits/MarginContainer/VBoxContainer/Names/VBoxContainer2"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("17_mg733")
+theme_override_font_sizes/font_size = 35
+text = "Music Producer"
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="Title Screen UI/Credits/MarginContainer/VBoxContainer/Names"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Label" type="Label" parent="Title Screen UI/Credits/MarginContainer/VBoxContainer/Names/VBoxContainer3"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 35
+text = "Jack Valladares"
+uppercase = true
+
+[node name="Label2" type="Label" parent="Title Screen UI/Credits/MarginContainer/VBoxContainer/Names/VBoxContainer3"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("17_mg733")
+theme_override_font_sizes/font_size = 35
+text = "Engineer"
+
+[node name="Label3" type="Label" parent="Title Screen UI/Credits/MarginContainer/VBoxContainer/Names/VBoxContainer3"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 35
+text = "Tinley Hampton"
+uppercase = true
+
+[node name="Label4" type="Label" parent="Title Screen UI/Credits/MarginContainer/VBoxContainer/Names/VBoxContainer3"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("17_mg733")
+theme_override_font_sizes/font_size = 35
+text = "3D Artist"
+
+[node name="Label5" type="Label" parent="Title Screen UI/Credits/MarginContainer/VBoxContainer/Names/VBoxContainer3"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 35
+text = "Journey
+"
+uppercase = true
+
+[node name="Label6" type="Label" parent="Title Screen UI/Credits/MarginContainer/VBoxContainer/Names/VBoxContainer3"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("17_mg733")
+theme_override_font_sizes/font_size = 35
+text = "Narrative Design"
+
+[node name="Back" type="Button" parent="Title Screen UI/Credits/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_8kqac")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(0.376471, 0.376471, 0.376471, 1)
+text = "Back"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Title Screen UI"]
+libraries = {
+"": SubResource("AnimationLibrary_0rtmh")
+}
+
+[node name="TextureRect" type="TextureRect" parent="."]
+modulate = Color(0, 0.619608, 1, 1)
+material = SubResource("ShaderMaterial_q21yp")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("19_ohmd1")
+script = ExtResource("20_hd84k")
+
+[connection signal="animation_finished" from="Transition Animation" to="." method="_on_transition_animation_finished"]
+[connection signal="pressed" from="Transition UI/Score Screen/Continue" to="." method="_on_continue_pressed"]
+[connection signal="pressed" from="Transition UI/Game Over/Control/MarginContainer/VBoxContainer/HBoxContainer/Try Again" to="." method="_on_try_again_pressed"]
+[connection signal="pressed" from="Transition UI/Game Over/Control/MarginContainer/VBoxContainer/HBoxContainer/Quit" to="." method="_on_gameover_quit_pressed"]
+[connection signal="pressed" from="Game Screen UI/MarginContainer/VBoxContainer/Top UI Bar/TextureButton" to="." method="_on_ui_gear_button_pressed"]
+[connection signal="pressed" from="Pause Screen UI/Pause Menu/MarginContainer/Pause Menu/VBoxContainer/Resume" to="." method="_on_pause_resume_pressed"]
+[connection signal="pressed" from="Pause Screen UI/Pause Menu/MarginContainer/Pause Menu/VBoxContainer/Restart" to="." method="_on_pause_restart_pressed"]
+[connection signal="pressed" from="Pause Screen UI/Pause Menu/MarginContainer/Pause Menu/VBoxContainer/How To Play" to="." method="_on_pause_restart_pressed"]
+[connection signal="pressed" from="Pause Screen UI/Pause Menu/MarginContainer/Pause Menu/VBoxContainer/Setting" to="." method="_on_pause_setting_pressed"]
+[connection signal="pressed" from="Pause Screen UI/Pause Menu/MarginContainer/Pause Menu/VBoxContainer/Exit" to="." method="_on_pause_exit_pressed"]
+[connection signal="value_changed" from="Pause Screen UI/Pause Menu/MarginContainer/Setting/PanelContainer/GridContainer/Master Slider" to="." method="_on_master_slider_value_changed"]
+[connection signal="value_changed" from="Pause Screen UI/Pause Menu/MarginContainer/Setting/PanelContainer/GridContainer/Background Slider" to="." method="_on_background_slider_value_changed"]
+[connection signal="value_changed" from="Pause Screen UI/Pause Menu/MarginContainer/Setting/PanelContainer/GridContainer/Sound Effect Slider" to="." method="_on_sound_effect_slider_value_changed"]
+[connection signal="pressed" from="Pause Screen UI/Pause Menu/MarginContainer/Setting/PanelContainer/GridContainer/Back" to="." method="_on_pause_setting_back_pressed"]
+[connection signal="pressed" from="Title Screen UI/Menu/MarginContainer/Main Menu/VBoxContainer/Start" to="." method="_on_start_game_pressed"]
+[connection signal="pressed" from="Title Screen UI/Menu/MarginContainer/Main Menu/VBoxContainer/Settings" to="." method="_on_settings_pressed"]
+[connection signal="pressed" from="Title Screen UI/Menu/MarginContainer/Main Menu/VBoxContainer/How To Play" to="." method="_on_credits_pressed"]
+[connection signal="pressed" from="Title Screen UI/Menu/MarginContainer/Main Menu/VBoxContainer/Credits" to="." method="_on_credits_pressed"]
+[connection signal="pressed" from="Title Screen UI/Menu/MarginContainer/Main Menu/VBoxContainer/Exit" to="." method="_on_exit_pressed"]
+[connection signal="pressed" from="Title Screen UI/Menu/MarginContainer/Level Selection/Level 1/Easy" to="." method="_on_level_pressed" binds= [1, 0]]
+[connection signal="pressed" from="Title Screen UI/Menu/MarginContainer/Level Selection/Level 1/Normal" to="." method="_on_level_pressed" binds= [1, 1]]
+[connection signal="pressed" from="Title Screen UI/Menu/MarginContainer/Level Selection/Level 1/Hard" to="." method="_on_level_pressed" binds= [1, 2]]
+[connection signal="pressed" from="Title Screen UI/Menu/MarginContainer/Level Selection/Level 1/Back" to="." method="_on_level_back_pressed"]
+[connection signal="pressed" from="Title Screen UI/Menu/MarginContainer/Level Selection/Level 2/Easy" to="." method="_on_level_pressed" binds= [2, 0]]
+[connection signal="pressed" from="Title Screen UI/Menu/MarginContainer/Level Selection/Level 2/Normal" to="." method="_on_level_pressed" binds= [2, 1]]
+[connection signal="pressed" from="Title Screen UI/Menu/MarginContainer/Level Selection/Level 2/Hard" to="." method="_on_level_pressed" binds= [2, 2]]
+[connection signal="value_changed" from="Title Screen UI/Menu/MarginContainer/Setting/PanelContainer/GridContainer/Master Slider" to="." method="_on_master_slider_value_changed"]
+[connection signal="value_changed" from="Title Screen UI/Menu/MarginContainer/Setting/PanelContainer/GridContainer/Background Slider" to="." method="_on_background_slider_value_changed"]
+[connection signal="value_changed" from="Title Screen UI/Menu/MarginContainer/Setting/PanelContainer/GridContainer/Sound Effect Slider" to="." method="_on_sound_effect_slider_value_changed"]
+[connection signal="pressed" from="Title Screen UI/Menu/MarginContainer/Setting/PanelContainer/GridContainer/Back" to="." method="_on_back_pressed"]
+[connection signal="pressed" from="Title Screen UI/Credits/MarginContainer/VBoxContainer/Back" to="." method="_on_credit_back_pressed"]
+[connection signal="animation_finished" from="Title Screen UI/AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
